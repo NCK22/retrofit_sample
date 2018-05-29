@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Matrimony</string>
+
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
+    <string name="menu_home">My Home</string>
+    <string name="menu_matches">Matches</string>
+    <string name="menu_profile">Profile</string>
+
+
+    <string name="default_email">apps@dev.com</string>
+</resources>

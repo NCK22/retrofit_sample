@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.RegisterActivity"
+
+    android:orientation="vertical"
+    android:id="@+id/ll_register_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_image"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg1">
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_overlay"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#B3F2146E">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="43dp"
+                android:layout_marginEnd="43dp"
+                android:layout_marginRight="43dp"
+                android:layout_marginStart="43dp"
+                android:layout_marginBottom="30dp"
+                >
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="69dp"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:text="Done !"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="30sp"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center" />
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="34dp"
+                    android:text="Thank you for your details.\nWe are finding the Best Matches \nas per your profile."
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center" />
+
+
+
+                <TextView
+                    android:id="@+id/tv_personal_detl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="(You can add Partener Preferences \nin profile section) >"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/btn_submit_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_border"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginEnd="70dp"
+                    android:layout_marginRight="70dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginLeft="70dp"
+                    android:text="OK!"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:fontFamily="Roboto-Medium"
+                    android:textSize="18dp"
+                    android:textColor="#F2146E"
+                    android:textAlignment="center"/>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
