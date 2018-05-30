@@ -17,7 +17,7 @@ import android.widget.Spinner;
 
 
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
-import com.applex.matrimony.Pojo.PojoWhoViewed;
+import com.applex.matrimony.Pojo.PojoProfile;
 import com.applex.matrimony.R;
 
 import org.json.JSONArray;
@@ -38,7 +38,7 @@ public class TabWhoViewed extends Fragment {
     Spinner quali,course,special,college,crs_type,year;
     JSONArray eduArray;
     ArrayList<String> list=new ArrayList<String>();
-    ArrayList<PojoWhoViewed> mListItem;
+    ArrayList<PojoProfile> mListItem;
     public RecyclerView recyclerView;
     WhoViewedAdapter adapter;
     private ProgressBar progressBar;
@@ -52,8 +52,8 @@ public class TabWhoViewed extends Fragment {
         View rootView=inflater.inflate(R.layout.tab_who_viewed,container,false);
 
         Log.e("TabWhoViewed","onCreateView");
-        mListItem = new ArrayList<PojoWhoViewed>();
-        PojoWhoViewed pojoWhoViewed=new PojoWhoViewed();
+        mListItem = new ArrayList<PojoProfile>();
+        PojoProfile pojoWhoViewed=new PojoProfile();
         pojoWhoViewed.setAge("25 yrs");
         pojoWhoViewed.setLocation("Hyderabad");
         pojoWhoViewed.setHeight("150cm - 4ft 11.05");
@@ -67,7 +67,7 @@ public class TabWhoViewed extends Fragment {
         pojoWhoViewed.setMatrimony_id("KL4566623");
         mListItem.add(pojoWhoViewed);
 
-        PojoWhoViewed pojoWhoViewed1=new PojoWhoViewed();
+        PojoProfile pojoWhoViewed1=new PojoProfile();
         pojoWhoViewed1.setAge("27 yrs");
         pojoWhoViewed1.setLocation("HariyanaHariyanaHariyana");
         pojoWhoViewed1.setHeight("150cm - 4ft 11.05");
