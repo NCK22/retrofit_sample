@@ -34,25 +34,30 @@
             app:tabIndicatorHeight="3dp">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/ti_personal"
+                android:id="@+id/ti_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
                 />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/ti_edu"
+                android:id="@+id/ti_viewed_me"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Who Viewed My Profile" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/ti_exp"
+                android:id="@+id/ti_shortlist_me"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Who Shortlisted Me"
                 />
-
+            <android.support.design.widget.TabItem
+                android:id="@+id/ti_interest_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Who Interested in Me"
+                />
 
 
         </android.support.design.widget.TabLayout>

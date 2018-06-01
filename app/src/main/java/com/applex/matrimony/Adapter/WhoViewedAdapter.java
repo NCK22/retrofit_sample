@@ -1,12 +1,8 @@
 package com.applex.matrimony.Adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applex.matrimony.Pojo.PojoProfile;
+import com.applex.matrimony.Pojo.PojoProfileOld;
 import com.applex.matrimony.R;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.ItemRowHolder> implements Serializable {
 
@@ -67,13 +58,13 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         final PojoProfile singleItem = dataList.get(position);
-        holder.age_loc.setText(singleItem.getAge()+" ,"+singleItem.getLocation());
+        holder.age_loc.setText(singleItem.getAge()+" ,"+singleItem.getFamily_location());
         holder.height.setText(singleItem.getHeight());
         holder.religion_caste.setText(singleItem.getReligion()+" ,"+singleItem.getCaste());
-        holder.sign_star.setText(singleItem.getSign()+" ,"+singleItem.getStar());
-        holder.edu.setText(singleItem.getEdu());
-        holder.occu.setText(singleItem.getOccu());
-        holder.member_typ.setText(singleItem.getMember_typ());
+        holder.sign_star.setText(singleItem.getRaasi()+" ,"+singleItem.getStar());
+        holder.edu.setText(singleItem.getEducation());
+        holder.occu.setText(singleItem.getOccupation());
+       // holder.member_typ.setText(singleItem.getMember_typ());
         holder.matrimony_id.setText(singleItem.getMatrimony_id());
 
         holder.btnSendMail.setOnClickListener(new View.OnClickListener() {

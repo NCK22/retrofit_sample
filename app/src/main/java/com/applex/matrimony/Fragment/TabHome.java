@@ -14,10 +14,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 
 import com.applex.matrimony.APIClient;
-import com.applex.matrimony.Activity.RegisterActivity;
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
 import com.applex.matrimony.Interface.getCasteInterface;
 import com.applex.matrimony.Interface.getReligionInterface;
@@ -25,7 +23,7 @@ import com.applex.matrimony.Pojo.ChildPojoCaste;
 import com.applex.matrimony.Pojo.ChildPojoReligion;
 import com.applex.matrimony.Pojo.ParentPojoCaste;
 import com.applex.matrimony.Pojo.ParentPojoReligion;
-import com.applex.matrimony.Pojo.PojoProfile;
+import com.applex.matrimony.Pojo.PojoProfileOld;
 import com.applex.matrimony.R;
 
 import org.json.JSONArray;
@@ -54,8 +52,8 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     ArrayList<ChildPojoReligion>list_pojo_religion=new ArrayList<ChildPojoReligion>();
     ArrayList<ChildPojoCaste>list_pojo_caste=new ArrayList<ChildPojoCaste>();
     ArrayList<String> list_caste=new ArrayList<String>();
-    ArrayList<PojoProfile> list_matches=new ArrayList<PojoProfile>();
-    ArrayList<PojoProfile> list_highlights=new ArrayList<PojoProfile>();
+    ArrayList<PojoProfileOld> list_matches=new ArrayList<PojoProfileOld>();
+    ArrayList<PojoProfileOld> list_highlights=new ArrayList<PojoProfileOld>();
     public RecyclerView rv_profile_matches,rv_profile_highlight;
     WhoViewedAdapter adapter;
     private ProgressBar progressBar;

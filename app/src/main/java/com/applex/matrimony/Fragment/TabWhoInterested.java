@@ -14,10 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
-
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
-import com.applex.matrimony.Interface.getViewedMeInterface;
+import com.applex.matrimony.Interface.getInterestedMeInterface;
 import com.applex.matrimony.Pojo.ParentPojoTabWhoMe;
 import com.applex.matrimony.Pojo.PojoProfile;
 import com.applex.matrimony.Pojo.PojoProfileOld;
@@ -38,7 +37,7 @@ import retrofit2.Response;
  */
 
 
-public class TabWhoViewed extends Fragment {
+public class TabWhoInterested extends Fragment {
 
 
     Spinner quali,course,special,college,crs_type,year;
@@ -65,7 +64,7 @@ public class TabWhoViewed extends Fragment {
 
         spCustProfile=new SPCustProfile(getActivity());
 
-        Log.e("TabWhoViewed","onCreateView");
+        Log.e("TabWhoInterested","onCreateView");
         mListItem = new ArrayList<PojoProfile>();
         PojoProfileOld pojoWhoViewed=new PojoProfileOld();
         pojoWhoViewed.setAge("25 yrs");
@@ -79,7 +78,7 @@ public class TabWhoViewed extends Fragment {
         pojoWhoViewed.setOccu("Administration security manager");
         pojoWhoViewed.setMember_typ("Bride");
         pojoWhoViewed.setMatrimony_id("KL4566623");
-      //  mListItem.add(pojoWhoViewed);
+     //   mListItem.add(pojoWhoViewed);
 
         PojoProfileOld pojoWhoViewed1=new PojoProfileOld();
         pojoWhoViewed1.setAge("27 yrs");
@@ -93,7 +92,7 @@ public class TabWhoViewed extends Fragment {
         pojoWhoViewed1.setOccu("Administration security manager");
         pojoWhoViewed1.setMember_typ("Groom");
         pojoWhoViewed1.setMatrimony_id("K987566623");
-        //mListItem.add(pojoWhoViewed1);
+      //  mListItem.add(pojoWhoViewed1);
         //mListItem.add(pojoWhoViewed);
         Log.e("List size",""+mListItem.size());
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_who_viewed);
@@ -102,9 +101,7 @@ public class TabWhoViewed extends Fragment {
        /* ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
         recyclerView.addItemDecoration(itemDecoration);*/
 
-
-        displayData();
-
+    getWhoInterestedMe();
 
         return rootView;
 
@@ -116,20 +113,18 @@ public class TabWhoViewed extends Fragment {
         recyclerView.setAdapter(adapter);
 
         if (adapter.getItemCount() == 0) {
-
         } else {
-
         }
     }
 
-    public void getwhoViewedMe()
+    public void getWhoInterestedMe()
     {
 
         progressDialog.show();
         if(mListItem!=null)
             mListItem.clear();
 
-        getViewedMeInterface getResponse = APIClient.getClient().create(getViewedMeInterface.class);
+        getInterestedMeInterface getResponse = APIClient.getClient().create(getInterestedMeInterface.class);
         Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("6673532");
         call.enqueue(new Callback<ParentPojoTabWhoMe>() {
             @Override
@@ -143,18 +138,23 @@ public class TabWhoViewed extends Fragment {
                     if(parentPojoTabWhoMe.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
                         Log.e("objsize", ""+parentPojoTabWhoMe.getObjProfile().size());
-                        if(parentPojoTabWhoMe.getObjProfile().size()!=0)
+                        mListItem=parentPojoTabWhoMe.getObjProfile();
+                        if(mListItem.size()!=0)
+
                             displayData();
 
                     }
                 }
-
+                else
+                    Log.e("parentpojotabwhome","null");
                 progressDialog.dismiss();
+
             }
 
             @Override
             public void onFailure(Call<ParentPojoTabWhoMe> call, Throwable t) {
 
+                Log.e("throwable",""+t);
                 progressDialog.dismiss();
             }
         });

@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,6 +24,8 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.applex.matrimony.Fragment.TabHome;
+import com.applex.matrimony.Fragment.TabWhoInterested;
+import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
 import com.applex.matrimony.R;
 
@@ -162,7 +165,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         }
     }
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -173,20 +176,31 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
 
+            Log.e("position", String.valueOf(position));
+            Log.e("positi",""+tabLayout.getSelectedTabPosition());
 
-            switch (position) {
+            switch (tabLayout.getSelectedTabPosition()) {
                 case 0:
                     TabHome tabHome=new TabHome();
                     return tabHome;
 
                 case 1:
 
-                    TabWhoViewed tabWhoViewed1=new TabWhoViewed();
+                  /*  TabWhoViewed tabWhoViewed1=new TabWhoViewed();
                     return tabWhoViewed1;
-
+*/
+                    TabWhoInterested tabWhoInterested2=new TabWhoInterested();
+                    return tabWhoInterested2;
                 case 2:
-                    TabWhoViewed tabWhoViewed2=new TabWhoViewed();
-                    return tabWhoViewed2;
+                   /* TabWhoShortlisted tabWhoShortlisted=new TabWhoShortlisted();
+                    return tabWhoShortlisted;*/
+                    TabWhoInterested tabWhoInterested1=new TabWhoInterested();
+                    return tabWhoInterested1;
+
+                case 3:
+                    TabWhoInterested tabWhoInterested=new TabWhoInterested();
+                    return tabWhoInterested;
+
 
                 default:
                     return null;
@@ -198,7 +212,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
     }
 

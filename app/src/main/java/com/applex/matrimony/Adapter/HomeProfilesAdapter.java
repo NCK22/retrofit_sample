@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applex.matrimony.Pojo.PojoProfile;
+import com.applex.matrimony.Pojo.PojoProfileOld;
 import com.applex.matrimony.R;
 
 import java.io.Serializable;
@@ -22,11 +22,11 @@ import java.util.ArrayList;
 
 public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapter.ItemRowHolder> implements Serializable {
 
-    private ArrayList<PojoProfile> dataList;
+    private ArrayList<PojoProfileOld> dataList;
     private Context mContext;
 
 
-    public HomeProfilesAdapter(Context context, ArrayList<PojoProfile> dataList) {
+    public HomeProfilesAdapter(Context context, ArrayList<PojoProfileOld> dataList) {
         this.dataList = dataList;
         this.mContext = context;
 
@@ -55,7 +55,7 @@ public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapte
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        final PojoProfile singleItem = dataList.get(position);
+        final PojoProfileOld singleItem = dataList.get(position);
 
         holder.member_typ.setText(singleItem.getMember_typ());
 
