@@ -24,6 +24,8 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.applex.matrimony.Fragment.TabHome;
+import com.applex.matrimony.Fragment.TabInterestedProf;
+import com.applex.matrimony.Fragment.TabShortlistedProf;
 import com.applex.matrimony.Fragment.TabWhoInterested;
 import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
@@ -54,6 +56,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
 
     Intent intent;
     Bundle bundle;
+    String tabFlag="home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,18 +80,19 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         intent=getIntent();
 
         bundle = new Bundle();
+        tabFlag=intent.getStringExtra("tabFlag");
 
 
         //   Tabs Activity
 
         mSectionsPagerAdapter = new TabViewParentActivity.SectionsPagerAdapter(getSupportFragmentManager());
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.vp_parent);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tl_parent);
 
+        mViewPager.setOffscreenPageLimit(0);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
@@ -122,6 +126,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
+
 
 
     }
@@ -177,42 +182,77 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
             // Return a PlaceholderFragment (defined as a static inner class below).
 
             Log.e("position", String.valueOf(position));
-            Log.e("positi",""+tabLayout.getSelectedTabPosition());
+            //Log.e("positi", "" + tabLayout.getSelectedTabPosition());
 
-            switch (tabLayout.getSelectedTabPosition()) {
+
+            switch (position) {
+
+
                 case 0:
-                    TabHome tabHome=new TabHome();
+                    Log.e("Tab", "home");
+                    TabHome tabHome = new TabHome();
                     return tabHome;
 
                 case 1:
+                    if(tabFlag.equalsIgnoreCase("home")) {
+                        Log.e("Tab", "whoViewed");
+                        TabWhoViewed tabWhoViewed = new TabWhoViewed();
+                        return tabWhoViewed;
+                    }
+                    else
+                    {
 
-                  /*  TabWhoViewed tabWhoViewed1=new TabWhoViewed();
-                    return tabWhoViewed1;
-*/
-                    TabWhoInterested tabWhoInterested2=new TabWhoInterested();
-                    return tabWhoInterested2;
+                        Log.e("Tab", "whoViewed");
+                        TabShortlistedProf tabShortlistedProf = new TabShortlistedProf();
+                        return tabShortlistedProf;
+                    }
                 case 2:
-                   /* TabWhoShortlisted tabWhoShortlisted=new TabWhoShortlisted();
-                    return tabWhoShortlisted;*/
-                    TabWhoInterested tabWhoInterested1=new TabWhoInterested();
-                    return tabWhoInterested1;
+                    if(tabFlag.equalsIgnoreCase("home")) {
+                        Log.e("Tab", "whoShortListed");
+                        TabWhoShortlisted tabWhoShortlisted = new TabWhoShortlisted();
+                        return tabWhoShortlisted;
+                    }
+                    else {
+                        Log.e("Tab", "whoInterested");
+                        TabInterestedProf tabInterestedProf = new TabInterestedProf();
+                        return tabInterestedProf;
+                    }
 
                 case 3:
-                    TabWhoInterested tabWhoInterested=new TabWhoInterested();
-                    return tabWhoInterested;
+                    if(tabFlag.equalsIgnoreCase("home")) {
+                        Log.e("Tab", "whoInterested");
+                        TabWhoInterested tabWhoInterested = new TabWhoInterested();
+                        return tabWhoInterested;
+                    }
+                    else
+
+                        return  null;
+
 
 
                 default:
                     return null;
 
             }
+
+
         }
 
+
+
+        @Override
+        public int getItemPosition(@NonNull Object object) {
+            Log.e("positionItem",""+object);
+            return super.getItemPosition(object);
+        }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
+            if(tabFlag.equalsIgnoreCase("home"))
             return 4;
+            else
+                return 3;
         }
     }
 
@@ -220,9 +260,12 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                //onBackPressed();
+                startActivity(new Intent(getApplicationContext(),TabViewParentActivity.class).putExtra("tabFlag","home"));
                 break;
 
+            case R.id.menu_go_matches:
+                startActivity(new Intent(getApplicationContext(),TabViewParentActivity.class).putExtra("tabFlag","matches"));
             default:
                 return super.onOptionsItemSelected(item);
         }

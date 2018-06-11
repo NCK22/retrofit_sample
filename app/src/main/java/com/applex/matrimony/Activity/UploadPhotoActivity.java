@@ -146,7 +146,8 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.btn_submit_photo:
-                uploadFile();
+                //uploadFile();
+                startActivity(new Intent(UploadPhotoActivity.this,TabViewParentActivity.class));
                 break;
         }
     }
@@ -175,6 +176,7 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
                         //  strResumePath=serverResponse.getMessage();
                         Log.e("Success Response", commonParentPojo.getMsg());
                         Toast.makeText(getApplicationContext(), "success" + commonParentPojo.getMsg(), Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(UploadPhotoActivity.this,TabViewParentActivity.class));
                     }
                    /* } else {
                         strResumePath=serverResponse.getMessage();

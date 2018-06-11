@@ -12,12 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
-
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
-import com.applex.matrimony.Interface.getViewedMeInterface;
+import com.applex.matrimony.Interface.getShortlistedMeInterface;
+import com.applex.matrimony.Interface.getShortlistedMyInterface;
 import com.applex.matrimony.Pojo.ParentPojoTabWhoMe;
 import com.applex.matrimony.Pojo.PojoProfile;
 import com.applex.matrimony.Pojo.PojoProfileOld;
@@ -38,11 +37,11 @@ import retrofit2.Response;
  */
 
 
-public class TabWhoViewed extends Fragment {
+public class TabShortlistedProf extends Fragment {
 
 
-
-    ArrayList<String> list=new ArrayList<String>();
+    JSONArray eduArray;
+    ArrayList<String> list_profile=new ArrayList<String>();
     ArrayList<PojoProfile> mListItem;
     public RecyclerView recyclerView;
     WhoViewedAdapter adapter;
@@ -53,18 +52,20 @@ public class TabWhoViewed extends Fragment {
     SPCustProfile spCustProfile;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView=inflater.inflate(R.layout.tab_who_viewed,container,false);
+        View rootView=inflater.inflate(R.layout.tab_who_shortlisted,container,false);
+
+        Log.e("TabWhoShortListed","onCreateView");
+
 
         progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage("Please wait");
 
         spCustProfile=new SPCustProfile(getActivity());
-
-        Log.e("TabWhoViewed","onCreateView");
         mListItem = new ArrayList<PojoProfile>();
         PojoProfileOld pojoWhoViewed=new PojoProfileOld();
         pojoWhoViewed.setAge("25 yrs");
@@ -78,7 +79,7 @@ public class TabWhoViewed extends Fragment {
         pojoWhoViewed.setOccu("Administration security manager");
         pojoWhoViewed.setMember_typ("Bride");
         pojoWhoViewed.setMatrimony_id("KL4566623");
-      //  mListItem.add(pojoWhoViewed);
+       // mListItem.add(pojoWhoViewed);
 
         PojoProfileOld pojoWhoViewed1=new PojoProfileOld();
         pojoWhoViewed1.setAge("27 yrs");
@@ -102,8 +103,9 @@ public class TabWhoViewed extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);*/
 
 
-      //  displayData();
-        getwhoViewedMe();
+
+
+       getWhoShortlistedMy();
 
 
         return rootView;
@@ -116,26 +118,27 @@ public class TabWhoViewed extends Fragment {
         recyclerView.setAdapter(adapter);
 
         if (adapter.getItemCount() == 0) {
-
         } else {
 
         }
     }
 
-    public void getwhoViewedMe()
+    public void getWhoShortlistedMy()
     {
 
         progressDialog.show();
+        if(list_profile!=null)
+            list_profile.clear();
         if(mListItem!=null)
             mListItem.clear();
 
-        getViewedMeInterface getResponse = APIClient.getClient().create(getViewedMeInterface.class);
+        getShortlistedMyInterface getResponse = APIClient.getClient().create(getShortlistedMyInterface.class);
         Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("7180214");
         call.enqueue(new Callback<ParentPojoTabWhoMe>() {
             @Override
             public void onResponse(Call<ParentPojoTabWhoMe> call, Response<ParentPojoTabWhoMe> response) {
 
-                Log.e("Inside","onResponseGetWhoViewedMe");
+                Log.e("Inside","onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
                 ParentPojoTabWhoMe parentPojoTabWhoMe=response.body();
@@ -144,7 +147,7 @@ public class TabWhoViewed extends Fragment {
                         Log.e("Response","Success");
                         Log.e("objsize", ""+parentPojoTabWhoMe.getObjProfile().size());
                         if(parentPojoTabWhoMe.getObjProfile().size()!=0) {
-                            mListItem=parentPojoTabWhoMe.getObjProfile();
+                         mListItem=parentPojoTabWhoMe.getObjProfile();
                             displayData();
                         }
 

@@ -57,7 +57,7 @@ public class TabWhoInterested extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView=inflater.inflate(R.layout.tab_who_viewed,container,false);
+        View rootView=inflater.inflate(R.layout.tab_who_interested,container,false);
 
         progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage("Please wait");
@@ -125,7 +125,7 @@ public class TabWhoInterested extends Fragment {
             mListItem.clear();
 
         getInterestedMeInterface getResponse = APIClient.getClient().create(getInterestedMeInterface.class);
-        Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("6673532");
+        Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("7180214");
         call.enqueue(new Callback<ParentPojoTabWhoMe>() {
             @Override
             public void onResponse(Call<ParentPojoTabWhoMe> call, Response<ParentPojoTabWhoMe> response) {

@@ -72,6 +72,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     SPCustProfile spCustProfile;
 
+    Boolean flagAllValid=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,8 +136,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
       btnSubmit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              //registerCustomer();
-              startActivity(new Intent(RegisterActivity.this,TabViewParentActivity.class));
+             // registerCustomer();
+            startActivity(new Intent(RegisterActivity.this,TabViewParentActivity.class).putExtra("tabFlag","home"));
+
           }
       });
 
@@ -327,69 +330,92 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     public void registerCustomer(){
 
-        progressDialog.show();
 
-        custRegInterface getResponse = APIClient.getClient().create(custRegInterface.class);
-        Call<ParentPojoCustReg> call = getResponse.doGetListResources(spProfFor.getSelectedItem().toString(),
-                etName.getText().toString(),spGender.getSelectedItem().toString(),dpBDate.getText().toString(),
-                list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
-                list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id(),
-                list_pojo_mtongue.get(list_mtongue.indexOf(spMTongue.getSelectedItem().toString())).getMother_tongue_id(),
-                etCountryCode.getText().toString(),etMobile.getText().toString(),etEmail.getText().toString(),etPwd.getText().toString()
-                );
-        call.enqueue(new Callback<ParentPojoCustReg>() {
-            @Override
-            public void onResponse(Call<ParentPojoCustReg> call, Response<ParentPojoCustReg> response) {
+        checkValidity();
 
-                Log.e("Inside","onResponse");
+        if(flagAllValid==true) {
+            progressDialog.show();
+            custRegInterface getResponse = APIClient.getClient().create(custRegInterface.class);
+            Call<ParentPojoCustReg> call = getResponse.doGetListResources(spProfFor.getSelectedItem().toString(),
+                    etName.getText().toString(), spGender.getSelectedItem().toString(), dpBDate.getText().toString(),
+                    list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
+                    list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id(),
+                    list_pojo_mtongue.get(list_mtongue.indexOf(spMTongue.getSelectedItem().toString())).getMother_tongue_id(),
+                    etCountryCode.getText().toString(), etMobile.getText().toString(), etEmail.getText().toString(), etPwd.getText().toString()
+            );
+            call.enqueue(new Callback<ParentPojoCustReg>() {
+                @Override
+                public void onResponse(Call<ParentPojoCustReg> call, Response<ParentPojoCustReg> response) {
+
+                    Log.e("Inside", "onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
-                ParentPojoCustReg parentPojoCustReg=response.body();
-                if(parentPojoCustReg!=null){
-                    if(parentPojoCustReg.getStatus().equalsIgnoreCase("1")){
-                        Log.e("Response","Success");
-                        //Log.e("objsize", ""+parentPojoCustReg.getObjProfile());
+                    ParentPojoCustReg parentPojoCustReg = response.body();
+                    if (parentPojoCustReg != null) {
+                        if (parentPojoCustReg.getStatus().equalsIgnoreCase("1")) {
+                            Log.e("Response", "Success");
+                            //Log.e("objsize", ""+parentPojoCustReg.getObjProfile());
 
-                       ChildPojoCustReg resultObj =parentPojoCustReg.getObjProfile();
-
-
-                        spCustProfile.setProfile_id(resultObj.getProfile_id());
-                        spCustProfile.setGender(resultObj.getGender());
-                        spCustProfile.setDob(resultObj.getDob());
-                        spCustProfile.setMobile(resultObj.getMobile());
-                        spCustProfile.setReligion(resultObj.getReligion());
-                        spCustProfile.setEmail(resultObj.getEmail());
+                            ChildPojoCustReg resultObj = parentPojoCustReg.getObjProfile();
 
 
-                        Log.e("profile_id",spCustProfile.getProfile_id());
-                        Log.e("gender",spCustProfile.getGender());
-                        Log.e("dob",spCustProfile.getDob());
-                        Log.e("phone",spCustProfile.getMobile());
-                        Log.e("religion",spCustProfile.getReligion());
-                        Log.e("email",spCustProfile.getEmail());
+                            spCustProfile.setProfile_id(resultObj.getProfile_id());
+                            spCustProfile.setGender(resultObj.getGender());
+                            spCustProfile.setDob(resultObj.getDob());
+                            spCustProfile.setMobile(resultObj.getMobile());
+                            spCustProfile.setReligion(resultObj.getReligion());
+                            spCustProfile.setEmail(resultObj.getEmail());
 
-                        startActivity(new Intent(RegisterActivity.this,DetailsActivity.class));
+
+                            Log.e("profile_id", spCustProfile.getProfile_id());
+                            Log.e("gender", spCustProfile.getGender());
+                            Log.e("dob", spCustProfile.getDob());
+                            Log.e("phone", spCustProfile.getMobile());
+                            Log.e("religion", spCustProfile.getReligion());
+                            Log.e("email", spCustProfile.getEmail());
+
+                            startActivity(new Intent(RegisterActivity.this, DetailsActivity.class));
+                        }
+
+                        showToast(parentPojoCustReg.getMsg());
                     }
 
-                    showToast(parentPojoCustReg.getMsg());
+                    progressDialog.dismiss();
                 }
 
-                progressDialog.dismiss();
-            }
+                @Override
+                public void onFailure(Call<ParentPojoCustReg> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<ParentPojoCustReg> call, Throwable t) {
-
-                Log.e("Throwabe ",""+t);
-                progressDialog.dismiss();
-            }
-        });
-
+                    Log.e("Throwabe ", "" + t);
+                    progressDialog.dismiss();
+                }
+            });
+        }
     }
 
     public void showToast(String msg)
     {
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+    }
+
+    public void checkValidity(){
+        progressDialog.show();
+        if(spProfFor.getSelectedItemPosition()==0 || spGender.getSelectedItemPosition()==0||
+                spReligion.getSelectedItemPosition()==0 || spCaste.getSelectedItemPosition()==0 ||
+                spMTongue.getSelectedItemPosition()==0 || etName.getText().toString().equals("")||
+                dpBDate.getText().toString().equals("")|| etMobile.getText().toString().equals("")||
+                etEmail.getText().toString().equals("")||etPwd.getText().toString().equals(""))
+            showToast("Please fill all fields");
+
+        else if(!etEmail.getText().toString().contains("@") || !etEmail.getText().toString().contains("."))
+            showToast("Plese enter valid email id");
+
+        else if(etPwd.getText().toString().length()<6)
+            showToast("Please enter atleast 6 characters for password");
+        else
+            flagAllValid=true;
+
+        progressDialog.dismiss();
     }
 
 }

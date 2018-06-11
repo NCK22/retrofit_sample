@@ -80,7 +80,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         spReligion=(MaterialSpinner)rootView.findViewById(R.id.sp_home_religion);
     spReligion.setOnItemSelectedListener(this);
         progressDialog=new ProgressDialog(getActivity());
-        progressDialog.setMessage("Please wait");
+        progressDialog.setMessage("Please wait home");
 
         getReligionList();
         displayData();
@@ -197,6 +197,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
                 Log.e("Inside","onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
+                progressDialog.dismiss();
                 ParentPojoCaste parentPojoCaste=response.body();
                 if(parentPojoCaste!=null){
                     if(parentPojoCaste.getStatus().equalsIgnoreCase("1")){
@@ -216,7 +217,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
                         aaCaste = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_caste);
                         aaCaste.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spCaste.setAdapter(aaCaste);
-                        progressDialog.dismiss();
+
                     }
                 }
 
@@ -225,6 +226,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
             @Override
             public void onFailure(Call<ParentPojoCaste> call, Throwable t) {
 
+                Log.e("throwable home",""+t);
                 progressDialog.dismiss();
             }
         });

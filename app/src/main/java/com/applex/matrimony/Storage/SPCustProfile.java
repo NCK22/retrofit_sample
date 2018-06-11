@@ -57,6 +57,17 @@ public class SPCustProfile{
         return preferences.getString("matrimony_id", "");
     }
 
+    public String getShortListedProf() {
+        // preferences = this.getSharedPreferences(prefName, 0);
+        return preferences.getString("shortlistMy", "");
+    }
+    public void setShortListedProf(String shortlistMy) {
+        //preferences = this.getSharedPreferences(prefName, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("shortlistMy", shortlistMy);
+        editor.apply();
+    }
+
     public void setReligion(String religion) {
         //preferences = this.getSharedPreferences(prefName, 0);
         SharedPreferences.Editor editor = preferences.edit();

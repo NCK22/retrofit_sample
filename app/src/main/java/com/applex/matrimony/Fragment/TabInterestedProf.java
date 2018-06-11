@@ -14,10 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
-
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
-import com.applex.matrimony.Interface.getViewedMeInterface;
+import com.applex.matrimony.Interface.getInterestedMeInterface;
+import com.applex.matrimony.Interface.getInterestedMyInterface;
 import com.applex.matrimony.Pojo.ParentPojoTabWhoMe;
 import com.applex.matrimony.Pojo.PojoProfile;
 import com.applex.matrimony.Pojo.PojoProfileOld;
@@ -38,10 +38,11 @@ import retrofit2.Response;
  */
 
 
-public class TabWhoViewed extends Fragment {
+public class TabInterestedProf extends Fragment {
 
 
-
+    Spinner quali,course,special,college,crs_type,year;
+    JSONArray eduArray;
     ArrayList<String> list=new ArrayList<String>();
     ArrayList<PojoProfile> mListItem;
     public RecyclerView recyclerView;
@@ -57,14 +58,14 @@ public class TabWhoViewed extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView=inflater.inflate(R.layout.tab_who_viewed,container,false);
+        View rootView=inflater.inflate(R.layout.tab_who_interested,container,false);
 
         progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage("Please wait");
 
         spCustProfile=new SPCustProfile(getActivity());
 
-        Log.e("TabWhoViewed","onCreateView");
+        Log.e("TabWhoInterested","onCreateView");
         mListItem = new ArrayList<PojoProfile>();
         PojoProfileOld pojoWhoViewed=new PojoProfileOld();
         pojoWhoViewed.setAge("25 yrs");
@@ -78,7 +79,7 @@ public class TabWhoViewed extends Fragment {
         pojoWhoViewed.setOccu("Administration security manager");
         pojoWhoViewed.setMember_typ("Bride");
         pojoWhoViewed.setMatrimony_id("KL4566623");
-      //  mListItem.add(pojoWhoViewed);
+     //   mListItem.add(pojoWhoViewed);
 
         PojoProfileOld pojoWhoViewed1=new PojoProfileOld();
         pojoWhoViewed1.setAge("27 yrs");
@@ -92,7 +93,7 @@ public class TabWhoViewed extends Fragment {
         pojoWhoViewed1.setOccu("Administration security manager");
         pojoWhoViewed1.setMember_typ("Groom");
         pojoWhoViewed1.setMatrimony_id("K987566623");
-        //mListItem.add(pojoWhoViewed1);
+      //  mListItem.add(pojoWhoViewed1);
         //mListItem.add(pojoWhoViewed);
         Log.e("List size",""+mListItem.size());
         recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_who_viewed);
@@ -101,10 +102,7 @@ public class TabWhoViewed extends Fragment {
        /* ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
         recyclerView.addItemDecoration(itemDecoration);*/
 
-
-      //  displayData();
-        getwhoViewedMe();
-
+    getWhoInterestedMy();
 
         return rootView;
 
@@ -116,26 +114,24 @@ public class TabWhoViewed extends Fragment {
         recyclerView.setAdapter(adapter);
 
         if (adapter.getItemCount() == 0) {
-
         } else {
-
         }
     }
 
-    public void getwhoViewedMe()
+    public void getWhoInterestedMy()
     {
 
         progressDialog.show();
         if(mListItem!=null)
             mListItem.clear();
 
-        getViewedMeInterface getResponse = APIClient.getClient().create(getViewedMeInterface.class);
+        getInterestedMyInterface getResponse = APIClient.getClient().create(getInterestedMyInterface.class);
         Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("7180214");
         call.enqueue(new Callback<ParentPojoTabWhoMe>() {
             @Override
             public void onResponse(Call<ParentPojoTabWhoMe> call, Response<ParentPojoTabWhoMe> response) {
 
-                Log.e("Inside","onResponseGetWhoViewedMe");
+                Log.e("Inside","onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
                 ParentPojoTabWhoMe parentPojoTabWhoMe=response.body();
@@ -143,20 +139,23 @@ public class TabWhoViewed extends Fragment {
                     if(parentPojoTabWhoMe.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
                         Log.e("objsize", ""+parentPojoTabWhoMe.getObjProfile().size());
-                        if(parentPojoTabWhoMe.getObjProfile().size()!=0) {
-                            mListItem=parentPojoTabWhoMe.getObjProfile();
+                        mListItem=parentPojoTabWhoMe.getObjProfile();
+                        if(mListItem.size()!=0)
+
                             displayData();
-                        }
 
                     }
                 }
-
+                else
+                    Log.e("parentpojotabwhome","null");
                 progressDialog.dismiss();
+
             }
 
             @Override
             public void onFailure(Call<ParentPojoTabWhoMe> call, Throwable t) {
 
+                Log.e("throwable",""+t);
                 progressDialog.dismiss();
             }
         });

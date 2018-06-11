@@ -6,12 +6,13 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface getViewedMeInterface {
 
-    @FormUrlEncoded
+
     @GET("app/app_get_viewed_me.php")
-    Call<ParentPojoTabWhoMe> doGetListResources(@Field("matrimony_id") String matrimony_id);
+    Call<ParentPojoTabWhoMe> doGetListResources(@Query("matrimony_id") String matrimony_id);
 
 
 }

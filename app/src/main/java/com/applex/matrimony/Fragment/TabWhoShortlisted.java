@@ -56,9 +56,9 @@ public class TabWhoShortlisted extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView=inflater.inflate(R.layout.tab_who_viewed,container,false);
+        View rootView=inflater.inflate(R.layout.tab_who_shortlisted,container,false);
 
-        Log.e("TabWhoViewed","onCreateView");
+        Log.e("TabWhoShortListed","onCreateView");
 
 
         progressDialog=new ProgressDialog(getActivity());
@@ -132,7 +132,7 @@ public class TabWhoShortlisted extends Fragment {
             mListItem.clear();
 
         getShortlistedMeInterface getResponse = APIClient.getClient().create(getShortlistedMeInterface.class);
-        Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("6673532");
+        Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("7180214");
         call.enqueue(new Callback<ParentPojoTabWhoMe>() {
             @Override
             public void onResponse(Call<ParentPojoTabWhoMe> call, Response<ParentPojoTabWhoMe> response) {
@@ -145,8 +145,10 @@ public class TabWhoShortlisted extends Fragment {
                     if(parentPojoTabWhoMe.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
                         Log.e("objsize", ""+parentPojoTabWhoMe.getObjProfile().size());
-                        if(parentPojoTabWhoMe.getObjProfile().size()!=0)
+                        if(parentPojoTabWhoMe.getObjProfile().size()!=0) {
+                         mListItem=parentPojoTabWhoMe.getObjProfile();
                             displayData();
+                        }
 
                     }
                 }

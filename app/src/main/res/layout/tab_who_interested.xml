@@ -3,15 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#e6e6e6"
-    android:layout_marginBottom="100dp">
+    android:background="#e6e6e6">
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_who_viewed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp">
+        android:layout_marginTop="30dp">
 
     </android.support.v7.widget.RecyclerView>
 
