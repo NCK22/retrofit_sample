@@ -9,7 +9,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -19,8 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
 import com.applex.matrimony.Fragment.TabHome;
@@ -31,15 +28,9 @@ import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
 import com.applex.matrimony.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+public class TabParentMatchesActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class TabViewParentActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
-
-    private TabViewParentActivity.SectionsPagerAdapter mSectionsPagerAdapter;
+    private TabParentMatchesActivity.SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
     String quotes[];
@@ -61,11 +52,12 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tab_view_parent);
+        setContentView(R.layout.activity_tab_parent_matches);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("My Home");
+        toolbar.setTitle("Matches");
 
+        Log.e("onCreateView","TabParentMatches");
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -85,7 +77,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
 
         //   Tabs Activity
 
-        mSectionsPagerAdapter = new TabViewParentActivity.SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new TabParentMatchesActivity.SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.vp_parent);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -147,12 +139,12 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.menu_go_home:
-             //   toolbar.setTitle(getString(R.string.menu_home));
-                startActivity(new Intent(TabViewParentActivity.this, TabViewParentActivity.class));
+               // toolbar.setTitle(getString(R.string.menu_home));
+                startActivity(new Intent(TabParentMatchesActivity.this, TabViewParentActivity.class));
                 return true;
 
             case R.id.menu_go_matches:
-             //   toolbar.setTitle(getString(R.string.menu_matches));
+//                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
                 return true;
         }
@@ -201,22 +193,17 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 
                 case 1:
 
+
                         Log.e("Tab", "whoViewed");
-                        TabWhoViewed tabWhoViewed = new TabWhoViewed();
-                        return tabWhoViewed;
+                        TabShortlistedProf tabShortlistedProf = new TabShortlistedProf();
+                        return tabShortlistedProf;
 
                 case 2:
 
-                        Log.e("Tab", "whoShortListed");
-                        TabWhoShortlisted tabWhoShortlisted = new TabWhoShortlisted();
-                        return tabWhoShortlisted;
-
-
-
-                case 3:
                         Log.e("Tab", "whoInterested");
-                        TabWhoInterested tabWhoInterested = new TabWhoInterested();
-                        return tabWhoInterested;
+                        TabInterestedProf tabInterestedProf = new TabInterestedProf();
+                        return tabInterestedProf;
+
 
                 default:
                     return null;
@@ -238,8 +225,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         public int getCount() {
             // Show 3 total pages.
 
-            return 4;
-
+                return 3;
         }
     }
 
@@ -248,7 +234,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         switch (item.getItemId()) {
             case android.R.id.home:
                 //onBackPressed();
-                startActivity(new Intent(getApplicationContext(),TabViewParentActivity.class).putExtra("tabFlag","home"));
+                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","home"));
                 break;
 
             case R.id.menu_go_matches:

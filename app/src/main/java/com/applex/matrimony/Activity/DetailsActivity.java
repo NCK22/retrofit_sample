@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -99,6 +100,8 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
     String strChildrenNo="0";
     SPCustProfile spCustProfile;
 
+    Boolean flagAllValid=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,6 +176,20 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
+        etAboutYou.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                v.getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                    case MotionEvent.ACTION_UP:
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                return false;
+            }
+        });
     }
 
     private void initializeSpinnerLists() {
@@ -683,6 +700,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
 
     public void registerDetails(){
 
+        checkValidity();
         progressDialog.show();
 
         regDetlInterface getResponse = APIClient.getClient().create(regDetlInterface.class);
@@ -802,4 +820,26 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
     }
 
+
+    public void checkValidity(){
+        progressDialog.show();
+        if(spMaritalStat.getSelectedItemPosition()==0 || spWillIntercast.getSelectedItemPosition()==0||etSubCaste.getText().toString().equals(""))
+            showToast("Please fill all personal details");
+             else if(spCountry.getSelectedItemPosition()==0 || spState.getSelectedItemPosition()==0 ||spCity.getSelectedItemPosition()==0 )
+                    showToast("Please fil all location details");
+             else if(spHeight.getSelectedItemPosition()==0 || spWeight.getSelectedItemPosition()==0 ||spBodyType.getSelectedItemPosition()==0
+                ||spComplexion.getSelectedItemPosition()==0 || spPhysStat.getSelectedItemPosition()==0 )
+                 showToast("Please fill all physical attributes");
+             else if(spEdu.getSelectedItemPosition()==0 || spOccu.getSelectedItemPosition()==0 ||spEmployIn.getSelectedItemPosition()==0 )
+                 showToast("Please fill all details of Education & occupation");
+                 else if(spFood.getSelectedItemPosition()==0 || spDrink.getSelectedItemPosition()==0 ||spSmoke.getSelectedItemPosition()==0 )
+                     showToast("Please fill all details of habit");
+                 else if(spFamStat.getSelectedItemPosition()==0 || spFamType.getSelectedItemPosition()==0 ||spFamValue.getSelectedItemPosition()==0 )
+                     showToast("Please fill all family profile details");
+                 else if(etAboutYou.getText().toString().equalsIgnoreCase(""))
+                     showToast("Please write something about you");
+        else
+            flagAllValid=true;
+        progressDialog.dismiss();
+    }
 }

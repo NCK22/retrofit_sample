@@ -1,6 +1,7 @@
 package com.applex.matrimony.Fragment;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
@@ -43,7 +47,7 @@ import retrofit2.Response;
  */
 
 
-public class TabHome extends Fragment implements AdapterView.OnItemSelectedListener {
+public class TabHome extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
 
     MaterialSpinner spReligion,spCaste;
@@ -60,7 +64,8 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     private LinearLayout lyt_not_found;
     ProgressDialog progressDialog;
     ArrayAdapter aaCaste;
-
+    Button  btnFind;
+    EditText etAgeFrom,etAgeTo;
 
     @Nullable
     @Override
@@ -76,14 +81,22 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         rv_profile_matches.setHasFixedSize(true);
         rv_profile_matches.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
+        etAgeFrom=(EditText)rootView.findViewById(R.id.et_age_from);
+        etAgeTo=(EditText)rootView.findViewById(R.id.et_age_to);
+        btnFind=(Button)rootView.findViewById(R.id.btn_home_find);
         spCaste=(MaterialSpinner)rootView.findViewById(R.id.sp_home_caste);
         spReligion=(MaterialSpinner)rootView.findViewById(R.id.sp_home_religion);
-    spReligion.setOnItemSelectedListener(this);
+
+        btnFind.setOnClickListener(this);
+        spReligion.setOnItemSelectedListener(this);
+        spCaste.setOnItemSelectedListener(this);
+
         progressDialog=new ProgressDialog(getActivity());
         progressDialog.setMessage("Please wait home");
 
         getReligionList();
         displayData();
+
 
 
         return rootView;
@@ -130,8 +143,10 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
                         Iterator<String> keys=resultMap.keySet().iterator();
                         while (keys.hasNext()){
                             String key=keys.next();
-                            list_pojo_religion.add(resultMap.get(key));
-                            list_religion.add(resultMap.get(key).getReligion_name());
+
+                                list_pojo_religion.add(resultMap.get(key));
+                                list_religion.add(resultMap.get(key).getReligion_name());
+
                         }
                         Log.e("List Size",""+list_religion.size());
                         ArrayAdapter aaReligion = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_religion);
@@ -155,12 +170,14 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+        ((TextView)view).setTextColor(Color.BLACK);
+        ((TextView)view).setTextSize(16);
         switch(adapterView.getId())
         {
             case R.id.sp_home_religion:
                 Log.e("onIemSelectedListener ","religion called");
                 Log.e("position clicked",""+spReligion.getSelectedItemPosition());
-                if(spReligion.getSelectedItemPosition() != -1)
+                if(spReligion.getSelectedItemPosition() >0)
                 {
                    /* Log.e("selected index",""+list_country.indexOf(spCountry.getSelectedItem()));
                     Log.e("pojo element name",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_name());
@@ -230,6 +247,12 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
                 progressDialog.dismiss();
             }
         });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
 
     }
 }

@@ -983,7 +983,14 @@
                         <EditText
                             android:id="@+id/edt_about_you"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="100dp"
+                            android:inputType="textMultiLine"
+                            android:scrollbars="vertical"
+                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                            android:fadeScrollbars="false"
+                            android:scrollbarSize="50dp"
+                            android:scrollbarStyle="insideInset"
+                            android:overScrollMode="always"
                             />
 
                     </LinearLayout>

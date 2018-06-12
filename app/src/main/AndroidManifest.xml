@@ -57,6 +57,9 @@
         <activity android:name=".Activity.TabViewParentActivity"
             android:windowSoftInputMode="adjustPan"/>
 
+        <activity android:name=".Activity.TabParentMatchesActivity"
+            android:windowSoftInputMode="adjustPan"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"

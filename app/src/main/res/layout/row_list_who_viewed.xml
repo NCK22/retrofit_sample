@@ -90,7 +90,8 @@
                     android:textSize="14dp"
                     android:fontFamily="Roboto-Medium"
                     android:textColor="#FFFFFF"
-                    android:background="@drawable/border_whoview_premium"/>
+                    android:background="@drawable/border_whoview_premium"
+                    android:visibility="invisible"/>
 
 
             </LinearLayout>
@@ -302,7 +303,8 @@
                         android:textSize="14dp"
                         android:fontFamily="Roboto-Medium"
                         android:textColor="#4A4A4A"
-                        android:background="@drawable/border_whoview_send"/>
+                        android:background="@drawable/border_whoview_send"
+                        android:visibility="invisible"/>
 
                     <android.support.v4.widget.Space
                         android:layout_width="0dp"
