@@ -15,10 +15,9 @@ import android.widget.ProgressBar;
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
-import com.applex.matrimony.Interface.getShortlistedMeInterface;
 import com.applex.matrimony.Interface.getShortlistedMyInterface;
-import com.applex.matrimony.Pojo.ParentPojoTabWhoMe;
-import com.applex.matrimony.Pojo.PojoProfile;
+import com.applex.matrimony.Pojo.ParentPojoProfile;
+import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.Pojo.PojoProfileOld;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
@@ -42,7 +41,7 @@ public class TabShortlistedProf extends Fragment {
 
     JSONArray eduArray;
     ArrayList<String> list_profile=new ArrayList<String>();
-    ArrayList<PojoProfile> mListItem;
+    ArrayList<ChildPojoProfile> mListItem;
     public RecyclerView recyclerView;
     WhoViewedAdapter adapter;
     private ProgressBar progressBar;
@@ -66,7 +65,7 @@ public class TabShortlistedProf extends Fragment {
         progressDialog.setMessage("Please wait");
 
         spCustProfile=new SPCustProfile(getActivity());
-        mListItem = new ArrayList<PojoProfile>();
+        mListItem = new ArrayList<ChildPojoProfile>();
         PojoProfileOld pojoWhoViewed=new PojoProfileOld();
         pojoWhoViewed.setAge("25 yrs");
         pojoWhoViewed.setLocation("Hyderabad");
@@ -133,21 +132,21 @@ public class TabShortlistedProf extends Fragment {
             mListItem.clear();
 
         getShortlistedMyInterface getResponse = APIClient.getClient().create(getShortlistedMyInterface.class);
-        Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("7180214");
-        call.enqueue(new Callback<ParentPojoTabWhoMe>() {
+        Call<ParentPojoProfile> call = getResponse.doGetListResources("7180214");
+        call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
-            public void onResponse(Call<ParentPojoTabWhoMe> call, Response<ParentPojoTabWhoMe> response) {
+            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
 
                 Log.e("Inside","onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
-                ParentPojoTabWhoMe parentPojoTabWhoMe=response.body();
-                if(parentPojoTabWhoMe!=null){
-                    if(parentPojoTabWhoMe.getStatus().equalsIgnoreCase("1")){
+                ParentPojoProfile parentPojoProfile =response.body();
+                if(parentPojoProfile !=null){
+                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
-                        Log.e("objsize", ""+parentPojoTabWhoMe.getObjProfile().size());
-                        if(parentPojoTabWhoMe.getObjProfile().size()!=0) {
-                         mListItem=parentPojoTabWhoMe.getObjProfile();
+                        Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
+                        if(parentPojoProfile.getObjProfile().size()!=0) {
+                         mListItem= parentPojoProfile.getObjProfile();
                             displayData();
                         }
 
@@ -158,7 +157,7 @@ public class TabShortlistedProf extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ParentPojoTabWhoMe> call, Throwable t) {
+            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
 
                 progressDialog.dismiss();
             }

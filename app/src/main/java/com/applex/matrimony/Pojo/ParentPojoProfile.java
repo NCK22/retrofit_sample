@@ -4,16 +4,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class ParentPojoTabWhoMe extends CommonParentPojo {
+public class ParentPojoProfile extends CommonParentPojo {
 
     @SerializedName("Profile_Details")
-    ArrayList<PojoProfile> objProfile;
+    ArrayList<ChildPojoProfile> objProfile;
 
-    public ArrayList<PojoProfile> getObjProfile() {
+    public ArrayList<ChildPojoProfile> getObjProfile() {
         return objProfile;
     }
 
-    public void setObjProfile(ArrayList<PojoProfile> objProfile) {
+    public void setObjProfile(ArrayList<ChildPojoProfile> objProfile) {
         this.objProfile = objProfile;
     }
 }

@@ -16,14 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
-import com.applex.matrimony.Interface.getShortlistedMeInterface;
 import com.applex.matrimony.Interface.getShortlistedMyInterface;
 import com.applex.matrimony.Interface.sendInterestInterface;
 import com.applex.matrimony.Interface.shortListInterface;
 import com.applex.matrimony.Pojo.CommonParentPojo;
-import com.applex.matrimony.Pojo.ParentPojoTabWhoMe;
-import com.applex.matrimony.Pojo.PojoProfile;
-import com.applex.matrimony.Pojo.PojoProfileOld;
+import com.applex.matrimony.Pojo.ParentPojoProfile;
+import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 import com.squareup.picasso.Picasso;
@@ -39,19 +37,19 @@ import retrofit2.Response;
 
 public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.ItemRowHolder> implements Serializable {
 
-    private ArrayList<PojoProfile> dataList;
+    private ArrayList<ChildPojoProfile> dataList;
     private Context mContext;
     ProgressDialog progressDialog;
     ArrayList<String> list_profile=new ArrayList<String>();
-    ArrayList<PojoProfile> mListItem;
+    ArrayList<ChildPojoProfile> mListItem;
     SPCustProfile spCustProfile;
 
-    public WhoViewedAdapter(Context context, ArrayList<PojoProfile> dataList) {
+    public WhoViewedAdapter(Context context, ArrayList<ChildPojoProfile> dataList) {
         this.dataList = dataList;
         this.mContext = context;
         progressDialog=new ProgressDialog(mContext);
         progressDialog.setMessage("Please wait adapter");
-        mListItem = new ArrayList<PojoProfile>();
+        mListItem = new ArrayList<ChildPojoProfile>();
         spCustProfile=new SPCustProfile(mContext);
 
 
@@ -85,7 +83,7 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        final PojoProfile singleItem = dataList.get(position);
+        final ChildPojoProfile singleItem = dataList.get(position);
         holder.age_loc.setText(singleItem.getAge()+" ,"+singleItem.getFamily_location());
         holder.height.setText(singleItem.getHeight());
         holder.religion_caste.setText(singleItem.getReligion()+" ,"+singleItem.getCaste());
@@ -275,23 +273,23 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
             mListItem.clear();
 
         getShortlistedMyInterface getResponse = APIClient.getClient().create(getShortlistedMyInterface.class);
-        Call<ParentPojoTabWhoMe> call = getResponse.doGetListResources("7180214");
-        call.enqueue(new Callback<ParentPojoTabWhoMe>() {
+        Call<ParentPojoProfile> call = getResponse.doGetListResources("7180214");
+        call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
-            public void onResponse(Call<ParentPojoTabWhoMe> call, Response<ParentPojoTabWhoMe> response) {
+            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
 
                 Log.e("Inside adapter","onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
-                ParentPojoTabWhoMe parentPojoTabWhoMe=response.body();
-                if(parentPojoTabWhoMe!=null){
-                    Log.e("Responseadaptr",parentPojoTabWhoMe.getMsg());
-                    if(parentPojoTabWhoMe.getStatus().equalsIgnoreCase("1")){
-                        Log.e("Responseadaptr",parentPojoTabWhoMe.getMsg());
+                ParentPojoProfile parentPojoProfile =response.body();
+                if(parentPojoProfile !=null){
+                    Log.e("Responseadaptr", parentPojoProfile.getMsg());
+                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
+                        Log.e("Responseadaptr", parentPojoProfile.getMsg());
 
-                        Log.e("objsize adapter", ""+parentPojoTabWhoMe.getObjProfile().size());
-                        if(parentPojoTabWhoMe.getObjProfile().size()!=0) {
-                            mListItem=parentPojoTabWhoMe.getObjProfile();
+                        Log.e("objsize adapter", ""+ parentPojoProfile.getObjProfile().size());
+                        if(parentPojoProfile.getObjProfile().size()!=0) {
+                            mListItem= parentPojoProfile.getObjProfile();
                             for(int i=0;i<mListItem.size();i++) {
                                 list_profile.add(mListItem.get(i).getMatrimony_id());
                                 spCustProfile.setShortListedProf(spCustProfile.getShortListedProf()+","+mListItem.get(i).getMatrimony_id());
@@ -308,7 +306,7 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
             }
 
             @Override
-            public void onFailure(Call<ParentPojoTabWhoMe> call, Throwable t) {
+            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
 
                 progressDialog.dismiss();
             }

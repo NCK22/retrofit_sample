@@ -1,6 +1,6 @@
 package com.applex.matrimony.Interface;
 
-import com.applex.matrimony.Pojo.ParentPojoTabWhoMe;
+import com.applex.matrimony.Pojo.ParentPojoProfile;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -11,7 +11,7 @@ public interface getInterestedMyInterface {
 
     @FormUrlEncoded
     @POST("app/app_get_interested_my.php")
-    Call<ParentPojoTabWhoMe> doGetListResources(@Field("matrimony_id") String matrimony_id);
+    Call<ParentPojoProfile> doGetListResources(@Field("matrimony_id") String matrimony_id);
 
 
 }

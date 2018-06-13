@@ -2,7 +2,7 @@ package com.applex.matrimony.Pojo;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PojoProfile {
+public class ChildPojoProfile {
 
     @SerializedName("profile_id") String profile_id;
     @SerializedName("user_id") String user_id;

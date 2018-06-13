@@ -20,14 +20,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.applex.matrimony.APIClient;
-import com.applex.matrimony.Adapter.WhoViewedAdapter;
+import com.applex.matrimony.Adapter.HomeProfilesAdapter;
 import com.applex.matrimony.Interface.getCasteInterface;
+import com.applex.matrimony.Interface.getHighlightedInterface;
 import com.applex.matrimony.Interface.getReligionInterface;
 import com.applex.matrimony.Pojo.ChildPojoCaste;
 import com.applex.matrimony.Pojo.ChildPojoReligion;
 import com.applex.matrimony.Pojo.ParentPojoCaste;
+import com.applex.matrimony.Pojo.ParentPojoProfile;
 import com.applex.matrimony.Pojo.ParentPojoReligion;
-import com.applex.matrimony.Pojo.PojoProfileOld;
+import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.R;
 
 import org.json.JSONArray;
@@ -56,10 +58,10 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     ArrayList<ChildPojoReligion>list_pojo_religion=new ArrayList<ChildPojoReligion>();
     ArrayList<ChildPojoCaste>list_pojo_caste=new ArrayList<ChildPojoCaste>();
     ArrayList<String> list_caste=new ArrayList<String>();
-    ArrayList<PojoProfileOld> list_matches=new ArrayList<PojoProfileOld>();
-    ArrayList<PojoProfileOld> list_highlights=new ArrayList<PojoProfileOld>();
+    ArrayList<ChildPojoProfile> list_matches=new ArrayList<ChildPojoProfile>();
+    ArrayList<ChildPojoProfile> list_highlights=new ArrayList<ChildPojoProfile>();
     public RecyclerView rv_profile_matches,rv_profile_highlight;
-    WhoViewedAdapter adapter;
+    HomeProfilesAdapter adapter;
     private ProgressBar progressBar;
     private LinearLayout lyt_not_found;
     ProgressDialog progressDialog;
@@ -80,6 +82,10 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         rv_profile_highlight = (RecyclerView) rootView.findViewById(R.id.rv_prof_highlight);
         rv_profile_matches.setHasFixedSize(true);
         rv_profile_matches.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        rv_profile_highlight.setHasFixedSize(true);
+        rv_profile_highlight.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+
 
         etAgeFrom=(EditText)rootView.findViewById(R.id.et_age_from);
         etAgeTo=(EditText)rootView.findViewById(R.id.et_age_to);
@@ -95,7 +101,8 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         progressDialog.setMessage("Please wait home");
 
         getReligionList();
-        displayData();
+       // displayData();
+        getHighlightedProf();
 
 
 
@@ -103,16 +110,17 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
 
     }
     private void displayData() {
-      /*  Log.e("displayData","called");
-        Log.e("List size",""+mListItem.size());
-        adapter = new WhoViewedAdapter(getActivity(), mListItem);
-        recyclerView.setAdapter(adapter);
+        Log.e("displayData","called");
+        Log.e("List_highlight size",""+list_highlights.size());
+        adapter = new HomeProfilesAdapter(getActivity(), list_highlights);
+        rv_profile_highlight.setAdapter(adapter);
+        rv_profile_matches.setAdapter(adapter);
 
         if (adapter.getItemCount() == 0) {
   //          lyt_not_found.setVisibility(View.VISIBLE);
         } else {
 //            lyt_not_found.setVisibility(View.GONE);
-        }*/
+        }
     }
 
     public void getReligionList(){
@@ -166,6 +174,52 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         });
 
     }
+
+
+    public void getHighlightedProf()
+    {
+
+        progressDialog.show();
+        if(list_highlights!=null)
+            list_highlights.clear();
+
+        getHighlightedInterface getResponse = APIClient.getClient().create(getHighlightedInterface.class);
+        Call<ParentPojoProfile> call = getResponse.doGetListResources();
+        call.enqueue(new Callback<ParentPojoProfile>() {
+            @Override
+            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
+
+                Log.e("Inside","onResponse");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+                ParentPojoProfile parentPojoProfile =response.body();
+                if(parentPojoProfile !=null){
+                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
+                        Log.e("Response","Success");
+                        Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
+                        list_highlights= parentPojoProfile.getObjProfile();
+                        if(list_highlights.size()!=0)
+
+                            displayData();
+
+                    }
+                }
+                else
+                    Log.e("parentpojotabwhome","null");
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
+
+                Log.e("throwable",""+t);
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -252,7 +306,6 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
 
     @Override
     public void onClick(View v) {
-
 
     }
 }

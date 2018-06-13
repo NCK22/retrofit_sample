@@ -13,8 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applex.matrimony.Pojo.PojoProfileOld;
+import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -22,11 +23,11 @@ import java.util.ArrayList;
 
 public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapter.ItemRowHolder> implements Serializable {
 
-    private ArrayList<PojoProfileOld> dataList;
+    private ArrayList<ChildPojoProfile> dataList;
     private Context mContext;
 
 
-    public HomeProfilesAdapter(Context context, ArrayList<PojoProfileOld> dataList) {
+    public HomeProfilesAdapter(Context context, ArrayList<ChildPojoProfile> dataList) {
         this.dataList = dataList;
         this.mContext = context;
 
@@ -42,22 +43,20 @@ public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapte
     public void onBindViewHolder(final ItemRowHolder holder, final int position) {
 
 
-        if(position %2 == 1)
-        {
-            holder.itemView.setBackgroundColor(Color.parseColor("#00000000"));
-            //  holder.imageView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        }
-        else
-        {
-            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            //  holder.imageView.setBackgroundColor(Color.parseColor("#FFFAF8FD"));
-        }
+
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        final PojoProfileOld singleItem = dataList.get(position);
+        final ChildPojoProfile singleItem = dataList.get(position);
 
-        holder.member_typ.setText(singleItem.getMember_typ());
+        if ((singleItem.getGender().equalsIgnoreCase("male"))) {
+            holder.member_typ.setText("Groom");
+        } else {
+            holder.member_typ.setText("Bride");
+        }
+        if(singleItem.getProfile_photo()!=null)
+
+        Picasso.with(mContext).load("http://applex360.in/Deshpande-family/Matrimony-web/"+singleItem.getProfile_photo()).placeholder(R.mipmap.iconprofile).fit().into(holder.image);
 
 
 
@@ -77,7 +76,7 @@ public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapte
 
         public ItemRowHolder(View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.img_logo);
+            image = (ImageView) itemView.findViewById(R.id.img_row_logo);
             member_typ = (TextView) itemView.findViewById(R.id.tv_row_member_type);
 
         }

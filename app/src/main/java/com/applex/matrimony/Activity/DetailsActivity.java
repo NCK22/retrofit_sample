@@ -20,6 +20,7 @@ import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Interface.APIInterface;
 import com.applex.matrimony.Interface.checkOtpInterface;
 import com.applex.matrimony.Interface.getCityInterface;
+import com.applex.matrimony.Interface.getCurrencyInterface;
 import com.applex.matrimony.Interface.getEducationInterface;
 import com.applex.matrimony.Interface.getHeightInterface;
 import com.applex.matrimony.Interface.getOccupationInterface;
@@ -29,6 +30,7 @@ import com.applex.matrimony.Interface.regDetlInterface;
 import com.applex.matrimony.Interface.sendOtpInterface;
 import com.applex.matrimony.Pojo.ChildModelCountry;
 import com.applex.matrimony.Pojo.ChildPojoCity;
+import com.applex.matrimony.Pojo.ChildPojoCurrency;
 import com.applex.matrimony.Pojo.ChildPojoEducation;
 import com.applex.matrimony.Pojo.ChildPojoHeight;
 import com.applex.matrimony.Pojo.ChildPojoOccupation;
@@ -37,6 +39,7 @@ import com.applex.matrimony.Pojo.ChildPojoWeight;
 import com.applex.matrimony.Pojo.CommonParentPojo;
 import com.applex.matrimony.Pojo.ParentModelCountry;
 import com.applex.matrimony.Pojo.ParentPojoCity;
+import com.applex.matrimony.Pojo.ParentPojoCurrency;
 import com.applex.matrimony.Pojo.ParentPojoEducation;
 import com.applex.matrimony.Pojo.ParentPojoHeight;
 import com.applex.matrimony.Pojo.ParentPojoOccupation;
@@ -57,10 +60,10 @@ import retrofit2.Response;
 public class DetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     MaterialSpinner spMaritalStat,spWillIntercast,spCountry,spState,spCity,spHeight,spWeight,spBodyType,spComplexion,
-    spPhysStat,spEdu,spOccu,spEmployIn,spLakh,spThousand,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue;
+    spPhysStat,spEdu,spOccu,spEmployIn,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue;
 
     ArrayAdapter aaMaritalStat,aaWillIntercast,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,
-            aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaLakh,aaThousand,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue;
+            aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue;
 
 
     ArrayList<String> list_marital_Stat=new ArrayList<String>();
@@ -91,7 +94,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
     ArrayList<String> list_fam_stat=new ArrayList<String>();
     ArrayList<String>list_fam_type=new ArrayList<String>();
     ArrayList<String> list_fam_value=new ArrayList<String>();
-
+ArrayList<String>list_currency=new ArrayList<String>();
     Button submit;
     EditText etSubCaste,etAboutYou,etChildren;
     ProgressDialog progressDialog;
@@ -115,7 +118,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
         spBodyType=(MaterialSpinner)findViewById(R.id.sp_body_type);spComplexion=(MaterialSpinner)findViewById(R.id.sp_complexion);
         spPhysStat=(MaterialSpinner)findViewById(R.id.sp_physical_stat);spEdu=(MaterialSpinner)findViewById(R.id.sp_edu);
         spOccu=(MaterialSpinner)findViewById(R.id.sp_occup);spEmployIn=(MaterialSpinner)findViewById(R.id.sp_employed_in);
-        spLakh=(MaterialSpinner)findViewById(R.id.sp_lakh);spThousand=(MaterialSpinner)findViewById(R.id.sp_thousand);
+        spCurrency=(MaterialSpinner)findViewById(R.id.sp_currency);
         spFood=(MaterialSpinner)findViewById(R.id.sp_food);spDrink=(MaterialSpinner)findViewById(R.id.sp_drink);
         spSmoke=(MaterialSpinner)findViewById(R.id.sp_smoke);spFamStat=(MaterialSpinner)findViewById(R.id.sp_fam_stat);
         spFamType=(MaterialSpinner)findViewById(R.id.sp_fam_type);spFamValue=(MaterialSpinner)findViewById(R.id.sp_fam_value);
@@ -145,7 +148,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
         spWillIntercast.setAdapter(aaWillIntercast);
         spBodyType.setAdapter(aaBodyType);spComplexion.setAdapter(aaComplexion);
         spPhysStat.setAdapter(aaPhysStat);
-        spEmployIn.setAdapter(aaEmployIn);spLakh.setAdapter(aaLakh);spThousand.setAdapter(aaThousand);
+        spEmployIn.setAdapter(aaEmployIn);
         spFood.setAdapter(aaFood);spDrink.setAdapter(aaDrink);spSmoke.setAdapter(aaSmoke);
         spFamStat.setAdapter(aaFamStat);spFamType.setAdapter(aaFamType);spFamValue.setAdapter(aapFamValue);
 
@@ -156,7 +159,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
         spState.setOnItemSelectedListener(this); spCity.setOnItemSelectedListener(this);  spHeight.setOnItemSelectedListener(this);
         spWeight.setOnItemSelectedListener(this);spBodyType.setOnItemSelectedListener(this);spComplexion.setOnItemSelectedListener(this);
         spPhysStat.setOnItemSelectedListener(this);spEdu.setOnItemSelectedListener(this);spOccu.setOnItemSelectedListener(this);
-        spEmployIn.setOnItemSelectedListener(this);spLakh.setOnItemSelectedListener(this);spThousand.setOnItemSelectedListener(this);
+        spEmployIn.setOnItemSelectedListener(this);spCurrency.setOnItemSelectedListener(this);
         spFood.setOnItemSelectedListener(this);spDrink.setOnItemSelectedListener(this);spSmoke.setOnItemSelectedListener(this);
         spFamStat.setOnItemSelectedListener(this);spFamType.setOnItemSelectedListener(this);spFamValue.setOnItemSelectedListener(this);
 
@@ -164,7 +167,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
         spMaritalStat.setSelected(true);spWillIntercast.setSelected(true);spCountry.setSelected(true);
         spState.setSelected(true);spCity.setSelected(true);spHeight.setSelected(true);spWeight.setSelected(true);spBodyType.setSelected(true);
         spComplexion.setSelected(true);spPhysStat.setSelected(true);spEdu.setSelected(true);
-        spOccu.setSelected(true);spEmployIn.setSelected(true);spLakh.setSelected(true);spThousand.setSelected(true);
+        spOccu.setSelected(true);spEmployIn.setSelected(true);spCurrency.setSelected(true);
         spFood.setSelected(true);spDrink.setSelected(true);spSmoke.setSelected(true);spFamStat.setSelected(true);
         spFamType.setSelected(true);spFamValue.setSelected(true);
 
@@ -277,10 +280,6 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
         aaPhysStat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         aaEmployIn = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_employed_in);
         aaEmployIn.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        aaLakh = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_lakh);
-        aaLakh.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        aaThousand = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_thosand);
-        aaThousand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         aaFood = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_food);
         aaFood.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         aaDrink = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_drink);
@@ -322,6 +321,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
                     Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
                    // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());*/
                     getStateList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())+1).getCountry_id());
+                    getCurrencyList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())+1).getCountry_id());
 
                 }
                 break;
@@ -697,6 +697,55 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
+    public void getCurrencyList(String country_id){
+
+        progressDialog.show();
+        if(list_currency!=null)
+            list_currency.clear();
+
+        Log.e("Country",country_id);
+        getCurrencyInterface getResponse = APIClient.getClient().create(getCurrencyInterface.class);
+        Call<ParentPojoCurrency> call = getResponse.doGetListResources(country_id);
+        call.enqueue(new Callback<ParentPojoCurrency>() {
+            @Override
+            public void onResponse(Call<ParentPojoCurrency> call, Response<ParentPojoCurrency> response) {
+
+                Log.e("Inside","onResponseCurrency");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+                ParentPojoCurrency parentPojoCurrency=response.body();
+                if(parentPojoCurrency!=null){
+                    if(parentPojoCurrency.getStatus().equalsIgnoreCase("1")){
+                        Log.e("Response","Success");
+                        Log.e("currobjsize", ""+parentPojoCurrency.getObjCurrency().size());
+
+                        LinkedHashMap<String, ChildPojoCurrency> resultMap =parentPojoCurrency.getObjCurrency();
+
+                        Iterator<String> keys=resultMap.keySet().iterator();
+                        while (keys.hasNext()){
+                            String key=keys.next();
+
+                            list_currency.add(resultMap.get(key).getCurrency());
+                        }
+                        Log.e("currency List Size",""+list_currency.size());
+                        aaCurrency = new ArrayAdapter(DetailsActivity.this,android.R.layout.simple_spinner_item,list_currency);
+                        aaCurrency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spCurrency.setAdapter(aaCurrency);
+                    }
+                    progressDialog.dismiss();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ParentPojoCurrency> call, Throwable t) {
+
+                Log.e("throwable currency",""+t);
+                progressDialog.dismiss();
+            }
+        });
+
+    }
 
     public void registerDetails(){
 
