@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+android:background="#FFFFFF"
+>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/expandableButton4"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/border_expbtn"
+                android:drawableRight="@mipmap/downarrow"
+                android:drawableTint="#4A4A4A"
+                android:fontFamily="Roboto-Regular"
+                android:onClick="expandableButton4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Basic Details"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#4A4A4A"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#0c000000"
+                android:weightSum="1">
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.80"/>
+
+
+                <ImageView
+                    android:id="@+id/img_dissmiss_basic"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.10"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/editicon2"
+                    android:visibility="visible"/>
+
+                <ImageView
+                    android:id="@+id/img_editSave_basic"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.10"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/editicon2"
+                    android:visibility="visible"/>
+
+            </LinearLayout>
+            <LinearLayout
+            android:id="@+id/ll_basic"
+                android:layout_width="match_parent"
+                android:layout_height="650dp"
+                android:background="#0c000000"
+                android:orientation="horizontal"
+                android:weightSum="2"
+           >
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:weightSum="13"
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+       >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Profile Created For :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Name :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Body Type :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Complexion :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Age :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Physical Status"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Height :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Weight"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Mother Tongue :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Marital Status"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Eating Habits :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Drinking Habits"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Smoking Habits :"
+            android:fontFamily="Roboto-Regular"
+            android:textSize="16sp"
+            android:textColor="#4A4A4A"
+            android:gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_basic_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="13"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.80"
+                    android:text="Myself"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                 />
+                    <ImageView
+                        android:id="@+id/img_edit"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.20"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/editicon2"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_basic_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="13"
+                android:layout_marginTop="5dp"
+                android:visibility="invisible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_profile_for"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16sp"
+                        app:ms_hint="Profile For"
+                        app:ms_hintColor="@color/black"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/home_spinner_border">
+
+                    <EditText
+                        android:id="@+id/edt_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Name"
+                        android:textColorHint="#4A4A4A"
+                        android:background="#00000000"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="Roboto-Regular"
+                        android:textSize="16sp"
+                        android:textColor="#4A4A4A"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_body_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_complexion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/home_spinner_border">
+
+
+                    <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                        android:id="@+id/edt_bdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#00000000"
+                        android:hint="Birth Date"
+                        android:inputType="date"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#4A4A4A"
+                        android:textSize="16sp"
+                        android:fontFamily="Roboto-Regular"
+                        android:textColorHint="#4A4A4A"
+                        android:textCursorDrawable="@drawable/cursor_black"
+                        app:dateFormat="yyyy-MM-dd" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_physical_stat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_height"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_mothertongue"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_marital_stat"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_eat"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_drink"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_spinner_border">
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/sp_smoke"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginEnd="25dp"
+                        app:ms_alignLabels="false"
+                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowSize="10dp"
+                        app:ms_baseColor="#00000000"
+                        app:ms_enableErrorLabel="false"
+                        app:ms_enableFloatingLabel="false"
+                        app:ms_errorColor="#FFFFFF"
+                        app:ms_typeface="fonts/Roboto-Regular.ttf"
+                        app:ms_hintTextSize="16px"
+                        app:ms_hint="Profile For"
+                        app:ms_multiline="false"
+                        app:ms_thickness="0.5dp"
+                        android:popupBackground="#e6e6e6"
+                        android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+        </FrameLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
