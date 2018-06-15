@@ -25,9 +25,17 @@ import com.applex.matrimony.Adapter.HomeProfilesAdapter;
 import com.applex.matrimony.Interface.getCasteInterface;
 import com.applex.matrimony.Interface.getHighlightedInterface;
 import com.applex.matrimony.Interface.getReligionInterface;
+import com.applex.matrimony.Pojo.ChildModelCountry;
 import com.applex.matrimony.Pojo.ChildPojoCaste;
+import com.applex.matrimony.Pojo.ChildPojoCity;
+import com.applex.matrimony.Pojo.ChildPojoEducation;
+import com.applex.matrimony.Pojo.ChildPojoHeight;
+import com.applex.matrimony.Pojo.ChildPojoMTongue;
+import com.applex.matrimony.Pojo.ChildPojoOccupation;
 import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.Pojo.ChildPojoReligion;
+import com.applex.matrimony.Pojo.ChildPojoState;
+import com.applex.matrimony.Pojo.ChildPojoWeight;
 import com.applex.matrimony.Pojo.ParentPojoCaste;
 import com.applex.matrimony.Pojo.ParentPojoProfile;
 import com.applex.matrimony.Pojo.ParentPojoReligion;
@@ -54,12 +62,56 @@ import retrofit2.Response;
 public class TabMyProfile extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
 
-    MaterialSpinner spReligion,spCaste;
-    JSONArray eduArray;
-    ArrayList<String> list_religion=new ArrayList<String>();
+    MaterialSpinner spMaritalStat,spWillIntercast,spCountry,spState,spCity,spHeight,spWeight,spBodyType,spComplexion,
+            spPhysStat,spEdu,spOccu,spEmployIn,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue
+    , spProfFor,spCaste,spReligion,spMTongue,spGender;
+
+    ArrayAdapter aaProfFor,aaGender,aaCaste,aaMTongue,aaMaritalStat,aaWillIntercast,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,
+            aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue;
+
+
+    ArrayList<String> list_prof_for=new ArrayList<String>();
+    ArrayList<String> list_caste=new ArrayList<String>();
     ArrayList<ChildPojoReligion>list_pojo_religion=new ArrayList<ChildPojoReligion>();
     ArrayList<ChildPojoCaste>list_pojo_caste=new ArrayList<ChildPojoCaste>();
-    ArrayList<String> list_caste=new ArrayList<String>();
+    ArrayList<ChildPojoMTongue>list_pojo_mtongue=new ArrayList<ChildPojoMTongue>();
+    ArrayList<String> list_religion=new ArrayList<String>();
+    ArrayList<String> list_mtongue=new ArrayList<String>();
+    ArrayList<String>list_gender=new ArrayList<String>();
+    ArrayList<String> list_marital_Stat=new ArrayList<String>();
+    ArrayList<String> list_will_intercast=new ArrayList<String>();
+    ArrayList<String> list_country=new ArrayList<String>();
+    ArrayList<ChildModelCountry>list_pojo_country=new ArrayList<ChildModelCountry>();
+    ArrayList<ChildPojoState> list_pojo_state=new ArrayList<ChildPojoState>();
+    ArrayList<ChildPojoCity>list_pojo_city=new ArrayList<ChildPojoCity>();
+    ArrayList<String> list_state=new ArrayList<String>();
+    ArrayList<ChildPojoHeight> list_pojo_height=new ArrayList<ChildPojoHeight>();
+    ArrayList<String>list_city=new ArrayList<String>();
+    ArrayList<String> list_height=new ArrayList<String>();
+    ArrayList<ChildPojoWeight> list_pojo_weight=new ArrayList<ChildPojoWeight>();
+    ArrayList<String> list_weight=new ArrayList<String>();
+    ArrayList<String>list_body_type=new ArrayList<String>();
+    ArrayList<String> list_complexion=new ArrayList<String>();
+    ArrayList<String> list_physical_stat=new ArrayList<String>();
+    ArrayList<String> list_edu=new ArrayList<String>();
+    ArrayList<ChildPojoEducation> list_pojo_edu=new ArrayList<ChildPojoEducation>();
+    ArrayList<String> list_occu=new ArrayList<String>();
+    ArrayList<ChildPojoOccupation> list_pojo_occu=new ArrayList<ChildPojoOccupation>();
+    ArrayList<String> list_employed_in=new ArrayList<String>();
+    ArrayList<String>list_lakh=new ArrayList<String>();
+    ArrayList<String> list_thosand=new ArrayList<String>();
+    ArrayList<String> list_food=new ArrayList<String>();
+    ArrayList<String>list_drink=new ArrayList<String>();
+    ArrayList<String> list_smoke=new ArrayList<String>();
+    ArrayList<String> list_fam_stat=new ArrayList<String>();
+    ArrayList<String>list_fam_type=new ArrayList<String>();
+    ArrayList<String> list_fam_value=new ArrayList<String>();
+    ArrayList<String>list_currency=new ArrayList<String>();
+    JSONArray eduArray;
+/*    ArrayList<String> list_religion=new ArrayList<String>();
+    ArrayList<ChildPojoReligion>list_pojo_religion=new ArrayList<ChildPojoReligion>();
+    ArrayList<ChildPojoCaste>list_pojo_caste=new ArrayList<ChildPojoCaste>();
+    ArrayList<String> list_caste=new ArrayList<String>();*/
     ArrayList<ChildPojoProfile> list_matches=new ArrayList<ChildPojoProfile>();
     ArrayList<ChildPojoProfile> list_highlights=new ArrayList<ChildPojoProfile>();
     public RecyclerView rv_profile_matches,rv_profile_highlight;
@@ -67,13 +119,14 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
     private ProgressBar progressBar;
     private LinearLayout lyt_not_found;
     ProgressDialog progressDialog;
-    ArrayAdapter aaCaste;
     Button  btnFind;
     EditText etAgeFrom,etAgeTo;
-    ExpandableRelativeLayout erlBasic;
-    Button btnBasic;
-    LinearLayout llBasic,llBasicEdit,llBasicView;
-    ImageView imgEditBasic;
+    Button btnBasic,btnReligion,btnProfessional,btnGroomBrideLoc,btnFam,btnAbtFam;
+    LinearLayout llBasic,llBasicEdit,llBasicView,llReligion,llReligionEdit,llReligionView,llGroomBrideLoc,llGroomBrideLocEdit,llGroomBrideLocView,
+            llProfessional,llProfessionalEdit,llProfessionalView,llFamily,llFamilyEdit,llFamilyView,llAbtFam;
+
+    ImageView imgEditBasic,imgClearBasic,imgEditProfessional,imgClearProfessional,imgEditReligion,imgClearReligion
+    ,imgEditGroomBrideLoc,imgClearGroomBrideLoc,imgEditFam,imgClearFam,imgEditAbtFam,imgClearAbtFam;
 
     @Nullable
     @Override
@@ -83,76 +136,222 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
 
         Log.e("TabHome","onCreateView");
 
+        spMaritalStat=(MaterialSpinner)rootView.findViewById(R.id.sp_marital_stat);
+        spCountry=(MaterialSpinner)rootView.findViewById(R.id.sp_country);
+        spState=(MaterialSpinner)rootView.findViewById(R.id.sp_state);spCity=(MaterialSpinner)rootView.findViewById(R.id.sp_city);
+        spHeight=(MaterialSpinner)rootView.findViewById(R.id.sp_height); spWeight=(MaterialSpinner)rootView.findViewById(R.id.sp_weight);
+        spBodyType=(MaterialSpinner)rootView.findViewById(R.id.sp_body_type);spComplexion=(MaterialSpinner)rootView.findViewById(R.id.sp_complexion);
+        spPhysStat=(MaterialSpinner)rootView.findViewById(R.id.sp_physical_stat);spEdu=(MaterialSpinner)rootView.findViewById(R.id.sp_edu);
+        spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occup);spEmployIn=(MaterialSpinner)rootView.findViewById(R.id.sp_employed_in);
+        spCurrency=(MaterialSpinner)rootView.findViewById(R.id.sp_currency);
+        spFood=(MaterialSpinner)rootView.findViewById(R.id.sp_food);spDrink=(MaterialSpinner)rootView.findViewById(R.id.sp_drink);
+        spSmoke=(MaterialSpinner)rootView.findViewById(R.id.sp_smoke);spFamStat=(MaterialSpinner)rootView.findViewById(R.id.sp_fam_stat);
+        spFamType=(MaterialSpinner)rootView.findViewById(R.id.sp_fam_type);spFamValue=(MaterialSpinner)rootView.findViewById(R.id.sp_fam_value);
+
+
+
+        btnBasic=(Button)rootView.findViewById(R.id.btnBasic) ;
+        btnReligion=(Button)rootView.findViewById(R.id.btnBasic) ;
+        btnProfessional=(Button)rootView.findViewById(R.id.btnBasic) ;
+        btnGroomBrideLoc=(Button)rootView.findViewById(R.id.btnBasic) ;
+        btnFam=(Button)rootView.findViewById(R.id.btnBasic) ;
+        btnAbtFam=(Button)rootView.findViewById(R.id.btnBasic) ;
+
+        btnBasic.setOnClickListener(this);btnReligion.setOnClickListener(this);btnProfessional.setOnClickListener(this);
+        btnGroomBrideLoc.setOnClickListener(this); btnFam.setOnClickListener(this); btnAbtFam.setOnClickListener(this);
+
+
+        initializeSpinnerLists();
+        initializeSpinnerAdapters();
+
+
+
+
+        spProfFor.setAdapter(aaProfFor);
+        spMaritalStat.setAdapter(aaMaritalStat);
+        spWillIntercast.setAdapter(aaWillIntercast);
+        spBodyType.setAdapter(aaBodyType);spComplexion.setAdapter(aaComplexion);
+        spPhysStat.setAdapter(aaPhysStat);
+        spEmployIn.setAdapter(aaEmployIn);
+        spFood.setAdapter(aaFood);spDrink.setAdapter(aaDrink);spSmoke.setAdapter(aaSmoke);
+        spFamStat.setAdapter(aaFamStat);spFamType.setAdapter(aaFamType);spFamValue.setAdapter(aapFamValue);
+
 
         llBasic=(LinearLayout)rootView.findViewById(R.id.ll_basic);
         llBasicEdit=(LinearLayout)rootView.findViewById(R.id.ll_basic_edit);
         llBasicView=(LinearLayout)rootView.findViewById(R.id.ll_basic_view);
-        btnBasic=(Button)rootView.findViewById(R.id.expandableButton4) ;
-        btnBasic.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if(llBasic.getVisibility()==View.GONE)
-                llBasic.setVisibility(View.VISIBLE);
-            else
-                llBasic.setVisibility(View.GONE);
 
-        }
-    });
+        llReligion=(LinearLayout)rootView.findViewById(R.id.ll_religion);
+        llReligionEdit=(LinearLayout)rootView.findViewById(R.id.ll_religion_edit);
+        llReligionView=(LinearLayout)rootView.findViewById(R.id.ll_religion_view);
+
+        llGroomBrideLoc=(LinearLayout)rootView.findViewById(R.id.ll_groomBrideLoc);
+        llGroomBrideLocEdit=(LinearLayout)rootView.findViewById(R.id.ll_groomBrideLoc_edit);
+        llGroomBrideLocView=(LinearLayout)rootView.findViewById(R.id.ll_groomBrideLoc_view);
+
+        llProfessional=(LinearLayout)rootView.findViewById(R.id.ll_professional);
+        llProfessionalEdit=(LinearLayout)rootView.findViewById(R.id.ll_professional_edit);
+        llProfessionalView=(LinearLayout)rootView.findViewById(R.id.ll_professional_view);
+
+        llFamily=(LinearLayout)rootView.findViewById(R.id.ll_family);
+        llFamilyEdit=(LinearLayout)rootView.findViewById(R.id.ll_family_edit);
+        llFamilyView=(LinearLayout)rootView.findViewById(R.id.ll_family_view);
+
+
+        llAbtFam=(LinearLayout)rootView.findViewById(R.id.ll_about_family);
+
+
 
         imgEditBasic=(ImageView)rootView.findViewById(R.id.img_editSave_basic);
-        imgEditBasic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                llBasicView.setVisibility(View.INVISIBLE);
-                llBasicEdit.setVisibility(View.VISIBLE);
-                llBasicEdit.setBackgroundResource(R.mipmap.saveicon);
-            }
-        });
+        imgClearBasic=(ImageView)rootView.findViewById(R.id.img_clear_basic);
 
-        return rootView;/*
+        imgEditReligion=(ImageView)rootView.findViewById(R.id.img_editSave_religion);
+        imgClearReligion=(ImageView)rootView.findViewById(R.id.img_clear_religion);
 
-        rv_profile_matches = (RecyclerView) rootView.findViewById(R.id.rv_prof_matches);
-        rv_profile_highlight = (RecyclerView) rootView.findViewById(R.id.rv_prof_highlight);
-        rv_profile_matches.setHasFixedSize(true);
-        rv_profile_matches.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        rv_profile_highlight.setHasFixedSize(true);
-        rv_profile_highlight.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        imgEditProfessional=(ImageView)rootView.findViewById(R.id.img_editSave_professional);
+        imgClearProfessional=(ImageView)rootView.findViewById(R.id.img_clear_professional);
 
+        imgEditGroomBrideLoc=(ImageView)rootView.findViewById(R.id.img_editSave_groomBrideLoc);
+        imgClearGroomBrideLoc=(ImageView)rootView.findViewById(R.id.img_clear_groomBrideLoc);
+
+        imgEditFam=(ImageView)rootView.findViewById(R.id.img_editSave_family);
+        imgClearFam=(ImageView)rootView.findViewById(R.id.img_clear_family);
+
+        imgEditAbtFam=(ImageView)rootView.findViewById(R.id.img_editSave_aboutFam);
+        imgClearAbtFam=(ImageView)rootView.findViewById(R.id.img_clear_aboutFam);
 
 
-        etAgeFrom=(EditText)rootView.findViewById(R.id.et_age_from);
-        etAgeTo=(EditText)rootView.findViewById(R.id.et_age_to);
-        btnFind=(Button)rootView.findViewById(R.id.btn_home_find);
-        spCaste=(MaterialSpinner)rootView.findViewById(R.id.sp_home_caste);
-        spReligion=(MaterialSpinner)rootView.findViewById(R.id.sp_home_religion);
+        imgEditBasic.setOnClickListener(this);
+        imgClearBasic.setOnClickListener(this);
+        imgEditReligion.setOnClickListener(this);
+        imgClearReligion.setOnClickListener(this);
+        imgEditProfessional.setOnClickListener(this);
+        imgClearProfessional.setOnClickListener(this);
+        imgEditGroomBrideLoc.setOnClickListener(this);
+        imgClearGroomBrideLoc.setOnClickListener(this);
+        imgEditFam.setOnClickListener(this);
+        imgClearFam.setOnClickListener(this);
+        imgEditAbtFam.setOnClickListener(this);
+        imgClearAbtFam.setOnClickListener(this);
 
-        btnFind.setOnClickListener(this);
-        spReligion.setOnItemSelectedListener(this);
-        spCaste.setOnItemSelectedListener(this);
 
-        progressDialog=new ProgressDialog(getActivity());
-        progressDialog.setMessage("Please wait home");
 
-        getReligionList();
-       // displayData();
-        getHighlightedProf();
-
-*/
-
+        return rootView;
 
     }
-    private void displayData() {
-        Log.e("displayData","called");
-        Log.e("List_highlight size",""+list_highlights.size());
-        adapter = new HomeProfilesAdapter(getActivity(), list_highlights);
-        rv_profile_highlight.setAdapter(adapter);
-        rv_profile_matches.setAdapter(adapter);
 
-        if (adapter.getItemCount() == 0) {
-  //          lyt_not_found.setVisibility(View.VISIBLE);
-        } else {
-//            lyt_not_found.setVisibility(View.GONE);
-        }
+
+    private void initializeSpinnerLists() {
+
+        progressDialog.show();
+
+        list_prof_for.add("Profile For");
+        list_prof_for.add("Son");
+        list_prof_for.add("Daughter");
+        list_prof_for.add("Myself");
+        list_prof_for.add("Brother");
+        list_prof_for.add("Sister");
+        list_prof_for.add("Relative");
+
+
+        list_marital_Stat.add("Marital Status");
+        list_marital_Stat.add("Never Married");
+        list_marital_Stat.add("Divorced");
+        list_marital_Stat.add("Widowed");
+        list_marital_Stat.add("Awaiting for Divorce");
+
+        list_height.add("Height");
+        list_weight.add("weight");
+
+        list_body_type.add("Body Type");
+        list_body_type.add("Slim");
+        list_body_type.add("Average");
+        list_body_type.add("Athletic");
+        list_body_type.add("Heavy");
+
+        list_complexion.add("Complexion");
+        list_complexion.add("Very Fair");
+        list_complexion.add("Fair");
+        list_complexion.add("Wheatish");
+        list_complexion.add("Wheatish Brown");
+        list_complexion.add("Dark");
+
+        list_physical_stat.add("Physical Status");
+        list_physical_stat.add("Normal");
+        list_physical_stat.add("Physically Challenged");
+
+        list_employed_in.add("Employed in");
+        list_employed_in.add("Government");
+        list_employed_in.add("Private");
+        list_employed_in.add("Business");
+        list_employed_in.add("Self Employed");
+
+        list_food.add("Food");
+        list_food.add("Vegetarian");
+        list_food.add("Non Vegetarian");
+        list_food.add("Eggetarian");
+
+        list_drink.add("Drinking");
+        list_drink.add("No");
+        list_drink.add("Drink Socially");
+        list_drink.add("Yes");
+
+        list_smoke.add("Smoking");
+        list_smoke.add("No");
+        list_smoke.add("Ocassionally");
+        list_smoke.add("Yes");
+
+        list_fam_stat.add("Family Status");
+        list_fam_stat.add("Middle Class");
+        list_fam_stat.add("Upper Middle Class");
+        list_fam_stat.add("Rich");
+        list_fam_stat.add("Affluent");
+
+        list_fam_type.add("Family Type");
+        list_fam_type.add("Joint");
+        list_fam_type.add("Nuclear");
+
+        list_fam_value.add("Family Value");
+        list_fam_value.add("Orthodox");
+        list_fam_value.add("Traditional");
+        list_fam_value.add("Moderate");
+        list_fam_value.add("Liberal");
+
+        progressDialog.dismiss();
+    }
+
+    public void initializeSpinnerAdapters(){
+
+        progressDialog.show();
+        aaProfFor = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_prof_for);
+        aaProfFor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaPhysStat = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_physical_stat);
+        aaPhysStat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaMaritalStat = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_marital_Stat);
+        aaMaritalStat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaBodyType = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_body_type);
+        aaBodyType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaComplexion = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_complexion);
+        aaComplexion.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaPhysStat = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_physical_stat);
+        aaPhysStat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaEmployIn = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_employed_in);
+        aaEmployIn.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaFood = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_food);
+        aaFood.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaDrink = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_drink);
+        aaDrink.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaSmoke = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_smoke);
+        aaSmoke.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaFamStat = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_fam_stat);
+        aaFamStat.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaFamType = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_fam_type);
+        aaFamType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aapFamValue = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_fam_value);
+        aapFamValue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        progressDialog.dismiss();
+
     }
 
     public void getReligionList(){
@@ -201,51 +400,6 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onFailure(Call<ParentPojoReligion> call, Throwable t) {
 
-                progressDialog.dismiss();
-            }
-        });
-
-    }
-
-
-    public void getHighlightedProf()
-    {
-
-        progressDialog.show();
-        if(list_highlights!=null)
-            list_highlights.clear();
-
-        getHighlightedInterface getResponse = APIClient.getClient().create(getHighlightedInterface.class);
-        Call<ParentPojoProfile> call = getResponse.doGetListResources();
-        call.enqueue(new Callback<ParentPojoProfile>() {
-            @Override
-            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
-
-                Log.e("Inside","onResponse");
-               /* Log.e("response body",response.body().getStatus());
-                Log.e("response body",response.body().getMsg());*/
-                ParentPojoProfile parentPojoProfile =response.body();
-                if(parentPojoProfile !=null){
-                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
-                        Log.e("Response","Success");
-                        Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
-                        list_highlights= parentPojoProfile.getObjProfile();
-                        if(list_highlights.size()!=0)
-
-                            displayData();
-
-                    }
-                }
-                else
-                    Log.e("parentpojotabwhome","null");
-                progressDialog.dismiss();
-
-            }
-
-            @Override
-            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
-
-                Log.e("throwable",""+t);
                 progressDialog.dismiss();
             }
         });
@@ -339,5 +493,64 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onClick(View v) {
 
+        switch(v.getId()){
+
+            case R.id.btnBasic:
+                if(llBasic.getVisibility()==View.GONE)
+                    llBasic.setVisibility(View.VISIBLE);
+                else
+                    llBasic.setVisibility(View.GONE);
+                break;
+
+            case R.id.img_clear_basic:
+                llBasicEdit.setVisibility(View.GONE);
+                llBasicView.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.img_editSave_basic:
+                if(llBasicView.getVisibility()==View.VISIBLE) {
+                llBasicView.setVisibility(View.INVISIBLE);
+                llBasicEdit.setVisibility(View.VISIBLE);
+                imgEditBasic.setImageResource(R.mipmap.saveicon);
+                imgClearBasic.setVisibility(View.VISIBLE);
+                }
+                else{
+                  saveBasic();
+                }
+
+            case R.id.btnBasic:
+                if(llBasic.getVisibility()==View.GONE)
+                    llBasic.setVisibility(View.VISIBLE);
+                else
+                    llBasic.setVisibility(View.GONE);
+                break;
+
+            case R.id.img_clear_basic:
+                llBasicEdit.setVisibility(View.GONE);
+                llBasicView.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.img_editSave_basic:
+                if(llBasicView.getVisibility()==View.VISIBLE) {
+                    llBasicView.setVisibility(View.INVISIBLE);
+                    llBasicEdit.setVisibility(View.VISIBLE);
+                    imgEditBasic.setImageResource(R.mipmap.saveicon);
+                    imgClearBasic.setVisibility(View.VISIBLE);
+                }
+                else{
+                    saveBasic();
+                }
+
+
+
+
+
+
+
+
+        }
+
     }
+
+    public void saveBasic(){}
 }
