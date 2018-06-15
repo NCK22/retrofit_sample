@@ -135,6 +135,13 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         View rootView=inflater.inflate(R.layout.tab_my_profile,container,false);
 
         Log.e("TabHome","onCreateView");
+progressDialog=new ProgressDialog(getActivity());
+
+
+        spProfFor=(MaterialSpinner)rootView.findViewById(R.id.sp_profile_for);
+        spCaste=(MaterialSpinner)rootView.findViewById(R.id.sp_caste);
+        spReligion=(MaterialSpinner)rootView.findViewById(R.id.sp_religion);
+        spMTongue=(MaterialSpinner)rootView.findViewById(R.id.sp_mothertongue);
 
         spMaritalStat=(MaterialSpinner)rootView.findViewById(R.id.sp_marital_stat);
         spCountry=(MaterialSpinner)rootView.findViewById(R.id.sp_country);
@@ -142,7 +149,7 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         spHeight=(MaterialSpinner)rootView.findViewById(R.id.sp_height); spWeight=(MaterialSpinner)rootView.findViewById(R.id.sp_weight);
         spBodyType=(MaterialSpinner)rootView.findViewById(R.id.sp_body_type);spComplexion=(MaterialSpinner)rootView.findViewById(R.id.sp_complexion);
         spPhysStat=(MaterialSpinner)rootView.findViewById(R.id.sp_physical_stat);spEdu=(MaterialSpinner)rootView.findViewById(R.id.sp_edu);
-        spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occup);spEmployIn=(MaterialSpinner)rootView.findViewById(R.id.sp_employed_in);
+        spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occup);
         spCurrency=(MaterialSpinner)rootView.findViewById(R.id.sp_currency);
         spFood=(MaterialSpinner)rootView.findViewById(R.id.sp_food);spDrink=(MaterialSpinner)rootView.findViewById(R.id.sp_drink);
         spSmoke=(MaterialSpinner)rootView.findViewById(R.id.sp_smoke);spFamStat=(MaterialSpinner)rootView.findViewById(R.id.sp_fam_stat);
@@ -151,11 +158,11 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
 
 
         btnBasic=(Button)rootView.findViewById(R.id.btnBasic) ;
-        btnReligion=(Button)rootView.findViewById(R.id.btnBasic) ;
-        btnProfessional=(Button)rootView.findViewById(R.id.btnBasic) ;
-        btnGroomBrideLoc=(Button)rootView.findViewById(R.id.btnBasic) ;
-        btnFam=(Button)rootView.findViewById(R.id.btnBasic) ;
-        btnAbtFam=(Button)rootView.findViewById(R.id.btnBasic) ;
+        btnReligion=(Button)rootView.findViewById(R.id.btnReligion) ;
+        btnProfessional=(Button)rootView.findViewById(R.id.btnProfessional) ;
+        btnGroomBrideLoc=(Button)rootView.findViewById(R.id.btnGroomBrideLoc) ;
+        btnFam=(Button)rootView.findViewById(R.id.btnFamily) ;
+        btnAbtFam=(Button)rootView.findViewById(R.id.btnAboutFamily) ;
 
         btnBasic.setOnClickListener(this);btnReligion.setOnClickListener(this);btnProfessional.setOnClickListener(this);
         btnGroomBrideLoc.setOnClickListener(this); btnFam.setOnClickListener(this); btnAbtFam.setOnClickListener(this);
@@ -169,10 +176,9 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
 
         spProfFor.setAdapter(aaProfFor);
         spMaritalStat.setAdapter(aaMaritalStat);
-        spWillIntercast.setAdapter(aaWillIntercast);
+
         spBodyType.setAdapter(aaBodyType);spComplexion.setAdapter(aaComplexion);
         spPhysStat.setAdapter(aaPhysStat);
-        spEmployIn.setAdapter(aaEmployIn);
         spFood.setAdapter(aaFood);spDrink.setAdapter(aaDrink);spSmoke.setAdapter(aaSmoke);
         spFamStat.setAdapter(aaFamStat);spFamType.setAdapter(aaFamType);spFamValue.setAdapter(aapFamValue);
 
@@ -518,31 +524,56 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
                   saveBasic();
                 }
 
-            case R.id.btnBasic:
-                if(llBasic.getVisibility()==View.GONE)
-                    llBasic.setVisibility(View.VISIBLE);
+            case R.id.btnReligion:
+                if(llReligion.getVisibility()==View.GONE)
+                    llReligion.setVisibility(View.VISIBLE);
                 else
-                    llBasic.setVisibility(View.GONE);
+                    llReligion.setVisibility(View.GONE);
                 break;
 
-            case R.id.img_clear_basic:
-                llBasicEdit.setVisibility(View.GONE);
-                llBasicView.setVisibility(View.VISIBLE);
+            case R.id.img_clear_religion:
+                llReligionEdit.setVisibility(View.GONE);
+                llReligionView.setVisibility(View.VISIBLE);
                 break;
 
-            case R.id.img_editSave_basic:
-                if(llBasicView.getVisibility()==View.VISIBLE) {
-                    llBasicView.setVisibility(View.INVISIBLE);
-                    llBasicEdit.setVisibility(View.VISIBLE);
-                    imgEditBasic.setImageResource(R.mipmap.saveicon);
-                    imgClearBasic.setVisibility(View.VISIBLE);
+            case R.id.img_editSave_religion:
+                if(llReligionView.getVisibility()==View.VISIBLE) {
+                    llReligionView.setVisibility(View.INVISIBLE);
+                    llReligionEdit.setVisibility(View.VISIBLE);
+                    imgEditReligion.setImageResource(R.mipmap.saveicon);
+                    imgClearReligion.setVisibility(View.VISIBLE);
+                }
+                else{
+                    saveBasic();
+                }
+    break;
+
+
+            case R.id.btnGroomBrideLoc:
+                if(llGroomBrideLoc.getVisibility()==View.GONE)
+                    llGroomBrideLoc.setVisibility(View.VISIBLE);
+                else
+                    llGroomBrideLoc.setVisibility(View.GONE);
+                break;
+
+            case R.id.img_clear_groomBrideLoc:
+                llGroomBrideLocEdit.setVisibility(View.GONE);
+                llGroomBrideLocView.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.img_editSave_groomBrideLoc:
+                if(llGroomBrideLocView.getVisibility()==View.VISIBLE) {
+                    llGroomBrideLocView.setVisibility(View.INVISIBLE);
+                    llGroomBrideLocEdit.setVisibility(View.VISIBLE);
+                    imgEditGroomBrideLoc.setImageResource(R.mipmap.saveicon);
+                    imgClearGroomBrideLoc.setVisibility(View.VISIBLE);
                 }
                 else{
                     saveBasic();
                 }
 
 
-
+    break;
 
 
 

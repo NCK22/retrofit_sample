@@ -46,7 +46,7 @@ android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -260,7 +260,7 @@ android:background="#FFFFFF"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:weightSum="13"
-                android:visibility="invisible">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/tv_profile_for"
@@ -282,16 +282,24 @@ android:background="#FFFFFF"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:weightSum="13"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="0dp"
                 android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+                  >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
+
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_profile_for"
@@ -302,19 +310,21 @@ android:background="#FFFFFF"
                         app:ms_alignLabels="false"
                         app:ms_arrowColor="#4A4A4A"
                         app:ms_arrowSize="10dp"
-                        app:ms_baseColor="#00000000"
+                        app:ms_baseColor="#665599"
                         app:ms_enableErrorLabel="false"
                         app:ms_enableFloatingLabel="false"
                         app:ms_errorColor="#FFFFFF"
                         app:ms_typeface="fonts/Roboto-Regular.ttf"
                         app:ms_hintTextSize="16sp"
-                        app:ms_hint="Profile For"
                         app:ms_hintColor="@color/black"
                         app:ms_multiline="false"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="gone"
                         />
+
+                    </LinearLayout>
                 </LinearLayout>
 
 
@@ -323,8 +333,15 @@ android:background="#FFFFFF"
                     android:layout_height="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/home_spinner_border">
+                   >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <EditText
                         android:id="@+id/edt_name"
@@ -339,15 +356,25 @@ android:background="#FFFFFF"
                         android:textColor="#4A4A4A"
                         />
 
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+                  >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_body_type"
@@ -356,7 +383,7 @@ android:background="#FFFFFF"
                         android:layout_marginRight="15dp"
                         android:layout_marginEnd="15dp"
                         app:ms_alignLabels="false"
-                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowColor="#00000000"
                         app:ms_arrowSize="10dp"
                         app:ms_baseColor="#00000000"
                         app:ms_enableErrorLabel="false"
@@ -369,16 +396,28 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+              >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
+
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_complexion"
@@ -387,7 +426,7 @@ android:background="#FFFFFF"
                         android:layout_marginRight="15dp"
                         android:layout_marginEnd="15dp"
                         app:ms_alignLabels="false"
-                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowColor="#00000000"
                         app:ms_arrowSize="10dp"
                         app:ms_baseColor="#00000000"
                         app:ms_enableErrorLabel="false"
@@ -400,7 +439,10 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -408,8 +450,16 @@ android:background="#FFFFFF"
                     android:layout_height="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/home_spinner_border">
+                    android:layout_marginBottom="0dp"
+                >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
 
                     <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
@@ -427,16 +477,27 @@ android:background="#FFFFFF"
                         android:textCursorDrawable="@drawable/cursor_black"
                         app:dateFormat="yyyy-MM-dd" />
 
+                    </LinearLayout>
 
-                </LinearLayout>
+
+                        </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+                 >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
+
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_physical_stat"
@@ -445,7 +506,7 @@ android:background="#FFFFFF"
                         android:layout_marginRight="15dp"
                         android:layout_marginEnd="15dp"
                         app:ms_alignLabels="false"
-                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowColor="#00000000"
                         app:ms_arrowSize="10dp"
                         app:ms_baseColor="#00000000"
                         app:ms_enableErrorLabel="false"
@@ -458,16 +519,27 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+                >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_height"
@@ -476,7 +548,7 @@ android:background="#FFFFFF"
                         android:layout_marginRight="15dp"
                         android:layout_marginEnd="15dp"
                         app:ms_alignLabels="false"
-                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowColor="#00000000"
                         app:ms_arrowSize="10dp"
                         app:ms_baseColor="#00000000"
                         app:ms_enableErrorLabel="false"
@@ -489,16 +561,29 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+               >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
+
+
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_weight"
@@ -520,16 +605,25 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="gone"
                         />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_mothertongue"
@@ -551,16 +645,27 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="gone"
                         />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+            >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_marital_stat"
@@ -582,19 +687,30 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/sp_eat"
+                        android:id="@+id/sp_food"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginRight="15dp"
@@ -613,16 +729,26 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+               >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_drink"
@@ -631,7 +757,7 @@ android:background="#FFFFFF"
                         android:layout_marginRight="15dp"
                         android:layout_marginEnd="15dp"
                         app:ms_alignLabels="false"
-                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowColor="#00000000"
                         app:ms_arrowSize="10dp"
                         app:ms_baseColor="#00000000"
                         app:ms_enableErrorLabel="false"
@@ -644,16 +770,27 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
                     android:orientation="vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/home_spinner_border">
+                   >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/home_spinner_border">
 
                     <fr.ganfra.materialspinner.MaterialSpinner
                         android:id="@+id/sp_smoke"
@@ -662,7 +799,7 @@ android:background="#FFFFFF"
                         android:layout_marginRight="15dp"
                         android:layout_marginEnd="15dp"
                         app:ms_alignLabels="false"
-                        app:ms_arrowColor="#4A4A4A"
+                        app:ms_arrowColor="#00000000"
                         app:ms_arrowSize="10dp"
                         app:ms_baseColor="#00000000"
                         app:ms_enableErrorLabel="false"
@@ -675,7 +812,10 @@ android:background="#FFFFFF"
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:visibility="visible"
                         />
+
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -685,10 +825,11 @@ android:background="#FFFFFF"
 
     </LinearLayout>
 
-
-
-</LinearLayout>
             </LinearLayout>
+            </LinearLayout>
+
+
+
 
             <Button
                 android:id="@+id/btnReligion"
@@ -708,6 +849,7 @@ android:background="#FFFFFF"
                 android:textAllCaps="false"
                 android:textColor="#4A4A4A"
                 android:textSize="16sp" />
+
             <LinearLayout
                 android:id="@+id/ll_religion"
                 android:layout_width="match_parent"
@@ -721,11 +863,11 @@ android:background="#FFFFFF"
                     android:orientation="horizontal"
                     android:background="#0c000000"
                     android:weightSum="1">
+
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.80"/>
-
 
                     <ImageView
                         android:id="@+id/img_clear_religion"
@@ -918,7 +1060,7 @@ android:background="#FFFFFF"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:weightSum="12"
-                                android:visibility="invisible">
+                                android:visibility="visible">
 
                                 <TextView
                                     android:id="@+id/tv_religion"
@@ -1027,6 +1169,7 @@ android:background="#FFFFFF"
                                     android:textColor="#4A4A4A"
                                     android:gravity="center_vertical"
                                     />
+
                                 <TextView
                                     android:id="@+id/tv_stateOfBirth"
                                     android:layout_width="match_parent"
@@ -1073,15 +1216,24 @@ android:background="#FFFFFF"
                                 android:orientation="vertical"
                                 android:weightSum="12"
                                 android:layout_marginTop="5dp"
-                                android:visibility="visible">
+                                android:visibility="gone">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_religion"
@@ -1105,16 +1257,27 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+
+                                    </LinearLayout>
                                 </LinearLayout>
 
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                 >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_caste"
@@ -1138,6 +1301,7 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
 
@@ -1146,8 +1310,18 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                 >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
 
                                     <EditText
                                         android:id="@+id/edt_subCaste"
@@ -1161,16 +1335,25 @@ android:background="#FFFFFF"
                                         android:textSize="16sp"
                                         android:textColor="#4A4A4A"
                                         />
-
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_rassi"
@@ -1193,15 +1376,25 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_star"
@@ -1224,15 +1417,25 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                               >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_gothra"
@@ -1255,15 +1458,25 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                 >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_dosham"
@@ -1286,7 +1499,8 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
-                                </LinearLayout>
+                                    </LinearLayout>
+                                        </LinearLayout>
 
 
                                 <LinearLayout
@@ -1294,8 +1508,15 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
 
                                     <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
@@ -1312,7 +1533,7 @@ android:background="#FFFFFF"
                                         android:textColorHint="#4A4A4A"
                                         android:textCursorDrawable="@drawable/cursor_black"
                                         app:dateFormat="yyyy-MM-dd" />
-
+                                    </LinearLayout>
 
                                 </LinearLayout>
 
@@ -1320,10 +1541,19 @@ android:background="#FFFFFF"
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                >
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_CountryOfBirth"
@@ -1346,15 +1576,24 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                   >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_stateOfBirth"
@@ -1377,15 +1616,24 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_cityOfBirth"
@@ -1408,15 +1656,24 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                            >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_chartStyle"
@@ -1439,6 +1696,7 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
 
@@ -1707,10 +1965,19 @@ android:background="#FFFFFF"
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                   >
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_country"
@@ -1734,16 +2001,26 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
-                                </LinearLayout>
+
+                                    </LinearLayout>
+                                        </LinearLayout>
 
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                  >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_state"
@@ -1767,15 +2044,26 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                   >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_city"
@@ -1798,16 +2086,26 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+
+                                    </LinearLayout>
                                 </LinearLayout>
 
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                 >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_resident_stat"
@@ -1830,6 +2128,7 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -1838,7 +2137,16 @@ android:background="#FFFFFF"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
                                     android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                   >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <EditText
                                         android:id="@+id/edt_parish"
@@ -1852,6 +2160,8 @@ android:background="#FFFFFF"
                                         android:textSize="16sp"
                                         android:textColor="#4A4A4A"
                                         />
+
+                                    </LinearLayout>
 
                                 </LinearLayout>
 
