@@ -571,10 +571,75 @@ progressDialog=new ProgressDialog(getActivity());
                 else{
                     saveBasic();
                 }
+                break;
 
+            case R.id.btnProfessional:
+                if(llProfessional.getVisibility()==View.GONE)
+                    llProfessional.setVisibility(View.VISIBLE);
+                else
+                    llProfessional.setVisibility(View.GONE);
+                break;
 
-    break;
+            case R.id.img_clear_professional:
+                llProfessionalEdit.setVisibility(View.GONE);
+                llProfessionalView.setVisibility(View.VISIBLE);
+                break;
 
+            case R.id.img_editSave_professional:
+                if(llProfessionalView.getVisibility()==View.VISIBLE) {
+                    llProfessionalView.setVisibility(View.INVISIBLE);
+                    llProfessionalEdit.setVisibility(View.VISIBLE);
+                    imgEditProfessional.setImageResource(R.mipmap.saveicon);
+                    imgClearProfessional.setVisibility(View.VISIBLE);
+                }
+                else{
+                    saveBasic();
+                }
+
+            case R.id.btnFamily:
+                if(llFamily.getVisibility()==View.GONE)
+                    llFamily.setVisibility(View.VISIBLE);
+                else
+                    llProfessional.setVisibility(View.GONE);
+                break;
+
+            case R.id.img_clear_family:
+                llFamilyEdit.setVisibility(View.GONE);
+                llFamilyView.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.img_editSave_family:
+                if(llFamilyView.getVisibility()==View.VISIBLE) {
+                    llFamilyView.setVisibility(View.INVISIBLE);
+                    llFamilyEdit.setVisibility(View.VISIBLE);
+                    imgEditFam.setImageResource(R.mipmap.saveicon);
+                    imgClearFam.setVisibility(View.VISIBLE);
+                }
+                else{
+                    saveBasic();
+                }
+            case R.id.btnAboutFamily:
+                if(llAbtFam.getVisibility()==View.GONE)
+                    llAbtFam.setVisibility(View.VISIBLE);
+                else
+                    llAbtFam.setVisibility(View.GONE);
+                break;
+
+            case R.id.img_clear_aboutFam:
+                llFamilyEdit.setVisibility(View.GONE);
+                llFamilyView.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.img_editSave_aboutFam:
+                if(llFamilyView.getVisibility()==View.VISIBLE) {
+                    llFamilyView.setVisibility(View.INVISIBLE);
+                    llFamilyEdit.setVisibility(View.VISIBLE);
+                    imgEditFam.setImageResource(R.mipmap.saveicon);
+                    imgClearFam.setVisibility(View.VISIBLE);
+                }
+                else{
+                    saveBasic();
+                }
 
 
 

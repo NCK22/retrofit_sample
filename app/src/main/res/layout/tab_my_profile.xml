@@ -46,7 +46,7 @@ android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -827,7 +827,6 @@ android:background="#FFFFFF"
 
             </LinearLayout>
             </LinearLayout>
-
 
 
 
@@ -2136,8 +2135,9 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                    >
+
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -2170,8 +2170,16 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:background="@drawable/home_spinner_border">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <EditText
                                         android:id="@+id/edt_village"
@@ -2186,6 +2194,7 @@ android:background="#FFFFFF"
                                         android:textColor="#4A4A4A"
                                         />
 
+                                    </LinearLayout>
                                 </LinearLayout>
 
 
@@ -2476,10 +2485,18 @@ android:background="#FFFFFF"
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_edu"
@@ -2503,6 +2520,7 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                             <LinearLayout
@@ -2510,10 +2528,18 @@ android:background="#FFFFFF"
                                 android:layout_height="0dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
-                                android:layout_marginBottom="20dp"
-                                android:background="@drawable/home_spinner_border">
+                                android:layout_marginBottom="0dp"
+                               >
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginBottom="4dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@drawable/home_spinner_border">
 
-                            <EditText
+
+                                <EditText
                                 android:id="@+id/edt_college"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -2525,6 +2551,7 @@ android:background="#FFFFFF"
                                 android:textSize="16sp"
                                 android:textColor="#4A4A4A"
                                 />
+                                </LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
@@ -2532,8 +2559,16 @@ android:background="#FFFFFF"
                                 android:layout_height="0dp"
                                 android:orientation="vertical"
                                 android:layout_weight="1"
-                                android:layout_marginBottom="20dp"
-                                android:background="@drawable/home_spinner_border">
+                                android:layout_marginBottom="0dp"
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_marginBottom="4dp"
+                                    android:layout_marginTop="5dp"
+                                    android:background="@drawable/home_spinner_border">
 
                                 <EditText
                                     android:id="@+id/edt_eduInDetail"
@@ -2547,6 +2582,7 @@ android:background="#FFFFFF"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
                                     />
+                                </LinearLayout>
                             </LinearLayout>
 
 
@@ -2554,10 +2590,18 @@ android:background="#FFFFFF"
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                              >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_occu"
@@ -2580,6 +2624,7 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -2587,8 +2632,17 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <EditText
                                         android:id="@+id/edt_occuInDetail"
@@ -2603,6 +2657,8 @@ android:background="#FFFFFF"
                                         android:textColor="#4A4A4A"
                                         />
 
+                                    </LinearLayout>
+
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -2610,8 +2666,16 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                             >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <EditText
                                         android:id="@+id/edt_employedIn"
@@ -2626,6 +2690,7 @@ android:background="#FFFFFF"
                                         android:textColor="#4A4A4A"
                                         />
 
+                                    </LinearLayout>
                                 </LinearLayout>
 
 
@@ -2634,8 +2699,16 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                   >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <EditText
                                         android:id="@+id/edt_income"
@@ -2649,6 +2722,7 @@ android:background="#FFFFFF"
                                         android:textSize="16sp"
                                         android:textColor="#4A4A4A"
                                         />
+                                    </LinearLayout>
 
                                 </LinearLayout>
                             </LinearLayout>
@@ -2982,10 +3056,19 @@ android:background="#FFFFFF"
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                   >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_fam_value"
@@ -3009,15 +3092,24 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_fam_type"
@@ -3040,15 +3132,24 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                               >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_fam_stat"
@@ -3071,6 +3172,7 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -3078,8 +3180,17 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                   >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <EditText
                                         android:id="@+id/edt_fam_origin"
@@ -3093,6 +3204,7 @@ android:background="#FFFFFF"
                                         android:textSize="16sp"
                                         android:textColor="#4A4A4A"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
 
@@ -3101,8 +3213,16 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                   >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <EditText
                                         android:id="@+id/edt_fam_location"
@@ -3117,6 +3237,8 @@ android:background="#FFFFFF"
                                         android:textColor="#4A4A4A"
                                         />
 
+                                    </LinearLayout>
+
                                 </LinearLayout>
 
 
@@ -3126,8 +3248,16 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <EditText
                                         android:id="@+id/edt_father_stat"
@@ -3142,6 +3272,8 @@ android:background="#FFFFFF"
                                         android:textColor="#4A4A4A"
                                         />
 
+                                    </LinearLayout>
+
                                 </LinearLayout>
 
 
@@ -3149,10 +3281,18 @@ android:background="#FFFFFF"
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_marginBottom="20dp"
+                                    android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:background="@drawable/home_spinner_border">
+                                >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
 
                                     <fr.ganfra.materialspinner.MaterialSpinner
                                         android:id="@+id/sp_mother_stat"
@@ -3175,6 +3315,7 @@ android:background="#FFFFFF"
                                         android:popupBackground="#e6e6e6"
                                         android:popupElevation="@dimen/floating_label_bottom_spacing"
                                         />
+                                    </LinearLayout>
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -3182,8 +3323,16 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <EditText
                                         android:id="@+id/edt_noOfBrother"
@@ -3197,6 +3346,7 @@ android:background="#FFFFFF"
                                         android:textSize="16sp"
                                         android:textColor="#4A4A4A"
                                         />
+                                </LinearLayout>
 
                                 </LinearLayout>
 
@@ -3205,8 +3355,16 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                    android:layout_marginBottom="20dp"
-                                    android:background="@drawable/home_spinner_border">
+                                    android:layout_marginBottom="0dp"
+                                 >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
 
                                     <EditText
                                         android:id="@+id/edt_noOfSister"
@@ -3220,6 +3378,7 @@ android:background="#FFFFFF"
                                         android:textSize="16sp"
                                         android:textColor="#4A4A4A"
                                         />
+                                    </LinearLayout>
 
                                 </LinearLayout>
 
