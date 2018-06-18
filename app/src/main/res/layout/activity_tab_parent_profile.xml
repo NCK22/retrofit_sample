@@ -6,11 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Activity.TabViewParentActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
     <include
         android:id="@+id/toolbar_main"
@@ -42,6 +44,8 @@
             app:menu="@menu/menu_bottom_nav"
             android:visibility="visible"
             />
+        <!-- android:background="@color/navBg"-->
+        <!--app:itemBackground="@color/colorTheme"-->
 
     </RelativeLayout>
 

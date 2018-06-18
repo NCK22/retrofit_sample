@@ -1,16 +1,27 @@
-package com.applex.matrimony;
+package com.applex.matrimony.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applex.matrimony.Activity.RegisterActivity;
+import com.applex.matrimony.APIClient;
+import com.applex.matrimony.Interface.custRegInterface;
+import com.applex.matrimony.Interface.loginInterface;
+import com.applex.matrimony.Pojo.ChildPojoCustReg;
+import com.applex.matrimony.Pojo.CommonParentPojo;
+import com.applex.matrimony.Pojo.ParentPojoCustReg;
+import com.applex.matrimony.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -56,13 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    public void login(){
 
-        checkValidity();
-        if(flagAllValid==true){
-
-        }
-    }
 
     public void checkValidity()
     {
@@ -75,6 +80,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else
             flagAllValid=true;
         progressDialog.dismiss();
+    }
+
+    public void login(){
+
+
+        checkValidity();
+
+        if(flagAllValid==true) {
+            progressDialog.show();
+            loginInterface getResponse = APIClient.getClient().create(loginInterface.class);
+            Call<CommonParentPojo> call = getResponse.doGetListResources(etUname.getText().toString(),etPwd.getText().toString());
+            call.enqueue(new Callback<CommonParentPojo>() {
+                @Override
+                public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
+
+                    Log.e("Inside", "onResponse");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+                    CommonParentPojo commonParentPojo = response.body();
+                    if (commonParentPojo != null) {
+                        if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
+                            Log.e("Response", commonParentPojo.getMsg());
+
+                            startActivity(new Intent(LoginActivity.this, TabViewParentActivity.class));
+                        }
+
+                        showToast(commonParentPojo.getMsg());
+                    }
+
+                    progressDialog.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<CommonParentPojo> call, Throwable t) {
+
+                    Log.e("Throwabe ", "" + t);
+                    progressDialog.dismiss();
+                }
+            });
+        }
     }
 
     public void showToast(String msg)

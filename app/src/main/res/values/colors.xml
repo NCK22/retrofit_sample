@@ -8,6 +8,7 @@
     <color name="offwhite">#1A000000</color>
     <color name="navBg">#AE0C4E</color>
     <color name="colorTheme">#F2146E</color>
+    <color name="transparent">#00000000</color>
 
 
     <color name="navigation_default">#000000</color>

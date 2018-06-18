@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.applex.matrimony.Fragment.TabHome;
 import com.applex.matrimony.Fragment.TabMyProfile;
+import com.applex.matrimony.Fragment.TabPartnerPreferences;
 import com.applex.matrimony.Fragment.TabWhoInterested;
 import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
@@ -192,10 +193,8 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
                 case 1:
 
                         Log.e("Tab", "whoViewed");
-                        TabWhoViewed tabWhoViewed = new TabWhoViewed();
-                        return tabWhoViewed;
-
-
+                        TabPartnerPreferences tabPartnerPreferences = new TabPartnerPreferences();
+                        return tabPartnerPreferences;
 
 
                 default:
