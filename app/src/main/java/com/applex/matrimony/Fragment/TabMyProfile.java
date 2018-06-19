@@ -1685,6 +1685,7 @@ if(mListItem.get(0).getBirth_country()!=null) {
         tvChartStyle.setText((mListItem.get(0).getChart()));
         //spChart.setSelection(Integer.parseInt(mListItem.get(0).getSmoking()));
     }
+    //display toast
     public void showToast(String msg){
         Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
