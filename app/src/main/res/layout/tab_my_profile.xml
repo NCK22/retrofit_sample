@@ -50,7 +50,7 @@ android:background="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:background="#0c000000">
 
                 <LinearLayout
@@ -361,6 +361,149 @@ android:background="#ffffff"
                     android:textSize="16sp"
                     android:textColor="#4A4A4A"
                     android:gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Name :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_body_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Body Type :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_complexion"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Complexion :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Age :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_physical_stat"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Physical Status"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_height"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Height :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_weight"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Weight"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_mtongue"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Mother Tongue :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+                <TextView
+                    android:id="@+id/tv_marital_stat"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Marital Status"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_food"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Eating Habits :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_drink"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Drinking Habits"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_smoke"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="Smoking Habits :"
+                    android:fontFamily="Roboto-Regular"
+                    android:textSize="16sp"
+                    android:textColor="#4A4A4A"
+                    android:gravity="center_vertical"
+                    />
 
 
             </LinearLayout>
@@ -1198,7 +1341,7 @@ android:background="#ffffff"
                                     />
 
                                 <TextView
-                                    android:id="@+id/tv_rassi"
+                                    android:id="@+id/tv_raasi"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
@@ -1622,20 +1765,20 @@ android:background="#ffffff"
                                         android:background="@drawable/home_spinner_border">
 
 
-                                    <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
+                                    <io.blackbox_vision.datetimepickeredittext.view.TimePickerEditText
                                         android:id="@+id/edt_timeOfBirth"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:background="#00000000"
                                         android:hint="Birth Date"
-                                        android:inputType="date"
+                                        android:inputType="time"
                                         android:textAppearance="?android:attr/textAppearanceSmall"
                                         android:textColor="#4A4A4A"
                                         android:textSize="16sp"
                                         android:fontFamily="Roboto-Regular"
                                         android:textColorHint="#4A4A4A"
                                         android:textCursorDrawable="@drawable/cursor_black"
-                                        app:dateFormat="yyyy-MM-dd" />
+                                         />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -3585,6 +3728,7 @@ android:background="#ffffff"
                         android:scrollbarSize="50dp"
                         android:scrollbarStyle="insideInset"
                         android:overScrollMode="always"
+                        android:enabled="false"
                         />
 
                 </LinearLayout>
