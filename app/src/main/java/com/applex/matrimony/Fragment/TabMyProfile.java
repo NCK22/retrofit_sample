@@ -107,7 +107,7 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
             aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue,aaStar,aaRassi,aaDosh,aaGotra,aaResident;
 
 
-    EditText etAbout,etAboutFam,etName,etSubCaste;
+    EditText etAbout,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome;
     DatePickerEditText etBDate;
     TimePickerEditText etBTime;
     ArrayList<String> list_prof_for=new ArrayList<String>();
@@ -178,9 +178,12 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
     ,imgEditGroomBrideLoc,imgClearGroomBrideLoc,imgEditFam,imgClearFam,imgEditAbtFam,imgClearAbtFam,imgEditAbout,imgClearAbout;
 
     TextView tvProfFor,tvName,tvAge,tvMaritalStat,tvBodyType,tvPhysicalStat,tvHeight,tvWeight,tvComplexion,tvMTongue,tvFood,tvDrink,tvSmoke,
-    tvReligion,tvCaste,tvSubCaste,tvRaasi,tvStar,tvGotra,tvDosh,tvBirthTime,tvBirthCountry,tvBirthState,tvBirthCity,tvChartStyle;
+    tvReligion,tvCaste,tvSubCaste,tvRaasi,tvStar,tvGotra,tvDosh,tvBirthTime,tvBirthCountry,tvBirthState,tvBirthCity,tvChartStyle,
+    tvCountry,tvState,tvCity,tvResidentStatus,tvParish,tvVillage,
+    tvEdu,tvInstitute,tvEduDetail,tvOccu,tvOccuDetail,tvEmployedIn,tvAnnualIncome;
 
-    String intentCaste="",intentCountry="",intentState="",intentCity="";
+    String intentCaste="",intentCountry="",intentState="",intentCity="",intentBirthCountry="",intentBirthState="",intentBirthCity="",
+    intentOccu="",intentEdu="";
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -192,8 +195,13 @@ progressDialog=new ProgressDialog(getActivity());
 
         etName=(EditText)rootView.findViewById(R.id.edt_name);
         etAbout=(EditText)rootView.findViewById(R.id.edt_about_you);
+        etCollege=(EditText)rootView.findViewById(R.id.edt_college);
+        etEduDetail=(EditText)rootView.findViewById(R.id.edt_eduInDetail);
+        etOccuDetail=(EditText)rootView.findViewById(R.id.edt_occuInDetail);
+        etEmployedIn=(EditText)rootView.findViewById(R.id.edt_employedIn);
         etBDate = (DatePickerEditText) rootView.findViewById(R.id.edt_bdate);
         etSubCaste=(EditText)rootView.findViewById(R.id.edt_subCaste);
+        etIncome=(EditText)rootView.findViewById(R.id.edt_income);
         etBDate.setManager(getActivity().getSupportFragmentManager());
         etBTime = (TimePickerEditText) rootView.findViewById(R.id.edt_timeOfBirth);
         etBTime.setManager(getActivity().getSupportFragmentManager());
@@ -255,6 +263,20 @@ progressDialog=new ProgressDialog(getActivity());
         tvBirthCity=(TextView)rootView.findViewById(R.id.tv_cityOfBirth);
         tvChartStyle=(TextView)rootView.findViewById(R.id.tv_chartStyle);
 
+        tvCountry=(TextView)rootView.findViewById(R.id.tv_countryOfBirth);
+        tvState=(TextView)rootView.findViewById(R.id.tv_stateOfBirth);
+        tvCity=(TextView)rootView.findViewById(R.id.tv_cityOfBirth);
+        tvResidentStatus=(TextView)rootView.findViewById(R.id.tv_chartStyle);
+        tvParish=(TextView)rootView.findViewById(R.id.tv_cityOfBirth);
+        tvVillage=(TextView)rootView.findViewById(R.id.tv_chartStyle);
+
+        tvEdu=(TextView)rootView.findViewById(R.id.tv_edu);
+        tvInstitute=(TextView)rootView.findViewById(R.id.tv_college);
+        tvEduDetail=(TextView)rootView.findViewById(R.id.tv_eduInDetail);
+        tvOccu=(TextView)rootView.findViewById(R.id.tv_occu);
+        tvOccuDetail=(TextView)rootView.findViewById(R.id.tv_occuInDetail);
+        tvEmployedIn=(TextView)rootView.findViewById(R.id.tv_employdIn);
+        tvAnnualIncome=(TextView)rootView.findViewById(R.id.tv_income);
 
         spProfFor=(MaterialSpinner)rootView.findViewById(R.id.sp_profile_for);
         spCaste=(MaterialSpinner)rootView.findViewById(R.id.sp_caste);
@@ -1134,7 +1156,9 @@ getProfile();
                         spBirthCountry.setAdapter(aaCountry);
 
                         if(intentCountry!=null)
-                            spBirthCountry.setSelection(list_country.indexOf(intentCountry)+1);
+                            spCountry.setSelection(list_country.indexOf(intentCountry)+1);
+                        if(intentBirthCountry!=null)
+                            spBirthCountry.setSelection(list_country.indexOf(intentBirthCountry)+1);
                         progressDialog.dismiss();
                     }
                 }
@@ -1188,7 +1212,9 @@ getProfile();
                         spBirthState.setAdapter(aaState);
 
                         if(intentState!=null)
-                            spBirthState.setSelection(list_state.indexOf(intentState)+1);
+                            spState.setSelection(list_state.indexOf(intentState)+1);
+                        if(intentBirthState!=null)
+                            spBirthState.setSelection(list_state.indexOf(intentBirthState)+1);
                     }
                     progressDialog.dismiss();
                 }
@@ -1243,6 +1269,8 @@ getProfile();
 
                         if(intentCity!=null)
                             spBirthCity.setSelection(list_city.indexOf(intentCity)+1);
+                        if(intentBirthCity!=null)
+                            spBirthCity.setSelection(list_city.indexOf(intentBirthCity)+1);
                     }
                     progressDialog.dismiss();
                 }
@@ -1391,6 +1419,9 @@ getProfile();
                         aaEdu = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_edu);
                         aaEdu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spEdu.setAdapter(aaEdu);
+
+                        if(intentEdu!=null)
+                            spEdu.setSelection(list_edu.indexOf(intentEdu));
                     }
                     progressDialog.dismiss();
                 }
@@ -1440,6 +1471,11 @@ getProfile();
                         aaOccu = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_occu);
                         aaOccu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spOccu.setAdapter(aaOccu);
+
+                        if(intentOccu!=null) {
+                            spOccu.setSelection(list_occu.indexOf(intentOccu));
+                            Log.e("indexIntentOccu",""+list_occu.indexOf(intentOccu));
+                        }
                     }
                     progressDialog.dismiss();
                 }
@@ -1588,7 +1624,8 @@ getProfile();
                         mListItem= parentPojoProfile.getObjProfile();
                         setBasic();
                         setReligion();
-
+                        setGroomBrideLoc();
+                        setProfessional();
                     }
                 }
                 else
@@ -1672,18 +1709,57 @@ getProfile();
 if(mListItem.get(0).getBirth_country()!=null) {
     //Log.e("indexcountry",""+list_country.indexOf(mListItem.get(0).getBirth_country()));
     tvBirthCountry.setText(mListItem.get(0).getBirth_country());
-    intentCountry=mListItem.get(0).getBirth_country();
+    intentBirthCountry=mListItem.get(0).getBirth_country();
 }
         if(mListItem.get(0).getBirth_state()!=null) {
             tvBirthState.setText(mListItem.get(0).getBirth_state());
-            intentState=mListItem.get(0).getBirth_state();
+            intentBirthState=mListItem.get(0).getBirth_state();
         }
         if(mListItem.get(0).getBirth_city()!=null) {
             tvBirthCity.setText(mListItem.get(0).getBirth_city());
-            intentCity=mListItem.get(0).getBirth_city();
+            intentBirthCity=mListItem.get(0).getBirth_city();
         }
         tvChartStyle.setText((mListItem.get(0).getChart()));
         //spChart.setSelection(Integer.parseInt(mListItem.get(0).getSmoking()));
+    }
+
+    public void setGroomBrideLoc(){
+
+        if(mListItem.get(0).getCountry()!=null) {
+            //Log.e("indexcountry",""+list_country.indexOf(mListItem.get(0).getBirth_country()));
+            tvCountry.setText(mListItem.get(0).getCountry());
+            intentCountry=mListItem.get(0).getCountry();
+        }
+        if(mListItem.get(0).getState()!=null) {
+            tvState.setText(mListItem.get(0).getState());
+            intentState=mListItem.get(0).getState();
+        }
+        if(mListItem.get(0).getCity()!=null) {
+            tvCity.setText(mListItem.get(0).getCity());
+            intentCity=mListItem.get(0).getCity();
+        }
+       tvResidentStatus.setText(mListItem.get(0).getResident_status());
+        spResident.setSelection(list_resident.indexOf(mListItem.get(0).getResident_status()));
+        tvParish.setText(mListItem.get(0).getParish());
+        tvVillage.setText(mListItem.get(0).getParish_village());
+    }
+
+    public void setProfessional(){
+        tvEdu.setText(mListItem.get(0).getEducation());
+        Log.e("indexr", String.valueOf(list_religion.indexOf(mListItem.get(0).getReligion())));
+        intentEdu=mListItem.get(0).getEducation();
+        Log.e("indexc", String.valueOf(list_caste.indexOf(mListItem.get(0).getCaste())));
+        tvInstitute.setText(mListItem.get(0).getCollege());
+        etCollege.setText(mListItem.get(0).getCollege());
+        tvEduDetail.setText(mListItem.get(0).getEducation_detail());
+        etEduDetail.setText(mListItem.get(0).getEducation_detail());
+        tvOccu.setText(mListItem.get(0).getOccupation());
+        intentOccu=mListItem.get(0).getOccupation();
+        tvOccuDetail.setText(mListItem.get(0).getOccupation_detail());
+        etOccuDetail.setText(mListItem.get(0).getOccupation_detail());
+       tvEmployedIn.setText(mListItem.get(0).getEmployed_in());
+       etEmployedIn.setText(mListItem.get(0).getEmployed_in());
+       tvAnnualIncome.setText(mListItem.get(0).getIncome());
     }
     //display toast
     public void showToast(String msg){
