@@ -3159,7 +3159,7 @@ android:background="#ffffff"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="No of Brother(s) :"
+                            android:text="No of Sister(s) :"
                             android:fontFamily="Roboto-Regular"
                             android:textSize="16sp"
                             android:textColor="#4A4A4A"
@@ -3551,27 +3551,18 @@ android:background="#ffffff"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
 
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/sp_mother_stat"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginEnd="15dp"
-                                        app:ms_alignLabels="false"
-                                        app:ms_arrowColor="#00000000"
-                                        app:ms_arrowSize="10dp"
-                                        app:ms_baseColor="#00000000"
-                                        app:ms_enableErrorLabel="false"
-                                        app:ms_enableFloatingLabel="false"
-                                        app:ms_errorColor="#FFFFFF"
-                                        app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                        app:ms_hintTextSize="16px"
-                                        app:ms_hint="Profile For"
-                                        app:ms_multiline="false"
-                                        app:ms_thickness="0.5dp"
-                                        android:popupBackground="#e6e6e6"
-                                        android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                        />
+                                        <EditText
+                                            android:id="@+id/edt_mother_stat"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
                                     </LinearLayout>
                                 </LinearLayout>
 

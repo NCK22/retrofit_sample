@@ -26,4 +26,36 @@ public interface updateProfileInterface {
                                        @Field("birth_country") String birth_country,@Field("birth_state") String birth_state, @Field("birth_city") String birth_city,
                                        @Field("chart_id") String chart_id);
 
+
+
+    @FormUrlEncoded
+    @POST("app/app_update_profile.php")
+    Call<CommonParentPojo> updateGroomBrideLoc(@Field("user_id") String user_id,@Field("country") String country,@Field("state")String state,
+                                          @Field("city") String city,@Field("resident_status") String resident_status,@Field("parish") String parish,
+                                          @Field("parish_village") String parish_village);
+
+
+
+    @FormUrlEncoded
+    @POST("app/app_update_profile.php")
+    Call<CommonParentPojo> updateProfessional(@Field("user_id") String user_id,@Field("education_id") String education,@Field("college")String college,
+                                               @Field("education_detail") String education_detail,@Field("occupation_id") String occupation,
+                                              @Field("occupation_detail") String occupation_detail,@Field("employed_in") String employed_in,@Field("income") String income);
+
+    @FormUrlEncoded
+    @POST("app/app_update_profile.php")
+    Call<CommonParentPojo> updateFamilyDetails(@Field("user_id") String user_id,@Field("family_value") String family_value,@Field("family_type")String family_type,
+                                              @Field("family_status") String family_status,@Field("family_origin") String family_origin,
+                                              @Field("family_location") String family_location,@Field("father_status") String father_status,@Field("mother_status") String mother_status,
+                                               @Field("brothers") String brothers,@Field("sisters") String sisters);
+
+    @FormUrlEncoded
+    @POST("app/app_update_profile.php")
+    Call<CommonParentPojo> updateAboutYou(@Field("user_id") String user_id,@Field("about_you") String about_you);
+
+
+    @FormUrlEncoded
+    @POST("app/app_update_profile.php")
+    Call<CommonParentPojo> updateAboutFam(@Field("user_id") String user_id,@Field("family_about") String family_about);
+
 }

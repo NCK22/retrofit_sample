@@ -572,10 +572,6 @@ progressDialog=new ProgressDialog(getActivity());
                 else{
                     saveBasic();
                 }
-
-
-
-
         }
 
     }
