@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
-android:background="#FFFFFF"
->
+    android:layout_marginBottom="70dp"
+    android:background="#ffffff"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,14 +15,18 @@ android:background="#FFFFFF"
         android:layout_marginStart="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="50dp">
+        android:fillViewport="true"
+        android:layout_marginBottom="70dp"
+        android:background="#00000000">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="140dp"
             android:background="#FFFFFF"
             android:orientation="vertical">
+
 
             <Button
                 android:id="@+id/btnBasic"
@@ -36,6 +40,7 @@ android:background="#FFFFFF"
                 android:onClick="expandableButton4"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:layout_marginTop="15dp"
                 android:text="Basic Details"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
@@ -46,7 +51,7 @@ android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -80,7 +85,7 @@ android:background="#FFFFFF"
                 <LinearLayout
 
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="400dp"
                     android:background="#0c000000"
                     android:orientation="horizontal"
                     android:weightSum="2"
@@ -91,14 +96,12 @@ android:background="#FFFFFF"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:weightSum="7"
+                        android:weightSum="8"
                         android:orientation="vertical"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="0dp"
                         >
-
-
 
                         <TextView
                             android:layout_width="match_parent"
@@ -114,14 +117,13 @@ android:background="#FFFFFF"
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="height"
+                            android:layout_weight="2"
+                            android:text="Height :"
                             android:fontFamily="Roboto-Regular"
                             android:textSize="16sp"
                             android:textColor="#4A4A4A"
                             android:gravity="center_vertical"
                             />
-
 
                         <TextView
                             android:layout_width="match_parent"
@@ -138,12 +140,13 @@ android:background="#FFFFFF"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="Physical Status :"
+                            android:text="Physical Status"
                             android:fontFamily="Roboto-Regular"
                             android:textSize="16sp"
                             android:textColor="#4A4A4A"
                             android:gravity="center_vertical"
                             />
+
 
                         <TextView
                             android:layout_width="match_parent"
@@ -197,9 +200,8 @@ android:background="#FFFFFF"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:weightSum="7"
-                                android:visibility="gone">
-
+                                android:weightSum="8"
+                                android:visibility="visible">
 
 
                                 <TextView
@@ -214,17 +216,31 @@ android:background="#FFFFFF"
                                     android:gravity="center_vertical"
                                     />
 
+
                                 <TextView
                                     android:id="@+id/tv_height"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_weight="1"
+                                    android:layout_weight="2"
                                     android:text="Height :"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
                                     android:gravity="center_vertical"
                                     />
+
+                                <TextView
+                                    android:id="@+id/tv_marital_stat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Marital Status"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
 
                                 <TextView
                                     android:id="@+id/tv_physical_stat"
@@ -238,18 +254,6 @@ android:background="#FFFFFF"
                                     android:gravity="center_vertical"
                                     />
 
-
-                                <TextView
-                                    android:id="@+id/tv_marital_stat"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:text="Marital Status"
-                                    android:fontFamily="Roboto-Regular"
-                                    android:textSize="16sp"
-                                    android:textColor="#4A4A4A"
-                                    android:gravity="center_vertical"
-                                    />
 
                                 <TextView
                                     android:id="@+id/tv_food"
@@ -295,42 +299,93 @@ android:background="#FFFFFF"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:weightSum="7"
+                                android:weightSum="8"
                                 android:layout_marginTop="0dp"
-                                android:visibility="visible">
+                                android:visibility="invisible">
 
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:orientation="vertical"
+                                    android:orientation="horizontal"
                                     android:layout_weight="1"
                                     android:layout_marginBottom="0dp"
+                                    android:weightSum="2"
                                     >
 
                                     <LinearLayout
-                                        android:layout_width="match_parent"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
                                         android:layout_height="match_parent"
                                         android:layout_gravity="center"
                                         android:layout_marginBottom="4dp"
                                         android:layout_marginTop="5dp"
+                                        android:layout_marginRight="2dp"
+                                        android:layout_marginEnd="2dp"
                                         android:background="@drawable/home_spinner_border">
 
-
-                                        <io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText
-                                            android:id="@+id/edt_bdate"
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_age_from"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:background="#00000000"
-                                            android:hint="Birth Date"
-                                            android:inputType="date"
-                                            android:textAppearance="?android:attr/textAppearanceSmall"
-                                            android:textColor="#4A4A4A"
-                                            android:textSize="16sp"
-                                            android:fontFamily="Roboto-Regular"
-                                            android:textColorHint="#4A4A4A"
-                                            android:textCursorDrawable="@drawable/cursor_black"
-                                            app:dateFormat="yyyy-MM-dd" />
+                                            android:layout_marginRight="0dp"
+                                            android:layout_marginEnd="0dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="From"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="0"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginLeft="2dp"
+                                        android:layout_marginStart="2dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_age_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="To"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
 
                                     </LinearLayout>
 
@@ -354,7 +409,50 @@ android:background="#FFFFFF"
                                         android:background="@drawable/home_spinner_border">
 
                                         <fr.ganfra.materialspinner.MaterialSpinner
-                                            android:id="@+id/sp_height"
+                                            android:id="@+id/sp_height_from"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Height"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_height_to"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:layout_marginRight="15dp"
@@ -466,6 +564,9 @@ android:background="#FFFFFF"
 
                                     </LinearLayout>
                                 </LinearLayout>
+
+
+
 
 
 
@@ -636,7 +737,7 @@ android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -703,12 +804,13 @@ android:background="#FFFFFF"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="Mother Tongue :"
+                            android:text="MotherTongue :"
                             android:fontFamily="Roboto-Regular"
                             android:textSize="16sp"
                             android:textColor="#4A4A4A"
                             android:gravity="center_vertical"
                             />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -757,6 +859,18 @@ android:background="#FFFFFF"
                                     />
 
                                 <TextView
+                                    android:id="@+id/tv_mtongue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text=""
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
                                     android:id="@+id/tv_caste"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
@@ -779,7 +893,7 @@ android:background="#FFFFFF"
                                 android:orientation="vertical"
                                 android:weightSum="3"
                                 android:layout_marginTop="5dp"
-                                android:visibility="gone">
+                                android:visibility="invisible">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -798,39 +912,39 @@ android:background="#FFFFFF"
                                         android:background="@drawable/home_spinner_border">
 
 
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/sp_religion"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginEnd="15dp"
-                                        app:ms_alignLabels="false"
-                                        app:ms_arrowColor="#00000000"
-                                        app:ms_arrowSize="10dp"
-                                        app:ms_baseColor="#00000000"
-                                        app:ms_enableErrorLabel="false"
-                                        app:ms_enableFloatingLabel="false"
-                                        app:ms_errorColor="#FFFFFF"
-                                        app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                        app:ms_hintTextSize="16sp"
-                                        app:ms_hint="Profile For"
-                                        app:ms_hintColor="@color/black"
-                                        app:ms_multiline="false"
-                                        app:ms_thickness="0.5dp"
-                                        android:popupBackground="#e6e6e6"
-                                        android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                        />
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_religion"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Religion"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
 
                                     </LinearLayout>
                                 </LinearLayout>
-
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1"
+                                    >
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -840,6 +954,7 @@ android:background="#FFFFFF"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
 
+
                                         <fr.ganfra.materialspinner.MaterialSpinner
                                             android:id="@+id/sp_mothertongue"
                                             android:layout_width="match_parent"
@@ -847,20 +962,20 @@ android:background="#FFFFFF"
                                             android:layout_marginRight="15dp"
                                             android:layout_marginEnd="15dp"
                                             app:ms_alignLabels="false"
-                                            app:ms_arrowColor="#4A4A4A"
+                                            app:ms_arrowColor="#00000000"
                                             app:ms_arrowSize="10dp"
                                             app:ms_baseColor="#00000000"
                                             app:ms_enableErrorLabel="false"
                                             app:ms_enableFloatingLabel="false"
                                             app:ms_errorColor="#FFFFFF"
                                             app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                            app:ms_hintTextSize="16px"
-                                            app:ms_hint="Profile For"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Rassi"
                                             app:ms_multiline="false"
                                             app:ms_thickness="0.5dp"
                                             android:popupBackground="#e6e6e6"
                                             android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                            android:visibility="gone"
                                             />
                                     </LinearLayout>
                                 </LinearLayout>
@@ -871,7 +986,7 @@ android:background="#FFFFFF"
                                     android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                 >
+                                    >
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -882,31 +997,30 @@ android:background="#FFFFFF"
                                         android:background="@drawable/home_spinner_border">
 
 
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/sp_caste"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginEnd="15dp"
-                                        app:ms_alignLabels="false"
-                                        app:ms_arrowColor="#00000000"
-                                        app:ms_arrowSize="10dp"
-                                        app:ms_baseColor="#00000000"
-                                        app:ms_enableErrorLabel="false"
-                                        app:ms_enableFloatingLabel="false"
-                                        app:ms_errorColor="#FFFFFF"
-                                        app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                        app:ms_hintTextSize="16sp"
-                                        app:ms_hint="Profile For"
-                                        app:ms_hintColor="@color/black"
-                                        app:ms_multiline="false"
-                                        app:ms_thickness="0.5dp"
-                                        android:popupBackground="#e6e6e6"
-                                        android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                        />
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_caste"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Caste"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
                                     </LinearLayout>
                                 </LinearLayout>
-
 
                             </LinearLayout>
                         </FrameLayout>
@@ -921,7 +1035,7 @@ android:background="#FFFFFF"
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnLocDetails"
+                android:id="@+id/btnGroomBrideLoc"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -933,13 +1047,13 @@ android:background="#FFFFFF"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:layout_marginTop="15dp"
-                android:text="Location Details"
+                android:text="Groom's Location"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="#4A4A4A"
                 android:textSize="16sp" />
             <LinearLayout
-                android:id="@+id/ll_locDetails"
+                android:id="@+id/ll_groomBrideLoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -951,14 +1065,14 @@ android:background="#FFFFFF"
                     android:orientation="horizontal"
                     android:background="#0c000000"
                     android:weightSum="1">
+
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.80"/>
 
-
                     <ImageView
-                        android:id="@+id/img_clear_LocDetails"
+                        android:id="@+id/img_clear_groomBrideLoc"
                         android:layout_width="0dp"
                         android:layout_weight="0.10"
                         android:layout_height="wrap_content"
@@ -966,7 +1080,7 @@ android:background="#FFFFFF"
                         android:visibility="invisible"/>
 
                     <ImageView
-                        android:id="@+id/img_editSave_LocDetails"
+                        android:id="@+id/img_editSave_groomBrideLoc"
                         android:layout_width="0dp"
                         android:layout_weight="0.10"
                         android:layout_height="wrap_content"
@@ -1021,7 +1135,6 @@ android:background="#FFFFFF"
 
 
 
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -1038,12 +1151,12 @@ android:background="#FFFFFF"
                             android:layout_height="match_parent">
 
                             <LinearLayout
-                                android:id="@+id/ll_locDetails_view"
+                                android:id="@+id/ll_groomBrideLoc_view"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:weightSum="2"
-                                android:visibility="invisible">
+                                android:visibility="visible">
 
                                 <TextView
                                     android:id="@+id/tv_country"
@@ -1070,17 +1183,16 @@ android:background="#FFFFFF"
                                     />
 
 
-
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/ll_locDetails_edit"
+                                android:id="@+id/ll_groomBrideLoc_edit"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:weightSum="2"
                                 android:layout_marginTop="5dp"
-                                android:visibility="visible">
+                                android:visibility="invisible">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1088,7 +1200,7 @@ android:background="#FFFFFF"
                                     android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                   >
+                                    >
 
 
                                     <LinearLayout
@@ -1099,75 +1211,74 @@ android:background="#FFFFFF"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
 
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/sp_country"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginEnd="15dp"
-                                        app:ms_alignLabels="false"
-                                        app:ms_arrowColor="#00000000"
-                                        app:ms_arrowSize="10dp"
-                                        app:ms_baseColor="#00000000"
-                                        app:ms_enableErrorLabel="false"
-                                        app:ms_enableFloatingLabel="false"
-                                        app:ms_errorColor="#FFFFFF"
-                                        app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                        app:ms_hintTextSize="16sp"
-                                        app:ms_hint="Profile For"
-                                        app:ms_hintColor="@color/black"
-                                        app:ms_multiline="false"
-                                        app:ms_thickness="0.5dp"
-                                        android:popupBackground="#e6e6e6"
-                                        android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                        />
-
-                                    </LinearLayout>
-                                        </LinearLayout>
-
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_marginBottom="0dp"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1"
-                                  >
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_gravity="center"
-                                        android:layout_marginBottom="4dp"
-                                        android:layout_marginTop="5dp"
-                                        android:background="@drawable/home_spinner_border">
-
-
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/sp_state"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginEnd="15dp"
-                                        app:ms_alignLabels="false"
-                                        app:ms_arrowColor="#00000000"
-                                        app:ms_arrowSize="10dp"
-                                        app:ms_baseColor="#00000000"
-                                        app:ms_enableErrorLabel="false"
-                                        app:ms_enableFloatingLabel="false"
-                                        app:ms_errorColor="#FFFFFF"
-                                        app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                        app:ms_hintTextSize="16sp"
-                                        app:ms_hint="Profile For"
-                                        app:ms_hintColor="@color/black"
-                                        app:ms_multiline="false"
-                                        app:ms_thickness="0.5dp"
-                                        android:popupBackground="#e6e6e6"
-                                        android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                        />
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_country"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Country"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
 
                                     </LinearLayout>
                                 </LinearLayout>
 
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_state"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="State"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
 
 
                             </LinearLayout>
@@ -1312,7 +1423,7 @@ android:background="#FFFFFF"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:weightSum="3"
-                                android:visibility="invisible">
+                                android:visibility="visible">
 
                                 <TextView
                                     android:id="@+id/tv_edu"
@@ -1326,7 +1437,6 @@ android:background="#FFFFFF"
                                     android:gravity="center_vertical"
                                     />
 
-
                                 <TextView
                                     android:id="@+id/tv_occu"
                                     android:layout_width="match_parent"
@@ -1338,8 +1448,6 @@ android:background="#FFFFFF"
                                     android:textColor="#4A4A4A"
                                     android:gravity="center_vertical"
                                     />
-
-
 
                                 <TextView
                                     android:id="@+id/tv_income"
@@ -1363,7 +1471,7 @@ android:background="#FFFFFF"
                                 android:orientation="vertical"
                                 android:weightSum="3"
                                 android:layout_marginTop="5dp"
-                                android:visibility="visible">
+                                android:visibility="invisible">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1371,7 +1479,7 @@ android:background="#FFFFFF"
                                     android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
-                                >
+                                    >
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
@@ -1381,28 +1489,28 @@ android:background="#FFFFFF"
                                         android:background="@drawable/home_spinner_border">
 
 
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/sp_edu"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginEnd="15dp"
-                                        app:ms_alignLabels="false"
-                                        app:ms_arrowColor="#00000000"
-                                        app:ms_arrowSize="10dp"
-                                        app:ms_baseColor="#00000000"
-                                        app:ms_enableErrorLabel="false"
-                                        app:ms_enableFloatingLabel="false"
-                                        app:ms_errorColor="#FFFFFF"
-                                        app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                        app:ms_hintTextSize="16sp"
-                                        app:ms_hint="Profile For"
-                                        app:ms_hintColor="@color/black"
-                                        app:ms_multiline="false"
-                                        app:ms_thickness="0.5dp"
-                                        android:popupBackground="#e6e6e6"
-                                        android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                        />
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_edu"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Education"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
                                     </LinearLayout>
                                 </LinearLayout>
 
@@ -1412,7 +1520,8 @@ android:background="#FFFFFF"
                                     android:layout_height="0dp"
                                     android:layout_marginBottom="0dp"
                                     android:orientation="vertical"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1"
+                                    >
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -1422,30 +1531,30 @@ android:background="#FFFFFF"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
 
-                                    <fr.ganfra.materialspinner.MaterialSpinner
-                                        android:id="@+id/sp_occu"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_marginRight="15dp"
-                                        android:layout_marginEnd="15dp"
-                                        app:ms_alignLabels="false"
-                                        app:ms_arrowColor="#00000000"
-                                        app:ms_arrowSize="10dp"
-                                        app:ms_baseColor="#00000000"
-                                        app:ms_enableErrorLabel="false"
-                                        app:ms_enableFloatingLabel="false"
-                                        app:ms_errorColor="#FFFFFF"
-                                        app:ms_typeface="fonts/Roboto-Regular.ttf"
-                                        app:ms_hintTextSize="16px"
-                                        app:ms_hint="Profile For"
-                                        app:ms_multiline="false"
-                                        app:ms_thickness="0.5dp"
-                                        android:popupBackground="#e6e6e6"
-                                        android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                        />
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_occu"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Occupation"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
                                     </LinearLayout>
                                 </LinearLayout>
-
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -1453,7 +1562,7 @@ android:background="#FFFFFF"
                                     android:orientation="vertical"
                                     android:layout_weight="1"
                                     android:layout_marginBottom="0dp"
-                                   >
+                                    >
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
@@ -1463,18 +1572,18 @@ android:background="#FFFFFF"
                                         android:background="@drawable/home_spinner_border">
 
 
-                                    <EditText
-                                        android:id="@+id/edt_income"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:hint="Deshastha"
-                                        android:textColorHint="#4A4A4A"
-                                        android:background="#00000000"
-                                        android:layout_gravity="center_horizontal"
-                                        android:fontFamily="Roboto-Regular"
-                                        android:textSize="16sp"
-                                        android:textColor="#4A4A4A"
-                                        />
+                                        <EditText
+                                            android:id="@+id/edt_income"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
                                     </LinearLayout>
 
                                 </LinearLayout>
@@ -1490,10 +1599,661 @@ android:background="#FFFFFF"
                 </LinearLayout>
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btnFamily"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/border_expbtn"
+                android:drawableRight="@mipmap/downarrow"
+                android:drawableTint="#4A4A4A"
+                android:fontFamily="Roboto-Regular"
+                android:onClick="expandableButton4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Family Details"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#4A4A4A"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+            <LinearLayout
+                android:id="@+id/ll_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#0c000000"
+                    android:weightSum="1">
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.80"/>
+
+
+                    <ImageView
+                        android:id="@+id/img_clear_family"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_dissmiss"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/img_editSave_family"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/editicon2"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="450dp"
+                    android:background="#0c000000"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="9"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="0dp"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Family Values:"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Family Type :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Family Status :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Family Origin :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Family Location :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Father's Status :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Mother's Status :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="No of Brother(s) :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="No of Sister(s) :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="0dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/ll_family_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="9"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:id="@+id/tv_fam_values"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Hindu"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_fam_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Brahmin - Deshastha"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_fam_stat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text=""
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_fam_origin"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Rassi:"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_fam_loc"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Star :"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_father_status"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Gothra :"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_mother_status"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Dosham :"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_noOfBrother"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="No of Brother(s) :"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_noOfSister"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="No of Sister(s) :"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_family_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="9"
+                                android:layout_marginTop="5dp"
+                                android:visibility="invisible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_fam_value"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Family Value"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_fam_type"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Family Type"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_fam_stat"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Family Status"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <EditText
+                                            android:id="@+id/edt_fam_origin"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <EditText
+                                            android:id="@+id/edt_fam_location"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <EditText
+                                            android:id="@+id/edt_father_stat"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <EditText
+                                            android:id="@+id/edt_mother_stat"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <EditText
+                                            android:id="@+id/edt_noOfBrother"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <EditText
+                                            android:id="@+id/edt_noOfSister"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+                        </FrameLayout>
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
 
             <Button
-                android:id="@+id/btnAboutFamily"
+                android:id="@+id/btnAboutGroomBride"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
@@ -1511,7 +2271,7 @@ android:background="#FFFFFF"
                 android:textColor="#4A4A4A"
                 android:textSize="16sp" />
             <LinearLayout
-                android:id="@+id/ll_about_family"
+                android:id="@+id/ll_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -1533,7 +2293,7 @@ android:background="#FFFFFF"
 
 
                     <ImageView
-                        android:id="@+id/img_clear_aboutFam"
+                        android:id="@+id/img_clear_about"
                         android:layout_width="0dp"
                         android:layout_weight="0.10"
                         android:layout_height="wrap_content"
@@ -1541,7 +2301,7 @@ android:background="#FFFFFF"
                         android:visibility="invisible"/>
 
                     <ImageView
-                        android:id="@+id/img_editSave_aboutFam"
+                        android:id="@+id/img_editSave_about"
                         android:layout_width="0dp"
                         android:layout_weight="0.10"
                         android:layout_height="wrap_content"
@@ -1558,20 +2318,21 @@ android:background="#FFFFFF"
                     android:background="@drawable/border_about_fam">
 
                     <EditText
-                        android:id="@+id/edt_about_fam"
+                        android:id="@+id/edt_about_you"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:inputType="textMultiLine"
                         android:scrollbars="vertical"
                         android:scrollbarAlwaysDrawVerticalTrack="true"
-                        android:hint="Describe your expectations"
                         android:fadeScrollbars="false"
                         android:scrollbarSize="50dp"
                         android:scrollbarStyle="insideInset"
                         android:overScrollMode="always"
+                        android:enabled="false"
                         />
 
                 </LinearLayout>
+
 
             </LinearLayout>
         </LinearLayout>

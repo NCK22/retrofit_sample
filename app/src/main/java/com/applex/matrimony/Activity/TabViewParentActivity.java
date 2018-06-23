@@ -101,6 +101,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.getMenu().clear(); //clear old inflated items.
         navigationView.inflateMenu(R.menu.menu_drawer);
+        navigationView.setCheckedItem(R.id.menu_go_home);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -144,6 +145,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        item.setChecked(true);
         drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.menu_go_home:
@@ -155,6 +157,12 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
              //   toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
                 return true;
+
+            case R.id.menu_go_profile:
+//                toolbar.setTitle(getString(R.string.menu_matches));
+                startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","profile"));
+                return true;
+
         }
             return false;
     }

@@ -438,7 +438,9 @@ progressDialog=new ProgressDialog(getActivity());
         imgEditAbout.setOnClickListener(this);
         imgClearAbout.setOnClickListener(this);
 
-getProfile();
+        spCountry.setMultiline(true);
+
+//getProfile();
 
         return rootView;
 
@@ -590,7 +592,6 @@ getProfile();
                     Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
                    // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());*/
                     getCasteList(list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id());
-
                 }
                 break;
 

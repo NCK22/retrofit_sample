@@ -92,6 +92,7 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.getMenu().clear(); //clear old inflated items.
         navigationView.inflateMenu(R.menu.menu_drawer);
+        navigationView.setCheckedItem(R.id.menu_go_profile);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -135,6 +136,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        item.setChecked(true);
         drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.menu_go_home:

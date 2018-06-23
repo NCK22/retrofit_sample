@@ -23,6 +23,7 @@ import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.HomeProfilesAdapter;
 import com.applex.matrimony.Interface.getCasteInterface;
 import com.applex.matrimony.Interface.getHighlightedInterface;
+import com.applex.matrimony.Interface.getMatchesInterface;
 import com.applex.matrimony.Interface.getReligionInterface;
 import com.applex.matrimony.Pojo.ChildPojoCaste;
 import com.applex.matrimony.Pojo.ChildPojoReligion;
@@ -61,7 +62,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     ArrayList<ChildPojoProfile> list_matches=new ArrayList<ChildPojoProfile>();
     ArrayList<ChildPojoProfile> list_highlights=new ArrayList<ChildPojoProfile>();
     public RecyclerView rv_profile_matches,rv_profile_highlight;
-    HomeProfilesAdapter adapter;
+    HomeProfilesAdapter adapterHighLights,adapterMatches;
     private ProgressBar progressBar;
     private LinearLayout lyt_not_found;
     ProgressDialog progressDialog;
@@ -103,6 +104,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         getReligionList();
        // displayData();
         getHighlightedProf();
+        getMatches();
 
 
 
@@ -112,11 +114,12 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     private void displayData() {
         Log.e("displayData","called");
         Log.e("List_highlight size",""+list_highlights.size());
-        adapter = new HomeProfilesAdapter(getActivity(), list_highlights);
-        rv_profile_highlight.setAdapter(adapter);
-        rv_profile_matches.setAdapter(adapter);
+        adapterHighLights = new HomeProfilesAdapter(getActivity(), list_highlights);
+        rv_profile_highlight.setAdapter(adapterHighLights);
+        adapterMatches = new HomeProfilesAdapter(getActivity(), list_matches);
+        rv_profile_matches.setAdapter(adapterMatches);
 
-        if (adapter.getItemCount() == 0) {
+        if (adapterMatches.getItemCount() == 0) {
   //          lyt_not_found.setVisibility(View.VISIBLE);
         } else {
 //            lyt_not_found.setVisibility(View.GONE);
@@ -199,6 +202,50 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
                         Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
                         list_highlights= parentPojoProfile.getObjProfile();
                         if(list_highlights.size()!=0)
+
+                            displayData();
+
+                    }
+                }
+                else
+                    Log.e("parentpojotabwhome","null");
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
+
+                Log.e("throwable",""+t);
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
+    public void getMatches()
+    {
+
+        progressDialog.show();
+        if(list_matches!=null)
+            list_matches.clear();
+
+        getMatchesInterface getResponse = APIClient.getClient().create(getMatchesInterface.class);
+        Call<ParentPojoProfile> call = getResponse.doGetListResources("7180214");
+        call.enqueue(new Callback<ParentPojoProfile>() {
+            @Override
+            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
+
+                Log.e("Inside","onResponse");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+                ParentPojoProfile parentPojoProfile =response.body();
+                if(parentPojoProfile !=null){
+                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
+                        Log.e("Response","Success");
+                        Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
+                        list_matches= parentPojoProfile.getObjProfile();
+                        if(list_matches.size()!=0)
 
                             displayData();
 
