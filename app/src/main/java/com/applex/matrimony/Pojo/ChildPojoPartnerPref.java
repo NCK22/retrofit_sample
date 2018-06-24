@@ -5,127 +5,85 @@ import com.google.gson.annotations.SerializedName;
 public class ChildPojoPartnerPref {
 
 
-    private String preferenceId;
-    private String profileId;
-    private String ageFrom;
-    private String ageTo;
-    private String heightFromId;
-    private String heightToId;
-    private String maritialStatus;
-    private String physicalStatus;
-    private String eatingHabit;
-    private String smokingHabit;
-    private String drinkingHabit;
-    private String religion;
-    private String caste;
-    private String motherLanguage;
-    private String star;
-    private String country;
-    private String state;
-    private String city;
-    private String education;
-    private String occupation;
-    private String minIncome;
-    private String aboutPartner;
-    private String preferenceDate;
-    private String subcaste;
-    private String raasi;
-    private String dosham;
-    private String weightFrom;
-    private String weightTo;
-    private String maxIncome;
-    private String bodyType;
-    private String complexion;
-    private String citizenship;
+    @SerializedName("preference_id") String preference_id;
+    @SerializedName("profile_id") String profile_id;
+    @SerializedName("age_from") String age_from;
+    @SerializedName("age_to") String age_to;
+    @SerializedName("height_from_id") String height_from_id;
+    @SerializedName("height_to_id") String height_to_id;
+    @SerializedName("maritial_status") String maritial_status;
+    @SerializedName("physical_status") String physical_status;
+    @SerializedName("eating_habit") String eating_habit;
+    @SerializedName("smoking_habit") String smoking_habit;
+    @SerializedName("drinking_habit") String drinking_habit;
+    @SerializedName("religion") String religion;
+    @SerializedName("caste") String caste;
+    @SerializedName("mother_language") String mother_language;
+    @SerializedName("star") String star;
+    @SerializedName("country") String country;
+    @SerializedName("state") String state;
+    @SerializedName("city") String city;
+    @SerializedName("education") String education;
+    @SerializedName("occupation") String occupation;
+    @SerializedName("min_income") String min_income;
+    @SerializedName("about_partner") String about_partner;
 
-    public String getPreferenceId() {
-        return preferenceId;
+
+    public String getAge_from() {
+        return age_from;
     }
 
-    public void setPreferenceId(String preferenceId) {
-        this.preferenceId = preferenceId;
+    public String getAge_to() {
+        return age_to;
     }
 
-    public String getProfileId() {
-        return profileId;
+    public String getEating_habit() {
+        return eating_habit;
     }
 
-    public void setProfileId(String profileId) {
-        this.profileId = profileId;
+    public String getDrinking_habit() {
+        return drinking_habit;
     }
 
-    public String getAgeFrom() {
-        return ageFrom;
+    public String getHeight_from_id() {
+        return height_from_id;
     }
 
-    public void setAgeFrom(String ageFrom) {
-        this.ageFrom = ageFrom;
+    public String getHeight_to_id() {
+        return height_to_id;
     }
 
-    public String getAgeTo() {
-        return ageTo;
+    public String getMaritial_status() {
+        return maritial_status;
     }
 
-    public void setAgeTo(String ageTo) {
-        this.ageTo = ageTo;
+    public String getPhysical_status() {
+        return physical_status;
     }
 
-    public String getHeightFromId() {
-        return heightFromId;
+    public String getPreference_id() {
+        return preference_id;
     }
 
-    public void setHeightFromId(String heightFromId) {
-        this.heightFromId = heightFromId;
+    public String getProfile_id() {
+        return profile_id;
     }
 
-    public String getHeightToId() {
-        return heightToId;
+    public String getSmoking_habit() {
+        return smoking_habit;
     }
 
-    public void setHeightToId(String heightToId) {
-        this.heightToId = heightToId;
+    public String getMother_language() {
+        return mother_language;
     }
 
-    public String getMaritialStatus() {
-        return maritialStatus;
+    public String getAbout_partner() {
+        return about_partner;
     }
 
-    public void setMaritialStatus(String maritialStatus) {
-        this.maritialStatus = maritialStatus;
+    public String getMin_income() {
+        return min_income;
     }
-
-    public String getPhysicalStatus() {
-        return physicalStatus;
-    }
-
-    public void setPhysicalStatus(String physicalStatus) {
-        this.physicalStatus = physicalStatus;
-    }
-
-    public String getEatingHabit() {
-        return eatingHabit;
-    }
-
-    public void setEatingHabit(String eatingHabit) {
-        this.eatingHabit = eatingHabit;
-    }
-
-    public String getSmokingHabit() {
-        return smokingHabit;
-    }
-
-    public void setSmokingHabit(String smokingHabit) {
-        this.smokingHabit = smokingHabit;
-    }
-
-    public String getDrinkingHabit() {
-        return drinkingHabit;
-    }
-
-    public void setDrinkingHabit(String drinkingHabit) {
-        this.drinkingHabit = drinkingHabit;
-    }
-
     public String getReligion() {
         return religion;
     }
@@ -142,13 +100,7 @@ public class ChildPojoPartnerPref {
         this.caste = caste;
     }
 
-    public String getMotherLanguage() {
-        return motherLanguage;
-    }
 
-    public void setMotherLanguage(String motherLanguage) {
-        this.motherLanguage = motherLanguage;
-    }
 
     public String getStar() {
         return star;
@@ -198,99 +150,59 @@ public class ChildPojoPartnerPref {
         this.occupation = occupation;
     }
 
-    public String getMinIncome() {
-        return minIncome;
+    public void setAge_from(String age_from) {
+        this.age_from = age_from;
     }
 
-    public void setMinIncome(String minIncome) {
-        this.minIncome = minIncome;
+    public void setAge_to(String age_to) {
+        this.age_to = age_to;
     }
 
-    public String getAboutPartner() {
-        return aboutPartner;
+    public void setDrinking_habit(String drinking_habit) {
+        this.drinking_habit = drinking_habit;
     }
 
-    public void setAboutPartner(String aboutPartner) {
-        this.aboutPartner = aboutPartner;
+    public void setEating_habit(String eating_habit) {
+        this.eating_habit = eating_habit;
     }
 
-    public String getPreferenceDate() {
-        return preferenceDate;
+    public void setHeight_from_id(String height_from_id) {
+        this.height_from_id = height_from_id;
     }
 
-    public void setPreferenceDate(String preferenceDate) {
-        this.preferenceDate = preferenceDate;
+    public void setHeight_to_id(String height_to_id) {
+        this.height_to_id = height_to_id;
     }
 
-    public String getSubcaste() {
-        return subcaste;
+    public void setMaritial_status(String maritial_status) {
+        this.maritial_status = maritial_status;
     }
 
-    public void setSubcaste(String subcaste) {
-        this.subcaste = subcaste;
+    public void setPhysical_status(String physical_status) {
+        this.physical_status = physical_status;
     }
 
-    public String getRaasi() {
-        return raasi;
+    public void setPreference_id(String preference_id) {
+        this.preference_id = preference_id;
     }
 
-    public void setRaasi(String raasi) {
-        this.raasi = raasi;
+    public void setMother_language(String mother_language) {
+        this.mother_language = mother_language;
     }
 
-    public String getDosham() {
-        return dosham;
+    public void setProfile_id(String profile_id) {
+        this.profile_id = profile_id;
     }
 
-    public void setDosham(String dosham) {
-        this.dosham = dosham;
+    public void setSmoking_habit(String smoking_habit) {
+        this.smoking_habit = smoking_habit;
     }
 
-    public String getWeightFrom() {
-        return weightFrom;
+    public void setAbout_partner(String about_partner) {
+        this.about_partner = about_partner;
     }
 
-    public void setWeightFrom(String weightFrom) {
-        this.weightFrom = weightFrom;
-    }
-
-    public String getWeightTo() {
-        return weightTo;
-    }
-
-    public void setWeightTo(String weightTo) {
-        this.weightTo = weightTo;
-    }
-
-    public String getMaxIncome() {
-        return maxIncome;
-    }
-
-    public void setMaxIncome(String maxIncome) {
-        this.maxIncome = maxIncome;
-    }
-
-    public String getBodyType() {
-        return bodyType;
-    }
-
-    public void setBodyType(String bodyType) {
-        this.bodyType = bodyType;
-    }
-
-    public String getComplexion() {
-        return complexion;
-    }
-
-    public void setComplexion(String complexion) {
-        this.complexion = complexion;
-    }
-
-    public String getCitizenship() {
-        return citizenship;
-    }
-
-    public void setCitizenship(String citizenship) {
-        this.citizenship = citizenship;
+    public void setMin_income(String min_income) {
+        this.min_income = min_income;
     }
 }

@@ -1514,14 +1514,17 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             public void onResponse(Call<ParentPojoPartnerPref> call, Response<ParentPojoPartnerPref> response) {
 
                 Log.e("Inside","onResponse");
-               /* Log.e("response body",response.body().getStatus());
-                Log.e("response body",response.body().getMsg());*/
+               Log.e(" status response",response.body().getStatus());
+                //Log.e("response body",response.body().getMsg());*/
                 ParentPojoPartnerPref parentPojoPartnerPref =response.body();
+                Log.e(" status pojo",parentPojoPartnerPref.getStatus());
                 if(parentPojoPartnerPref !=null){
                     if(parentPojoPartnerPref.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
-                      //  Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
-                        mListItem= parentPojoPartnerPref.getObjProfile();
+                        Log.e("objsize", ""+ parentPojoPartnerPref.getObjProfile().size());
+                        mListItem=parentPojoPartnerPref.getObjProfile();
+                        //mListItem.add(parentPojoPartnerPref.getObjProfile().get(0));
+                        Log.e("age",""+mListItem.get(0).getCaste());
                         setBasic();
                         setReligion();
                         setGroomBrideLoc();
@@ -1547,20 +1550,20 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
     public void setBasic(){
 
-        tvAge.setText(mListItem.get(0).getAgeFrom()+" to "+mListItem.get(0).getAgeTo());
-      /*//  tvPhysicalStat.setText(list_physical_stat.get(Integer.parseInt(mListItem.get(0).getPhysicalStatus())-1));
-//        spPhysStat.setSelection(Integer.parseInt(mListItem.get(0).getPhysicalStatus()));
-  //      tvMaritalStat.setText(list_marital_Stat.get(Integer.parseInt(mListItem.get(0).getMaritialStatus())-1));
-    //    spMaritalStat.setSelection(Integer.parseInt(mListItem.get(0).getMaritialStatus()));
-        tvHeight.setText(mListItem.get(0).getHeightFromId());
-        spHeightFrom.setSelection(Integer.parseInt(mListItem.get(0).getHeightFromId()));
-        spHeightTo.setSelection(Integer.parseInt(mListItem.get(0).getHeightToId()));
-        tvFood.setText(list_food.get(Integer.parseInt(mListItem.get(0).getEatingHabit())-1));
-        spFood.setSelection(Integer.parseInt(mListItem.get(0).getEatingHabit()));
-        tvDrink.setText(list_drink.get(Integer.parseInt(mListItem.get(0).getDrinkingHabit())-1));
-        spDrink.setSelection(Integer.parseInt(mListItem.get(0).getDrinkingHabit()));
-        tvSmoke.setText(list_smoke.get(Integer.parseInt(mListItem.get(0).getSmokingHabit())-1));
-        spSmoke.setSelection(Integer.parseInt(mListItem.get(0).getSmokingHabit()));*/
+        tvAge.setText(mListItem.get(0).getAge_from()+" to "+mListItem.get(0).getAge_to());
+        tvPhysicalStat.setText(list_physical_stat.get(Integer.parseInt(mListItem.get(0).getPhysical_status())-1));
+        spPhysStat.setSelection(Integer.parseInt(mListItem.get(0).getPhysical_status()));
+        tvMaritalStat.setText(list_marital_Stat.get(Integer.parseInt(mListItem.get(0).getMaritial_status())-1));
+       spMaritalStat.setSelection(Integer.parseInt(mListItem.get(0).getMaritial_status()));
+        tvHeight.setText(list_height.get(Integer.parseInt(mListItem.get(0).getHeight_from_id()))+" to "+list_height.get(Integer.parseInt(mListItem.get(0).getHeight_to_id())));
+        spHeightFrom.setSelection(Integer.parseInt(mListItem.get(0).getHeight_from_id()));
+        spHeightTo.setSelection(Integer.parseInt(mListItem.get(0).getHeight_to_id()));
+        tvFood.setText(list_food.get(Integer.parseInt(mListItem.get(0).getEating_habit())-1));
+        spFood.setSelection(Integer.parseInt(mListItem.get(0).getEating_habit()));
+        tvDrink.setText(list_drink.get(Integer.parseInt(mListItem.get(0).getDrinking_habit())-1));
+        spDrink.setSelection(Integer.parseInt(mListItem.get(0).getDrinking_habit()));
+        tvSmoke.setText(list_smoke.get(Integer.parseInt(mListItem.get(0).getSmoking_habit())-1));
+        spSmoke.setSelection(Integer.parseInt(mListItem.get(0).getSmoking_habit()));
     }
 
     public void setReligion(){
