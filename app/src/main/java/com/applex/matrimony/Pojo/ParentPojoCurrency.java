@@ -14,11 +14,9 @@ public class ParentPojoCurrency {
     String msg;
 
     @SerializedName("Currency_Details")
-    LinkedHashMap<String,ChildPojoCurrency> objCurrency;
+    LinkedHashMap<String,String> objCurrency;
 
-    public LinkedHashMap<String, ChildPojoCurrency> getObjCurrency() {
-        return objCurrency;
-    }
+
 
     public String getMsg() {
         return msg;
@@ -37,7 +35,11 @@ public class ParentPojoCurrency {
         this.msg = msg;
     }
 
-    public void setObjCurrency(LinkedHashMap<String, ChildPojoCurrency> objCurrency) {
+    public LinkedHashMap<String, String> getObjCurrency() {
+        return objCurrency;
+    }
+
+    public void setObjCurrency(LinkedHashMap<String, String> objCurrency) {
         this.objCurrency = objCurrency;
     }
 }

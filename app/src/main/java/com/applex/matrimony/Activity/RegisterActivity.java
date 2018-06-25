@@ -136,9 +136,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
       btnSubmit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              registerCustomer();
-            //startActivity(new Intent(RegisterActivity.this,TabParentProfileActivity.class).putExtra("tabFlag","home"));
-
+            //  registerCustomer();
+            startActivity(new Intent(RegisterActivity.this,DetailsActivity.class).putExtra("tabFlag","home"));
           }
       });
 

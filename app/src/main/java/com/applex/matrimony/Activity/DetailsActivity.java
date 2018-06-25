@@ -96,7 +96,7 @@ public class DetailsActivity extends AppCompatActivity implements AdapterView.On
     ArrayList<String> list_fam_value=new ArrayList<String>();
 ArrayList<String>list_currency=new ArrayList<String>();
     Button submit;
-    EditText etSubCaste,etAboutYou,etChildren;
+    EditText etSubCaste,etAboutYou,etChildren,etIncome;
     ProgressDialog progressDialog;
     LinearLayout llChildren;
 
@@ -127,6 +127,7 @@ ArrayList<String>list_currency=new ArrayList<String>();
         etSubCaste=(EditText)findViewById(R.id.edt_subCaste);
         etAboutYou=(EditText)findViewById(R.id.edt_about_you);
         etChildren=(EditText)findViewById(R.id.edt_children);
+        etIncome=(EditText)findViewById(R.id.edt_income);
 
         llChildren=(LinearLayout)findViewById(R.id.ll_children);
         progressDialog=new ProgressDialog(this);
@@ -313,28 +314,28 @@ ArrayList<String>list_currency=new ArrayList<String>();
 
             case R.id.sp_country:
                 Log.e("onIemSelectedListener ","country called");
-                if(spCountry.getSelectedItemPosition()!=-1)
+                if(spCountry.getSelectedItemPosition()>0)
                 {
                    /* Log.e("selected index",""+list_country.indexOf(spCountry.getSelectedItem()));
                     Log.e("pojo element name",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_name());
                     Log.e("pojo element id",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
                     Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
                    // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());*/
-                    getStateList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())+1).getCountry_id());
-                    getCurrencyList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())+1).getCountry_id());
+                    getStateList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
+                    getCurrencyList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
 
                 }
                 break;
 
             case R.id.sp_state:
                 Log.e("onIemSelectedListener","state called");
-                if(spState.getSelectedItemPosition() != -1)
+                if(spState.getSelectedItemPosition() >0)
                 {
                    /* Log.e("selected index",""+list_state.indexOf(spState.getSelectedItem()));
                     Log.e("pojo element name",list_pojo_state.get(list_state.indexOf(spState.getSelectedItem())).getState_name());
                     Log.e("pojo element id",list_pojo_state.get(list_state.indexOf(spState.getSelectedItem())).getState_id());
                     Log.e("pojo element countryid",list_pojo_state.get(list_state.indexOf(spState.getSelectedItem())).getCountry_id());*/
-                    getCityList(list_pojo_state.get(list_state.indexOf(spState.getSelectedItem())+1).getState_id());
+                    getCityList(list_pojo_state.get(list_state.indexOf(spState.getSelectedItem())).getState_id());
                 }
 
 
@@ -716,16 +717,16 @@ ArrayList<String>list_currency=new ArrayList<String>();
                 ParentPojoCurrency parentPojoCurrency=response.body();
                 if(parentPojoCurrency!=null){
                     if(parentPojoCurrency.getStatus().equalsIgnoreCase("1")){
-                        Log.e("Response","Success");
+                        Log.e("currencyResponse","Success");
                         Log.e("currobjsize", ""+parentPojoCurrency.getObjCurrency().size());
 
-                        LinkedHashMap<String, ChildPojoCurrency> resultMap =parentPojoCurrency.getObjCurrency();
+                        LinkedHashMap<String, String> resultMap =parentPojoCurrency.getObjCurrency();
 
                         Iterator<String> keys=resultMap.keySet().iterator();
                         while (keys.hasNext()){
                             String key=keys.next();
 
-                            list_currency.add(resultMap.get(key).getCurrency());
+                            list_currency.add(resultMap.get(key));
                         }
                         Log.e("currency List Size",""+list_currency.size());
                         aaCurrency = new ArrayAdapter(DetailsActivity.this,android.R.layout.simple_spinner_item,list_currency);
@@ -750,84 +751,85 @@ ArrayList<String>list_currency=new ArrayList<String>();
     public void registerDetails(){
 
         checkValidity();
-        progressDialog.show();
+        if(flagAllValid==true) {
+            progressDialog.show();
 
-        regDetlInterface getResponse = APIClient.getClient().create(regDetlInterface.class);
+            regDetlInterface getResponse = APIClient.getClient().create(regDetlInterface.class);
 
 
-        Log.e("Ms", String.valueOf(spMaritalStat.getSelectedItemPosition()));
-        Log.e("ic", String.valueOf(spWillIntercast.getSelectedItemPosition()));
-        Log.e("sc",etSubCaste.getText().toString());
-        Log.e("c",list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()).toString())).getCountry_id());
-        Log.e("s",list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id());
-        Log.e("c",list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id());
-        Log.e("c", list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_name());
-        Log.e("h", list_pojo_height.get(list_height.indexOf(spHeight.getSelectedItem().toString())).getHeight_id());
-        Log.e("w",list_pojo_weight.get(list_weight.indexOf(spWeight.getSelectedItem().toString())).getWeight_id());
-        Log.e("bt",String.valueOf(spBodyType.getSelectedItemPosition()));
-        Log.e("c", String.valueOf(spComplexion.getSelectedItemPosition()));
-        Log.e("ps", String.valueOf(spPhysStat.getSelectedItemPosition()));
-        Log.e("e", list_pojo_edu.get(list_edu.indexOf(spEdu.getSelectedItem().toString())).getEducation_id());
-        Log.e("o",list_pojo_occu.get(list_occu.indexOf(spOccu.getSelectedItem().toString())).getOccupation_id());
-        Log.e("f", String.valueOf(spFood.getSelectedItemPosition()));
-        Log.e("d", String.valueOf(spDrink.getSelectedItemPosition()));
-        Log.e("s", String.valueOf(spSmoke.getSelectedItemPosition()));
-        Log.e("fs", String.valueOf(spFamStat.getSelectedItemPosition()));Log.e("ft", String.valueOf(spFamType.getSelectedItemPosition()));
-        Log.e("fv", String.valueOf(spFamValue.getSelectedItemPosition()));
-        Log.e("a",etAboutYou.getText().toString());
-        Log.e("cp",spCustProfile.getProfile_id());
+            Log.e("Ms", String.valueOf(spMaritalStat.getSelectedItemPosition()));
+            Log.e("ic", String.valueOf(spWillIntercast.getSelectedItemPosition()));
+            Log.e("sc", etSubCaste.getText().toString());
+            Log.e("c", list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()).toString())).getCountry_id());
+            Log.e("s", list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id());
+            Log.e("c", list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id());
+            Log.e("c", list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_name());
+            Log.e("h", list_pojo_height.get(list_height.indexOf(spHeight.getSelectedItem().toString())).getHeight_id());
+            Log.e("w", list_pojo_weight.get(list_weight.indexOf(spWeight.getSelectedItem().toString())).getWeight_id());
+            Log.e("bt", String.valueOf(spBodyType.getSelectedItemPosition()));
+            Log.e("c", String.valueOf(spComplexion.getSelectedItemPosition()));
+            Log.e("ps", String.valueOf(spPhysStat.getSelectedItemPosition()));
+            Log.e("e", list_pojo_edu.get(list_edu.indexOf(spEdu.getSelectedItem().toString())).getEducation_id());
+            Log.e("o", list_pojo_occu.get(list_occu.indexOf(spOccu.getSelectedItem().toString())).getOccupation_id());
+            Log.e("f", String.valueOf(spFood.getSelectedItemPosition()));
+            Log.e("d", String.valueOf(spDrink.getSelectedItemPosition()));
+            Log.e("s", String.valueOf(spSmoke.getSelectedItemPosition()));
+            Log.e("fs", String.valueOf(spFamStat.getSelectedItemPosition()));
+            Log.e("ft", String.valueOf(spFamType.getSelectedItemPosition()));
+            Log.e("fv", String.valueOf(spFamValue.getSelectedItemPosition()));
+            Log.e("a", etAboutYou.getText().toString());
+            Log.e("cp", spCustProfile.getProfile_id());
 
-        if(llChildren.getVisibility()==View.VISIBLE)
-            strChildrenNo=etChildren.getText().toString();
-        Call<CommonParentPojo> call = getResponse.doGetListResources( String.valueOf(spMaritalStat.getSelectedItemPosition()),
-                strChildrenNo,String.valueOf(spWillIntercast.getSelectedItemPosition()),
-                etSubCaste.getText().toString(),
-                list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()).toString())).getCountry_id(),
-                list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id(),
-                list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id(),
-                list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_name(),
-                "",",","","","",
-                list_pojo_height.get(list_height.indexOf(spHeight.getSelectedItem().toString())).getHeight_id(),
-                list_pojo_weight.get(list_weight.indexOf(spWeight.getSelectedItem().toString())).getWeight_id(),
-                String.valueOf(spBodyType.getSelectedItemPosition()),String.valueOf(spComplexion.getSelectedItemPosition()),
-                String.valueOf(spPhysStat.getSelectedItemPosition()),
-                list_pojo_edu.get(list_edu.indexOf(spEdu.getSelectedItem().toString())).getEducation_id(),
-                list_pojo_occu.get(list_occu.indexOf(spOccu.getSelectedItem().toString())).getOccupation_id(),
-                "",String.valueOf(spFood.getSelectedItemPosition()),String.valueOf(spDrink.getSelectedItemPosition()),String.valueOf(spSmoke.getSelectedItemPosition()),
-                "","",String.valueOf(spFamStat.getSelectedItemPosition()),String.valueOf(spFamType.getSelectedItemPosition()),
-                String.valueOf(spFamValue.getSelectedItemPosition()),
-                etAboutYou.getText().toString(),spCustProfile.getProfile_id()
+            if (llChildren.getVisibility() == View.VISIBLE)
+                strChildrenNo = etChildren.getText().toString();
+            Call<CommonParentPojo> call = getResponse.doGetListResources(String.valueOf(spMaritalStat.getSelectedItemPosition()),
+                    strChildrenNo, String.valueOf(spWillIntercast.getSelectedItemPosition()),
+                    etSubCaste.getText().toString(),
+                    list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()).toString())-1).getCountry_id(),
+                    list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())-1).getState_id(),
+                    list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id(),
+                    list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_name(),
+                    "", ",", "", etIncome.getText().toString(),"",
+                    list_pojo_height.get(list_height.indexOf(spHeight.getSelectedItem().toString())).getHeight_id(),
+                    list_pojo_weight.get(list_weight.indexOf(spWeight.getSelectedItem().toString())).getWeight_id(),
+                    String.valueOf(spBodyType.getSelectedItemPosition()), String.valueOf(spComplexion.getSelectedItemPosition()),
+                    String.valueOf(spPhysStat.getSelectedItemPosition()),
+                    list_pojo_edu.get(list_edu.indexOf(spEdu.getSelectedItem().toString())).getEducation_id(),
+                    list_pojo_occu.get(list_occu.indexOf(spOccu.getSelectedItem().toString())).getOccupation_id(),
+                    "", String.valueOf(spFood.getSelectedItemPosition()), String.valueOf(spDrink.getSelectedItemPosition()), String.valueOf(spSmoke.getSelectedItemPosition()),
+                    "", "", String.valueOf(spFamStat.getSelectedItemPosition()), String.valueOf(spFamType.getSelectedItemPosition()),
+                    String.valueOf(spFamValue.getSelectedItemPosition()),
+                    etAboutYou.getText().toString(), spCustProfile.getProfile_id()
 
-        );
-        call.enqueue(new Callback<CommonParentPojo>() {
-            @Override
-            public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
+            );
+            call.enqueue(new Callback<CommonParentPojo>() {
+                @Override
+                public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
 
-                Log.e("Inside","onResponse");
+                    Log.e("Inside", "onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
-                CommonParentPojo commonParentPojo=response.body();
-                if(commonParentPojo!=null){
-                    if(commonParentPojo.getStatus().equalsIgnoreCase("1")){
-                        Log.e("Response",commonParentPojo.getMsg());
-                        showToast(commonParentPojo.getMsg());
-                        sendOtp();
-                        startActivity(new Intent(DetailsActivity.this,VerificationActivity.class));
-
+                    CommonParentPojo commonParentPojo = response.body();
+                    if (commonParentPojo != null) {
+                        if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
+                            Log.e("Response", commonParentPojo.getMsg());
+                            showToast(commonParentPojo.getMsg());
+                            sendOtp();
+                            startActivity(new Intent(DetailsActivity.this, VerificationActivity.class));
+                        }
                     }
+
+                    progressDialog.dismiss();
                 }
 
-                progressDialog.dismiss();
-            }
+                @Override
+                public void onFailure(Call<CommonParentPojo> call, Throwable t) {
 
-            @Override
-            public void onFailure(Call<CommonParentPojo> call, Throwable t) {
-
-                Log.e("Throwabe ",""+t);
-                progressDialog.dismiss();
-            }
-        });
-
+                    Log.e("Throwabe ", "" + t);
+                    progressDialog.dismiss();
+                }
+            });
+        }
     }
 
     public void sendOtp(){
