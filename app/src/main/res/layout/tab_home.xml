@@ -28,6 +28,12 @@
         android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp">
 <!--        android:layout_weight="5"-->
+
+        <LinearLayout
+            android:id="@+id/ll_search_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -200,6 +206,51 @@
                 android:popupElevation="@dimen/floating_label_bottom_spacing"
                 />
         </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="19dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Search by ID :"
+                android:fontFamily="Roboto-Regular"
+                android:textSize="16sp"
+                android:textColor="#4A4A4A"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/et_search_id"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:background="@drawable/border_home_age"
+                android:fontFamily="Roboto-Regular"
+                android:textSize="16sp"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:textColor="#4A4A4A"
+                android:layout_gravity="start"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:inputType="number"
+                />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

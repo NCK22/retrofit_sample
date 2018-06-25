@@ -7,6 +7,9 @@ public class ChildPojoCustReg {
     @SerializedName("profile_id")
     String profile_id;
 
+    @SerializedName("matrimony_id")
+    String matrimony_id;
+
     @SerializedName("gender")
     String gender;
 
@@ -32,6 +35,10 @@ public class ChildPojoCustReg {
 
     public String getProfile_id() {
         return profile_id;
+    }
+
+    public String getMatrimony_id() {
+        return matrimony_id;
     }
 
     public String getReligion() {
@@ -68,6 +75,10 @@ public class ChildPojoCustReg {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public void setMatrimony_id(String matrimony_id) {
+        this.matrimony_id = matrimony_id;
     }
 }
 

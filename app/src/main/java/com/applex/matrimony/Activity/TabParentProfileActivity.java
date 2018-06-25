@@ -141,12 +141,18 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         switch (item.getItemId()) {
             case R.id.menu_go_home:
              //   toolbar.setTitle(getString(R.string.menu_home));
-                startActivity(new Intent(TabParentProfileActivity.this, TabParentProfileActivity.class));
+                startActivity(new Intent(TabParentProfileActivity.this, TabViewParentActivity.class));
                 return true;
 
             case R.id.menu_go_matches:
              //   toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                return true;
+
+
+            case R.id.menu_go_profile:
+//                toolbar.setTitle(getString(R.string.menu_matches));
+                startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","profile"));
                 return true;
         }
             return false;

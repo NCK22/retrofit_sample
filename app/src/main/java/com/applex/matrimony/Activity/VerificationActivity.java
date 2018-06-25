@@ -62,8 +62,8 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         switch (view.getId()) {
             case R.id.btn_submit_verif:
 
-                //checkOtp();
-                startActivity(new Intent(VerificationActivity.this,CongratsActivity.class));
+                checkOtp();
+              //  startActivity(new Intent(VerificationActivity.this,CongratsActivity.class));
                 break;
 
             case R.id.ibtn_edit_email:

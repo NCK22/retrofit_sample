@@ -136,8 +136,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
       btnSubmit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-             // registerCustomer();
-            startActivity(new Intent(RegisterActivity.this,TabParentProfileActivity.class).putExtra("tabFlag","home"));
+              registerCustomer();
+            //startActivity(new Intent(RegisterActivity.this,TabParentProfileActivity.class).putExtra("tabFlag","home"));
 
           }
       });
@@ -158,14 +158,14 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
                 Log.e("onIemSelectedListener ","religion called");
                 Log.e("position clicked",""+spReligion.getSelectedItemPosition());
-                if(spReligion.getSelectedItemPosition() != -1)
+                if(spReligion.getSelectedItemPosition() >0)
                 {
                    /* Log.e("selected index",""+list_country.indexOf(spCountry.getSelectedItem()));
                     Log.e("pojo element name",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_name());
                     Log.e("pojo element id",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
                     Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
                    // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());*/
-                    getCasteList(list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())+1).getReligion_id());
+                    getCasteList(list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id());
 
                 }
                 break;
@@ -365,6 +365,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             spCustProfile.setMobile(resultObj.getMobile());
                             spCustProfile.setReligion(resultObj.getReligion());
                             spCustProfile.setEmail(resultObj.getEmail());
+                            spCustProfile.setMatrimonyId(resultObj.getMatrimony_id());
 
 
                             Log.e("profile_id", spCustProfile.getProfile_id());
@@ -373,6 +374,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             Log.e("phone", spCustProfile.getMobile());
                             Log.e("religion", spCustProfile.getReligion());
                             Log.e("email", spCustProfile.getEmail());
+                            Log.e("matrimony_id", spCustProfile.getMatrimonyId());
 
                             startActivity(new Intent(RegisterActivity.this, DetailsActivity.class));
                         }

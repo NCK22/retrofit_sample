@@ -5,8 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +17,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.applex.matrimony.APIClient;
@@ -25,6 +31,7 @@ import com.applex.matrimony.Interface.getCasteInterface;
 import com.applex.matrimony.Interface.getHighlightedInterface;
 import com.applex.matrimony.Interface.getMatchesInterface;
 import com.applex.matrimony.Interface.getReligionInterface;
+import com.applex.matrimony.Interface.searchBasicInterface;
 import com.applex.matrimony.Pojo.ChildPojoCaste;
 import com.applex.matrimony.Pojo.ChildPojoReligion;
 import com.applex.matrimony.Pojo.ParentPojoCaste;
@@ -50,7 +57,7 @@ import retrofit2.Response;
  */
 
 
-public class TabHome extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class TabHome extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
 
     MaterialSpinner spReligion,spCaste;
@@ -60,6 +67,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     ArrayList<ChildPojoCaste>list_pojo_caste=new ArrayList<ChildPojoCaste>();
     ArrayList<String> list_caste=new ArrayList<String>();
     ArrayList<ChildPojoProfile> list_matches=new ArrayList<ChildPojoProfile>();
+    ArrayList<ChildPojoProfile> list_search=new ArrayList<ChildPojoProfile>();
     ArrayList<ChildPojoProfile> list_highlights=new ArrayList<ChildPojoProfile>();
     public RecyclerView rv_profile_matches,rv_profile_highlight;
     HomeProfilesAdapter adapterHighLights,adapterMatches;
@@ -68,7 +76,11 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     ProgressDialog progressDialog;
     ArrayAdapter aaCaste;
     Button  btnFind;
-    EditText etAgeFrom,etAgeTo;
+    EditText etAgeFrom,etAgeTo,etSearchId;
+    RadioButton rbGroom,rbBride;
+    String strGender="";
+    FrameLayout Container;
+    LinearLayout ll_search_info;
 
     @Nullable
     @Override
@@ -78,6 +90,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
 
         Log.e("TabHome","onCreateView");
 
+       // Container=(FrameLayout)rootView.findViewById(R.id.Container);
 
         rv_profile_matches = (RecyclerView) rootView.findViewById(R.id.rv_prof_matches);
         rv_profile_highlight = (RecyclerView) rootView.findViewById(R.id.rv_prof_highlight);
@@ -87,13 +100,51 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         rv_profile_highlight.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
 
-
         etAgeFrom=(EditText)rootView.findViewById(R.id.et_age_from);
         etAgeTo=(EditText)rootView.findViewById(R.id.et_age_to);
+        etSearchId=(EditText)rootView.findViewById(R.id.et_search_id);
         btnFind=(Button)rootView.findViewById(R.id.btn_home_find);
         spCaste=(MaterialSpinner)rootView.findViewById(R.id.sp_home_caste);
         spReligion=(MaterialSpinner)rootView.findViewById(R.id.sp_home_religion);
 
+        rbGroom=(RadioButton)rootView.findViewById(R.id.rb_groom);
+        rbBride=(RadioButton)rootView.findViewById(R.id.rb_bride);
+        rbGroom.setOnCheckedChangeListener(this);
+        rbBride.setOnCheckedChangeListener(this);
+        ll_search_info=(LinearLayout)rootView.findViewById(R.id.ll_search_info);
+
+        etSearchId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(etSearchId.getText().toString().length()>0) {
+                   rbBride.setEnabled(false);
+                   rbGroom.setEnabled(false);
+                   etAgeFrom.setEnabled(false);
+                   etAgeTo.setEnabled(false);
+                   spReligion.setEnabled(false);
+                   spCaste.setEnabled(false);
+                }
+                else if(etSearchId.getText().toString().length()==0) {
+                    rbBride.setEnabled(true);
+                    rbGroom.setEnabled(true);
+                    etAgeFrom.setEnabled(true);
+                    etAgeTo.setEnabled(true);
+                    spReligion.setEnabled(true);
+                    spCaste.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         btnFind.setOnClickListener(this);
         spReligion.setOnItemSelectedListener(this);
         spCaste.setOnItemSelectedListener(this);
@@ -267,6 +318,63 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
 
     }
 
+    public void basicSearch(String searchFlag)
+    {
+
+        progressDialog.show();
+        if(list_search!=null)
+            list_search.clear();
+Log.e("searchFlag",searchFlag);
+        searchBasicInterface getResponse = APIClient.getClient().create(searchBasicInterface.class);
+        Call<ParentPojoProfile> call = null;
+        if(searchFlag.equalsIgnoreCase("byid"))
+            call=getResponse.searchById("7180214",etSearchId.getText().toString());
+        else if(searchFlag.equalsIgnoreCase("basic")) 
+            call = getResponse.searchBasic("7180214",etAgeFrom.getText().toString(),etAgeTo.getText().toString(),
+                list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id(),
+                list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem())).getCaste_id(),strGender);
+        
+        call.enqueue(new Callback<ParentPojoProfile>() {
+            @Override
+            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
+
+                Log.e("Inside","onResponse");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+                ParentPojoProfile parentPojoProfile =response.body();
+                if(parentPojoProfile !=null){
+                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
+                        Log.e("Response","Success");
+                        Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
+                        list_matches= parentPojoProfile.getObjProfile();
+                        if(list_matches.size()!=0)
+
+                            displayData();
+
+                      // Container.setVisibility(View.VISIBLE);
+                      /*  Fragment someFragment = new TabSearchResult();
+                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.Container, someFragment ); // give your fragment container id in first parameter
+                        transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
+                        transaction.commit();*/
+                    }
+                }
+                else
+                    Log.e("parentpojotabwhome","null");
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
+
+                Log.e("throwable",""+t);
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -285,12 +393,9 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
                     Log.e("pojo element id",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
                     Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
                    // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());*/
-                    getCasteList(list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())+1).getReligion_id());
-
+                    getCasteList(list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id());
                 }
                 break;
-
-
         }
     }
 
@@ -354,5 +459,26 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     @Override
     public void onClick(View v) {
 
+        if(etSearchId.getText().toString().length()>0)
+        basicSearch("byid");
+        else
+            basicSearch("basic");
+
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        switch(buttonView.getId()){
+
+            case R.id.rb_bride:
+                if(rbBride.isChecked())
+                    strGender="female";
+                    break;
+
+            case R.id.rb_groom:
+                if(rbGroom.isChecked())
+                    strGender="male";
+        }
     }
 }

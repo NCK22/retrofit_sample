@@ -174,8 +174,8 @@ ArrayList<String>list_currency=new ArrayList<String>();
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //registerDetails();
-                startActivity(new Intent(DetailsActivity.this,VerificationActivity.class));
+                registerDetails();
+               // startActivity(new Intent(DetailsActivity.this,VerificationActivity.class));
             }
         });
 
@@ -810,8 +810,8 @@ ArrayList<String>list_currency=new ArrayList<String>();
                 if(commonParentPojo!=null){
                     if(commonParentPojo.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response",commonParentPojo.getMsg());
-                        /*showToast(commonParentPojo.getMsg());
-                        sendOtp();*/
+                        showToast(commonParentPojo.getMsg());
+                        sendOtp();
                         startActivity(new Intent(DetailsActivity.this,VerificationActivity.class));
 
                     }
