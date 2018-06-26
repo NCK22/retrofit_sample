@@ -1,5 +1,6 @@
 package com.applex.matrimony.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -44,10 +46,9 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
     TabLayout tabLayout;
 
 
-
     Intent intent;
     Bundle bundle;
-    String tabFlag="home";
+    String tabFlag = "home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +64,15 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        tabLayout=(TabLayout)findViewById(R.id.tl_parent);
+        tabLayout = (TabLayout) findViewById(R.id.tl_parent);
         tabLayout.addOnTabSelectedListener(this);
-        tabLayout.setTabTextColors(Color.BLACK,Color.WHITE);
+        tabLayout.setTabTextColors(Color.BLACK, Color.WHITE);
 
 
-        intent=getIntent();
+        intent = getIntent();
 
         bundle = new Bundle();
-        tabFlag=intent.getStringExtra("tabFlag");
+        tabFlag = intent.getStringExtra("tabFlag");
 
 
         //   Tabs Activity
@@ -110,15 +111,14 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        bottmNavView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);
-bottmNavView.setOnNavigationItemSelectedListener(this);
+        bottmNavView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        bottmNavView.setOnNavigationItemSelectedListener(this);
 
 
     }
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-
 
 
     }
@@ -140,37 +140,65 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.menu_go_home:
-             //   toolbar.setTitle(getString(R.string.menu_home));
+                //   toolbar.setTitle(getString(R.string.menu_home));
                 startActivity(new Intent(TabParentProfileActivity.this, TabViewParentActivity.class));
                 return true;
 
             case R.id.menu_go_matches:
-             //   toolbar.setTitle(getString(R.string.menu_matches));
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                //   toolbar.setTitle(getString(R.string.menu_matches));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "matches"));
                 return true;
 
 
             case R.id.menu_go_profile:
 //                toolbar.setTitle(getString(R.string.menu_matches));
-                startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","profile"));
+                startActivity(new Intent(getApplicationContext(), TabParentProfileActivity.class).putExtra("tabFlag", "profile"));
                 return true;
+
+            case R.id.menu_go_logout:
+                logout();
+
         }
-            return false;
+        return false;
     }
+
+    private void logout() {
+
+        new AlertDialog.Builder(TabParentProfileActivity.this)
+                .setTitle(getString(R.string.menu_logout))
+                .setMessage(getString(R.string.logout_msg))
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //MyApp.saveIsLogin(false);
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                //  .setIcon(R.drawable.ic_logout)
+                .show();
+    }
+
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
-        Log.e("hascapture",""+hasCapture);
-        switch(bottmNavView.getSelectedItemId())
-        {
+        Log.e("hascapture", "" + hasCapture);
+        switch (bottmNavView.getSelectedItemId()) {
             case R.id.menu_go_home:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","home"));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "home"));
                 break;
 
-            case R.id.menu_go_profile:break;
+            case R.id.menu_go_profile:
+                break;
             case R.id.menu_go_matches:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "matches"));
                 break;
         }
     }
@@ -195,14 +223,14 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 
                 case 0:
                     Log.e("Tab", "home");
-                    TabMyProfile tabMyProfile=new TabMyProfile();
-                    return  tabMyProfile;
+                    TabMyProfile tabMyProfile = new TabMyProfile();
+                    return tabMyProfile;
 
                 case 1:
 
-                        Log.e("Tab", "whoViewed");
-                        TabPartnerPreferences tabPartnerPreferences = new TabPartnerPreferences();
-                        return tabPartnerPreferences;
+                    Log.e("Tab", "whoViewed");
+                    TabPartnerPreferences tabPartnerPreferences = new TabPartnerPreferences();
+                    return tabPartnerPreferences;
 
 
                 default:
@@ -214,10 +242,9 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         }
 
 
-
         @Override
         public int getItemPosition(@NonNull Object object) {
-            Log.e("positionItem",""+object);
+            Log.e("positionItem", "" + object);
             return super.getItemPosition(object);
         }
 
@@ -235,15 +262,16 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         switch (item.getItemId()) {
             case android.R.id.home:
                 //onBackPressed();
-                startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","home"));
+                startActivity(new Intent(getApplicationContext(), TabParentProfileActivity.class).putExtra("tabFlag", "home"));
                 break;
 
             case R.id.menu_go_matches:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "matches"));
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
     }
+
 }
 

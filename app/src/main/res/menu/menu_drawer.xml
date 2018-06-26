@@ -22,5 +22,11 @@
             android:icon="@mipmap/iconmatches"
             android:title="@string/menu_matches" />
 
+        <item
+            android:id="@+id/menu_go_logout"
+            android:checked="true"
+            android:icon="@mipmap/iconback"
+            android:title="@string/menu_logout" />
+
     </group>
 </menu>

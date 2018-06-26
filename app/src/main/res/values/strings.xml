@@ -10,4 +10,6 @@
 
 
     <string name="default_email">apps@dev.com</string>
+    <string name="menu_logout">Logout</string>
+    <string name="logout_msg">Do you really want to log out?</string>
 </resources>

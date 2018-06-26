@@ -2,6 +2,7 @@ package com.applex.matrimony.Interface;
 
 import com.applex.matrimony.Pojo.CommonParentPojo;
 import com.applex.matrimony.Pojo.ParentPojoCustReg;
+import com.applex.matrimony.Pojo.ParentPojoRegDetail;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -12,7 +13,7 @@ public interface regDetlInterface {
 
     @FormUrlEncoded
     @POST("app/app_reg_details.php")
-    Call<CommonParentPojo> doGetListResources(
+    Call<ParentPojoRegDetail> doGetListResources(
             @Field("maritial_status") String maritial_status,
             @Field("children_number") String children_number,
             @Field("willing") String willing,

@@ -43,6 +43,7 @@ import com.applex.matrimony.Pojo.ParentPojoCurrency;
 import com.applex.matrimony.Pojo.ParentPojoEducation;
 import com.applex.matrimony.Pojo.ParentPojoHeight;
 import com.applex.matrimony.Pojo.ParentPojoOccupation;
+import com.applex.matrimony.Pojo.ParentPojoRegDetail;
 import com.applex.matrimony.Pojo.ParentPojoState;
 import com.applex.matrimony.Pojo.ParentPojoWeight;
 import com.applex.matrimony.R;
@@ -199,65 +200,65 @@ ArrayList<String>list_currency=new ArrayList<String>();
     private void initializeSpinnerLists() {
 
         progressDialog.show();
-        list_marital_Stat.add("Marital Status");
+       // list_marital_Stat.add("Marital Status");
         list_marital_Stat.add("Never Married");
         list_marital_Stat.add("Divorced");
         list_marital_Stat.add("Widowed");
         list_marital_Stat.add("Awaiting for Divorce");
-        list_will_intercast.add("Willing to marry from the other communities?");
+        //list_will_intercast.add("Willing to marry from the other communities?");
         list_will_intercast.add("Yes");
         list_will_intercast.add("No");
-        list_height.add("Height");
-        list_weight.add("weight");
-        list_body_type.add("Body Type");
+      //  list_height.add("Height");
+        //list_weight.add("weight");
+        //list_body_type.add("Body Type");
         list_body_type.add("Slim");
         list_body_type.add("Average");
         list_body_type.add("Athletic");
         list_body_type.add("Heavy");
 
-        list_complexion.add("Complexion");
+        //list_complexion.add("Complexion");
         list_complexion.add("Very Fair");
         list_complexion.add("Fair");
         list_complexion.add("Wheatish");
         list_complexion.add("Wheatish Brown");
         list_complexion.add("Dark");
 
-        list_physical_stat.add("Physical Status");
+        //list_physical_stat.add("Physical Status");
         list_physical_stat.add("Normal");
         list_physical_stat.add("Physically Challenged");
 
-        list_employed_in.add("Employed in");
+        //list_employed_in.add("Employed in");
         list_employed_in.add("Government");
         list_employed_in.add("Private");
         list_employed_in.add("Business");
         list_employed_in.add("Self Employed");
 
-        list_food.add("Food");
+       // list_food.add("Food");
         list_food.add("Vegetarian");
         list_food.add("Non Vegetarian");
         list_food.add("Eggetarian");
 
-        list_drink.add("Drinking");
+        //list_drink.add("Drinking");
         list_drink.add("No");
         list_drink.add("Drink Socially");
         list_drink.add("Yes");
 
-        list_smoke.add("Smoking");
+        //list_smoke.add("Smoking");
         list_smoke.add("No");
         list_smoke.add("Ocassionally");
         list_smoke.add("Yes");
 
-        list_fam_stat.add("Family Status");
+        //list_fam_stat.add("Family Status");
         list_fam_stat.add("Middle Class");
         list_fam_stat.add("Upper Middle Class");
         list_fam_stat.add("Rich");
         list_fam_stat.add("Affluent");
 
-        list_fam_type.add("Family Type");
+       // list_fam_type.add("Family Type");
         list_fam_type.add("Joint");
         list_fam_type.add("Nuclear");
 
-        list_fam_value.add("Family Value");
+        //list_fam_value.add("Family Value");
         list_fam_value.add("Orthodox");
         list_fam_value.add("Traditional");
         list_fam_value.add("Moderate");
@@ -754,16 +755,23 @@ ArrayList<String>list_currency=new ArrayList<String>();
         if(flagAllValid==true) {
             progressDialog.show();
 
-            regDetlInterface getResponse = APIClient.getClient().create(regDetlInterface.class);
+            String strCityId="",strCityName="";
+            if(spCity.getSelectedItemPosition()>0)
+            {
+                strCityId=list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id();
+                strCityName=list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_name();
+            }
 
+
+            regDetlInterface getResponse = APIClient.getClient().create(regDetlInterface.class);
 
             Log.e("Ms", String.valueOf(spMaritalStat.getSelectedItemPosition()));
             Log.e("ic", String.valueOf(spWillIntercast.getSelectedItemPosition()));
             Log.e("sc", etSubCaste.getText().toString());
             Log.e("c", list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()).toString())).getCountry_id());
             Log.e("s", list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id());
-            Log.e("c", list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id());
-            Log.e("c", list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_name());
+            Log.e("c", strCityId);
+            Log.e("c", strCityName);
             Log.e("h", list_pojo_height.get(list_height.indexOf(spHeight.getSelectedItem().toString())).getHeight_id());
             Log.e("w", list_pojo_weight.get(list_weight.indexOf(spWeight.getSelectedItem().toString())).getWeight_id());
             Log.e("bt", String.valueOf(spBodyType.getSelectedItemPosition()));
@@ -782,14 +790,12 @@ ArrayList<String>list_currency=new ArrayList<String>();
 
             if (llChildren.getVisibility() == View.VISIBLE)
                 strChildrenNo = etChildren.getText().toString();
-            Call<CommonParentPojo> call = getResponse.doGetListResources(String.valueOf(spMaritalStat.getSelectedItemPosition()),
+            Call<ParentPojoRegDetail> call = getResponse.doGetListResources(String.valueOf(spMaritalStat.getSelectedItemPosition()),
                     strChildrenNo, String.valueOf(spWillIntercast.getSelectedItemPosition()),
                     etSubCaste.getText().toString(),
                     list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()).toString())-1).getCountry_id(),
-                    list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())-1).getState_id(),
-                    list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id(),
-                    list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_name(),
-                    "", ",", "", etIncome.getText().toString(),"",
+                    list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id(),
+                   strCityId,strCityName,"", "", "", etIncome.getText().toString(),"",
                     list_pojo_height.get(list_height.indexOf(spHeight.getSelectedItem().toString())).getHeight_id(),
                     list_pojo_weight.get(list_weight.indexOf(spWeight.getSelectedItem().toString())).getWeight_id(),
                     String.valueOf(spBodyType.getSelectedItemPosition()), String.valueOf(spComplexion.getSelectedItemPosition()),
@@ -802,18 +808,29 @@ ArrayList<String>list_currency=new ArrayList<String>();
                     etAboutYou.getText().toString(), spCustProfile.getProfile_id()
 
             );
-            call.enqueue(new Callback<CommonParentPojo>() {
+            call.enqueue(new Callback<ParentPojoRegDetail>() {
                 @Override
-                public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
+                public void onResponse(Call<ParentPojoRegDetail> call, Response<ParentPojoRegDetail> response) {
 
                     Log.e("Inside", "onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
-                    CommonParentPojo commonParentPojo = response.body();
-                    if (commonParentPojo != null) {
-                        if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
-                            Log.e("Response", commonParentPojo.getMsg());
-                            showToast(commonParentPojo.getMsg());
+                    ParentPojoRegDetail parentPojoRegDetail = response.body();
+                    if (parentPojoRegDetail != null) {
+                        if (parentPojoRegDetail.getStatus().equalsIgnoreCase("1")) {
+                            Log.e("Response", parentPojoRegDetail.getMsg());
+                            showToast(parentPojoRegDetail.getMsg());
+
+                       /*     LinkedHashMap<String,String> resultMap =parentPojoRegDetail.getObjDetail();
+
+                            Iterator<String> keys=resultMap.keySet().iterator();
+                            while (keys.hasNext()){
+                                String key=keys.next();*/
+
+                               spCustProfile.setMatrimonyId(parentPojoRegDetail.getObjDetail().get("matrimony_id"));
+                           // spCustProfile.setUser_id(parentPojoRegDetail.getObjDetail().get("user_id"));
+
+                          //  }
                             sendOtp();
                             startActivity(new Intent(DetailsActivity.this, VerificationActivity.class));
                         }
@@ -823,7 +840,7 @@ ArrayList<String>list_currency=new ArrayList<String>();
                 }
 
                 @Override
-                public void onFailure(Call<CommonParentPojo> call, Throwable t) {
+                public void onFailure(Call<ParentPojoRegDetail> call, Throwable t) {
 
                     Log.e("Throwabe ", "" + t);
                     progressDialog.dismiss();
@@ -837,7 +854,7 @@ ArrayList<String>list_currency=new ArrayList<String>();
         progressDialog.show();
 
         sendOtpInterface getResponse = APIClient.getClient().create(sendOtpInterface.class);
-        Call<CommonParentPojo> call = getResponse.doGetListResources(spCustProfile.getEmail(),"",spCustProfile.getMobile());
+        Call<CommonParentPojo> call = getResponse.doGetListResources(spCustProfile.getEmail(),spCustProfile.getMatrimonyId(),spCustProfile.getMobile());
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
             public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
@@ -874,9 +891,9 @@ ArrayList<String>list_currency=new ArrayList<String>();
 
     public void checkValidity(){
         progressDialog.show();
-        if(spMaritalStat.getSelectedItemPosition()==0 || spWillIntercast.getSelectedItemPosition()==0||etSubCaste.getText().toString().equals(""))
+        if(spMaritalStat.getSelectedItemPosition()==0 || spWillIntercast.getSelectedItemPosition()==0/*||etSubCaste.getText().toString().equals("")*/)
             showToast("Please fill all personal details");
-             else if(spCountry.getSelectedItemPosition()==0 || spState.getSelectedItemPosition()==0 ||spCity.getSelectedItemPosition()==0 )
+             else if(spCountry.getSelectedItemPosition()==0 || spState.getSelectedItemPosition()==0 /*||spCity.getSelectedItemPosition()==0 */)
                     showToast("Please fil all location details");
              else if(spHeight.getSelectedItemPosition()==0 || spWeight.getSelectedItemPosition()==0 ||spBodyType.getSelectedItemPosition()==0
                 ||spComplexion.getSelectedItemPosition()==0 || spPhysStat.getSelectedItemPosition()==0 )

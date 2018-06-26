@@ -1,5 +1,6 @@
 package com.applex.matrimony.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -155,6 +157,10 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 //                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","profile"));
                 return true;
+
+            case R.id.menu_go_logout:
+                logout();
+                return true;
         }
             return false;
     }
@@ -251,6 +257,29 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void logout() {
+
+        new AlertDialog.Builder(TabParentMatchesActivity.this)
+                .setTitle(getString(R.string.menu_logout))
+                .setMessage(getString(R.string.logout_msg))
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //MyApp.saveIsLogin(false);
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                //  .setIcon(R.drawable.ic_logout)
+                .show();
     }
 }
 

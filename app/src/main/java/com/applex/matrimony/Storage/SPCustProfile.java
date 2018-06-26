@@ -26,6 +26,10 @@ public class SPCustProfile{
 
         return preferences.getString("profile_id", "");
     }
+    public String getUser_id() {
+
+        return preferences.getString("user_id", "");
+    }
 
     public String getReligion() {
       //  preferences = this.getSharedPreferences(prefName, 0);
@@ -79,6 +83,13 @@ public class SPCustProfile{
        // preferences = this.getSharedPreferences(prefName, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("profile_id", profile_id);
+        editor.apply();
+    }
+
+    public void setUser_id(String user_id) {
+        // preferences = this.getSharedPreferences(prefName, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user_id", user_id);
         editor.apply();
     }
 

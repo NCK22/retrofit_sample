@@ -78,6 +78,7 @@ import com.applex.matrimony.Pojo.ParentPojoStar;
 import com.applex.matrimony.Pojo.ParentPojoState;
 import com.applex.matrimony.Pojo.ParentPojoWeight;
 import com.applex.matrimony.R;
+import com.applex.matrimony.Storage.SPCustProfile;
 
 
 import org.json.JSONArray;
@@ -198,6 +199,8 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
     String intentReligion="",intentCaste="",intentCountry="",intentState="",intentCity="",intentBirthCountry="",intentBirthState="",intentBirthCity="",
             intentOccu="",intentEdu="",intentMTongue;
+    SPCustProfile spCustProfile;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -206,6 +209,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
         Log.e("TabHome","onCreateView");
         progressDialog=new ProgressDialog(getActivity());
+        spCustProfile=new SPCustProfile(getActivity());
 
         etName=(EditText)rootView.findViewById(R.id.edt_name);
         etAbout=(EditText)rootView.findViewById(R.id.edt_about_you);
@@ -1465,7 +1469,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         Call<CommonParentPojo> call = null;
         if(section.equalsIgnoreCase("Basic")) {
 
-            call = getResponse.updateBasic("7180214", spAgeFrom.getSelectedItem().toString(),spAgeTo.getSelectedItem().toString(),
+            call = getResponse.updateBasic(spCustProfile.getUser_id(), spAgeFrom.getSelectedItem().toString(),spAgeTo.getSelectedItem().toString(),
                     String.valueOf(spPhysStat.getSelectedItemPosition()),
                     String.valueOf(spMaritalStat.getSelectedItemPosition()),
                     list_pojo_height.get(list_height.indexOf(spHeightFrom.getSelectedItem().toString())).getHeight_id(),
@@ -1476,24 +1480,24 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         else if(section.equalsIgnoreCase("religion")) {
 
 
-            call = getResponse.updateReligion("7180214", list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
+            call = getResponse.updateReligion(spCustProfile.getUser_id(), list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
                     list_pojo_mtongue.get(list_mtongue.indexOf(spMTongue.getSelectedItem().toString())).getMother_tongue_id(),
                     list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id());
         }
         else if(section.equalsIgnoreCase("groomBrideLoc")) {
 
-            call = getResponse.updateGroomBrideLoc("7180214",list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
+            call = getResponse.updateGroomBrideLoc(spCustProfile.getUser_id(),list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
                     list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id());
         }
         else if(section.equalsIgnoreCase("professional")) {
 
-            call = getResponse.updateProfessional("7180214",list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
+            call = getResponse.updateProfessional(spCustProfile.getUser_id(),list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
                     list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),etIncome.getText().toString());
 
         }
         else if(section.equalsIgnoreCase("about_partner")) {
 
-            call = getResponse.updateAboutYou("7180214",etAbout.getText().toString());
+            call = getResponse.updateAboutYou(spCustProfile.getUser_id(),etAbout.getText().toString());
         }
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
@@ -1543,7 +1547,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             mListItem.clear();
 
         getPreferenceInterface getResponse = APIClient.getClient().create(getPreferenceInterface.class);
-        Call<ParentPojoPartnerPref> call = getResponse.doGetListResources("7180214");
+        Call<ParentPojoPartnerPref> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
         call.enqueue(new Callback<ParentPojoPartnerPref>() {
             @Override
             public void onResponse(Call<ParentPojoPartnerPref> call, Response<ParentPojoPartnerPref> response) {

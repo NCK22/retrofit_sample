@@ -74,13 +74,17 @@ import com.applex.matrimony.Pojo.ParentPojoStar;
 import com.applex.matrimony.Pojo.ParentPojoState;
 import com.applex.matrimony.Pojo.ParentPojoWeight;
 import com.applex.matrimony.R;
+import com.applex.matrimony.Storage.SPCustProfile;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import org.json.JSONArray;
 
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
@@ -193,6 +197,8 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
 
     String intentReligion="",intentCaste="",intentCountry="",intentState="",intentCity="",intentBirthCountry="",intentBirthState="",intentBirthCity="",
     intentOccu="",intentEdu="",intentMTongue;
+    SPCustProfile spCustProfile;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -201,6 +207,8 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
 
         Log.e("TabHome","onCreateView");
 progressDialog=new ProgressDialog(getActivity());
+
+        spCustProfile=new SPCustProfile(getActivity());
 
         etName=(EditText)rootView.findViewById(R.id.edt_name);
         etAbout=(EditText)rootView.findViewById(R.id.edt_about_you);
@@ -440,7 +448,7 @@ progressDialog=new ProgressDialog(getActivity());
 
         spCountry.setMultiline(true);
 
-//getProfile();
+        getProfile();
 
         return rootView;
 
@@ -1750,7 +1758,7 @@ progressDialog=new ProgressDialog(getActivity());
             String s=d.get(d.YEAR)+"-"+(d.get(d.MONTH)+1)+"-"+d.get(d.DAY_OF_MONTH);
             String age= String.valueOf(2018-d.get(d.YEAR));
 
-            call = getResponse.updateBasic("4", String.valueOf(spProfFor.getSelectedItemPosition()), etName.getText().toString(),age,
+            call = getResponse.updateBasic(spCustProfile.getUser_id(), String.valueOf(spProfFor.getSelectedItemPosition()), etName.getText().toString(),age,
                     String.valueOf(spBodyType.getSelectedItemPosition()),String.valueOf(spPhysStat.getSelectedItemPosition()),String.valueOf(spComplexion.getSelectedItemPosition()),s,
                     String.valueOf(spMaritalStat.getSelectedItemPosition()), spHeight.getSelectedItem().toString(),spWeight.getSelectedItem().toString(),
                     list_pojo_mtongue.get(list_mtongue.indexOf(spMTongue.getSelectedItem().toString())).getMother_tongue_id()
@@ -1761,7 +1769,7 @@ progressDialog=new ProgressDialog(getActivity());
             Calendar t=etBTime.getTime();
             String tm=t.get(t.HOUR)+":"+t.get(t.MINUTE);
 
-            call = getResponse.updateReligion("4", list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
+            call = getResponse.updateReligion(spCustProfile.getUser_id(), list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
                     list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id(),etSubCaste.getText().toString(),
                     list_pojo_raasi.get(list_raasi.indexOf(spRassi.getSelectedItem().toString())).getRaasi_id(),
                     list_pojo_star.get(list_star.indexOf(spStar.getSelectedItem().toString())).getStar_id(),
@@ -1772,32 +1780,32 @@ progressDialog=new ProgressDialog(getActivity());
         }
         else if(section.equalsIgnoreCase("groomBrideLoc")) {
 
-            call = getResponse.updateGroomBrideLoc("4",list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
+            call = getResponse.updateGroomBrideLoc(spCustProfile.getUser_id(),list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
                     list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id(),
                     list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id(), String.valueOf(spResident.getSelectedItemPosition()-1),
                     "","");
         }
         else if(section.equalsIgnoreCase("professional")) {
 
-            call = getResponse.updateProfessional("4",list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),etCollege.getText().toString(),
+            call = getResponse.updateProfessional(spCustProfile.getUser_id(),list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),etCollege.getText().toString(),
                     etEduDetail.getText().toString(),list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),
                     etOccuDetail.getText().toString(),etEmployedIn.getText().toString(),etIncome.getText().toString());
 
         }
         else if(section.equalsIgnoreCase("family_details")) {
 
-            call = getResponse.updateFamilyDetails("4",String.valueOf(spFamValue.getSelectedItemPosition()),String.valueOf(spFamType.getSelectedItemPosition()),
+            call = getResponse.updateFamilyDetails(spCustProfile.getUser_id(),String.valueOf(spFamValue.getSelectedItemPosition()),String.valueOf(spFamType.getSelectedItemPosition()),
                     String.valueOf(spFamStat.getSelectedItemPosition()),etFamOrigin.getText().toString(),etFamLoc.getText().toString(),
                  etFatherStat.getText().toString(),etMotherStat.getText().toString(),etNoOfBrothers.getText().toString(),etNoOfSisters.getText().toString());
         }
 
         else if(section.equalsIgnoreCase("family_about")) {
 
-            call = getResponse.updateAboutFam("4",etAboutFam.getText().toString());
+            call = getResponse.updateAboutFam(spCustProfile.getUser_id(),etAboutFam.getText().toString());
         }
         else if(section.equalsIgnoreCase("about_you")) {
 
-            call = getResponse.updateAboutFam("4",etAbout.getText().toString());
+            call = getResponse.updateAboutFam(spCustProfile.getUser_id(),etAbout.getText().toString());
         }
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
@@ -1851,7 +1859,7 @@ progressDialog=new ProgressDialog(getActivity());
 
 
         final updateAboutInterface getResponse = APIClient.getClient().create(updateAboutInterface.class);
-        Call<CommonParentPojo> call = getResponse.updateAboutYou("4",etAbout.getText().toString());
+        Call<CommonParentPojo> call = getResponse.updateAboutYou(spCustProfile.getUser_id(),etAbout.getText().toString());
 
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
@@ -1891,7 +1899,7 @@ progressDialog=new ProgressDialog(getActivity());
             mListItem.clear();
 
         getProfileInterface getResponse = APIClient.getClient().create(getProfileInterface.class);
-        Call<ParentPojoProfile> call = getResponse.doGetListResources("7180214");
+        Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
         call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
             public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
@@ -1931,12 +1939,28 @@ progressDialog=new ProgressDialog(getActivity());
     public void setBasic(){
 
         etAbout.setText(mListItem.get(0).getAbout_you());
+        /*tvProfFor.setText(mListItem.get(0).getProfile_for());
+        Log.e("profforsize",""+list_prof_for.size());
+        Log.e("indexproffor",""+list_prof_for.indexOf(mListItem.get(0).getProfile_for()));
+        spProfFor.setSelection(list_prof_for.indexOf(mListItem.get(0).getProfile_for()+1));*/
         tvProfFor.setText(list_prof_for.get(Integer.parseInt(mListItem.get(0).getProfile_for())-1));
         spProfFor.setSelection(Integer.parseInt(mListItem.get(0).getProfile_for()));
         tvName.setText(mListItem.get(0).getProfile_name());
         etName.setText(mListItem.get(0).getProfile_name());
         tvAge.setText(mListItem.get(0).getAge());
-        etBDate.setText(mListItem.get(0).getDob());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = null;
+        try {
+            date = sdf. parse(mListItem.get(0).getDob());
+            Calendar cal = Calendar. getInstance();
+            cal.setTime(date);
+            etBDate.setDate(cal);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         tvPhysicalStat.setText(list_physical_stat.get(Integer.parseInt(mListItem.get(0).getPhysical_status())-1));
         spPhysStat.setSelection(Integer.parseInt(mListItem.get(0).getPhysical_status()));
         tvMaritalStat.setText(list_marital_Stat.get(Integer.parseInt(mListItem.get(0).getMaritial_status())-1));
@@ -1987,10 +2011,21 @@ progressDialog=new ProgressDialog(getActivity());
         if(mListItem.get(0).getHave_dosham()!=null) {
             tvDosh.setText(list_dosh.get(Integer.parseInt(mListItem.get(0).getHave_dosham()) - 1));
             spDosh.setSelection(Integer.parseInt(mListItem.get(0).getHave_dosham()));
+           /* tvBirthTime.setText(mListItem.get(0).getBirth_time());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = null;
+            try {
+                date = sdf.parse(mListItem.get(0).getBirth_time());
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                etBTime.setTime(cal);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }*/
         }
 
-        tvBirthTime.setText(mListItem.get(0).getBirth_time());
-        etBTime.setText(mListItem.get(0).getBirth_time());
+
 
 if(mListItem.get(0).getBirth_country()!=null) {
     Log.e("Countrybirth",mListItem.get(0).getBirth_country());
@@ -2035,12 +2070,14 @@ if(mListItem.get(0).getBirth_country()!=null) {
             intentCity=mListItem.get(0).getCity();
             spCity.setSelection(list_city.indexOf(intentCity)+1);
         }
-        Log.e("resident",list_resident.get(Integer.parseInt(mListItem.get(0).getResident_status())));
-      Log.e("residentindex",""+list_resident.indexOf(mListItem.get(0).getResident_status()));
-       tvResidentStatus.setText(list_resident.get(Integer.parseInt(mListItem.get(0).getResident_status())));
-        spResident.setSelection(Integer.parseInt(mListItem.get(0).getResident_status())+1);
-        tvParish.setText(mListItem.get(0).getParish());
-        tvVillage.setText(mListItem.get(0).getParish_village());
+        if(mListItem.get(0).getResident_status()!=null) {
+          //  Log.e("resident",(mListItem.get(0).getResident_status()));
+           // Log.e("residentindex", "" + list_resident.indexOf(mListItem.get(0).getResident_status()));
+            tvResidentStatus.setText(mListItem.get(0).getResident_status());
+            spResident.setSelection(list_resident.indexOf(mListItem.get(0).getResident_status()));
+        }
+        //tvParish.setText(mListItem.get(0).getParish());
+        //tvVillage.setText(mListItem.get(0).getParish_village());
     }
 
     public void setProfessional(){

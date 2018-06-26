@@ -14,7 +14,8 @@ public interface checkOtpInterface {
     @POST("app/app_check_otp.php")
     Call<CommonParentPojo> doGetListResources(
             @Field("matrimony_id") String matrimony_id,
-            @Field("otp") String otp
+            @Field("otp") String otp,
+            @Field("phone")String phone
     );
 
 

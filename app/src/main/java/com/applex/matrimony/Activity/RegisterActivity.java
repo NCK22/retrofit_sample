@@ -102,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         spCustProfile=new SPCustProfile(this);
 
-        list_prof_for.add("Profile For");
+      //  list_prof_for.add("Profile For");
         list_prof_for.add("Son");
         list_prof_for.add("Daughter");
         list_prof_for.add("Myself");
@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         list_prof_for.add("Sister");
         list_prof_for.add("Relative");
 
-        list_gender.add("Gender");
+       // list_gender.add("Gender");
         list_gender.add("Male");
         list_gender.add("Female");
 
@@ -118,8 +118,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         aaProfFor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ArrayAdapter aaGender = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_gender);
         aaGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
 
         spProfFor.setAdapter(aaProfFor);
         spGender.setAdapter(aaGender);
@@ -136,13 +134,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
       btnSubmit.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            //  registerCustomer();
-            startActivity(new Intent(RegisterActivity.this,DetailsActivity.class).putExtra("tabFlag","home"));
+          registerCustomer();
+       // startActivity(new Intent(RegisterActivity.this,TabParentProfileActivity.class).putExtra("tabFlag","home"));
           }
       });
-
-
-
     }
 
     @Override
@@ -335,7 +330,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         if(flagAllValid==true) {
             progressDialog.show();
             custRegInterface getResponse = APIClient.getClient().create(custRegInterface.class);
-            Call<ParentPojoCustReg> call = getResponse.doGetListResources(spProfFor.getSelectedItem().toString(),
+            Call<ParentPojoCustReg> call = getResponse.doGetListResources(String.valueOf(spProfFor.getSelectedItemPosition()),
                     etName.getText().toString(), spGender.getSelectedItem().toString(), dpBDate.getText().toString(),
                     list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
                     list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id(),
@@ -364,7 +359,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                             spCustProfile.setMobile(resultObj.getMobile());
                             spCustProfile.setReligion(resultObj.getReligion());
                             spCustProfile.setEmail(resultObj.getEmail());
-                            spCustProfile.setMatrimonyId(resultObj.getMatrimony_id());
+                            //spCustProfile.setMatrimonyId(resultObj.getMatrimony_id());
+                            spCustProfile.setUser_id(resultObj.getUser_id());
 
 
                             Log.e("profile_id", spCustProfile.getProfile_id());

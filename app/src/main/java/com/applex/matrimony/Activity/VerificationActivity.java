@@ -84,7 +84,7 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         progressDialog.show();
 
         checkOtpInterface getResponse = APIClient.getClient().create(checkOtpInterface.class);
-        Call<CommonParentPojo> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId(),etOtp.getText().toString());
+        Call<CommonParentPojo> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId(),etOtp.getText().toString(),spCustProfile.getMobile());
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
             public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
@@ -118,7 +118,7 @@ public class VerificationActivity extends AppCompatActivity implements View.OnCl
         progressDialog.show();
 
         resendOtpInterface getResponse = APIClient.getClient().create(resendOtpInterface.class);
-        Call<CommonParentPojo> call = getResponse.doGetListResources("nehackulkarni22@gmail.com",spCustProfile.getMatrimonyId(),spCustProfile.getMobile());
+        Call<CommonParentPojo> call = getResponse.doGetListResources(spCustProfile.getEmail(),spCustProfile.getMatrimonyId(),spCustProfile.getMobile());
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
             public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
