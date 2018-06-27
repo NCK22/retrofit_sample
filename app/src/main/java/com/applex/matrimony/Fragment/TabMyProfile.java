@@ -2073,7 +2073,7 @@ if(mListItem.get(0).getBirth_country()!=null) {
         if(mListItem.get(0).getResident_status()!=null) {
           //  Log.e("resident",(mListItem.get(0).getResident_status()));
            // Log.e("residentindex", "" + list_resident.indexOf(mListItem.get(0).getResident_status()));
-            tvResidentStatus.setText(mListItem.get(0).getResident_status());
+            tvResidentStatus.setText(list_resident.get(Integer.parseInt(mListItem.get(0).getResident_status())));
             spResident.setSelection(list_resident.indexOf(mListItem.get(0).getResident_status()));
         }
         //tvParish.setText(mListItem.get(0).getParish());

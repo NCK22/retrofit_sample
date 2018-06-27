@@ -7,11 +7,11 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
-public interface loginInterface {
+public interface forgotPasswordInterface {
 
     @FormUrlEncoded
-    @POST("app/app_login.php")
-    Call<CommonParentPojo> doGetListResources(@Field("username") String username,@Field("password") String password);
+    @POST("app/app_forgot_password.php")
+    Call<CommonParentPojo> doGetListResources(  @Field("email_id") String username );
 
 
 }

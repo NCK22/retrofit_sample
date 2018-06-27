@@ -22,6 +22,11 @@ public class SPCustProfile{
     }
 
 
+    public String getIsLogin()
+    {
+        return preferences.getString("is_login","");
+    }
+
     public String getProfile_id() {
 
         return preferences.getString("profile_id", "");
@@ -125,6 +130,13 @@ public class SPCustProfile{
         //preferences = this.getSharedPreferences(prefName, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("matrimony_id", matrimony_id);
+        editor.apply();
+    }
+
+    public void setIsLogin(String is_login) {
+        //preferences = this.getSharedPreferences(prefName, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("is_login", is_login);
         editor.apply();
     }
 }

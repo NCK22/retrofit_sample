@@ -197,8 +197,9 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             tvEdu,tvInstitute,tvEduDetail,tvOccu,tvOccuDetail,tvEmployedIn,tvAnnualIncome,
             tvFamValues,tvFamType,tvFamStatus,tvFamOrigin,tvFamLoc,tvFatherStat,tvMotherStat,tvNoOfBrothers,tvNoOfSisters;
 
-    String intentReligion="",intentCaste="",intentCountry="",intentState="",intentCity="",intentBirthCountry="",intentBirthState="",intentBirthCity="",
-            intentOccu="",intentEdu="",intentMTongue;
+    String intentReligion="",intentCaste="",intentCountry="",intentState="",intentMaritalStat="",intentBirthCountry="",intentBirthState="",intentBirthCity="",
+            intentOccu="",intentEdu="",intentMTongue="",intentPhysicalStat="",intentHeightFrom="",intentHeightTo="",intentEating="",intentDrinking="",
+    intentSmoking="";
     SPCustProfile spCustProfile;
 
     @Nullable
@@ -356,15 +357,13 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
         getCountryList();
         getHeightList();
-     //   getEducationList();
-       // getOccupationList();
-        //getReligionList();
+        getEducationList();
+        getOccupationList();
+        getReligionList();
         getMTongueList();
 
 
-        spMaritalStat.setAdapter(aaMaritalStat);spAgeTo.setAdapter(aaAge);spAgeFrom.setAdapter(aaAge);
-        spPhysStat.setAdapter(aaPhysStat);
-        spFood.setAdapter(aaFood);spDrink.setAdapter(aaDrink);spSmoke.setAdapter(aaSmoke);
+
 
         llBasic=(LinearLayout)rootView.findViewById(R.id.ll_basic);
         llBasicEdit=(LinearLayout)rootView.findViewById(R.id.ll_basic_edit);
@@ -562,6 +561,36 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         aaDosh.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         aaResident = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_resident);
         aaResident.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+        spMaritalStat.setAdapter(aaMaritalStat);spAgeTo.setAdapter(aaAge);spAgeFrom.setAdapter(aaAge);
+        spPhysStat.setAdapter(aaPhysStat);
+        spFood.setAdapter(aaFood);spDrink.setAdapter(aaDrink);spSmoke.setAdapter(aaSmoke);
+
+        Log.e("intentMaritialStat",intentMaritalStat);
+        if(!intentMaritalStat.equalsIgnoreCase("")){
+
+            tvMaritalStat.setText(list_marital_Stat.get(Integer.parseInt(intentMaritalStat)-1));
+            spMaritalStat.setSelection(Integer.parseInt(intentMaritalStat));
+        }
+
+        Log.e("intentPhysicalStat",intentPhysicalStat);
+        if(!intentPhysicalStat.equalsIgnoreCase("")){
+
+            tvPhysicalStat.setText(list_physical_stat.get(Integer.parseInt(intentPhysicalStat)-1));
+            spPhysStat.setSelection(Integer.parseInt(intentPhysicalStat));
+        }
+
+        Log.e("intentEating",intentEating);
+        if(!intentEating.equalsIgnoreCase("")){
+
+            tvFood.setText(list_food.get(Integer.parseInt(intentEating)-1));
+            spFood.setSelection(Integer.parseInt(intentEating));
+        }
+
+
+
+
 
         progressDialog.dismiss();
 
@@ -1006,11 +1035,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         aaMTongue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spMTongue.setAdapter(aaMTongue);
 
-                        if(intentMTongue!=null) {
+                      /*  if(intentMTongue!=null) {
                          //   spMTongue.setSelection(list_mtongue.indexOf(intentMTongue) + 1);
                             spMTongue.setSelection(Integer.parseInt(intentMTongue));
                             tvMTongue.setText(list_mtongue.get(Integer.parseInt(intentMTongue)));
-                        }
+                        }*/
                         progressDialog.dismiss();
                     }
                 }
@@ -1334,6 +1363,21 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         aaHeight.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spHeightFrom.setAdapter(aaHeight);
                         spHeightTo.setAdapter(aaHeight);
+
+
+                        Log.e("intentHeightFrom",intentHeightFrom);
+                        if(!intentHeightFrom.equalsIgnoreCase("")){
+
+                            Log.e("heightFrom",list_pojo_height.get(Integer.parseInt(intentHeightFrom)).getHeight());
+                            tvHeight.setText(list_pojo_height.get(Integer.parseInt(intentHeightFrom)-1).getHeight());
+                            spHeightFrom.setSelection(list_height.indexOf(list_pojo_height.get(Integer.parseInt(intentHeightFrom)).getHeight()));
+                        }
+                        Log.e("intentHeightTo",intentHeightTo);
+                        if(!intentHeightTo.equalsIgnoreCase("")){
+
+                            tvHeight.append(" to "+list_pojo_height.get(Integer.parseInt(intentHeightTo)-1).getHeight());
+                            spHeightTo.setSelection(list_height.indexOf(list_pojo_height.get(Integer.parseInt(intentHeightTo)).getHeight()));
+                        }
                     }
                     progressDialog.dismiss();
                 }
@@ -1384,7 +1428,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         aaEdu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spEdu.setAdapter(aaEdu);
 
-                        if(intentEdu!=null) {
+                        if(!intentEdu.equalsIgnoreCase("")) {
                             Log.e("intentedufunction",intentEdu);
                             Log.e("indexIntentEdu",""+list_edu.indexOf(intentEdu));
                             spEdu.setSelection(Integer.parseInt(intentEdu));
@@ -1440,7 +1484,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         aaOccu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spOccu.setAdapter(aaOccu);
 
-                        if(intentOccu!=null) {
+                        if(!intentOccu.equalsIgnoreCase("")) {
                             Log.e("intentoccufunction",intentOccu);
                             spOccu.setSelection(Integer.parseInt(intentOccu));
                             Log.e("indexIntentOccu",""+list_occu.indexOf(intentOccu));
@@ -1469,7 +1513,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         Call<CommonParentPojo> call = null;
         if(section.equalsIgnoreCase("Basic")) {
 
-            call = getResponse.updateBasic(spCustProfile.getUser_id(), spAgeFrom.getSelectedItem().toString(),spAgeTo.getSelectedItem().toString(),
+            call = getResponse.updateBasic(spCustProfile.getMatrimonyId(), "24","25",
                     String.valueOf(spPhysStat.getSelectedItemPosition()),
                     String.valueOf(spMaritalStat.getSelectedItemPosition()),
                     list_pojo_height.get(list_height.indexOf(spHeightFrom.getSelectedItem().toString())).getHeight_id(),
@@ -1480,24 +1524,24 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         else if(section.equalsIgnoreCase("religion")) {
 
 
-            call = getResponse.updateReligion(spCustProfile.getUser_id(), list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
+            call = getResponse.updateReligion(spCustProfile.getMatrimonyId(), list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
                     list_pojo_mtongue.get(list_mtongue.indexOf(spMTongue.getSelectedItem().toString())).getMother_tongue_id(),
                     list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id());
         }
         else if(section.equalsIgnoreCase("groomBrideLoc")) {
 
-            call = getResponse.updateGroomBrideLoc(spCustProfile.getUser_id(),list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
+            call = getResponse.updateGroomBrideLoc(spCustProfile.getMatrimonyId(),list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
                     list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id());
         }
         else if(section.equalsIgnoreCase("professional")) {
 
-            call = getResponse.updateProfessional(spCustProfile.getUser_id(),list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
+            call = getResponse.updateProfessional(spCustProfile.getMatrimonyId(),list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
                     list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),etIncome.getText().toString());
 
         }
         else if(section.equalsIgnoreCase("about_partner")) {
 
-            call = getResponse.updateAboutYou(spCustProfile.getUser_id(),etAbout.getText().toString());
+            call = getResponse.updateAboutYou(spCustProfile.getMatrimonyId(),etAbout.getText().toString());
         }
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
@@ -1565,10 +1609,10 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         //mListItem.add(parentPojoPartnerPref.getObjProfile().get(0));
                         Log.e("age",""+mListItem.get(0).getCaste());
                         setBasic();
-                        setReligion();
-                        setGroomBrideLoc();
-                        setProfessional();
-                        setPartnerDescription();
+                       // setReligion();
+                       //setGroomBrideLoc();
+                       // setProfessional();
+                        //setPartnerDescription();
                     }
                 }
                 else
@@ -1590,19 +1634,52 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     public void setBasic(){
 
         tvAge.setText(mListItem.get(0).getAge_from()+" to "+mListItem.get(0).getAge_to());
-        tvPhysicalStat.setText(list_physical_stat.get(Integer.parseInt(mListItem.get(0).getPhysical_status())-1));
-        spPhysStat.setSelection(Integer.parseInt(mListItem.get(0).getPhysical_status()));
-        tvMaritalStat.setText(list_marital_Stat.get(Integer.parseInt(mListItem.get(0).getMaritial_status())-1));
-       spMaritalStat.setSelection(Integer.parseInt(mListItem.get(0).getMaritial_status()));
-//        tvHeight.setText(list_height.get(Integer.parseInt(mListItem.get(0).getHeight_from_id()))+" to "+list_height.get(Integer.parseInt(mListItem.get(0).getHeight_to_id())));
-        spHeightFrom.setSelection(Integer.parseInt(mListItem.get(0).getHeight_from_id()));
-        spHeightTo.setSelection(Integer.parseInt(mListItem.get(0).getHeight_to_id()));
-        tvFood.setText(list_food.get(Integer.parseInt(mListItem.get(0).getEating_habit())-1));
-        spFood.setSelection(Integer.parseInt(mListItem.get(0).getEating_habit()));
-        tvDrink.setText(list_drink.get(Integer.parseInt(mListItem.get(0).getDrinking_habit())-1));
-        spDrink.setSelection(Integer.parseInt(mListItem.get(0).getDrinking_habit()));
-        tvSmoke.setText(list_smoke.get(Integer.parseInt(mListItem.get(0).getSmoking_habit())-1));
-        spSmoke.setSelection(Integer.parseInt(mListItem.get(0).getSmoking_habit()));
+        intentPhysicalStat=mListItem.get(0).getPhysical_status();
+        Log.e("listPhysicalStatSize",""+list_physical_stat.size());
+        Log.e("textPStat",""+list_marital_Stat.get(Integer.parseInt(intentPhysicalStat)-1));
+        if(list_physical_stat.size()>Integer.parseInt(intentPhysicalStat) -1){
+            tvPhysicalStat.setText(list_physical_stat.get(Integer.parseInt(intentPhysicalStat) - 1));
+            spPhysStat.setSelection(Integer.parseInt(intentPhysicalStat));
+        }
+        intentMaritalStat=mListItem.get(0).getMaritial_status();
+        Log.e("listMaritialStatSize",""+list_marital_Stat.size());
+        Log.e("textMStat",""+list_marital_Stat.get(Integer.parseInt(intentMaritalStat)-1));
+        if (list_marital_Stat.size()>Integer.parseInt(intentMaritalStat)-1) {
+
+            tvMaritalStat.setText(list_marital_Stat.get(Integer.parseInt(intentMaritalStat)-1));
+            spMaritalStat.setSelection(Integer.parseInt(intentMaritalStat));
+            Log.e("textMaritalStat",tvMaritalStat.getText().toString());
+        }
+        intentHeightFrom=mListItem.get(0).getHeight_from_id();
+
+        /*Log.e("listHeightSize",""+list_height.size());
+        Log.e("textHeight",""+list_pojo_height.get(Integer.parseInt(intentHeightFrom)).getHeight());*/
+        if(list_height.size()>Integer.parseInt(intentHeightFrom)) {
+            Log.e("heightFrom",list_pojo_height.get(Integer.parseInt(intentHeightFrom)).getHeight());
+            tvHeight.setText(list_pojo_height.get(Integer.parseInt(intentHeightFrom)-1).getHeight());
+            spHeightFrom.setSelection(list_height.indexOf(list_pojo_height.get(Integer.parseInt(intentHeightFrom)).getHeight()));
+        }
+        intentHeightTo=mListItem.get(0).getHeight_to_id();
+        if(list_height.size()>Integer.parseInt(intentHeightTo)) {
+
+            tvHeight.append(" to "+list_pojo_height.get(Integer.parseInt(intentHeightTo)-1).getHeight());
+            spHeightTo.setSelection(list_height.indexOf(list_pojo_height.get(Integer.parseInt(intentHeightTo)).getHeight()));
+        }
+        intentEating=mListItem.get(0).getEating_habit();
+        if(list_food.size()>(Integer.parseInt(intentEating))) {
+            tvFood.setText(list_food.get(Integer.parseInt(intentEating) - 1));
+            spFood.setSelection(Integer.parseInt(intentEating));
+        }
+        intentDrinking=mListItem.get(0).getDrinking_habit();
+        if(list_drink.contains(intentDrinking)) {
+            tvDrink.setText(list_drink.get(Integer.parseInt(intentDrinking) - 1));
+            spDrink.setSelection(Integer.parseInt(intentDrinking));
+        }
+        intentSmoking=mListItem.get(0).getSmoking_habit();
+        if(list_smoke.contains(intentSmoking)) {
+            tvSmoke.setText(list_smoke.get(Integer.parseInt(intentSmoking) - 1));
+            spSmoke.setSelection(Integer.parseInt(intentSmoking));
+        }
     }
 
     public void setReligion(){
@@ -1620,7 +1697,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
        // spCaste.setSelection(Integer.parseInt(intentCaste));
         intentMTongue=mListItem.get(0).getMother_language();
-        spMTongue.setSelection(Integer.parseInt(intentMTongue));
+//        spMTongue.setSelection(Integer.parseInt(intentMTongue));
         //tvMTongue.setText(list_mtongue.get(Integer.parseInt(intentMTongue)-1));
     }
 

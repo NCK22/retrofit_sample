@@ -28,7 +28,9 @@ import com.applex.matrimony.Fragment.TabPartnerPreferences;
 import com.applex.matrimony.Fragment.TabWhoInterested;
 import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
+import com.applex.matrimony.Fragment.UploadPhoto;
 import com.applex.matrimony.R;
+import com.applex.matrimony.Storage.SPCustProfile;
 
 public class TabParentProfileActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -45,7 +47,7 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
     TextView testtv;
     TabLayout tabLayout;
 
-
+SPCustProfile spCustProfile;
     Intent intent;
     Bundle bundle;
     String tabFlag = "home";
@@ -58,6 +60,7 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Home");
 
+        spCustProfile=new SPCustProfile(this);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -170,6 +173,7 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //MyApp.saveIsLogin(false);
+                        spCustProfile.setIsLogin("false");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -232,6 +236,12 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
                     TabPartnerPreferences tabPartnerPreferences = new TabPartnerPreferences();
                     return tabPartnerPreferences;
 
+                case 2:
+
+                    Log.e("Tab", "whoViewed");
+                    UploadPhoto tabUploadPhoto = new UploadPhoto();
+                    return tabUploadPhoto;
+
 
                 default:
                     return null;
@@ -252,7 +262,7 @@ public class TabParentProfileActivity extends AppCompatActivity implements TabLa
         public int getCount() {
             // Show 3 total pages.
 
-            return 2;
+            return 3;
 
         }
     }

@@ -32,6 +32,7 @@ import com.applex.matrimony.Fragment.TabWhoInterested;
 import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
 import com.applex.matrimony.R;
+import com.applex.matrimony.Storage.SPCustProfile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +54,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
     BottomNavigationView bottmNavView;
     TextView testtv;
     TabLayout tabLayout;
-
+    SPCustProfile spCustProfile;
 
 
     Intent intent;
@@ -67,7 +68,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Home");
-
+        spCustProfile=new SPCustProfile(this);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -281,6 +282,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //MyApp.saveIsLogin(false);
+                        spCustProfile.setIsLogin("false");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

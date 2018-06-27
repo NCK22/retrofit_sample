@@ -24,11 +24,13 @@ import android.widget.TextView;
 
 import com.applex.matrimony.Fragment.TabHome;
 import com.applex.matrimony.Fragment.TabInterestedProf;
+import com.applex.matrimony.Fragment.TabMatches;
 import com.applex.matrimony.Fragment.TabShortlistedProf;
 import com.applex.matrimony.Fragment.TabWhoInterested;
 import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
 import com.applex.matrimony.R;
+import com.applex.matrimony.Storage.SPCustProfile;
 
 public class TabParentMatchesActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -45,7 +47,7 @@ public class TabParentMatchesActivity extends AppCompatActivity implements TabLa
     TextView testtv;
     TabLayout tabLayout;
 
-
+    SPCustProfile spCustProfile;
 
     Intent intent;
     Bundle bundle;
@@ -58,6 +60,8 @@ public class TabParentMatchesActivity extends AppCompatActivity implements TabLa
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("Matches");
+
+        spCustProfile=new SPCustProfile(this);
 
         Log.e("onCreateView","TabParentMatches");
         setSupportActionBar(toolbar);
@@ -202,8 +206,8 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 
                 case 0:
                     Log.e("Tab", "home");
-                    TabHome tabHome = new TabHome();
-                    return tabHome;
+                    TabMatches tabMatches = new TabMatches();
+                    return tabMatches;
 
                 case 1:
 
@@ -267,6 +271,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         //MyApp.saveIsLogin(false);
+                        spCustProfile.setIsLogin("false");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

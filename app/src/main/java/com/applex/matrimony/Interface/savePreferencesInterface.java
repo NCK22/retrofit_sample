@@ -11,7 +11,7 @@ public interface savePreferencesInterface {
 
     @FormUrlEncoded
     @POST("app/app_save_preference.php")
-    Call<CommonParentPojo> updateBasic(@Field("matrimony_id") String user_id, @Field("age_from") String age,@Field("age_to") String ageto, @Field("marital_status") String marital_status,
+    Call<CommonParentPojo> updateBasic(@Field("matrimony_id") String user_id, @Field("age_from") String age,@Field("age_to") String ageto, @Field("maritial_status") String marital_status,
                                        @Field("physical_status") String physical_status,@Field("height_from_id") String height,@Field("height_to_id") String height_to,
                                        @Field("eating_habit") String eating, @Field("drinking_habit") String drinking,@Field("smoking_habit") String smoking);
 

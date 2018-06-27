@@ -13,9 +13,10 @@ import retrofit2.http.Part;
 
 public interface uploadPhotoInterface {
 
+
     @Multipart
     @POST("app/app_upload_photo.php")
-    Call<CommonParentPojo> uploadFile(@Part MultipartBody.Part file, @Part("file") RequestBody name, @Part("profile_id") String profile_id);
+    Call<CommonParentPojo> uploadFile(@Part MultipartBody.Part file, @Part("file") RequestBody name, @Part("profile_id") RequestBody profile_id);
    /* Call<CommonParentPojo> doGetListResources(
             @Field("email_id") String email_id,
             @Field("matrimony_id") String matrimony_id,

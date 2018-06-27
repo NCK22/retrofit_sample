@@ -24,8 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
+import com.applex.matrimony.Activity.LoginActivity;
 import com.applex.matrimony.Adapter.HomeProfilesAdapter;
 import com.applex.matrimony.Interface.getCasteInterface;
 import com.applex.matrimony.Interface.getHighlightedInterface;
@@ -81,6 +83,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     String strGender="";
     FrameLayout Container;
     LinearLayout ll_search_info;
+    boolean flagAllValid=false;
 
     @Nullable
     @Override
@@ -459,10 +462,13 @@ Log.e("searchFlag",searchFlag);
     @Override
     public void onClick(View v) {
 
-        if(etSearchId.getText().toString().length()>0)
-        basicSearch("byid");
-        else
-            basicSearch("basic");
+        checkValidity();
+        if(flagAllValid==true) {
+            if (etSearchId.getText().toString().length() > 0)
+                basicSearch("byid");
+            else
+                basicSearch("basic");
+        }
 
     }
 
@@ -480,5 +486,18 @@ Log.e("searchFlag",searchFlag);
                 if(rbGroom.isChecked())
                     strGender="male";
         }
+    }
+
+    public void checkValidity(){
+        if(etSearchId.getText().toString().length()==0) {
+            if (!rbGroom.isChecked() && !rbBride.isChecked())
+                showToast("Please check Groom / Bride");
+        }
+
+    }
+
+    public void showToast(String msg)
+    {
+        Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
 }

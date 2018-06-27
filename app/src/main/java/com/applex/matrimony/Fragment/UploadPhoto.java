@@ -1,20 +1,23 @@
-package com.applex.matrimony.Activity;
+package com.applex.matrimony.Fragment;
 
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
+import com.applex.matrimony.Activity.TabViewParentActivity;
 import com.applex.matrimony.Interface.uploadPhotoInterface;
 import com.applex.matrimony.Pojo.CommonParentPojo;
 import com.applex.matrimony.R;
@@ -34,9 +37,10 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
+import static android.app.Activity.RESULT_OK;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class UploadPhotoActivity extends AppCompatActivity implements View.OnClickListener {
+public class UploadPhoto extends Fragment implements View.OnClickListener {
 
 
     public static File file;
@@ -47,16 +51,19 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
     Button btnSubmit;
     SPCustProfile spCustProfile;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload_photo);
-        imgProfilePic=(ShapedImageView) findViewById(R.id.img_profile_pic);
-        btnSubmit=(Button)findViewById(R.id.btn_submit_photo);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
+        View rootView=inflater.inflate(R.layout.activity_upload_photo,container,false);
+        imgProfilePic=(ShapedImageView) rootView.findViewById(R.id.img_profile_pic);
+        btnSubmit=(Button)rootView.findViewById(R.id.btn_submit_photo);
         btnSubmit.setOnClickListener(this);
         imgProfilePic.setOnClickListener(this);
-        spCustProfile=new SPCustProfile(this);
+        spCustProfile=new SPCustProfile(getActivity());
+        return rootView;
     }
+
 
 
     private void chooseImage()
@@ -64,7 +71,7 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
         // Intent intent = new Intent();
         // intent.setType("image/*");
         //  intent.setAction(Intent.ACTION_GET_CONTENT);
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
 
         file = getOutputMediaFile(MEDIA_TYPE_IMAGE);
@@ -72,7 +79,7 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
     }
 
     private File getOutputMediaFile(int type) {
-        File mediaStorageDir = new File(getCacheDir(), "cache_images");
+        File mediaStorageDir = new File(getActivity().getCacheDir(), "cache_images");
         if(!mediaStorageDir.exists()){
             mediaStorageDir.mkdir();
         }
@@ -91,7 +98,7 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
@@ -110,7 +117,7 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
 
                 bitmap = null;
                 try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                     imgProfilePic.setImageBitmap(bitmap);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -124,7 +131,7 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
 
             String thePath = "no-path-found";
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(contentURI, filePathColumn, null, null, null);
+            Cursor cursor = getActivity().getContentResolver().query(contentURI, filePathColumn, null, null, null);
             if(cursor!=null) {
                 if (cursor.moveToFirst()) {
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
@@ -146,8 +153,8 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.btn_submit_photo:
-                //uploadFile();
-                startActivity(new Intent(UploadPhotoActivity.this,TabViewParentActivity.class));
+                uploadFile();
+               // startActivity(new Intent(UploadPhoto.this,TabViewParentActivity.class));
                 break;
         }
     }
@@ -159,10 +166,9 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
 
         // Parsing any Media type file
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), imageFile);
-        RequestBody profile_id = RequestBody.create(null, spCustProfile.getProfile_id());
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", imageFile.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("JPEG/PNG"), imageFile.getName());
-
+        RequestBody profile_id = RequestBody.create(null, spCustProfile.getProfile_id());
         uploadPhotoInterface getResponse = APIClient.getClient().create(uploadPhotoInterface.class);
         Call<CommonParentPojo> call = getResponse.uploadFile(fileToUpload, filename,profile_id);
         call.enqueue(new Callback<CommonParentPojo>() {
@@ -176,8 +182,8 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
                     if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
                         //  strResumePath=serverResponse.getMessage();
                         Log.e("Success Response", commonParentPojo.getMsg());
-                        Toast.makeText(getApplicationContext(), "success" + commonParentPojo.getMsg(), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(UploadPhotoActivity.this,TabViewParentActivity.class));
+                        Toast.makeText(getActivity(), "success" + commonParentPojo.getMsg(), Toast.LENGTH_SHORT).show();
+                        //startActivity(new Intent(UploadPhoto.this,TabViewParentActivity.class));
                     }
                    /* } else {
                         strResumePath=serverResponse.getMessage();

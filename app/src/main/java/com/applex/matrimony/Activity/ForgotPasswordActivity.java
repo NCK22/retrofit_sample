@@ -2,8 +2,8 @@ package com.applex.matrimony.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
-import com.applex.matrimony.Interface.custRegInterface;
+import com.applex.matrimony.Interface.forgotPasswordInterface;
 import com.applex.matrimony.Interface.loginInterface;
-import com.applex.matrimony.Pojo.ChildPojoCustReg;
 import com.applex.matrimony.Pojo.CommonParentPojo;
-import com.applex.matrimony.Pojo.ParentPojoCustReg;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 
@@ -24,10 +22,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class ForgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText etUname,etPwd;
-    TextView tvForgot,tvRegister;
+    EditText etUname;
     Button btnLogin;
     Boolean flagAllValid=false;
     ProgressDialog progressDialog;
@@ -35,19 +32,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_forgot_password);
 
         spCustProfile=new SPCustProfile(this);
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Please Wait");
         etUname=(EditText)findViewById(R.id.edt_email);
-        etPwd=(EditText)findViewById(R.id.edt_pwd);
-        tvForgot=(TextView)findViewById(R.id.tv_forgotPwd);
-        tvRegister=(TextView)findViewById(R.id.tv_register);
+
         btnLogin=(Button)findViewById(R.id.btn_submit);
         btnLogin.setOnClickListener(this);
-        tvRegister.setOnClickListener(this);
-        tvForgot.setOnClickListener(this);
 
     }
 
@@ -57,17 +50,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch(v.getId()){
 
             case R.id.btn_submit:
-              login();
+              sendPwdToMail();
                 break;
 
-            case R.id.tv_forgotPwd:
-                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
-                break;
 
-            case R.id.tv_register:
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-                finish();
-                break;
         }
     }
 
@@ -76,25 +62,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void checkValidity()
     {
         progressDialog.show();
-        if(etUname.getText().toString().equals("")|| etPwd.getText().toString().equals("")){
+        if(etUname.getText().toString().equals("")){
             showToast("Please fill all fields");
         }
-        else if(etPwd.getText().toString().length()<4)
-            showToast("Enter valid password");
         else
             flagAllValid=true;
         progressDialog.dismiss();
     }
 
-    public void login(){
+    public void sendPwdToMail(){
 
 
         checkValidity();
 
         if(flagAllValid==true) {
             progressDialog.show();
-            loginInterface getResponse = APIClient.getClient().create(loginInterface.class);
-            Call<CommonParentPojo> call = getResponse.doGetListResources(etUname.getText().toString(),etPwd.getText().toString());
+            forgotPasswordInterface getResponse = APIClient.getClient().create(forgotPasswordInterface.class);
+            Call<CommonParentPojo> call = getResponse.doGetListResources(etUname.getText().toString());
             call.enqueue(new Callback<CommonParentPojo>() {
                 @Override
                 public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
@@ -107,8 +91,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
                             Log.e("Response", commonParentPojo.getMsg());
 
-                            spCustProfile.setIsLogin("true");
-                            startActivity(new Intent(LoginActivity.this, TabViewParentActivity.class));
+                           // spCustProfile.setIsLogin("true");
+                            startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
                         }
 
                         showToast(commonParentPojo.getMsg());
@@ -129,6 +113,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public void showToast(String msg)
     {
-        Toast.makeText(LoginActivity.this,msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(ForgotPasswordActivity.this,msg,Toast.LENGTH_SHORT).show();
     }
 }
