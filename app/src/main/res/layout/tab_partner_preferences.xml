@@ -51,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -971,7 +971,7 @@
                                             app:ms_typeface="fonts/Roboto-Regular.ttf"
                                             app:ms_hintTextSize="16sp"
                                             app:ms_hintColor="#000000"
-                                            app:ms_hint="Rassi"
+                                            app:ms_hint="MotherTongue"
                                             app:ms_multiline="false"
                                             app:ms_thickness="0.5dp"
                                             android:popupBackground="#e6e6e6"

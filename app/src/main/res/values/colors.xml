@@ -12,7 +12,7 @@
 
 
     <color name="navigation_default">#000000</color>
-    <color name="navigation_checked">#0090ff</color>
+    <color name="navigation_checked">#F2146E</color>
     <!-- <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>-->

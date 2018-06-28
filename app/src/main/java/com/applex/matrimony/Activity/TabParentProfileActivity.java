@@ -31,6 +31,9 @@ import com.applex.matrimony.Fragment.TabWhoViewed;
 import com.applex.matrimony.Fragment.UploadPhoto;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
+import com.squareup.picasso.Picasso;
+
+import cn.gavinliu.android.lib.shapedimageview.ShapedImageView;
 
 public class TabParentProfileActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -117,6 +120,7 @@ SPCustProfile spCustProfile;
         bottmNavView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottmNavView.setOnNavigationItemSelectedListener(this);
 
+        setHeader();
 
     }
 
@@ -174,6 +178,7 @@ SPCustProfile spCustProfile;
                     public void onClick(DialogInterface dialog, int which) {
                         //MyApp.saveIsLogin(false);
                         spCustProfile.setIsLogin("false");
+                        spCustProfile.setProfilePhotoPath("");
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -281,6 +286,39 @@ SPCustProfile spCustProfile;
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void setHeader() {
+        if (spCustProfile.getIsLogin().equalsIgnoreCase("true")) {
+            View header = navigationView.getHeaderView(0);
+            TextView txtHeaderName = (TextView) header.findViewById(R.id.header_name);
+            TextView txtHeaderEmail = (TextView) header.findViewById(R.id.header_email);
+            final ShapedImageView imageUser = (ShapedImageView) header.findViewById(R.id.header_image);
+           // txtHeaderName.setText(spCustProfile.get());
+            txtHeaderEmail.setText(spCustProfile.getEmail());
+
+            if(spCustProfile.getProfilePhotoPath()!=null) {
+                Log.e("profile_photo","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
+                Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
+                        //.placeholder(R.drawable.placeholder)
+                        .into(imageUser);
+            }
+            header.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    /*Intent profile = new Intent(TabParentProfileActivity.this, TabParentProfileActivity.class);
+                    profile.putExtra("id", MyApp.getUserId());
+                    if (MyApp.getIsJobProvider())
+                        profile.putExtra("p_type", "jp");
+                    else
+                        profile.putExtra("p_type", "js");
+                    profile.putExtra("editFlag", "true");
+                    profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(profile);*/
+                }
+            });
+        }
     }
 
 }

@@ -17,6 +17,7 @@ import com.applex.matrimony.Interface.loginInterface;
 import com.applex.matrimony.Pojo.ChildPojoCustReg;
 import com.applex.matrimony.Pojo.CommonParentPojo;
 import com.applex.matrimony.Pojo.ParentPojoCustReg;
+import com.applex.matrimony.Pojo.ParentPojoLogin;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 
@@ -94,31 +95,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(flagAllValid==true) {
             progressDialog.show();
             loginInterface getResponse = APIClient.getClient().create(loginInterface.class);
-            Call<CommonParentPojo> call = getResponse.doGetListResources(etUname.getText().toString(),etPwd.getText().toString());
-            call.enqueue(new Callback<CommonParentPojo>() {
+            Call<ParentPojoLogin> call = getResponse.doGetListResources(etUname.getText().toString(),etPwd.getText().toString());
+            call.enqueue(new Callback<ParentPojoLogin>() {
                 @Override
-                public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
+                public void onResponse(Call<ParentPojoLogin> call, Response<ParentPojoLogin> response) {
 
                     Log.e("Inside", "onResponse");
                /* Log.e("response body",response.body().getStatus());
                 Log.e("response body",response.body().getMsg());*/
-                    CommonParentPojo commonParentPojo = response.body();
-                    if (commonParentPojo != null) {
-                        if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
-                            Log.e("Response", commonParentPojo.getMsg());
+                    ParentPojoLogin parentPojoLogin = response.body();
+                    if (parentPojoLogin != null) {
+                        if (parentPojoLogin.getStatus().equalsIgnoreCase("1")) {
+                            Log.e("Response", parentPojoLogin.getMsg());
 
                             spCustProfile.setIsLogin("true");
+                            spCustProfile.setMatrimonyId(parentPojoLogin.getObjProfile().get("matrimony_id"));
+                            spCustProfile.setUser_id(parentPojoLogin.getObjProfile().get("user_id"));
                             startActivity(new Intent(LoginActivity.this, TabViewParentActivity.class));
                         }
 
-                        showToast(commonParentPojo.getMsg());
+                        showToast(parentPojoLogin.getMsg());
                     }
 
                     progressDialog.dismiss();
                 }
 
                 @Override
-                public void onFailure(Call<CommonParentPojo> call, Throwable t) {
+                public void onFailure(Call<ParentPojoLogin> call, Throwable t) {
 
                     Log.e("Throwabe ", "" + t);
                     progressDialog.dismiss();

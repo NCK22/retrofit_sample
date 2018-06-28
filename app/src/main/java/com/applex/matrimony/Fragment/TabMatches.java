@@ -132,7 +132,7 @@ public class TabMatches extends Fragment {
             mListItem.clear();
 
         getShortlistedMyInterface getResponse = APIClient.getClient().create(getShortlistedMyInterface.class);
-        Call<ParentPojoProfile> call = getResponse.doGetListResources("7180214");
+        Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
         call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
             public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {

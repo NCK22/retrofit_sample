@@ -1,6 +1,5 @@
 package com.applex.matrimony.Activity;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,7 +10,6 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -22,37 +20,21 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.widget.TabWidget;
 import android.widget.TextView;
 
-import com.applex.matrimony.APIClient;
-import com.applex.matrimony.Fragment.TabHome;
-import com.applex.matrimony.Fragment.TabInterestedProf;
-import com.applex.matrimony.Fragment.TabShortlistedProf;
-import com.applex.matrimony.Fragment.TabWhoInterested;
-import com.applex.matrimony.Fragment.TabWhoShortlisted;
-import com.applex.matrimony.Fragment.TabWhoViewed;
-import com.applex.matrimony.Interface.getProfileInterface;
-import com.applex.matrimony.Pojo.ParentPojoProfile;
+import com.applex.matrimony.Fragment.TabChangeEmail;
+import com.applex.matrimony.Fragment.TabMyProfile;
+import com.applex.matrimony.Fragment.TabPartnerPreferences;
+import com.applex.matrimony.Fragment.UploadPhoto;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import cn.gavinliu.android.lib.shapedimageview.ShapedImageView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class TabViewParentActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class TabParentSettingsActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
-    private TabViewParentActivity.SectionsPagerAdapter mSectionsPagerAdapter;
+    private TabParentSettingsActivity.SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
     String quotes[];
@@ -64,22 +46,20 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
     BottomNavigationView bottmNavView;
     TextView testtv;
     TabLayout tabLayout;
-    SPCustProfile spCustProfile;
-    ProgressDialog progressDialog;
 
-
+SPCustProfile spCustProfile;
     Intent intent;
     Bundle bundle;
-    String tabFlag="home";
+    String tabFlag = "home";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tab_view_parent);
+        setContentView(R.layout.activity_tab_parent_settings);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("My Home");
-        progressDialog=new ProgressDialog(this);
+
         spCustProfile=new SPCustProfile(this);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -87,20 +67,20 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        tabLayout=(TabLayout)findViewById(R.id.tl_parent);
+        tabLayout = (TabLayout) findViewById(R.id.tl_parent);
         tabLayout.addOnTabSelectedListener(this);
-        tabLayout.setTabTextColors(Color.BLACK,Color.WHITE);
+        tabLayout.setTabTextColors(Color.BLACK, Color.WHITE);
 
 
-        intent=getIntent();
+        intent = getIntent();
 
         bundle = new Bundle();
-        tabFlag=intent.getStringExtra("tabFlag");
+        tabFlag = intent.getStringExtra("tabFlag");
 
 
         //   Tabs Activity
 
-        mSectionsPagerAdapter = new TabViewParentActivity.SectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new TabParentSettingsActivity.SectionsPagerAdapter(getSupportFragmentManager());
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.vp_parent);
         mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -116,7 +96,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.getMenu().clear(); //clear old inflated items.
         navigationView.inflateMenu(R.menu.menu_drawer);
-        navigationView.setCheckedItem(R.id.menu_go_home);
+        navigationView.setCheckedItem(R.id.menu_go_profile);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -134,18 +114,15 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        bottmNavView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);
-bottmNavView.setOnNavigationItemSelectedListener(this);
+        bottmNavView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        bottmNavView.setOnNavigationItemSelectedListener(this);
 
-    Log.e("SPProfilephoto",spCustProfile.getProfilePhotoPath());
-       if(spCustProfile.getProfilePhotoPath().equalsIgnoreCase(""))
-           getProfile();
+        setHeader();
 
     }
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-
 
 
     }
@@ -167,41 +144,73 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.menu_go_home:
-             //   toolbar.setTitle(getString(R.string.menu_home));
-                startActivity(new Intent(TabViewParentActivity.this, TabViewParentActivity.class));
+                //   toolbar.setTitle(getString(R.string.menu_home));
+                startActivity(new Intent(TabParentSettingsActivity.this, TabViewParentActivity.class));
                 return true;
 
             case R.id.menu_go_matches:
-             //   toolbar.setTitle(getString(R.string.menu_matches));
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                //   toolbar.setTitle(getString(R.string.menu_matches));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "matches"));
                 return true;
+
 
             case R.id.menu_go_profile:
 //                toolbar.setTitle(getString(R.string.menu_matches));
-                startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","profile"));
+                startActivity(new Intent(getApplicationContext(), TabParentProfileActivity.class).putExtra("tabFlag", "profile"));
+                return true;
+
+
+            case R.id.menu_go_setting:
+//                toolbar.setTitle(getString(R.string.menu_matches));
+                startActivity(new Intent(getApplicationContext(), TabParentSettingsActivity.class).putExtra("tabFlag", "profile"));
                 return true;
 
             case R.id.menu_go_logout:
                 logout();
-                return true;
 
         }
-            return false;
+        return false;
     }
+
+    private void logout() {
+
+        new AlertDialog.Builder(TabParentSettingsActivity.this)
+                .setTitle(getString(R.string.menu_logout))
+                .setMessage(getString(R.string.logout_msg))
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        //MyApp.saveIsLogin(false);
+                        spCustProfile.setIsLogin("false");
+                        spCustProfile.setProfilePhotoPath("");
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                //  .setIcon(R.drawable.ic_logout)
+                .show();
+    }
+
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
-        Log.e("hascapture",""+hasCapture);
-        switch(bottmNavView.getSelectedItemId())
-        {
+        Log.e("hascapture", "" + hasCapture);
+        switch (bottmNavView.getSelectedItemId()) {
             case R.id.menu_go_home:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","home"));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "home"));
                 break;
 
-            case R.id.menu_go_profile:break;
+            case R.id.menu_go_profile:
+                break;
             case R.id.menu_go_matches:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "matches"));
                 break;
         }
     }
@@ -226,27 +235,17 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 
                 case 0:
                     Log.e("Tab", "home");
-                    TabHome tabHome = new TabHome();
-                    return tabHome;
+                    TabChangeEmail tabChangeEmail = new TabChangeEmail();
+                    return tabChangeEmail;
 
                 case 1:
 
-                        Log.e("Tab", "whoViewed");
-                        TabWhoViewed tabWhoViewed = new TabWhoViewed();
-                        return tabWhoViewed;
-
-                case 2:
-
-                        Log.e("Tab", "whoShortListed");
-                        TabWhoShortlisted tabWhoShortlisted = new TabWhoShortlisted();
-                        return tabWhoShortlisted;
+                    Log.e("Tab", "whoViewed");
+                    TabChangeEmail tabChangeEmail1 = new TabChangeEmail();
+                    return tabChangeEmail1;
 
 
 
-                case 3:
-                        Log.e("Tab", "whoInterested");
-                        TabWhoInterested tabWhoInterested = new TabWhoInterested();
-                        return tabWhoInterested;
 
                 default:
                     return null;
@@ -257,10 +256,9 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         }
 
 
-
         @Override
         public int getItemPosition(@NonNull Object object) {
-            Log.e("positionItem",""+object);
+            Log.e("positionItem", "" + object);
             return super.getItemPosition(object);
         }
 
@@ -268,7 +266,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         public int getCount() {
             // Show 3 total pages.
 
-            return 4;
+            return 2;
 
         }
     }
@@ -278,83 +276,15 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         switch (item.getItemId()) {
             case android.R.id.home:
                 //onBackPressed();
-                startActivity(new Intent(getApplicationContext(),TabViewParentActivity.class).putExtra("tabFlag","home"));
+                startActivity(new Intent(getApplicationContext(), TabParentSettingsActivity.class).putExtra("tabFlag", "home"));
                 break;
 
             case R.id.menu_go_matches:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "matches"));
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
-    }
-
-    private void logout() {
-
-        new AlertDialog.Builder(TabViewParentActivity.this)
-                .setTitle(getString(R.string.menu_logout))
-                .setMessage(getString(R.string.logout_msg))
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        //MyApp.saveIsLogin(false);
-                        spCustProfile.setIsLogin("false");
-                        spCustProfile.setProfilePhotoPath("");
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intent);
-                        finish();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
-                })
-                //  .setIcon(R.drawable.ic_logout)
-                .show();
-    }
-
-    public void getProfile(){
-
-        progressDialog.show();
-
-
-        getProfileInterface getResponse = APIClient.getClient().create(getProfileInterface.class);
-        Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
-        call.enqueue(new Callback<ParentPojoProfile>() {
-            @Override
-            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
-
-                Log.e("Inside","onResponse");
-               /* Log.e("response body",response.body().getStatus());
-                Log.e("response body",response.body().getMsg());*/
-                ParentPojoProfile parentPojoProfile =response.body();
-                if(parentPojoProfile !=null){
-                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
-                        Log.e("Response","Success");
-                        Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
-                        if(parentPojoProfile.getObjProfile().get(0).getProfile_photo()!=null) {
-                            Log.e("profile_photo res", parentPojoProfile.getObjProfile().get(0).getProfile_photo());
-                            spCustProfile.setProfilePhotoPath(parentPojoProfile.getObjProfile().get(0).getProfile_photo());
-                        }
-                       setHeader();
-
-                    }
-                }
-                else
-                    Log.e("parentpojotabwhome","null");
-                progressDialog.dismiss();
-
-            }
-
-            @Override
-            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
-
-                Log.e("throwable",""+t);
-                progressDialog.dismiss();
-            }
-        });
-
     }
 
     private void setHeader() {
@@ -363,7 +293,7 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
             TextView txtHeaderName = (TextView) header.findViewById(R.id.header_name);
             TextView txtHeaderEmail = (TextView) header.findViewById(R.id.header_email);
             final ShapedImageView imageUser = (ShapedImageView) header.findViewById(R.id.header_image);
-            // txtHeaderName.setText(spCustProfile.get());
+           // txtHeaderName.setText(spCustProfile.get());
             txtHeaderEmail.setText(spCustProfile.getEmail());
 
             if(spCustProfile.getProfilePhotoPath()!=null) {
@@ -389,5 +319,6 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
             });
         }
     }
+
 }
 

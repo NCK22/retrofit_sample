@@ -41,6 +41,7 @@ import com.applex.matrimony.Pojo.ParentPojoProfile;
 import com.applex.matrimony.Pojo.ParentPojoReligion;
 import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.R;
+import com.applex.matrimony.Storage.SPCustProfile;
 
 import org.json.JSONArray;
 
@@ -84,6 +85,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
     FrameLayout Container;
     LinearLayout ll_search_info;
     boolean flagAllValid=false;
+    SPCustProfile spCustProfile;
 
     @Nullable
     @Override
@@ -93,6 +95,7 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
 
         Log.e("TabHome","onCreateView");
 
+        spCustProfile=new SPCustProfile(getActivity());
        // Container=(FrameLayout)rootView.findViewById(R.id.Container);
 
         rv_profile_matches = (RecyclerView) rootView.findViewById(R.id.rv_prof_matches);
@@ -333,7 +336,7 @@ Log.e("searchFlag",searchFlag);
         if(searchFlag.equalsIgnoreCase("byid"))
             call=getResponse.searchById("7180214",etSearchId.getText().toString());
         else if(searchFlag.equalsIgnoreCase("basic")) 
-            call = getResponse.searchBasic("7180214",etAgeFrom.getText().toString(),etAgeTo.getText().toString(),
+            call = getResponse.searchBasic(spCustProfile.getMatrimonyId(),etAgeFrom.getText().toString(),etAgeTo.getText().toString(),
                 list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id(),
                 list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem())).getCaste_id(),strGender);
         

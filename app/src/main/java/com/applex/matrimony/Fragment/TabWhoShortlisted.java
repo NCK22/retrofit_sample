@@ -132,7 +132,7 @@ public class TabWhoShortlisted extends Fragment {
             mListItem.clear();
 
         getShortlistedMeInterface getResponse = APIClient.getClient().create(getShortlistedMeInterface.class);
-        Call<ParentPojoProfile> call = getResponse.doGetListResources("7180214");
+        Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
         call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
             public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {

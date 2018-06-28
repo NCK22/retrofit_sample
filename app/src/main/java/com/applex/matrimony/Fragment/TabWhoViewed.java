@@ -127,7 +127,7 @@ public class TabWhoViewed extends Fragment {
             mListItem.clear();
 
         getViewedMeInterface getResponse = APIClient.getClient().create(getViewedMeInterface.class);
-        Call<ParentPojoProfile> call = getResponse.doGetListResources("7180214");
+        Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
         call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
             public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {

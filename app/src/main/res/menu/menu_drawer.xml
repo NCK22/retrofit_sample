@@ -23,6 +23,12 @@
             android:title="@string/menu_matches" />
 
         <item
+            android:id="@+id/menu_go_setting"
+            android:checked="true"
+            android:icon="@mipmap/iconsearch"
+            android:title="@string/menu_setting" />
+
+        <item
             android:id="@+id/menu_go_logout"
             android:checked="true"
             android:icon="@mipmap/iconback"
