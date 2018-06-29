@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.applex.matrimony.Fragment.TabChangeEmail;
+import com.applex.matrimony.Fragment.TabChangePassword;
 import com.applex.matrimony.Fragment.TabMyProfile;
 import com.applex.matrimony.Fragment.TabPartnerPreferences;
 import com.applex.matrimony.Fragment.UploadPhoto;
@@ -58,7 +59,7 @@ SPCustProfile spCustProfile;
         setContentView(R.layout.activity_tab_parent_settings);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("My Home");
+        toolbar.setTitle("Settings");
 
         spCustProfile=new SPCustProfile(this);
         setSupportActionBar(toolbar);
@@ -96,7 +97,7 @@ SPCustProfile spCustProfile;
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.getMenu().clear(); //clear old inflated items.
         navigationView.inflateMenu(R.menu.menu_drawer);
-        navigationView.setCheckedItem(R.id.menu_go_profile);
+        navigationView.setCheckedItem(R.id.menu_go_setting);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -146,27 +147,32 @@ SPCustProfile spCustProfile;
             case R.id.menu_go_home:
                 //   toolbar.setTitle(getString(R.string.menu_home));
                 startActivity(new Intent(TabParentSettingsActivity.this, TabViewParentActivity.class));
+                finish();
                 return true;
 
             case R.id.menu_go_matches:
                 //   toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(), TabParentMatchesActivity.class).putExtra("tabFlag", "matches"));
+                finish();
                 return true;
 
 
             case R.id.menu_go_profile:
 //                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(), TabParentProfileActivity.class).putExtra("tabFlag", "profile"));
+                finish();
                 return true;
 
 
             case R.id.menu_go_setting:
 //                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(), TabParentSettingsActivity.class).putExtra("tabFlag", "profile"));
+                finish();
                 return true;
 
             case R.id.menu_go_logout:
                 logout();
+                return true;
 
         }
         return false;
@@ -241,8 +247,8 @@ SPCustProfile spCustProfile;
                 case 1:
 
                     Log.e("Tab", "whoViewed");
-                    TabChangeEmail tabChangeEmail1 = new TabChangeEmail();
-                    return tabChangeEmail1;
+                    TabChangePassword tabChangePassword = new TabChangePassword();
+                    return tabChangePassword;
 
 
 
@@ -320,5 +326,28 @@ SPCustProfile spCustProfile;
         }
     }
 
+    private void exitApp() {
+        new AlertDialog.Builder(TabParentSettingsActivity.this)
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.exit_msg))
+                //.setIcon(R.mipmap.ic_launcher_app)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        exitApp();
+    }
 }
 

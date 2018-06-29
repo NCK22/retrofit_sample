@@ -1910,7 +1910,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             }
         }
 
-        if(mListItem.get(0).getCaste()!=null) {
+        if(mListItem.get(0).getMother_language()!=null) {
             intentMTongue = mListItem.get(0).getMother_language();
             if (intentMTongue.equalsIgnoreCase("0")||intentMTongue.equalsIgnoreCase("")) {
                 tvMTongue.setText("");
@@ -1947,7 +1947,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             }
         }
 
-        if(mListItem.get(0).getCountry()!=null) {
+        if(mListItem.get(0).getState()!=null) {
             intentState = mListItem.get(0).getState();
             if (intentState.equalsIgnoreCase("0")||intentState.equalsIgnoreCase("")) {
                 tvState.setText("");

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.HomeProfilesAdapter;
 import com.applex.matrimony.Interface.APIInterface;
+import com.applex.matrimony.Interface.editEmailInterface;
 import com.applex.matrimony.Interface.getCasteInterface;
 import com.applex.matrimony.Interface.getCityInterface;
 import com.applex.matrimony.Interface.getEducationInterface;
@@ -118,14 +119,48 @@ public class TabChangeEmail extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()){
-
-
-        }
-
+        if(etEmail.getText().toString().length()==0)
+            showToast("Please enter email");
+        else if(!etEmail.getText().toString().contains("@")||!etEmail.getText().toString().contains("."))
+            showToast("Please enter valid Email");
+        else
+        editEmail();
     }
 
+public void editEmail(){
 
+    progressDialog.show();
+    editEmailInterface getResponse = APIClient.getClient().create(editEmailInterface.class);
+    Call<CommonParentPojo> call = getResponse.doGetListResources(etEmail.getText().toString());
+    call.enqueue(new Callback<CommonParentPojo>() {
+        @Override
+        public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
+
+            Log.e("Inside", "onResponse");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+            CommonParentPojo commonParentPojo = response.body();
+            if (commonParentPojo != null) {
+                if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
+                    Log.e("Response", commonParentPojo.getMsg());
+                    spCustProfile.setEmail(etEmail.getText().toString());
+                }
+
+                showToast(commonParentPojo.getMsg());
+            }
+
+            progressDialog.dismiss();
+        }
+
+        @Override
+        public void onFailure(Call<CommonParentPojo> call, Throwable t) {
+
+            Log.e("Throwabe ", "" + t);
+            progressDialog.dismiss();
+        }
+    });
+
+}
 
         //display toast
     public void showToast(String msg){

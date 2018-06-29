@@ -149,17 +149,26 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
             case R.id.menu_go_home:
                // toolbar.setTitle(getString(R.string.menu_home));
                 startActivity(new Intent(TabParentMatchesActivity.this, TabViewParentActivity.class));
+                finish();
                 return true;
 
             case R.id.menu_go_matches:
 //                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                finish();
                 return true;
 
 
             case R.id.menu_go_profile:
 //                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","profile"));
+                finish();
+                return true;
+
+            case R.id.menu_go_setting:
+//                toolbar.setTitle(getString(R.string.menu_matches));
+                startActivity(new Intent(getApplicationContext(), TabParentSettingsActivity.class).putExtra("tabFlag", "profile"));
+                finish();
                 return true;
 
             case R.id.menu_go_logout:
@@ -285,6 +294,30 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
                 })
                 //  .setIcon(R.drawable.ic_logout)
                 .show();
+    }
+
+    private void exitApp() {
+        new AlertDialog.Builder(TabParentMatchesActivity.this)
+                .setTitle(getString(R.string.app_name))
+                .setMessage(getString(R.string.exit_msg))
+                //.setIcon(R.mipmap.ic_launcher_app)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        exitApp();
     }
 }
 

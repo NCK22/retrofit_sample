@@ -60,6 +60,9 @@
         <activity
             android:name=".Activity.TabParentProfileActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Activity.TabParentSettingsActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
