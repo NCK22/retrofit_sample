@@ -14,8 +14,8 @@ public interface updateProfileInterface {
     @POST("app/app_update_profile.php")
     Call<CommonParentPojo> updateBasic(@Field("user_id") String user_id,@Field("profile_for") String profileFor,@Field("profile_name")String profile_name,
                                        @Field("age") String age,@Field("body_type") String body_type,@Field("physical_status") String physical_status,
-                                       @Field("complexion") String complexion,@Field("dob") String dob,@Field("marital_status") String marital_status,
-                                       @Field("height") String height,@Field("weight") String weight, @Field("mother_language") String mother_language,
+                                       @Field("complexion") String complexion,@Field("dob") String dob,@Field("maritial_status") String marital_status,
+                                       @Field("height_id") String height,@Field("weight_id") String weight, @Field("mother_language") String mother_language,
                                        @Field("eating") String eating,@Field("drinking") String drinking, @Field("smoking") String smoking);
 
     @FormUrlEncoded

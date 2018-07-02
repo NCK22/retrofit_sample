@@ -2033,4 +2033,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     public void showToast(String msg){
         Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
+
+
 }
