@@ -1,7 +1,10 @@
 package com.applex.matrimony.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.applex.matrimony.Fragment.TabMatches;
+import com.applex.matrimony.Fragment.TabProfileDetail;
 import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.R;
 import com.squareup.picasso.Picasso;
@@ -58,7 +63,20 @@ public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapte
 
         Picasso.with(mContext).load("http://applex360.in/Deshpande-family/Matrimony-web/"+singleItem.getProfile_photo()).placeholder(R.mipmap.iconprofile).fit().into(holder.image);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                singleItem.getMatrimony_id();
+
+                Toast.makeText(mContext,"Clicked",Toast.LENGTH_SHORT).show();
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.Container, new TabProfileDetail())
+                        .addToBackStack("detail")
+                        .commit();
+
+            }
+        });
 
     }
 
