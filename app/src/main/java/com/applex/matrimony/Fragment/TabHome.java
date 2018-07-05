@@ -3,8 +3,10 @@ package com.applex.matrimony.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -334,11 +336,11 @@ Log.e("searchFlag",searchFlag);
         searchBasicInterface getResponse = APIClient.getClient().create(searchBasicInterface.class);
         Call<ParentPojoProfile> call = null;
         if(searchFlag.equalsIgnoreCase("byid"))
-            call=getResponse.searchById("7180214",etSearchId.getText().toString());
+            call=getResponse.searchById(spCustProfile.getMatrimonyId(),etSearchId.getText().toString());
         else if(searchFlag.equalsIgnoreCase("basic")) 
             call = getResponse.searchBasic(spCustProfile.getMatrimonyId(),etAgeFrom.getText().toString(),etAgeTo.getText().toString(),
-                list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id(),
-                list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem())).getCaste_id(),strGender);
+                spReligion.getSelectedItemPosition()<=0?"":list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id(),
+                spCaste.getSelectedItemPosition()<=0?"":list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem())).getCaste_id(),strGender);
         
         call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
@@ -352,10 +354,22 @@ Log.e("searchFlag",searchFlag);
                     if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
                         Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
-                        list_matches= parentPojoProfile.getObjProfile();
-                        if(list_matches.size()!=0)
+                        list_search= parentPojoProfile.getObjProfile();
+                        if(list_search.size()!=0)
+                        {
+                            Bundle bundle=new Bundle();
+                            bundle.putParcelable("parentPojoProfile", parentPojoProfile);
+                            TabSearchResult tabSearchResult=new TabSearchResult();
+                            tabSearchResult.setArguments(bundle);
 
-                            displayData();
+                           // Toast.makeText(mContext,"Clicked",Toast.LENGTH_SHORT).show();
+                            //((FragmentActivity)getContext())
+                                    getActivity().getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.Container, tabSearchResult)
+                                    .addToBackStack("search")
+                                    .commit();
+                        }
+                          //  displayData();
 
                       // Container.setVisibility(View.VISIBLE);
                       /*  Fragment someFragment = new TabSearchResult();
@@ -465,7 +479,9 @@ Log.e("searchFlag",searchFlag);
     @Override
     public void onClick(View v) {
 
+        Log.e("btnFind","clicked");
         checkValidity();
+        Log.e("flagAllValid",""+flagAllValid);
         if(flagAllValid==true) {
             if (etSearchId.getText().toString().length() > 0)
                 basicSearch("byid");
@@ -492,10 +508,14 @@ Log.e("searchFlag",searchFlag);
     }
 
     public void checkValidity(){
+        Log.e("etSearchlength",""+etSearchId.getText().toString().length());
         if(etSearchId.getText().toString().length()==0) {
             if (!rbGroom.isChecked() && !rbBride.isChecked())
                 showToast("Please check Groom / Bride");
+            else
+                flagAllValid=true;
         }
+        flagAllValid=true;
 
     }
 

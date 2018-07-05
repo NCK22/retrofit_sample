@@ -78,7 +78,8 @@ public void changePassword(){
 
     progressDialog.show();
     changePasswordInterface getResponse = APIClient.getClient().create(changePasswordInterface.class);
-    Call<CommonParentPojo> call = getResponse.doGetListResources(etCurrPwd.getText().toString(),etNewPwd.getText().toString(),etConfirmNewPwd.getText().toString());
+    Call<CommonParentPojo> call = getResponse.doGetListResources(etCurrPwd.getText().toString(),etNewPwd.getText().toString(),
+            etConfirmNewPwd.getText().toString(),spCustProfile.getUser_id());
     call.enqueue(new Callback<CommonParentPojo>() {
         @Override
         public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {

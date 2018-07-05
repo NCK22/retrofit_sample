@@ -10,8 +10,11 @@ import retrofit2.http.POST;
 public interface changePasswordInterface {
 
     @FormUrlEncoded
-    @POST("app/app_change_password.php")
-    Call<CommonParentPojo> doGetListResources(@Field("current_password") String current_password,@Field("new_password") String new_password,@Field("confirm_new_password") String confirm_new_password);
+    @POST("app/app_update_password.php")
+    Call<CommonParentPojo> doGetListResources(@Field("old_password") String old_password,
+                                              @Field("new_password") String new_password,
+                                              @Field("conf_password") String conf_password,
+                                              @Field("user_id") String user_id);
 
 
 }

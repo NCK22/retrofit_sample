@@ -11,8 +11,8 @@ import retrofit2.http.POST;
 public interface editEmailInterface {
 
     @FormUrlEncoded
-    @POST("app/app_edit_email.php")
-    Call<CommonParentPojo> doGetListResources(@Field("email_id") String email_id);
+    @POST("app/app_update_email.php")
+    Call<CommonParentPojo> doGetListResources(@Field("email") String email,@Field("user_id") String user_id);
 
 
 }

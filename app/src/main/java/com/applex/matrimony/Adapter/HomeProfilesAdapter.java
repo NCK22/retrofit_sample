@@ -3,6 +3,7 @@ package com.applex.matrimony.Adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -67,11 +68,15 @@ public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapte
             @Override
             public void onClick(View v) {
 
-                singleItem.getMatrimony_id();
+
+                Bundle bundle=new Bundle();
+                bundle.putString("matrimony_id",singleItem.getMatrimony_id());
+                TabProfileDetail tabProfileDetail=new TabProfileDetail();
+                tabProfileDetail.setArguments(bundle);
 
                 Toast.makeText(mContext,"Clicked",Toast.LENGTH_SHORT).show();
                 ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.Container, new TabProfileDetail())
+                        .replace(R.id.Container, tabProfileDetail)
                         .addToBackStack("detail")
                         .commit();
 

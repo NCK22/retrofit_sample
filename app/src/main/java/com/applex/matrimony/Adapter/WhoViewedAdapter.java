@@ -3,6 +3,8 @@ package com.applex.matrimony.Adapter;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
+import com.applex.matrimony.Fragment.TabProfileDetail;
 import com.applex.matrimony.Interface.getShortlistedMyInterface;
 import com.applex.matrimony.Interface.sendInterestInterface;
 import com.applex.matrimony.Interface.shortListInterface;
@@ -146,6 +149,22 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
             public void onClick(View view) {
 
                 sendInterest(singleItem.getMatrimony_id(),view);
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("matrimony_id",singleItem.getMatrimony_id());
+                TabProfileDetail tabProfileDetail=new TabProfileDetail();
+                tabProfileDetail.setArguments(bundle);
+
+                Toast.makeText(mContext,"Clicked",Toast.LENGTH_SHORT).show();
+                ((FragmentActivity) v.getContext()).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.Container, tabProfileDetail)
+                        .addToBackStack("detail")
+                        .commit();
             }
         });
 

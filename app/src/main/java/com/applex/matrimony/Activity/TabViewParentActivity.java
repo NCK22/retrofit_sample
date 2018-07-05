@@ -91,7 +91,6 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         tabLayout.addOnTabSelectedListener(this);
         tabLayout.setTabTextColors(Color.BLACK,Color.WHITE);
 
-
         intent=getIntent();
 
         bundle = new Bundle();
@@ -416,6 +415,11 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
                 .show();
     }
 
+
+    public void setToolbarTitle(String title)
+    {
+        toolbar.setTitle(title);
+    }
     @Override
     public void onBackPressed() {
         //super.onBackPressed();

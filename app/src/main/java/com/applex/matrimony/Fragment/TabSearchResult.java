@@ -71,6 +71,13 @@ public class TabSearchResult extends Fragment {
        /* ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
         recyclerView.addItemDecoration(itemDecoration);*/
 
+       if(getArguments()!=null)
+       {
+        ParentPojoProfile parentPojoProfile=getArguments().getParcelable("parentPojoProfile");
+        mListItem=parentPojoProfile.getObjProfile();
+        if(mListItem!=null)
+            displayData();
+       }
 
       //  displayData();
 //        getwhoViewedMe();

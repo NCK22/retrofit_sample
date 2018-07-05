@@ -131,7 +131,7 @@ public void editEmail(){
 
     progressDialog.show();
     editEmailInterface getResponse = APIClient.getClient().create(editEmailInterface.class);
-    Call<CommonParentPojo> call = getResponse.doGetListResources(etEmail.getText().toString());
+    Call<CommonParentPojo> call = getResponse.doGetListResources(etEmail.getText().toString(),spCustProfile.getUser_id());
     call.enqueue(new Callback<CommonParentPojo>() {
         @Override
         public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
