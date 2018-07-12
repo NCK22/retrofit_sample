@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Activity.DetailsActivity;
 import com.applex.matrimony.Activity.RegisterActivity;
+import com.applex.matrimony.Adapter.GalleryImagesAdapter;
 import com.applex.matrimony.Adapter.HomeProfilesAdapter;
 import com.applex.matrimony.Interface.APIInterface;
 import com.applex.matrimony.Interface.getCasteInterface;
@@ -198,6 +199,10 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
             intentWeight = "", intentBodyType = "", intentComplexion = "", intentProfileFor = "", intentRaasi = "", intentStar = "", intentGothra = "", intentDosham = "", intentChart = "",
             intentResident="",intentFamilyValue="",intentFamilyStat="",intentFamilyType="";
     SPCustProfile spCustProfile;
+    RecyclerView rv_gallery;
+    GalleryImagesAdapter adapterGallery;
+    ArrayList<String> list_gallery=new ArrayList<String>();
+    ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
 
 
     @Nullable
@@ -210,6 +215,15 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         progressDialog = new ProgressDialog(getActivity());
 
         spCustProfile = new SPCustProfile(getActivity());
+
+
+
+
+        rv_gallery = (RecyclerView) rootView.findViewById(R.id.rv_prof_gallery);
+        rv_gallery.setHasFixedSize(true);
+        rv_gallery.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+
 
         etName = (EditText) rootView.findViewById(R.id.edt_name);
         etAbout = (EditText) rootView.findViewById(R.id.edt_about_you);
@@ -413,6 +427,13 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
 
         llAbt = (LinearLayout) rootView.findViewById(R.id.ll_about);
 
+        list_ll.add(llAbt);
+        list_ll.add(llBasic);
+        list_ll.add(llReligion);
+        list_ll.add(llGroomBrideLoc);
+        list_ll.add(llProfessional);
+        list_ll.add(llFamily);
+        list_ll.add(llAbtFam);
 
         imgEditBasic = (ImageView) rootView.findViewById(R.id.img_editSave_basic);
         imgClearBasic = (ImageView) rootView.findViewById(R.id.img_clear_basic);
@@ -454,9 +475,32 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         spCountry.setMultiline(true);
 
 //        getProfile();
-
+displayData();
         return rootView;
 
+    }
+
+    private void displayData() {
+
+
+        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
+        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
+        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
+        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
+        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
+        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
+
+        Log.e("displayData","called");
+        Log.e("List_highlight size",""+list_gallery.size());
+        adapterGallery = new GalleryImagesAdapter(getActivity(), list_gallery);
+        rv_gallery.setAdapter(adapterGallery);
+
+
+        if (adapterGallery.getItemCount() == 0) {
+            //          lyt_not_found.setVisibility(View.VISIBLE);
+        } else {
+//            lyt_not_found.setVisibility(View.GONE);
+        }
     }
 
 
@@ -768,10 +812,11 @@ if(view!=null) {
         switch (v.getId()) {
 
             case R.id.btnBasic:
-                if (llBasic.getVisibility() == View.GONE)
+                keepButtonOpen("basic");
+               /* if (llBasic.getVisibility() == View.GONE)
                     llBasic.setVisibility(View.VISIBLE);
                 else
-                    llBasic.setVisibility(View.GONE);
+                    llBasic.setVisibility(View.GONE);*/
                 break;
 
             case R.id.img_clear_basic:
@@ -792,10 +837,11 @@ if(view!=null) {
                 }
 
             case R.id.btnReligion:
-                if (llReligion.getVisibility() == View.GONE)
+               /* if (llReligion.getVisibility() == View.GONE)
                     llReligion.setVisibility(View.VISIBLE);
                 else
-                    llReligion.setVisibility(View.GONE);
+                    llReligion.setVisibility(View.GONE);*/
+               keepButtonOpen("religion");
                 break;
 
             case R.id.img_clear_religion:
@@ -818,10 +864,11 @@ if(view!=null) {
 
 
             case R.id.btnGroomBrideLoc:
-                if (llGroomBrideLoc.getVisibility() == View.GONE)
+                /*if (llGroomBrideLoc.getVisibility() == View.GONE)
                     llGroomBrideLoc.setVisibility(View.VISIBLE);
                 else
-                    llGroomBrideLoc.setVisibility(View.GONE);
+                    llGroomBrideLoc.setVisibility(View.GONE);*/
+                keepButtonOpen("location");
                 break;
 
             case R.id.img_clear_groomBrideLoc:
@@ -843,10 +890,11 @@ if(view!=null) {
                 break;
 
             case R.id.btnProfessional:
-                if (llProfessional.getVisibility() == View.GONE)
+               /* if (llProfessional.getVisibility() == View.GONE)
                     llProfessional.setVisibility(View.VISIBLE);
                 else
-                    llProfessional.setVisibility(View.GONE);
+                    llProfessional.setVisibility(View.GONE);*/
+               keepButtonOpen("professional");
                 break;
 
             case R.id.img_clear_professional:
@@ -867,10 +915,11 @@ if(view!=null) {
                 }
 
             case R.id.btnFamily:
-                if (llFamily.getVisibility() == View.GONE)
+           /*     if (llFamily.getVisibility() == View.GONE)
                     llFamily.setVisibility(View.VISIBLE);
                 else
-                    llFamily.setVisibility(View.GONE);
+                    llFamily.setVisibility(View.GONE);*/
+           keepButtonOpen("Family");
                 break;
 
             case R.id.img_clear_family:
@@ -890,10 +939,11 @@ if(view!=null) {
                     updateProfile("family_details");
                 }
             case R.id.btnAboutFamily:
-                if (llAbtFam.getVisibility() == View.GONE)
+           /*     if (llAbtFam.getVisibility() == View.GONE)
                     llAbtFam.setVisibility(View.VISIBLE);
                 else
-                    llAbtFam.setVisibility(View.GONE);
+                    llAbtFam.setVisibility(View.GONE);*/
+           keepButtonOpen("aboutFam");
                 break;
 
             case R.id.img_clear_aboutFam:
@@ -917,10 +967,11 @@ if(view!=null) {
 
 
             case R.id.btnAboutGroomBride:
-                if (llAbt.getVisibility() == View.GONE)
+               /* if (llAbt.getVisibility() == View.GONE)
                     llAbt.setVisibility(View.VISIBLE);
                 else
-                    llAbt.setVisibility(View.GONE);
+                    llAbt.setVisibility(View.GONE);*/
+               keepButtonOpen("about");
                 break;
 
             case R.id.img_clear_about:
@@ -940,8 +991,6 @@ if(view!=null) {
                 } else {
                     updateAbout();
                 }
-
-
         }
 
     }
@@ -3030,5 +3079,108 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
         spFood.setSelection(0);
         spDrink.setSelection(0);
         spSmoke.setSelection(0);
+    }
+
+    public void keepButtonOpen(String section)
+    {
+
+
+       switch(section)
+       {
+           case "basic": if (llBasic.getVisibility() == View.GONE) {
+               for(int i=0;i<list_ll.size();i++)
+               {
+                   list_ll.get(i).setVisibility(View.GONE);
+               }
+               llBasic.setVisibility(View.VISIBLE);
+           }
+           else
+               llBasic.setVisibility(View.GONE);
+
+           break;
+
+           case "about":
+               if (llAbt.getVisibility() == View.GONE) {
+
+                   for(int i=0;i<list_ll.size();i++)
+                   {
+                       list_ll.get(i).setVisibility(View.GONE);
+                   }
+                   llAbt.setVisibility(View.VISIBLE);
+               }
+           else
+               llAbt.setVisibility(View.GONE);
+
+               break;
+
+           case "religion":
+               if (llReligion.getVisibility() == View.GONE) {
+                   for(int i=0;i<list_ll.size();i++)
+                   {
+                       list_ll.get(i).setVisibility(View.GONE);
+                   }
+
+                   llReligion.setVisibility(View.VISIBLE);
+               }
+           else
+               llReligion.setVisibility(View.GONE);
+
+               break;
+
+           case "location": if (llGroomBrideLoc.getVisibility() == View.GONE) {
+               for(int i=0;i<list_ll.size();i++)
+               {
+                   list_ll.get(i).setVisibility(View.GONE);
+               }
+               llGroomBrideLoc.setVisibility(View.VISIBLE);
+           }
+           else
+               llGroomBrideLoc.setVisibility(View.GONE);
+
+               break;
+
+           case "professional":
+               if (llProfessional.getVisibility() == View.GONE) {
+
+                   for(int i=0;i<list_ll.size();i++)
+                   {
+                       list_ll.get(i).setVisibility(View.GONE);
+                   }
+                   llProfessional.setVisibility(View.VISIBLE);
+               }
+               else
+                   llProfessional.setVisibility(View.GONE);
+
+               break;
+
+           case "Family":
+               if (llFamily.getVisibility() == View.GONE) {
+                   for(int i=0;i<list_ll.size();i++)
+                   {
+                       list_ll.get(i).setVisibility(View.GONE);
+                   }
+
+                   llFamily.setVisibility(View.VISIBLE);
+               }
+               else
+                   llFamily.setVisibility(View.GONE);
+
+               break;
+
+           case "aboutFam":
+               if (llAbtFam.getVisibility() == View.GONE) {
+                   for(int i=0;i<list_ll.size();i++)
+                   {
+                       list_ll.get(i).setVisibility(View.GONE);
+                   }
+
+                   llAbtFam.setVisibility(View.VISIBLE);
+               }
+               else
+                   llAbtFam.setVisibility(View.GONE);
+
+               break;
+       }
+
     }
 }

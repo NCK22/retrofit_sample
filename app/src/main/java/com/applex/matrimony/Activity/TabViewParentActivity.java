@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -20,7 +22,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TabWidget;
@@ -37,6 +41,7 @@ import com.applex.matrimony.Interface.getProfileInterface;
 import com.applex.matrimony.Pojo.ParentPojoProfile;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -61,7 +66,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
     TextView toolbar_textView;
     DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    BottomNavigationView bottmNavView;
+    BottomNavigationViewEx bottmNavView;
     TextView testtv;
     TabLayout tabLayout;
     SPCustProfile spCustProfile;
@@ -110,7 +115,6 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView.getMenu().clear(); //clear old inflated items.
@@ -133,8 +137,18 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        bottmNavView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);
-bottmNavView.setOnNavigationItemSelectedListener(this);
+        bottmNavView=(BottomNavigationViewEx)findViewById(R.id.bottomNavigationView);
+        bottmNavView.setOnNavigationItemSelectedListener(this);
+        bottmNavView.setSelectedItemId(R.id.bmenu_go_home);
+        bottmNavView.enableAnimation(false);
+        bottmNavView.enableShiftingMode(false);
+        bottmNavView.enableItemShiftingMode(false);
+        bottmNavView.setIconSize(30,30);
+        bottmNavView.setTextSize(0);
+        bottmNavView.setTextVisibility(false);
+        bottmNavView.setPadding(0,0,0,10);
+
+        bottmNavView.setIconSizeAt(bottmNavView.getMenuItemPosition(bottmNavView.getMenu().findItem(bottmNavView.getSelectedItemId())),32,32);
 
     Log.e("SPProfilephoto",spCustProfile.getProfilePhotoPath());
        if(spCustProfile.getProfilePhotoPath().equalsIgnoreCase(""))
@@ -163,26 +177,33 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         item.setChecked(true);
+        View view =item.getActionView();
+//        view.setDrawingCacheBackgroundColor(R.color.btm_state_list);
         drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.menu_go_home:
+                Log.e("menu","home");
              //   toolbar.setTitle(getString(R.string.menu_home));
+
                 startActivity(new Intent(TabViewParentActivity.this, TabViewParentActivity.class));
                 return true;
 
             case R.id.menu_go_matches:
+                Log.e("menu","matches");
              //   toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
                 finish();
                 return true;
 
             case R.id.menu_go_profile:
+                Log.e("menu","profile");
 //                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(),TabParentProfileActivity.class).putExtra("tabFlag","profile"));
                 finish();
                 return true;
 
             case R.id.menu_go_setting:
+                Log.e("menu","settings");
 //                toolbar.setTitle(getString(R.string.menu_matches));
                 startActivity(new Intent(getApplicationContext(), TabParentSettingsActivity.class).putExtra("tabFlag", "profile"));
                 finish();
@@ -196,22 +217,9 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
             return false;
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
 
-        Log.e("hascapture",""+hasCapture);
-        switch(bottmNavView.getSelectedItemId())
-        {
-            case R.id.menu_go_home:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","home"));
-                break;
 
-            case R.id.menu_go_profile:break;
-            case R.id.menu_go_matches:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
-                break;
-        }
-    }
+
 
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -263,8 +271,6 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 
         }
 
-
-
         @Override
         public int getItemPosition(@NonNull Object object) {
             Log.e("positionItem",""+object);
@@ -285,11 +291,11 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
         switch (item.getItemId()) {
             case android.R.id.home:
                 //onBackPressed();
-                startActivity(new Intent(getApplicationContext(),TabViewParentActivity.class).putExtra("tabFlag","home"));
+               // startActivity(new Intent(getApplicationContext(),TabViewParentActivity.class).putExtra("tabFlag","home"));
                 break;
 
             case R.id.menu_go_matches:
-                startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
+                //startActivity(new Intent(getApplicationContext(),TabParentMatchesActivity.class).putExtra("tabFlag","matches"));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -324,7 +330,6 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
     public void getProfile(){
 
         progressDialog.show();
-
 
         getProfileInterface getResponse = APIClient.getClient().create(getProfileInterface.class);
         Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());

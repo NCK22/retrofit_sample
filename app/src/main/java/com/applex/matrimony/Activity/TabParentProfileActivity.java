@@ -120,6 +120,9 @@ SPCustProfile spCustProfile;
         bottmNavView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottmNavView.setOnNavigationItemSelectedListener(this);
 
+
+
+
         setHeader();
 
     }

@@ -91,7 +91,7 @@
                     android:fontFamily="Roboto-Medium"
                     android:textColor="#FFFFFF"
                     android:background="@drawable/border_whoview_premium"
-                    android:visibility="invisible"/>
+                    android:visibility="visible"/>
 
 
             </LinearLayout>
@@ -304,7 +304,7 @@
                         android:fontFamily="Roboto-Medium"
                         android:textColor="#4A4A4A"
                         android:background="@drawable/border_whoview_send"
-                        android:visibility="invisible"/>
+                        android:visibility="visible"/>
 
                     <android.support.v4.widget.Space
                         android:layout_width="0dp"

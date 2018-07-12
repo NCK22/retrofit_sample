@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#00000000"
+    >
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="vertical"
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="#00000000">
+
+
+                <ImageView
+                    android:id="@+id/img_row_logo"
+                    android:layout_width="50dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="50dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@mipmap/addicon"
+
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/gallery_photo_border"
+                    />
+
+
+            </LinearLayout>
+
+</LinearLayout>

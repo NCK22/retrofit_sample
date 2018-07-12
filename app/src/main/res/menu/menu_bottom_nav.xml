@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" >
 
 
         <item
             android:id="@+id/menu_go_home"
-            android:checkable="false"
+
             android:icon="@mipmap/iconhome"
             android:title=""
             />
 
         <item
             android:id="@+id/menu_go_profile"
-            android:checked="true"
+
             android:icon="@mipmap/iconprofile"
             android:title="" />
 
         <item
             android:id="@+id/menu_go_matches"
-            android:checked="true"
+
             android:icon="@mipmap/iconmatches"
             android:title="" />
 
