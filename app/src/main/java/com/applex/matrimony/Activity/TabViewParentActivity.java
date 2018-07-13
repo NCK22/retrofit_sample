@@ -146,9 +146,11 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
         bottmNavView.setIconSize(30,30);
         bottmNavView.setTextSize(0);
         bottmNavView.setTextVisibility(false);
-        bottmNavView.setPadding(0,0,0,10);
+        bottmNavView.setFocusableInTouchMode(true);
+        bottmNavView.setPadding(0,0,0,0);
 
-        bottmNavView.setIconSizeAt(bottmNavView.getMenuItemPosition(bottmNavView.getMenu().findItem(bottmNavView.getSelectedItemId())),32,32);
+      //  bottmNavView.setItemBackground(0,R.color.colorTheme);
+     //   bottmNavView.setIconSizeAt(bottmNavView.getMenuItemPosition(bottmNavView.getMenu().findItem(bottmNavView.getSelectedItemId())),32,32);
 
     Log.e("SPProfilephoto",spCustProfile.getProfilePhotoPath());
        if(spCustProfile.getProfilePhotoPath().equalsIgnoreCase(""))
@@ -381,7 +383,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
             if(spCustProfile.getProfilePhotoPath()!=null) {
                 Log.e("profile_photo","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
                 Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
-                        //.placeholder(R.drawable.placeholder)
+                        .placeholder(R.mipmap.userprofile)
                         .into(imageUser);
             }
             header.setOnClickListener(new View.OnClickListener() {

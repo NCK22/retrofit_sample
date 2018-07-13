@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"></include>
 
-        <android.support.design.widget.BottomNavigationView
+        <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,10 +35,10 @@
             android:layout_marginLeft="0dp"
             android:layout_marginStart="0dp"
             android:background="@color/navBg"
+            app:itemBackground="@drawable/btm_state_list"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            app:itemBackground="@color/colorTheme"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
             app:menu="@menu/menu_bottom_nav"

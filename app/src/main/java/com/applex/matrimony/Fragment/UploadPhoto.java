@@ -165,12 +165,13 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
        // File file = new File(docPath);
 
         // Parsing any Media type file
+        Log.v("profile_id",spCustProfile.getProfile_id());
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), imageFile);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", imageFile.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("JPEG/PNG"), imageFile.getName());
-        RequestBody profile_id = RequestBody.create(null, spCustProfile.getProfile_id());
+        RequestBody profile_id = RequestBody.create(MediaType.parse("text/plain"), spCustProfile.getProfile_id());
         uploadPhotoInterface getResponse = APIClient.getClient().create(uploadPhotoInterface.class);
-        Call<CommonParentPojo> call = getResponse.uploadFile(fileToUpload, filename,profile_id);
+        Call<CommonParentPojo> call = getResponse.uploadFile(fileToUpload, filename, profile_id);
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
             public void onResponse(Call<CommonParentPojo> call, retrofit2.Response<CommonParentPojo> response) {

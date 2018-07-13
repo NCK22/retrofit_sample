@@ -50,10 +50,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/btm_state_list"
+            app:itemBackground="@drawable/btm_state_list"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
             app:menu="@menu/menu_bottom_nav"
             />
 

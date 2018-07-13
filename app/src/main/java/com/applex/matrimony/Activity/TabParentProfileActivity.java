@@ -313,7 +313,7 @@ SPCustProfile spCustProfile;
             if(spCustProfile.getProfilePhotoPath()!=null) {
                 Log.e("profile_photo","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
                 Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
-                        //.placeholder(R.drawable.placeholder)
+                        .placeholder(R.mipmap.userprofile)
                         .into(imageUser);
             }
             header.setOnClickListener(new View.OnClickListener() {

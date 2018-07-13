@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
+import android.support.v4.media.AudioAttributesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -159,9 +160,9 @@ public class UploadPhotoActivity extends AppCompatActivity implements View.OnCli
 
         // Parsing any Media type file
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), imageFile);
-        RequestBody profile_id = RequestBody.create(null, spCustProfile.getProfile_id());
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", imageFile.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("JPEG/PNG"), imageFile.getName());
+        RequestBody profile_id = RequestBody.create(MediaType.parse("text/plain"), spCustProfile.getProfile_id());
 
         uploadPhotoInterface getResponse = APIClient.getClient().create(uploadPhotoInterface.class);
         Call<CommonParentPojo> call = getResponse.uploadFile(fileToUpload, filename,profile_id);

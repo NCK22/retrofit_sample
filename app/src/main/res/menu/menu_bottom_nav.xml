@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single" >
 
 
         <item
             android:id="@+id/menu_go_home"
-
             android:icon="@mipmap/iconhome"
             android:title=""
+            app:showAsAction="never"
             />
 
         <item
             android:id="@+id/menu_go_profile"
 
             android:icon="@mipmap/iconprofile"
-            android:title="" />
+            android:title=""
+            app:showAsAction="never"/>
 
         <item
             android:id="@+id/menu_go_matches"
 
             android:icon="@mipmap/iconmatches"
-            android:title="" />
+            android:title=""
+            app:showAsAction="never"/>
 
     </group>
 </menu>

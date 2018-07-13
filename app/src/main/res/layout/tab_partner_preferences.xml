@@ -1506,7 +1506,7 @@
                                             app:ms_hintTextSize="16sp"
                                             app:ms_hint="Education"
                                             app:ms_hintColor="@color/black"
-                                            app:ms_multiline="false"
+                                            app:ms_multiline="true"
                                             app:ms_thickness="0.5dp"
                                             android:popupBackground="#e6e6e6"
                                             android:popupElevation="@dimen/floating_label_bottom_spacing"

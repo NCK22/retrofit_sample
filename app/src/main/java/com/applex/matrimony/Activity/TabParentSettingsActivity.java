@@ -29,6 +29,7 @@ import com.applex.matrimony.Fragment.TabPartnerPreferences;
 import com.applex.matrimony.Fragment.UploadPhoto;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.squareup.picasso.Picasso;
 
 import cn.gavinliu.android.lib.shapedimageview.ShapedImageView;
@@ -44,7 +45,7 @@ public class TabParentSettingsActivity extends AppCompatActivity implements TabL
     TextView toolbar_textView;
     DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    BottomNavigationView bottmNavView;
+    BottomNavigationViewEx bottmNavView;
     TextView testtv;
     TabLayout tabLayout;
 
@@ -115,8 +116,17 @@ SPCustProfile spCustProfile;
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
-        bottmNavView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
+        bottmNavView = (BottomNavigationViewEx) findViewById(R.id.bottomNavigationView);
         bottmNavView.setOnNavigationItemSelectedListener(this);
+        //bottmNavView.setSelectedItemId(R.id.bMenu);
+        bottmNavView.enableAnimation(false);
+        bottmNavView.enableShiftingMode(false);
+        bottmNavView.enableItemShiftingMode(false);
+        bottmNavView.setIconSize(30,30);
+                bottmNavView.setTextVisibility(false);
+        bottmNavView.setPadding(0,0,0,10);
+
+        bottmNavView.setIconSizeAt(bottmNavView.getMenuItemPosition(bottmNavView.getMenu().findItem(bottmNavView.getSelectedItemId())),32,32);
 
         setHeader();
 
@@ -305,7 +315,7 @@ SPCustProfile spCustProfile;
             if(spCustProfile.getProfilePhotoPath()!=null) {
                 Log.e("profile_photo","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
                 Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
-                        //.placeholder(R.drawable.placeholder)
+                        .placeholder(R.mipmap.userprofile)
                         .into(imageUser);
             }
             header.setOnClickListener(new View.OnClickListener() {

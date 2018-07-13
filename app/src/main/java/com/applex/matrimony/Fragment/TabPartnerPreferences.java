@@ -201,6 +201,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             intentOccu="",intentEdu="",intentMTongue="",intentPhysicalStat="",intentHeightFrom="",intentHeightTo="",intentEating="",intentDrinking="",
     intentSmoking="";
     SPCustProfile spCustProfile;
+    ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
 
     @Nullable
     @Override
@@ -389,6 +390,13 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         llAbtFam=(LinearLayout)rootView.findViewById(R.id.ll_about_family);
 
         llAbt=(LinearLayout)rootView.findViewById(R.id.ll_about);
+
+
+        list_ll.add(llAbt);
+        list_ll.add(llBasic);
+        list_ll.add(llReligion);
+        list_ll.add(llGroomBrideLoc);
+        list_ll.add(llProfessional);
 
 
 
@@ -692,10 +700,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         switch(v.getId()){
 
             case R.id.btnBasic:
-                if(llBasic.getVisibility()==View.GONE)
+              keepButtonOpen("basic");
+                /*  if(llBasic.getVisibility()==View.GONE)
                     llBasic.setVisibility(View.VISIBLE);
                 else
-                    llBasic.setVisibility(View.GONE);
+                    llBasic.setVisibility(View.GONE);*/
                 break;
 
             case R.id.img_clear_basic:
@@ -717,10 +726,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 }
 
             case R.id.btnReligion:
-                if(llReligion.getVisibility()==View.GONE)
+              keepButtonOpen("religion");
+                /*  if(llReligion.getVisibility()==View.GONE)
                     llReligion.setVisibility(View.VISIBLE);
                 else
-                    llReligion.setVisibility(View.GONE);
+                    llReligion.setVisibility(View.GONE);*/
                 break;
 
             case R.id.img_clear_religion:
@@ -744,10 +754,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
 
             case R.id.btnGroomBrideLoc:
-                if(llGroomBrideLoc.getVisibility()==View.GONE)
+                keepButtonOpen("location");
+                /*if(llGroomBrideLoc.getVisibility()==View.GONE)
                     llGroomBrideLoc.setVisibility(View.VISIBLE);
                 else
-                    llGroomBrideLoc.setVisibility(View.GONE);
+                    llGroomBrideLoc.setVisibility(View.GONE);*/
                 break;
 
             case R.id.img_clear_groomBrideLoc:
@@ -770,10 +781,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 break;
 
             case R.id.btnProfessional:
-                if(llProfessional.getVisibility()==View.GONE)
+               keepButtonOpen("professional");
+                /* if(llProfessional.getVisibility()==View.GONE)
                     llProfessional.setVisibility(View.VISIBLE);
                 else
-                    llProfessional.setVisibility(View.GONE);
+                    llProfessional.setVisibility(View.GONE);*/
                 break;
 
             case R.id.img_clear_professional:
@@ -847,10 +859,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 */
 
             case R.id.btnAboutGroomBride:
-                if(llAbt.getVisibility()==View.GONE)
+               keepButtonOpen("about");
+                /* if(llAbt.getVisibility()==View.GONE)
                     llAbt.setVisibility(View.VISIBLE);
                 else
-                    llAbt.setVisibility(View.GONE);
+                    llAbt.setVisibility(View.GONE);*/
                 break;
 
             case R.id.img_clear_about:
@@ -2032,6 +2045,82 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     //display toast
     public void showToast(String msg){
         Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
+    }
+
+    public void keepButtonOpen(String section)
+    {
+
+
+        switch(section)
+        {
+            case "basic": if (llBasic.getVisibility() == View.GONE) {
+                for(int i=0;i<list_ll.size();i++)
+                {
+                    list_ll.get(i).setVisibility(View.GONE);
+                }
+                llBasic.setVisibility(View.VISIBLE);
+            }
+            else
+                llBasic.setVisibility(View.GONE);
+
+                break;
+
+            case "about":
+                if (llAbt.getVisibility() == View.GONE) {
+
+                    for(int i=0;i<list_ll.size();i++)
+                    {
+                        list_ll.get(i).setVisibility(View.GONE);
+                    }
+                    llAbt.setVisibility(View.VISIBLE);
+                }
+                else
+                    llAbt.setVisibility(View.GONE);
+
+                break;
+
+            case "religion":
+                if (llReligion.getVisibility() == View.GONE) {
+                    for(int i=0;i<list_ll.size();i++)
+                    {
+                        list_ll.get(i).setVisibility(View.GONE);
+                    }
+
+                    llReligion.setVisibility(View.VISIBLE);
+                }
+                else
+                    llReligion.setVisibility(View.GONE);
+
+                break;
+
+            case "location": if (llGroomBrideLoc.getVisibility() == View.GONE) {
+                for(int i=0;i<list_ll.size();i++)
+                {
+                    list_ll.get(i).setVisibility(View.GONE);
+                }
+                llGroomBrideLoc.setVisibility(View.VISIBLE);
+            }
+            else
+                llGroomBrideLoc.setVisibility(View.GONE);
+
+                break;
+
+            case "professional":
+                if (llProfessional.getVisibility() == View.GONE) {
+
+                    for(int i=0;i<list_ll.size();i++)
+                    {
+                        list_ll.get(i).setVisibility(View.GONE);
+                    }
+                    llProfessional.setVisibility(View.VISIBLE);
+                }
+                else
+                    llProfessional.setVisibility(View.GONE);
+
+                break;
+
+        }
+
     }
 
 

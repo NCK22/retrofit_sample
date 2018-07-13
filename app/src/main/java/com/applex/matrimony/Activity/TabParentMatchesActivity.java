@@ -31,6 +31,9 @@ import com.applex.matrimony.Fragment.TabWhoShortlisted;
 import com.applex.matrimony.Fragment.TabWhoViewed;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
+import com.squareup.picasso.Picasso;
+
+import cn.gavinliu.android.lib.shapedimageview.ShapedImageView;
 
 public class TabParentMatchesActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -121,6 +124,7 @@ public class TabParentMatchesActivity extends AppCompatActivity implements TabLa
 bottmNavView.setOnNavigationItemSelectedListener(this);
 
 
+setHeader();
     }
 
     @Override
@@ -178,6 +182,39 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
             return false;
     }
 
+    private void setHeader() {
+        if (spCustProfile.getIsLogin().equalsIgnoreCase("true")) {
+            View header = navigationView.getHeaderView(0);
+            TextView txtHeaderName = (TextView) header.findViewById(R.id.header_name);
+            TextView txtHeaderEmail = (TextView) header.findViewById(R.id.header_email);
+            final ShapedImageView imageUser = (ShapedImageView) header.findViewById(R.id.header_image);
+            // txtHeaderName.setText(spCustProfile.get());
+            txtHeaderEmail.setText(spCustProfile.getEmail());
+
+            if(spCustProfile.getProfilePhotoPath()!=null) {
+                Log.e("profile_photo","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
+                Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
+                        .placeholder(R.mipmap.userprofile)
+                        .into(imageUser);
+            }
+            header.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    /*Intent profile = new Intent(TabParentProfileActivity.this, TabParentProfileActivity.class);
+                    profile.putExtra("id", MyApp.getUserId());
+                    if (MyApp.getIsJobProvider())
+                        profile.putExtra("p_type", "jp");
+                    else
+                        profile.putExtra("p_type", "js");
+                    profile.putExtra("editFlag", "true");
+                    profile.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(profile);*/
+                }
+            });
+        }
+    }
+
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
@@ -211,7 +248,6 @@ bottmNavView.setOnNavigationItemSelectedListener(this);
 
 
             switch (position) {
-
 
                 case 0:
                     Log.e("Tab", "home");
