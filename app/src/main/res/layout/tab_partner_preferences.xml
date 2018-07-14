@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_marginBottom="70dp"
-    android:background="#ffffff"
-    >
+    android:background="#ffffff"  >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,6 +45,7 @@
                 android:textAllCaps="false"
                 android:textColor="#4A4A4A"
                 android:textSize="16sp" />
+
             <LinearLayout
                 android:id="@+id/ll_basic"
                 android:layout_width="match_parent"
@@ -1021,16 +1021,9 @@
                                             />
                                     </LinearLayout>
                                 </LinearLayout>
-
                             </LinearLayout>
                         </FrameLayout>
-
-
-
                     </LinearLayout>
-
-
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -1052,6 +1045,7 @@
                 android:textAllCaps="false"
                 android:textColor="#4A4A4A"
                 android:textSize="16sp" />
+
             <LinearLayout
                 android:id="@+id/ll_groomBrideLoc"
                 android:layout_width="match_parent"
@@ -1472,7 +1466,6 @@
                                 android:weightSum="3"
                                 android:layout_marginTop="5dp"
                                 android:visibility="invisible">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
@@ -1487,8 +1480,6 @@
                                         android:layout_marginBottom="4dp"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
-
-
                                         <fr.ganfra.materialspinner.MaterialSpinner
                                             android:id="@+id/sp_edu"
                                             android:layout_width="match_parent"
@@ -1583,6 +1574,7 @@
                                             android:fontFamily="Roboto-Regular"
                                             android:textSize="16sp"
                                             android:textColor="#4A4A4A"
+                                            android:singleLine="true"
                                             />
                                     </LinearLayout>
 
@@ -1654,6 +1646,7 @@
                         android:visibility="visible"/>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1677,8 +1670,6 @@
                         />
 
                 </LinearLayout>
-
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

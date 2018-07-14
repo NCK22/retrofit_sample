@@ -77,6 +77,7 @@ import com.applex.matrimony.Pojo.ParentPojoWeight;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -186,7 +187,7 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
     LinearLayout llBasic, llBasicEdit, llBasicView, llReligion, llReligionEdit, llReligionView, llGroomBrideLoc, llGroomBrideLocEdit, llGroomBrideLocView,
             llProfessional, llProfessionalEdit, llProfessionalView, llFamily, llFamilyEdit, llFamilyView, llAbtFam, llAbt;
 
-    ImageView imgEditBasic, imgClearBasic, imgEditProfessional, imgClearProfessional, imgEditReligion, imgClearReligion, imgEditGroomBrideLoc, imgClearGroomBrideLoc, imgEditFam, imgClearFam, imgEditAbtFam, imgClearAbtFam, imgEditAbout, imgClearAbout;
+    ImageView imgProfPic,imgEditBasic, imgClearBasic, imgEditProfessional, imgClearProfessional, imgEditReligion, imgClearReligion, imgEditGroomBrideLoc, imgClearGroomBrideLoc, imgEditFam, imgClearFam, imgEditAbtFam, imgClearAbtFam, imgEditAbout, imgClearAbout;
 
     TextView tvProfFor, tvName, tvAge, tvMaritalStat, tvBodyType, tvPhysicalStat, tvHeight, tvWeight, tvComplexion, tvMTongue, tvFood, tvDrink, tvSmoke,
             tvReligion, tvCaste, tvSubCaste, tvRaasi, tvStar, tvGotra, tvDosh, tvBirthTime, tvBirthCountry, tvBirthState, tvBirthCity, tvChartStyle,
@@ -434,6 +435,8 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         list_ll.add(llProfessional);
         list_ll.add(llFamily);
         list_ll.add(llAbtFam);
+
+        imgProfPic=(ImageView)rootView.findViewById(R.id.img_profile_pic);
 
         imgEditBasic = (ImageView) rootView.findViewById(R.id.img_editSave_basic);
         imgClearBasic = (ImageView) rootView.findViewById(R.id.img_clear_basic);
@@ -2235,6 +2238,9 @@ if(view!=null) {
         spProfFor.setSelection(list_prof_for.indexOf(mListItem.get(0).getProfile_for()+1));*/
        /* tvProfFor.setText(list_prof_for.get(Integer.parseInt(mListItem.get(0).getProfile_for())-1));
         spProfFor.setSelection(Integer.parseInt(mListItem.get(0).getProfile_for()));*/
+        Picasso.with(getActivity()).load("http://applex360.in/Deshpande-family/Matrimony-web/"+mListItem.get(0).getProfile_photo()).
+                placeholder(R.mipmap.addicon).fit().into(imgProfPic);
+
         tvName.setText(mListItem.get(0).getProfile_name());
         etName.setText(mListItem.get(0).getProfile_name());
         tvAge.setText(mListItem.get(0).getAge());

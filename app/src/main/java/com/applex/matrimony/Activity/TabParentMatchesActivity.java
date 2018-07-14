@@ -121,10 +121,9 @@ public class TabParentMatchesActivity extends AppCompatActivity implements TabLa
         actionBarDrawerToggle.syncState();
 
         bottmNavView=(BottomNavigationView)findViewById(R.id.bottomNavigationView);
-bottmNavView.setOnNavigationItemSelectedListener(this);
+        bottmNavView.setOnNavigationItemSelectedListener(this);
 
-
-setHeader();
+        setHeader();
     }
 
     @Override

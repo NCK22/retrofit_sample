@@ -301,6 +301,7 @@
                         android:textSize="16dp"
                         android:padding="10dp"
                         android:textColor="#ffffff"
+                        android:singleLine="true"
                         />
 
                     <View
@@ -324,6 +325,7 @@
                         android:inputType="phone"
                         android:padding="10dp"
                         android:textColor="#ffffff"
+                        android:singleLine="true"
                         />
 
                 </LinearLayout>
@@ -373,6 +375,7 @@
                         android:textSize="16dp"
                         android:padding="10dp"
                         android:textColor="#ffffff"
+                        android:singleLine="true"
                         />
 
                 </LinearLayout>

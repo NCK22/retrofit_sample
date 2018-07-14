@@ -246,7 +246,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             }
         });
 */
-
         tvProfFor=(TextView)rootView.findViewById(R.id.tv_profile_for);
         tvName=(TextView)rootView.findViewById(R.id.tv_name);
         tvAge=(TextView)rootView.findViewById(R.id.tv_age);

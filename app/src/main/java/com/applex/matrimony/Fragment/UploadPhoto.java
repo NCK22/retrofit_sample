@@ -165,7 +165,8 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
        // File file = new File(docPath);
 
         // Parsing any Media type file
-        Log.v("profile_id",spCustProfile.getProfile_id());
+        spCustProfile.setProfile_id("83");
+        Log.e("profile_id",spCustProfile.getProfile_id());
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), imageFile);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", imageFile.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("JPEG/PNG"), imageFile.getName());
