@@ -350,6 +350,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
                         if(parentPojoProfile.getObjProfile().get(0).getProfile_photo()!=null) {
                             Log.e("profile_photo res", parentPojoProfile.getObjProfile().get(0).getProfile_photo());
                             spCustProfile.setProfilePhotoPath(parentPojoProfile.getObjProfile().get(0).getProfile_photo());
+                            spCustProfile.setName(parentPojoProfile.getObjProfile().get(0).getProfile_name());
                         }
                        setHeader();
 
@@ -421,7 +422,6 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
                 })
                 .show();
     }
-
 
     public void setToolbarTitle(String title)
     {

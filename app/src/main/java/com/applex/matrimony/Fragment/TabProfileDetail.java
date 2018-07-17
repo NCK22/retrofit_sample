@@ -710,6 +710,7 @@ displayData();
                 } else {
                     //updateProfile("basic");
                 }
+                break;
 
             case R.id.btnReligion:
               /*  if (llReligion.getVisibility() == View.GONE)
@@ -789,6 +790,8 @@ displayData();
                    // updateProfile("professional");
                 }
 
+                break;
+
             case R.id.btnFamily:
                 keepButtonOpen("Family");
                 /*   if (llFamily.getVisibility() == View.GONE)
@@ -813,6 +816,9 @@ displayData();
                 } else {
                   //  updateProfile("family_details");
                 }
+
+                break;
+
             case R.id.btnAboutFamily:
                 keepButtonOpen("aboutFam");
                 /*    if (llAbtFam.getVisibility() == View.GONE)
@@ -840,6 +846,7 @@ displayData();
                 //    updateProfile("family_about");
                 }
 
+                break;
 
             case R.id.btnAboutGroomBride:
                 keepButtonOpen("about");
@@ -866,7 +873,7 @@ displayData();
                 } else {
                   //  updateAbout();
                 }
-
+                break;
         }
 
     }
@@ -1920,6 +1927,7 @@ displayData();
 
     public void setBasic() {
 
+        btnAbt.setText("A few words about "+mListItem.get(0).getProfile_name());
         etAbout.setText(mListItem.get(0).getAbout_you());
         /*tvProfFor.setText(mListItem.get(0).getProfile_for());
         Log.e("profforsize",""+list_prof_for.size());

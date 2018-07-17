@@ -76,10 +76,22 @@ public class SPCustProfile{
         return preferences.getString("profile_photo", "");
     }
 
+    public String getName() {
+        // preferences = this.getSharedPreferences(prefName, 0);
+        return preferences.getString("name", "");
+    }
+
     public void setProfilePhotoPath(String profile_photo) {
         //preferences = this.getSharedPreferences(prefName, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("profile_photo", profile_photo);
+        editor.apply();
+    }
+
+    public void setName(String name) {
+        //preferences = this.getSharedPreferences(prefName, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("name", name);
         editor.apply();
     }
 

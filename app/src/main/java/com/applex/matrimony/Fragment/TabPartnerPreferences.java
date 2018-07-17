@@ -385,7 +385,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         llFamilyEdit=(LinearLayout)rootView.findViewById(R.id.ll_family_edit);
         llFamilyView=(LinearLayout)rootView.findViewById(R.id.ll_family_view);
 
-
         llAbtFam=(LinearLayout)rootView.findViewById(R.id.ll_about_family);
 
         llAbt=(LinearLayout)rootView.findViewById(R.id.ll_about);
@@ -396,7 +395,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         list_ll.add(llReligion);
         list_ll.add(llGroomBrideLoc);
         list_ll.add(llProfessional);
-
 
 
         imgEditBasic=(ImageView)rootView.findViewById(R.id.img_editSave_basic);
@@ -433,7 +431,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
   //      imgClearFam.setOnClickListener(this);
         imgEditAbout.setOnClickListener(this);
         imgClearAbout.setOnClickListener(this);
-
 
 
         //getPreference();

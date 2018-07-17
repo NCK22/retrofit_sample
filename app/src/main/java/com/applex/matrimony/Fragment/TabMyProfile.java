@@ -1,6 +1,7 @@
 package com.applex.matrimony.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Activity.DetailsActivity;
+import com.applex.matrimony.Activity.FullImageActivity;
 import com.applex.matrimony.Activity.RegisterActivity;
 import com.applex.matrimony.Adapter.GalleryImagesAdapter;
 import com.applex.matrimony.Adapter.HomeProfilesAdapter;
@@ -460,6 +462,8 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         imgClearAbout = (ImageView) rootView.findViewById(R.id.img_clear_about);
 
 
+        imgProfPic.setOnClickListener(this);
+
         imgEditBasic.setOnClickListener(this);
         imgClearBasic.setOnClickListener(this);
         imgEditReligion.setOnClickListener(this);
@@ -814,6 +818,14 @@ if(view!=null) {
 
         switch (v.getId()) {
 
+            case R.id.img_profile_pic:
+                if(!spCustProfile.getProfilePhotoPath().equalsIgnoreCase("")){
+                Intent intent=new Intent(getActivity(), FullImageActivity.class);
+                intent.putExtra("path",spCustProfile.getProfilePhotoPath());
+                startActivity(intent);
+                }
+                break;
+
             case R.id.btnBasic:
                 keepButtonOpen("basic");
                /* if (llBasic.getVisibility() == View.GONE)
@@ -830,14 +842,16 @@ if(view!=null) {
                 break;
 
             case R.id.img_editSave_basic:
+                Log.e("editSaveBasic","onClick");
                 if (llBasicView.getVisibility() == View.VISIBLE) {
-                    llBasicView.setVisibility(View.INVISIBLE);
                     llBasicEdit.setVisibility(View.VISIBLE);
+                    llBasicView.setVisibility(View.INVISIBLE);
                     imgEditBasic.setImageResource(R.mipmap.saveicon);
                     imgClearBasic.setVisibility(View.VISIBLE);
                 } else {
                     updateProfile("basic");
                 }
+                break;
 
             case R.id.btnReligion:
                /* if (llReligion.getVisibility() == View.GONE)
@@ -855,6 +869,7 @@ if(view!=null) {
                 break;
 
             case R.id.img_editSave_religion:
+                Log.e("editSaveReligion","onClick");
                 if (llReligionView.getVisibility() == View.VISIBLE) {
                     llReligionView.setVisibility(View.INVISIBLE);
                     llReligionEdit.setVisibility(View.VISIBLE);
@@ -916,6 +931,7 @@ if(view!=null) {
                 } else {
                     updateProfile("professional");
                 }
+                break;
 
             case R.id.btnFamily:
            /*     if (llFamily.getVisibility() == View.GONE)
@@ -941,6 +957,9 @@ if(view!=null) {
                 } else {
                     updateProfile("family_details");
                 }
+
+                break;
+
             case R.id.btnAboutFamily:
            /*     if (llAbtFam.getVisibility() == View.GONE)
                     llAbtFam.setVisibility(View.VISIBLE);
@@ -967,7 +986,7 @@ if(view!=null) {
                 } else {
                     updateProfile("family_about");
                 }
-
+                break;
 
             case R.id.btnAboutGroomBride:
                /* if (llAbt.getVisibility() == View.GONE)
@@ -994,6 +1013,7 @@ if(view!=null) {
                 } else {
                     updateAbout();
                 }
+                break;
         }
 
     }
@@ -1042,7 +1062,6 @@ if(view!=null) {
                         progressDialog.dismiss();
                     }
                 }
-
             }
 
             @Override
@@ -1877,8 +1896,8 @@ if(view!=null) {
                             list_edu.add(resultMap.get(key).getEducation());
                         }
                         Log.e("List Size", "" + list_edu.size());
-                        aaEdu = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list_edu);
-                        aaEdu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        aaEdu = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_multiple_choice, list_edu);
+                        aaEdu.setDropDownViewResource(android.R.layout.select_dialog_multichoice);
                         spEdu.setAdapter(aaEdu);
 
                         if(!intentEdu.equalsIgnoreCase("")) {
@@ -2231,6 +2250,7 @@ if(view!=null) {
 
     public void setBasic() {
 
+        btnAbt.setText("A few words about "+spCustProfile.getName());
         etAbout.setText(mListItem.get(0).getAbout_you());
         /*tvProfFor.setText(mListItem.get(0).getProfile_for());
         Log.e("profforsize",""+list_prof_for.size());
@@ -2238,8 +2258,8 @@ if(view!=null) {
         spProfFor.setSelection(list_prof_for.indexOf(mListItem.get(0).getProfile_for()+1));*/
        /* tvProfFor.setText(list_prof_for.get(Integer.parseInt(mListItem.get(0).getProfile_for())-1));
         spProfFor.setSelection(Integer.parseInt(mListItem.get(0).getProfile_for()));*/
-        Picasso.with(getActivity()).load("http://applex360.in/Deshpande-family/Matrimony-web/"+mListItem.get(0).getProfile_photo()).
-                placeholder(R.mipmap.addicon).fit().into(imgProfPic);
+        Picasso.with(getActivity()).load("http://applex360.in/Deshpande-family/Matrimony-web/"+spCustProfile.getProfilePhotoPath()).
+                placeholder(R.mipmap.userprofile).fit().into(imgProfPic);
 
         tvName.setText(mListItem.get(0).getProfile_name());
         etName.setText(mListItem.get(0).getProfile_name());
@@ -2271,6 +2291,7 @@ if(view!=null) {
                 }
             }
         }
+
         else if(mListItem.get(0).getProfile_for()==null) tvProfFor.setText("");
 
         if (mListItem.get(0).getComplexion() != null) {
@@ -3093,7 +3114,9 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
 
        switch(section)
        {
-           case "basic": if (llBasic.getVisibility() == View.GONE) {
+           case "basic":
+               Log.e("basic","keepButtonOpen");
+               if (llBasic.getVisibility() == View.GONE) {
                for(int i=0;i<list_ll.size();i++)
                {
                    list_ll.get(i).setVisibility(View.GONE);
@@ -3120,6 +3143,7 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
                break;
 
            case "religion":
+               Log.e("religion","keepButtonOpen");
                if (llReligion.getVisibility() == View.GONE) {
                    for(int i=0;i<list_ll.size();i++)
                    {
@@ -3156,7 +3180,6 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
                }
                else
                    llProfessional.setVisibility(View.GONE);
-
                break;
 
            case "Family":
