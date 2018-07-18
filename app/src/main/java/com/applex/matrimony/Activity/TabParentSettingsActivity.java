@@ -309,7 +309,7 @@ SPCustProfile spCustProfile;
             TextView txtHeaderName = (TextView) header.findViewById(R.id.header_name);
             TextView txtHeaderEmail = (TextView) header.findViewById(R.id.header_email);
             final ShapedImageView imageUser = (ShapedImageView) header.findViewById(R.id.header_image);
-           // txtHeaderName.setText(spCustProfile.get());
+            txtHeaderName.setText(spCustProfile.getName());
             txtHeaderEmail.setText(spCustProfile.getEmail());
 
             if(spCustProfile.getProfilePhotoPath()!=null) {

@@ -1,5 +1,6 @@
 package com.applex.matrimony.Fragment;
 
+import android.app.ProgressDialog;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,8 +19,10 @@ import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Activity.TabViewParentActivity;
+import com.applex.matrimony.Interface.getProfileInterface;
 import com.applex.matrimony.Interface.uploadPhotoInterface;
 import com.applex.matrimony.Pojo.CommonParentPojo;
+import com.applex.matrimony.Pojo.ParentPojoProfile;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 
@@ -36,6 +39,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
@@ -50,24 +54,24 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
     File imageFile;
     Button btnSubmit;
     SPCustProfile spCustProfile;
+    ProgressDialog progressDialog;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView=inflater.inflate(R.layout.activity_upload_photo,container,false);
-        imgProfilePic=(ShapedImageView) rootView.findViewById(R.id.img_profile_pic);
-        btnSubmit=(Button)rootView.findViewById(R.id.btn_submit_photo);
+        View rootView = inflater.inflate(R.layout.activity_upload_photo, container, false);
+        imgProfilePic = (ShapedImageView) rootView.findViewById(R.id.img_profile_pic);
+        btnSubmit = (Button) rootView.findViewById(R.id.btn_submit_photo);
         btnSubmit.setOnClickListener(this);
         imgProfilePic.setOnClickListener(this);
-        spCustProfile=new SPCustProfile(getActivity());
+        spCustProfile = new SPCustProfile(getActivity());
+        progressDialog=new ProgressDialog(getActivity());
         return rootView;
     }
 
 
-
-    private void chooseImage()
-    {
+    private void chooseImage() {
         // Intent intent = new Intent();
         // intent.setType("image/*");
         //  intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -75,25 +79,25 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
         intent.setType("image/*");
 
         file = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"),200);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 200);
     }
 
     private File getOutputMediaFile(int type) {
         File mediaStorageDir = new File(getActivity().getCacheDir(), "cache_images");
-        if(!mediaStorageDir.exists()){
+        if (!mediaStorageDir.exists()) {
             mediaStorageDir.mkdir();
         }
 
         File mediaFile;
         if (type == MEDIA_TYPE_IMAGE) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + getFileName() + ".png");
-        }  else {
+        } else {
             return null;
         }
         return mediaFile;
     }
 
-    private String getFileName(){
+    private String getFileName() {
         return new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
     }
 
@@ -105,7 +109,7 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
             if (requestCode == 200) {
 
                 Uri selectedImage = data.getData();
-                 imageFile = new File(getRealPathFromURI(selectedImage));
+                imageFile = new File(getRealPathFromURI(selectedImage));
 
 
                 if (imageFile == null)
@@ -127,26 +131,26 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
             }
         }
     }
-        private String getRealPathFromURI(Uri contentURI) {
 
-            String thePath = "no-path-found";
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getActivity().getContentResolver().query(contentURI, filePathColumn, null, null, null);
-            if(cursor!=null) {
-                if (cursor.moveToFirst()) {
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    thePath = cursor.getString(columnIndex);
-                }
-                cursor.close();
+    private String getRealPathFromURI(Uri contentURI) {
+
+        String thePath = "no-path-found";
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(contentURI, filePathColumn, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                thePath = cursor.getString(columnIndex);
             }
-            return  thePath;
+            cursor.close();
         }
+        return thePath;
+    }
 
     @Override
     public void onClick(View view) {
 
-        switch(view.getId())
-        {
+        switch (view.getId()) {
             case R.id.img_profile_pic:
 
                 chooseImage();
@@ -154,7 +158,7 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
 
             case R.id.btn_submit_photo:
                 uploadFile();
-               // startActivity(new Intent(UploadPhoto.this,TabViewParentActivity.class));
+                // startActivity(new Intent(UploadPhoto.this,TabViewParentActivity.class));
                 break;
         }
     }
@@ -162,11 +166,11 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
     private void uploadFile() {
 
         // Map is used to multipart the file using okhttp3.RequestBody
-       // File file = new File(docPath);
+        // File file = new File(docPath);
 
         // Parsing any Media type file
-        spCustProfile.setProfile_id("83");
-        Log.e("profile_id",spCustProfile.getProfile_id());
+       // spCustProfile.setProfile_id("83");
+        Log.e("profile_id", spCustProfile.getProfile_id());
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), imageFile);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", imageFile.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("JPEG/PNG"), imageFile.getName());
@@ -178,14 +182,15 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
             public void onResponse(Call<CommonParentPojo> call, retrofit2.Response<CommonParentPojo> response) {
 
                 CommonParentPojo commonParentPojo = response.body();
-                    Log.e("ServerResponse", commonParentPojo.getMsg());
+                Log.e("ServerResponse", commonParentPojo.getMsg());
                 if (commonParentPojo != null) {
-                    Log.e("response",commonParentPojo.getMsg());
+                    Log.e("response", commonParentPojo.getMsg());
                     if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
                         //  strResumePath=serverResponse.getMessage();
                         Log.e("Success Response", commonParentPojo.getMsg());
                         Toast.makeText(getActivity(), "success" + commonParentPojo.getMsg(), Toast.LENGTH_SHORT).show();
-                        //startActivity(new Intent(UploadPhoto.this,TabViewParentActivity.class));
+                        getProfile();
+
                     }
                    /* } else {
                         strResumePath=serverResponse.getMessage();
@@ -203,12 +208,53 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(Call<CommonParentPojo> call, Throwable t) {
 
-                Log.e("throwbale",""+t);
+                Log.e("throwbale", "" + t);
             }
 
-            });
+        });
 
 
-
-}
     }
+
+
+    public void getProfile() {
+
+        progressDialog.show();
+
+        getProfileInterface getResponse = APIClient.getClient().create(getProfileInterface.class);
+        Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
+        call.enqueue(new Callback<ParentPojoProfile>() {
+            @Override
+            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
+
+                Log.e("Inside", "onResponse");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+                ParentPojoProfile parentPojoProfile = response.body();
+                if (parentPojoProfile != null) {
+                    if (parentPojoProfile.getStatus().equalsIgnoreCase("1")) {
+                        Log.e("Response", "Success");
+                        Log.e("objsize", "" + parentPojoProfile.getObjProfile().size());
+                        if (parentPojoProfile.getObjProfile().get(0).getProfile_photo() != null) {
+                            Log.e("profile_photo res", parentPojoProfile.getObjProfile().get(0).getProfile_photo());
+                            spCustProfile.setProfilePhotoPath(parentPojoProfile.getObjProfile().get(0).getProfile_photo());
+                            spCustProfile.setName(parentPojoProfile.getObjProfile().get(0).getProfile_name());
+                        }
+                       // setHeader();
+                    }
+                } else
+                    Log.e("parentpojotabwhome", "null");
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
+
+                Log.e("throwable", "" + t);
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+}

@@ -266,7 +266,6 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
                         v.getParent().requestDisallowInterceptTouchEvent(false);
                         break;
                 }
-
                 return false;
             }
         });
@@ -323,8 +322,6 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
         tvMotherStat = (TextView) rootView.findViewById(R.id.tv_mother_status);
         tvNoOfBrothers = (TextView) rootView.findViewById(R.id.tv_noOfBrother);
         tvNoOfSisters = (TextView) rootView.findViewById(R.id.tv_noOfSister);
-
-
 
 
         btnAbt = (Button) rootView.findViewById(R.id.btnAboutGroomBride);
@@ -1957,14 +1954,16 @@ displayData();
                 tvProfFor.setText("");
             } else {
 
-                //tvProfFor.setText(intentProfileFor);
-                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
+
+/*
                 Log.e("listPhysicalStatSize", "" + list_prof_for.size());
                 Log.e("textPStat", "" + list_prof_for.get(Integer.parseInt(intentProfileFor) - 1));
                 if (list_prof_for.size() > Integer.parseInt(intentProfileFor) - 1) {
-                    tvProfFor.setText(list_prof_for.get(Integer.parseInt(intentProfileFor) - 1));
-                   // spProfFor.setSelection(Integer.parseInt(intentProfileFor));
-                }
+                    tvProfFor.setText(list_prof_for.get(Integer.parseInt(intentProfileFor) - 1));}*/
+
+                    tvProfFor.setText(intentProfileFor);
+                    //spProfFor.setSelection(Integer.parseInt(intentProfileFor));
+
             }
         }
         else if(mListItem.get(0).getProfile_for()==null) tvProfFor.setText("");
@@ -2536,16 +2535,16 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
             if (intentResident.equalsIgnoreCase("0")||intentResident.equalsIgnoreCase("")) {
                 tvResidentStatus.setText("");
             } else {
-          //      tvResidentStatus.setText(intentResident);
-                //intentMaritalStat = mListItem.get(0).getMaritial_status();
-                Log.e("listMaritialStatSize", "" + list_resident.size());
+                tvResidentStatus.setText(intentResident);
+
+               /* Log.e("listMaritialStatSize", "" + list_resident.size());
 //                Log.e("textMStat", "" + list_resident.get(Integer.parseInt(intentResident) - 1));
                 if (list_resident.size() > Integer.parseInt(intentResident) - 1) {
 
                     tvResidentStatus.setText(list_resident.get(Integer.parseInt(intentResident) - 1));
                    // spResident.setSelection(Integer.parseInt(intentResident));
                     Log.e("textMaritalStat", tvResidentStatus.getText().toString());
-                }
+                }*/
             }
         }
         else if(mListItem.get(0).getResident_status()==null) tvResidentStatus.setText("");
@@ -2580,7 +2579,6 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
         //tvParish.setText(mListItem.get(0).getParish());
         //tvVillage.setText(mListItem.get(0).getParish_village());
     }
-
     public void setProfessional(){
 
        /* if(mListItem.get(0).getEducation()!=null) {
@@ -2868,5 +2866,4 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
         }
 
     }
-
 }

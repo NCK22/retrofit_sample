@@ -3,6 +3,7 @@ package com.applex.matrimony.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -1896,8 +1897,8 @@ if(view!=null) {
                             list_edu.add(resultMap.get(key).getEducation());
                         }
                         Log.e("List Size", "" + list_edu.size());
-                        aaEdu = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_multiple_choice, list_edu);
-                        aaEdu.setDropDownViewResource(android.R.layout.select_dialog_multichoice);
+                        aaEdu = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list_edu);
+                        aaEdu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spEdu.setAdapter(aaEdu);
 
                         if(!intentEdu.equalsIgnoreCase("")) {
@@ -1919,7 +1920,6 @@ if(view!=null) {
                     }
                     progressDialog.dismiss();
                 }
-
             }
 
             @Override
@@ -2064,7 +2064,7 @@ if(view!=null) {
             String age = String.valueOf(2018 - d.get(d.YEAR));
 
             call = getResponse.updateBasic(spCustProfile.getUser_id(),
-                    spProfFor.getSelectedItemPosition()==0 ? "0" :   String.valueOf(spProfFor.getSelectedItemPosition()), etName.getText().toString(), age,
+                    spProfFor.getSelectedItemPosition()==0 ? "0" :  spProfFor.getSelectedItem().toString(), etName.getText().toString(), age,
                     spBodyType.getSelectedItemPosition()==0 ? "0" : String.valueOf(spBodyType.getSelectedItemPosition()),
                     spPhysStat.getSelectedItemPosition()==0 ? "0" : String.valueOf(spPhysStat.getSelectedItemPosition()),
                     spComplexion.getSelectedItemPosition()==0 ? "0" : String.valueOf(spComplexion.getSelectedItemPosition()), s,
@@ -2100,7 +2100,8 @@ if(view!=null) {
 
             call = getResponse.updateGroomBrideLoc(spCustProfile.getUser_id(), list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition() - 1).toString())).getCountry_id(),
                     list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id(),
-                    list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id(), String.valueOf(spResident.getSelectedItemPosition()),
+                    list_pojo_city.get(list_city.indexOf(spCity.getSelectedItem().toString())).getCity_id(),
+                    spResident.getSelectedItemPosition()==0?"0":spResident.getSelectedItem().toString(),
                     "", "");
         } else if (section.equalsIgnoreCase("professional")) {
 
@@ -2258,8 +2259,40 @@ if(view!=null) {
         spProfFor.setSelection(list_prof_for.indexOf(mListItem.get(0).getProfile_for()+1));*/
        /* tvProfFor.setText(list_prof_for.get(Integer.parseInt(mListItem.get(0).getProfile_for())-1));
         spProfFor.setSelection(Integer.parseInt(mListItem.get(0).getProfile_for()));*/
-        Picasso.with(getActivity()).load("http://applex360.in/Deshpande-family/Matrimony-web/"+spCustProfile.getProfilePhotoPath()).
-                placeholder(R.mipmap.userprofile).fit().into(imgProfPic);
+        Log.e("profile_photo_myProfile","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
+
+        Picasso.Builder builder = new Picasso.Builder(getActivity());
+        builder.listener(new Picasso.Listener()
+        {
+            @Override
+            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+            {
+                exception.printStackTrace();
+                Log.e("Exception",""+exception);
+            }
+        });
+        builder.build()
+                .load("http://applex360.in/Deshpande-family/Matrimony-web/"+spCustProfile.getProfilePhotoPath())
+                .placeholder(R.mipmap.userprofile)
+                .into(imgProfPic);
+
+
+   /*     Picasso.with(getActivity().getApplicationContext())
+                .load("http://applex360.in/Deshpande-family/Matrimony-web/"+spCustProfile.getProfilePhotoPath())
+                .placeholder(R.mipmap.userprofile)
+                .error(R.mipmap.addicon)
+                .fit()
+                .into(imgProfPic, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });*/
 
         tvName.setText(mListItem.get(0).getProfile_name());
         etName.setText(mListItem.get(0).getProfile_name());
@@ -2282,13 +2315,15 @@ if(view!=null) {
             if (intentProfileFor.equalsIgnoreCase("0") || intentProfileFor.equalsIgnoreCase("")) {
                 tvProfFor.setText("");
             } else {
-                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
-                Log.e("listPhysicalStatSize", "" + list_prof_for.size());
+
+                tvProfFor.setText(intentProfileFor);
+                spProfFor.setSelection(list_prof_for.indexOf(intentProfileFor));
+               /* Log.e("listPhysicalStatSize", "" + list_prof_for.size());
                 Log.e("textPStat", "" + list_prof_for.get(Integer.parseInt(intentProfileFor) - 1));
                 if (list_prof_for.size() > Integer.parseInt(intentProfileFor) - 1) {
                     tvProfFor.setText(list_prof_for.get(Integer.parseInt(intentProfileFor) - 1));
                     spProfFor.setSelection(Integer.parseInt(intentProfileFor));
-                }
+                }*/
             }
         }
 
@@ -2863,15 +2898,16 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
             if (intentResident.equalsIgnoreCase("0")||intentResident.equalsIgnoreCase("")) {
                 tvResidentStatus.setText("");
             } else {
-                //intentMaritalStat = mListItem.get(0).getMaritial_status();
-                Log.e("listMaritialStatSize", "" + list_resident.size());
+               tvResidentStatus.setText(intentResident);
+               spResident.setSelection(list_resident.indexOf(intentResident));
+               /* Log.e("listMaritialStatSize", "" + list_resident.size());
                 Log.e("textMStat", "" + list_resident.get(Integer.parseInt(intentResident) - 1));
                 if (list_resident.size() > Integer.parseInt(intentResident) - 1) {
 
                     tvResidentStatus.setText(list_resident.get(Integer.parseInt(intentResident) - 1));
                     spResident.setSelection(Integer.parseInt(intentResident));
                     Log.e("textMaritalStat", tvResidentStatus.getText().toString());
-                }
+                }*/
             }
         }
         else if(mListItem.get(0).getResident_status()==null) tvResidentStatus.setText("");
@@ -3017,8 +3053,6 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
     }
 
     public void setFamilyDetails(){
-
-
 
         if (mListItem.get(0).getFamily_value() != null) {
             intentFamilyValue= mListItem.get(0).getFamily_value();

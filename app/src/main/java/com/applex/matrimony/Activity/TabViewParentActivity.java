@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -153,6 +154,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
      //   bottmNavView.setIconSizeAt(bottmNavView.getMenuItemPosition(bottmNavView.getMenu().findItem(bottmNavView.getSelectedItemId())),32,32);
 
     Log.e("SPProfilephoto",spCustProfile.getProfilePhotoPath());
+        setHeader();
        if(spCustProfile.getProfilePhotoPath().equalsIgnoreCase(""))
            getProfile();
 
@@ -373,19 +375,38 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
     }
 
     private void setHeader() {
+        Log.e("setHeader","TabViewParent");
         if (spCustProfile.getIsLogin().equalsIgnoreCase("true")) {
             View header = navigationView.getHeaderView(0);
             TextView txtHeaderName = (TextView) header.findViewById(R.id.header_name);
             TextView txtHeaderEmail = (TextView) header.findViewById(R.id.header_email);
             final ShapedImageView imageUser = (ShapedImageView) header.findViewById(R.id.header_image);
-            // txtHeaderName.setText(spCustProfile.get());
+             txtHeaderName.setText(spCustProfile.getName());
             txtHeaderEmail.setText(spCustProfile.getEmail());
 
             if(spCustProfile.getProfilePhotoPath()!=null) {
                 Log.e("profile_photo","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
-                Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
+              /*  Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
                         .placeholder(R.mipmap.userprofile)
+                        .into(imageUser);*/
+
+
+                Picasso.Builder builder = new Picasso.Builder(this);
+                builder.listener(new Picasso.Listener()
+                {
+                    @Override
+                    public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
+                    {
+                        exception.printStackTrace();
+                        Log.e("Exception",""+exception);
+                    }
+                });
+                builder.build()
+                        .load("http://applex360.in/Deshpande-family/Matrimony-web/"+spCustProfile.getProfilePhotoPath())
+                        .placeholder(R.mipmap.userprofile)
+                        .fit()
                         .into(imageUser);
+
             }
             header.setOnClickListener(new View.OnClickListener() {
                 @Override

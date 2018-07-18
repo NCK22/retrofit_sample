@@ -111,6 +111,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             spCustProfile.setIsLogin("true");
                             spCustProfile.setMatrimonyId(parentPojoLogin.getObjProfile().get("matrimony_id"));
                             spCustProfile.setUser_id(parentPojoLogin.getObjProfile().get("user_id"));
+                            spCustProfile.setProfile_id(parentPojoLogin.getObjProfile().get("profile_id"));
+
                             startActivity(new Intent(LoginActivity.this, TabViewParentActivity.class));
                         }
 

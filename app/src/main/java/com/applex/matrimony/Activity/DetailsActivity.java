@@ -311,6 +311,8 @@ ArrayList<String>list_currency=new ArrayList<String>();
             case R.id.sp_marital_stat:
                 if(spMaritalStat.getSelectedItemPosition()>1)
                     llChildren.setVisibility(View.VISIBLE);
+                else
+                    llChildren.setVisibility(View.GONE);
                 break;
 
             case R.id.sp_country:

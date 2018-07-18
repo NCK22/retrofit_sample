@@ -199,7 +199,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
     String intentReligion="",intentCaste="",intentCountry="",intentState="",intentMaritalStat="",intentBirthCountry="",intentBirthState="",intentBirthCity="",
             intentOccu="",intentEdu="",intentMTongue="",intentPhysicalStat="",intentHeightFrom="",intentHeightTo="",intentEating="",intentDrinking="",
-    intentSmoking="";
+    intentSmoking="",intentAgeFrom="",intentAgeTo="";
     SPCustProfile spCustProfile;
     ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
 
@@ -571,6 +571,23 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         spPhysStat.setAdapter(aaPhysStat);
         spFood.setAdapter(aaFood);spDrink.setAdapter(aaDrink);spSmoke.setAdapter(aaSmoke);
 
+
+        Log.e("intentAgeFrom",intentAgeFrom);
+        if(!intentAgeFrom.equalsIgnoreCase("")){
+
+            tvAge.setText(intentAgeFrom);
+            spAgeFrom.setSelection(list_age.indexOf(intentAgeFrom));
+        }
+
+
+        Log.e("intentAgeFrom",intentAgeTo);
+        if(!intentAgeTo.equalsIgnoreCase("")){
+
+            tvAge.append(" To "+intentAgeTo);
+            spAgeTo.setSelection(list_age.indexOf(intentAgeTo));
+        }
+
+
         Log.e("intentMaritialStat",intentMaritalStat);
         if(!intentMaritalStat.equalsIgnoreCase("")){
 
@@ -721,6 +738,8 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     updateProfile("basic");
                 }
 
+                break;
+
             case R.id.btnReligion:
               keepButtonOpen("religion");
                 /*  if(llReligion.getVisibility()==View.GONE)
@@ -801,7 +820,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 else{
                     updateProfile("professional");
                 }
-
+                break;
           /*  case R.id.btnFamily:
                 if(llFamily.getVisibility()==View.GONE)
                     llFamily.setVisibility(View.VISIBLE);
@@ -881,6 +900,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     updateProfile("about_partner");
                 }
 
+                break;
 
 
 
@@ -1637,7 +1657,9 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             String ps= spPhysStat.getSelectedItemPosition()==0 ? "" : String.valueOf(spPhysStat.getSelectedItemPosition());
             String ms= spMaritalStat.getSelectedItemPosition()==0 ? "" : String.valueOf(spMaritalStat.getSelectedItemPosition());
 
-            call = getResponse.updateBasic(spCustProfile.getMatrimonyId(), "24","25",
+            call = getResponse.updateBasic(spCustProfile.getMatrimonyId(),
+                    spAgeFrom.getSelectedItemPosition()<=0 ? "0" : spAgeFrom.getSelectedItem().toString(),
+                    spAgeTo.getSelectedItemPosition()<=0 ? "0" : spAgeTo.getSelectedItem().toString(),
                     spMaritalStat.getSelectedItemPosition()==0 ? "0" : String.valueOf(spMaritalStat.getSelectedItemPosition()),
                     spPhysStat.getSelectedItemPosition()==0 ? "0" : String.valueOf(spPhysStat.getSelectedItemPosition()),
                     spHeightFrom.getSelectedItemPosition()==0 ? "0" : list_pojo_height.get(list_height.indexOf(spHeightFrom.getSelectedItem().toString())).getHeight_id(),
@@ -1776,6 +1798,37 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     public void setBasic(){
 
         tvAge.setText(mListItem.get(0).getAge_from()+" to "+mListItem.get(0).getAge_to());
+
+        if(mListItem.get(0).getAge_from()!=null) {
+            intentAgeFrom = mListItem.get(0).getAge_from();
+            if (intentAgeFrom.equalsIgnoreCase("0") || intentAgeFrom.equalsIgnoreCase("")) {
+                tvAge.setText("");
+            } else {
+                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
+               // Log.e("listPhysicalStatSize", "" + list_physical_stat.size());
+              //  Log.e("textPStat", "" + list_marital_Stat.get(Integer.parseInt(intentPhysicalStat) - 1));
+                //if (list_age.size() > Integer.parseInt(intentAgeFrom) - 1) {
+                    tvAge.setText(intentAgeFrom);
+                    spAgeFrom.setSelection(list_age.indexOf(intentAgeFrom)+1);
+                //}
+            }
+        }
+
+        if(mListItem.get(0).getAge_to()!=null) {
+            intentAgeTo = mListItem.get(0).getAge_to();
+            if (intentAgeTo.equalsIgnoreCase("0") || intentAgeTo.equalsIgnoreCase("")) {
+                tvAge.append("");
+            } else {
+                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
+                // Log.e("listPhysicalStatSize", "" + list_physical_stat.size());
+                //  Log.e("textPStat", "" + list_marital_Stat.get(Integer.parseInt(intentPhysicalStat) - 1));
+            //    if (list_age.size() > Integer.parseInt(intentAgeTo) - 1) {
+                tvAge.append(" To "+intentAgeTo);
+                    spAgeTo.setSelection(list_age.indexOf(intentAgeTo)+1);
+              //  }
+            }
+        }
+
         if(mListItem.get(0).getPhysical_status()!=null) {
             intentPhysicalStat = mListItem.get(0).getPhysical_status();
             if (intentPhysicalStat.equalsIgnoreCase("0") || intentPhysicalStat.equalsIgnoreCase("")) {

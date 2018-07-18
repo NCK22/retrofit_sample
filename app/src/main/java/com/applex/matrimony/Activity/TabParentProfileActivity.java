@@ -120,9 +120,6 @@ SPCustProfile spCustProfile;
         bottmNavView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
         bottmNavView.setOnNavigationItemSelectedListener(this);
 
-
-
-
         setHeader();
 
     }
@@ -302,18 +299,20 @@ SPCustProfile spCustProfile;
     }
 
     private void setHeader() {
+        Log.e("setHeader","TabViewProfile");
         if (spCustProfile.getIsLogin().equalsIgnoreCase("true")) {
             View header = navigationView.getHeaderView(0);
             TextView txtHeaderName = (TextView) header.findViewById(R.id.header_name);
             TextView txtHeaderEmail = (TextView) header.findViewById(R.id.header_email);
             final ShapedImageView imageUser = (ShapedImageView) header.findViewById(R.id.header_image);
-           // txtHeaderName.setText(spCustProfile.get());
+            txtHeaderName.setText(spCustProfile.getName());
             txtHeaderEmail.setText(spCustProfile.getEmail());
 
             if(spCustProfile.getProfilePhotoPath()!=null) {
                 Log.e("profile_photo","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
                 Picasso.with(this).load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
                         .placeholder(R.mipmap.userprofile)
+                        .fit()
                         .into(imageUser);
             }
             header.setOnClickListener(new View.OnClickListener() {
