@@ -2,6 +2,8 @@ package com.applex.matrimony.Pojo;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class ChildPojoProfile {
 
     @SerializedName("profile_id") String profile_id;
@@ -93,6 +95,7 @@ public class ChildPojoProfile {
     @SerializedName("chart") String chart;
     @SerializedName("shortlisted") String shortlisted;
     @SerializedName("interested") String interested;
+    @SerializedName("Gallery") ArrayList<String> Gallery;
 
 
 
@@ -349,6 +352,14 @@ public class ChildPojoProfile {
     public String getBrothers ()
     {
         return brothers;
+    }
+
+    public ArrayList<String> getGallery() {
+        return Gallery;
+    }
+
+    public void setGallery(ArrayList<String> gallery) {
+        Gallery = gallery;
     }
 
     public void setBrothers (String brothers)

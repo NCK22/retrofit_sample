@@ -1,8 +1,11 @@
 package com.applex.matrimony.Storage;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SPCustProfile{
 
@@ -75,6 +78,30 @@ public class SPCustProfile{
         // preferences = this.getSharedPreferences(prefName, 0);
         return preferences.getString("profile_photo", "");
     }
+
+    public Set<String> getGalleryPhotoPath() {
+        // preferences = this.getSharedPreferences(prefName, 0);
+        return preferences.getStringSet("gallery_photo", null);
+    }
+
+    public void clearGalleryPhotoPath(){
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("gallery_photo");
+        editor.apply();
+    }
+
+    public void setGalleryPhotoPath(ArrayList<String> gallery_photo) {
+        //preferences = this.getSharedPreferences(prefName, 0);
+
+        Set<String> set = new HashSet<String>();
+        set.addAll(gallery_photo);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putStringSet("gallery_photo", set);
+        editor.apply();
+        /*scoreEditor.putStringSet("key", set);
+        scoreEditor.commit();*/
+    }
+
 
     public String getName() {
         // preferences = this.getSharedPreferences(prefName, 0);

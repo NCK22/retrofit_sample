@@ -207,6 +207,7 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
     GalleryImagesAdapter adapterGallery;
     ArrayList<String> list_gallery=new ArrayList<String>();
     ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
+    String[] temp;
 
 
     @Nullable
@@ -219,8 +220,6 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         progressDialog = new ProgressDialog(getActivity());
 
         spCustProfile = new SPCustProfile(getActivity());
-
-
 
 
         rv_gallery = (RecyclerView) rootView.findViewById(R.id.rv_prof_gallery);
@@ -491,15 +490,20 @@ displayData();
     private void displayData() {
 
 
+/*        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
         list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
         list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
         list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
         list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
+        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");*/
 
         Log.e("displayData","called");
         Log.e("List_highlight size",""+list_gallery.size());
+        if(list_gallery.size()<=0 && spCustProfile.getGalleryPhotoPath()!=null) {
+            temp = spCustProfile.getGalleryPhotoPath().toArray(new String[0]);
+            for (int i = 0; i < temp.length; i++)
+                list_gallery.add(temp[i]);
+        }
         adapterGallery = new GalleryImagesAdapter(getActivity(), list_gallery);
         rv_gallery.setAdapter(adapterGallery);
 
@@ -2227,6 +2231,8 @@ if(view!=null) {
                         Log.e("Response", "Success");
                         Log.e("objsize", "" + parentPojoProfile.getObjProfile().size());
                         mListItem = parentPojoProfile.getObjProfile();
+                        spCustProfile.setProfilePhotoPath(mListItem.get(0).getProfile_photo());
+                        spCustProfile.setGalleryPhotoPath(mListItem.get(0).getGallery());
                         setBasic();
                         setReligion();
                         setGroomBrideLoc();

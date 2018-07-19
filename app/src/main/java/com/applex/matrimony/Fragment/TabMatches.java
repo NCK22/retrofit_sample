@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Adapter.WhoViewedAdapter;
+import com.applex.matrimony.Interface.getMatchesInterface;
 import com.applex.matrimony.Interface.getShortlistedMyInterface;
 import com.applex.matrimony.Pojo.ChildPojoProfile;
 import com.applex.matrimony.Pojo.ParentPojoProfile;
@@ -102,9 +103,8 @@ public class TabMatches extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);*/
 
 
-
-
-       getWhoShortlistedMy();
+       //getWhoShortlistedMy();
+        getMatches();
 
 
         return rootView;
@@ -121,6 +121,50 @@ public class TabMatches extends Fragment {
 
         }
     }
+
+    public void getMatches()
+    {
+
+        progressDialog.show();
+        if(mListItem!=null)
+            mListItem.clear();
+
+        getMatchesInterface getResponse = APIClient.getClient().create(getMatchesInterface.class);
+        Call<ParentPojoProfile> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId());
+        call.enqueue(new Callback<ParentPojoProfile>() {
+            @Override
+            public void onResponse(Call<ParentPojoProfile> call, Response<ParentPojoProfile> response) {
+
+                Log.e("Inside","onResponse");
+               /* Log.e("response body",response.body().getStatus());
+                Log.e("response body",response.body().getMsg());*/
+                ParentPojoProfile parentPojoProfile =response.body();
+                if(parentPojoProfile !=null){
+                    if(parentPojoProfile.getStatus().equalsIgnoreCase("1")){
+                        Log.e("Response","Success");
+                        Log.e("objsize", ""+ parentPojoProfile.getObjProfile().size());
+                        mListItem= parentPojoProfile.getObjProfile();
+                        if(mListItem.size()!=0)
+
+                            displayData();
+                    }
+                }
+                else
+                    Log.e("parentpojotabwhome","null");
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<ParentPojoProfile> call, Throwable t) {
+
+                Log.e("throwable",""+t);
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
 
     public void getWhoShortlistedMy()
     {

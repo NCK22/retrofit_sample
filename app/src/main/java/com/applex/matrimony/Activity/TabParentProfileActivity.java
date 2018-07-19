@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.applex.matrimony.Fragment.TabGalleryPhoto;
 import com.applex.matrimony.Fragment.TabHome;
 import com.applex.matrimony.Fragment.TabMyProfile;
 import com.applex.matrimony.Fragment.TabPartnerPreferences;
@@ -189,6 +190,7 @@ SPCustProfile spCustProfile;
                         //MyApp.saveIsLogin(false);
                         spCustProfile.setIsLogin("false");
                         spCustProfile.setProfilePhotoPath("");
+                        spCustProfile.clearGalleryPhotoPath();
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -257,6 +259,10 @@ SPCustProfile spCustProfile;
                     UploadPhoto tabUploadPhoto = new UploadPhoto();
                     return tabUploadPhoto;
 
+                case 3:
+                    Log.e("Tab", "whoViewed");
+                    TabGalleryPhoto tabGalleryPhoto = new TabGalleryPhoto();
+                    return tabGalleryPhoto;
 
                 default:
                     return null;
@@ -277,7 +283,7 @@ SPCustProfile spCustProfile;
         public int getCount() {
             // Show 3 total pages.
 
-            return 3;
+            return 4;
 
         }
     }

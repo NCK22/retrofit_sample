@@ -1,9 +1,7 @@
 package com.applex.matrimony.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,12 +11,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.applex.matrimony.Activity.FullImageActivity;
-import com.applex.matrimony.Fragment.TabProfileDetail;
-import com.applex.matrimony.Pojo.ChildPojoProfile;
+import com.applex.matrimony.Fragment.TabGalleryPhoto;
 import com.applex.matrimony.R;
 import com.squareup.picasso.Picasso;
 
@@ -26,13 +21,13 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class GalleryImagesAdapter extends RecyclerView.Adapter<GalleryImagesAdapter.ItemRowHolder> implements Serializable {
+public class GalleryBitmapsAdapter extends RecyclerView.Adapter<GalleryBitmapsAdapter.ItemRowHolder> implements Serializable {
 
-    private ArrayList<String> dataList;
+    private ArrayList<Bitmap> dataList;
     private Context mContext;
 
 
-    public GalleryImagesAdapter(Context context, ArrayList<String> dataList) {
+    public GalleryBitmapsAdapter(Context context, ArrayList<Bitmap> dataList) {
         this.dataList = dataList;
         this.mContext = context;
 
@@ -52,21 +47,18 @@ public class GalleryImagesAdapter extends RecyclerView.Adapter<GalleryImagesAdap
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        final String singleItem = dataList.get(position);
+        final Bitmap singleItem = dataList.get(position);
+        holder.image.setImageBitmap(singleItem);
 
-        Log.e("path","http://applex360.in/Deshpande-family/Matrimony-web/"+singleItem);
+      /*  Log.e("path","http://applex360.in/Deshpande-family/Matrimony-web/"+singleItem);
         Picasso.with(mContext).load("http://applex360.in/Deshpande-family/Matrimony-web/"+singleItem).placeholder(R.mipmap.addicon).fit().into(holder.image);
-
+*/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if(!singleItem.equalsIgnoreCase("")){
-                    Intent intent=new Intent(mContext, FullImageActivity.class);
-                    intent.putExtra("path",singleItem);
-                    mContext.startActivity(intent);
-                }
+                TabGalleryPhoto.imgProfilePic.setImageBitmap(singleItem);
                 /*Bundle bundle=new Bundle();
                 bundle.putString("matrimony_id",singleItem.getMatrimony_id());
                 TabProfileDetail tabProfileDetail=new TabProfileDetail();

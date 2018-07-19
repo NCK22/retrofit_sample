@@ -214,7 +214,7 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
 
     Log.e("matrimony_id",matrimony_id_to);
         shortListInterface getResponse = APIClient.getClient().create(shortListInterface.class);
-        Call<CommonParentPojo> call = getResponse.doGetListResources("7180214",matrimony_id_to);
+        Call<CommonParentPojo> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId(),matrimony_id_to);
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
             public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {
@@ -252,7 +252,7 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
 
         Log.e("matrimony_id",matrimony_id_to);
         sendInterestInterface getResponse = APIClient.getClient().create(sendInterestInterface.class);
-        Call<CommonParentPojo> call = getResponse.doGetListResources("7180214",matrimony_id_to);
+        Call<CommonParentPojo> call = getResponse.doGetListResources(spCustProfile.getMatrimonyId(),matrimony_id_to);
         call.enqueue(new Callback<CommonParentPojo>() {
             @Override
             public void onResponse(Call<CommonParentPojo> call, Response<CommonParentPojo> response) {

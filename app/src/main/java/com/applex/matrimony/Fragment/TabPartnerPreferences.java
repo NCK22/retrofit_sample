@@ -1159,7 +1159,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             public void onResponse(Call<ParentModelCountry> call, Response<ParentModelCountry> response) {
 
                 Log.e("Inside","onResponse");
-                Log.e("response body",response.body().status);
+              //  Log.e("response body",response.body().status);
                 ParentModelCountry parentModelCountry=response.body();
                 if(parentModelCountry!=null){
                     if(parentModelCountry.getStatus().equalsIgnoreCase("1")){

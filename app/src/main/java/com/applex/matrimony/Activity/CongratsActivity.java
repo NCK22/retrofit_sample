@@ -29,7 +29,9 @@ public class CongratsActivity extends AppCompatActivity {
         tvFillDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             startActivity(new Intent(CongratsActivity.this,TabParentProfileActivity.class));
+           //  startActivity(new Intent(CongratsActivity.this,TabParentProfileActivity.class));
+                startActivity(new Intent(CongratsActivity.this,LoginActivity.class));
+                finish();
             }
         });
     }

@@ -316,6 +316,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
                         //MyApp.saveIsLogin(false);
                         spCustProfile.setIsLogin("false");
                         spCustProfile.setProfilePhotoPath("");
+                        spCustProfile.clearGalleryPhotoPath();
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

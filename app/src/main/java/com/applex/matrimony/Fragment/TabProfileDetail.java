@@ -1,6 +1,7 @@
 package com.applex.matrimony.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,6 +26,7 @@ import android.widget.Toolbar;
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Activity.DetailsActivity;
+import com.applex.matrimony.Activity.FullImageActivity;
 import com.applex.matrimony.Activity.RegisterActivity;
 import com.applex.matrimony.Adapter.GalleryImagesAdapter;
 import com.applex.matrimony.Adapter.HomeProfilesAdapter;
@@ -78,6 +80,7 @@ import com.applex.matrimony.Pojo.ParentPojoWeight;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 
@@ -194,12 +197,13 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
     String intentReligion = "", intentCaste = "", intentCountry = "", intentState = "", intentCity = "", intentBirthCountry = "", intentBirthState = "", intentBirthCity = "",
             intentOccu = "", intentEdu = "", intentMTongue, intentPhysicalStat = "", intentMaritalStat = "", intentHeight = "", intentEating = "", intentDrinking = "", intentSmoking = "",
             intentWeight = "", intentBodyType = "", intentComplexion = "", intentProfileFor = "", intentRaasi = "", intentStar = "", intentGothra = "", intentDosham = "", intentChart = "",
-            intentResident="",intentFamilyValue="",intentFamilyStat="",intentFamilyType="";
+            intentResident="",intentFamilyValue="",intentFamilyStat="",intentFamilyType="",path="";
     SPCustProfile spCustProfile;
     RecyclerView rv_gallery;
     GalleryImagesAdapter adapterGallery;
     ArrayList<String> list_gallery=new ArrayList<String>();
     ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
+    ImageView imgProfPic;
 
     Toolbar toolbar;
 
@@ -221,6 +225,7 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
         rv_gallery.setHasFixedSize(true);
         rv_gallery.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
+        imgProfPic=(ImageView)rootView.findViewById(R.id.img_profile_pic);
 
 
         etName = (EditText) rootView.findViewById(R.id.edt_name);
@@ -412,6 +417,7 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
         imgEditAbout = (ImageView) rootView.findViewById(R.id.img_editSave_about);
         imgClearAbout = (ImageView) rootView.findViewById(R.id.img_clear_about);
 
+        imgProfPic.setOnClickListener(this);
 
         imgEditBasic.setOnClickListener(this);
         imgClearBasic.setOnClickListener(this);
@@ -442,12 +448,6 @@ displayData();
     private void displayData() {
 
 
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
-        list_gallery.add("assets/uploads/profile_pics/1521118041_Jellyfish.jpg");
 
         Log.e("displayData","called");
         Log.e("List_highlight size",""+list_gallery.size());
@@ -681,6 +681,14 @@ displayData();
     public void onClick(View v) {
 
         switch (v.getId()) {
+
+            case R.id.img_profile_pic:
+                if(!path.equalsIgnoreCase("")){
+                    Intent intent=new Intent(getActivity(), FullImageActivity.class);
+                    intent.putExtra("path",path);
+                    startActivity(intent);
+                }
+                break;
 
             case R.id.btnBasic:
 
@@ -1900,6 +1908,7 @@ displayData();
                         Log.e("Response", "Success");
                         Log.e("objsize", "" + parentPojoProfile.getObjProfile().size());
                         mListItem = parentPojoProfile.getObjProfile();
+                        setImages();
                         setBasic();
                         setReligion();
                         setGroomBrideLoc();
@@ -1919,6 +1928,20 @@ displayData();
                 progressDialog.dismiss();
             }
         });
+
+    }
+
+    public void setImages()
+    {
+        Picasso.with(getActivity())
+                .load("http://applex360.in/Deshpande-family/Matrimony-web/"+mListItem.get(0).getProfile_photo()).
+                placeholder(R.mipmap.userprofile)
+                .fit()
+                .into(imgProfPic);
+        path=mListItem.get(0).getProfile_photo();
+
+        list_gallery=mListItem.get(0).getGallery();
+        displayData();
 
     }
 

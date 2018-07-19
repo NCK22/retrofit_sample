@@ -1,7 +1,6 @@
 package com.applex.matrimony.Fragment;
 
 import android.app.ProgressDialog;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,19 +8,25 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.applex.matrimony.APIClient;
-import com.applex.matrimony.Activity.TabViewParentActivity;
+import com.applex.matrimony.Adapter.GalleryBitmapsAdapter;
+import com.applex.matrimony.Adapter.GalleryImagesAdapter;
 import com.applex.matrimony.Interface.getProfileInterface;
+import com.applex.matrimony.Interface.uploadGalleryInterface;
 import com.applex.matrimony.Interface.uploadPhotoInterface;
 import com.applex.matrimony.Pojo.CommonParentPojo;
+import com.applex.matrimony.Pojo.ParentPojoGallery;
 import com.applex.matrimony.Pojo.ParentPojoProfile;
 import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
@@ -30,6 +35,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -44,29 +50,41 @@ import retrofit2.Response;
 import static android.app.Activity.RESULT_OK;
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
-public class UploadPhoto extends Fragment implements View.OnClickListener {
+public class TabGalleryPhoto extends Fragment implements View.OnClickListener {
 
 
     public static File file;
     private Uri mCameraFileUri;
     Bitmap bitmap;
-    ShapedImageView imgProfilePic;
+    public static ShapedImageView imgProfilePic;
     File imageFile;
     Button btnSubmit;
     SPCustProfile spCustProfile;
     ProgressDialog progressDialog;
+    RecyclerView rv_gallery;
+    GalleryImagesAdapter adapterGallery;
+    ArrayList<String> list_gallery=new ArrayList<String>();
+    ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
+    String[] temp;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.activity_upload_photo, container, false);
+        View rootView = inflater.inflate(R.layout.tab_gallery_photo, container, false);
         imgProfilePic = (ShapedImageView) rootView.findViewById(R.id.img_profile_pic);
         btnSubmit = (Button) rootView.findViewById(R.id.btn_submit_photo);
         btnSubmit.setOnClickListener(this);
         imgProfilePic.setOnClickListener(this);
         spCustProfile = new SPCustProfile(getActivity());
         progressDialog=new ProgressDialog(getActivity());
+
+        rv_gallery = (RecyclerView) rootView.findViewById(R.id.rv_prof_gallery);
+        rv_gallery.setHasFixedSize(true);
+        rv_gallery.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+
+        displayData();
+
         return rootView;
     }
 
@@ -123,6 +141,7 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
                 try {
                     bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
                     imgProfilePic.setImageBitmap(bitmap);
+
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -147,6 +166,28 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
         return thePath;
     }
 
+    private void displayData() {
+
+
+        Log.e("displayData","called");
+        //Log.e("List_highlight size",""+list_gallery.size());
+        if(list_gallery.size()<=0 && spCustProfile.getGalleryPhotoPath()!=null) {
+            temp = spCustProfile.getGalleryPhotoPath().toArray(new String[0]);
+            for (int i = 0; i < temp.length; i++)
+                list_gallery.add(temp[i]);
+        }
+        adapterGallery = new GalleryImagesAdapter(getActivity(),list_gallery);
+        rv_gallery.setAdapter(adapterGallery);
+
+
+        if (adapterGallery.getItemCount() == 0) {
+            //          lyt_not_found.setVisibility(View.VISIBLE);
+        } else {
+//            lyt_not_found.setVisibility(View.GONE);
+        }
+    }
+
+
     @Override
     public void onClick(View view) {
 
@@ -170,26 +211,32 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
 
         // Parsing any Media type file
        // spCustProfile.setProfile_id("83");
-        Log.e("profile_id", spCustProfile.getProfile_id());
+        if(list_gallery!=null)
+            list_gallery.clear();
+        Log.e("matrimony_id", spCustProfile.getMatrimonyId());
         RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), imageFile);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", imageFile.getName(), requestBody);
         RequestBody filename = RequestBody.create(MediaType.parse("JPEG/PNG"), imageFile.getName());
-        RequestBody profile_id = RequestBody.create(MediaType.parse("text/plain"), spCustProfile.getProfile_id());
-        uploadPhotoInterface getResponse = APIClient.getClient().create(uploadPhotoInterface.class);
-        Call<CommonParentPojo> call = getResponse.uploadFile(fileToUpload, filename, profile_id);
-        call.enqueue(new Callback<CommonParentPojo>() {
+        RequestBody matrimony_id = RequestBody.create(MediaType.parse("text/plain"), spCustProfile.getMatrimonyId());
+        uploadGalleryInterface getResponse = APIClient.getClient().create(uploadGalleryInterface.class);
+        Call<ParentPojoGallery> call = getResponse.uploadFile(fileToUpload, filename, matrimony_id);
+        call.enqueue(new Callback<ParentPojoGallery>() {
             @Override
-            public void onResponse(Call<CommonParentPojo> call, retrofit2.Response<CommonParentPojo> response) {
+            public void onResponse(Call<ParentPojoGallery> call, Response<ParentPojoGallery> response) {
 
-                CommonParentPojo commonParentPojo = response.body();
-                Log.e("ServerResponse", commonParentPojo.getMsg());
-                if (commonParentPojo != null) {
-                    Log.e("response", commonParentPojo.getMsg());
-                    if (commonParentPojo.getStatus().equalsIgnoreCase("1")) {
+                ParentPojoGallery parentPojoGallery = response.body();
+                Log.e("ServerResponse", parentPojoGallery.getMsg());
+                if (parentPojoGallery != null) {
+                    Log.e("response", parentPojoGallery.getMsg());
+                    if (parentPojoGallery.getStatus().equalsIgnoreCase("1")) {
                         //  strResumePath=serverResponse.getMessage();
-                        Log.e("Success Response", commonParentPojo.getMsg());
-                        Toast.makeText(getActivity(), "success" + commonParentPojo.getMsg(), Toast.LENGTH_SHORT).show();
-                        getProfile();
+                        Log.e("Success Response", parentPojoGallery.getMsg());
+                        Toast.makeText(getActivity(), "success" + parentPojoGallery.getMsg(), Toast.LENGTH_SHORT).show();
+                        list_gallery=parentPojoGallery.getObjGallery().get("Gallery");
+                        spCustProfile.setGalleryPhotoPath(list_gallery);
+                        displayData();
+
+                        //getProfile();
 
                     }
                    /* } else {
@@ -206,7 +253,7 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
 
 
             @Override
-            public void onFailure(Call<CommonParentPojo> call, Throwable t) {
+            public void onFailure(Call<ParentPojoGallery> call, Throwable t) {
 
                 Log.e("throwbale", "" + t);
             }
