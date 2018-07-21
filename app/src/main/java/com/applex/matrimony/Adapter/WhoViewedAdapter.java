@@ -29,7 +29,6 @@ import com.applex.matrimony.R;
 import com.applex.matrimony.Storage.SPCustProfile;
 import com.squareup.picasso.Picasso;
 
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,14 +53,11 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
         progressDialog.setMessage("Please wait adapter");
         mListItem = new ArrayList<ChildPojoProfile>();
         spCustProfile=new SPCustProfile(mContext);
-
-
     }
 
     @Override
     public ItemRowHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_list_who_viewed, parent, false);
-
         return new ItemRowHolder(v);
     }
 
@@ -196,13 +192,11 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
             member_typ = (TextView) itemView.findViewById(R.id.tv_row_member_type);
             ibtnInterest=(ImageButton)itemView.findViewById(R.id.ibtn_row_interest);
 
-
             btnSendMail = (Button) itemView.findViewById(R.id.btn_row_sendMail);
             btnShortList = (Button) itemView.findViewById(R.id.btn_row_shortList);
             btnPremium=(Button)itemView.findViewById(R.id.btn_row_premium);
         }
     }
-
         public void showToast(String msg) {
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
@@ -227,27 +221,19 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
                     if(commonParentPojo.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response",commonParentPojo.getMsg());
                         new ItemRowHolder(view).btnShortList.setText("Shortlisted");
-
                     }
-
-
                 }
-
                 progressDialog.dismiss();
             }
-
             @Override
             public void onFailure(Call<CommonParentPojo> call, Throwable t) {
-
                 progressDialog.dismiss();
             }
         });
-
     }
 
     public void sendInterest(String matrimony_id_to, final View view)
     {
-
         progressDialog.show();
 
         Log.e("matrimony_id",matrimony_id_to);
@@ -266,8 +252,6 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
                         Log.e("Response interest",commonParentPojo.getMsg());
                         new ItemRowHolder(view).ibtnInterest.setImageResource(R.mipmap.iconintrestedfilled);
                     }
-
-
                 }
 
                 progressDialog.dismiss();
@@ -279,7 +263,6 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
                 progressDialog.dismiss();
             }
         });
-
     }
 
     public void getWhoShortlistedMy()
@@ -315,9 +298,7 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
                             }
                             Log.e("size of list_profile",""+list_profile.size());
                             Log.e("sp",spCustProfile.getShortListedProf());
-
                         }
-
                     }
                 }
 
@@ -330,8 +311,6 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
                 progressDialog.dismiss();
             }
         });
-
     }
 }
-
 

@@ -106,10 +106,10 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
 
     MaterialSpinner spMaritalStat,spCountry,spState,spCity,spBirthCountry,spBirthState,spBirthCity,spHeightFrom,spHeightTo,spWeight,spBodyType,spComplexion,
-            spPhysStat,spEdu,spOccu,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue
+            spPhysStat,spEdu,spOccu,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue,spIncomeFrom,spIncomeTo
             , spProfFor,spCaste,spReligion,spMTongue,spStar,spRassi,spDosh,spGotra,spResident,spAgeFrom,spAgeTo;
 
-    ArrayAdapter aaProfFor,aaAge,aaGender,aaCaste,aaMTongue,aaMaritalStat,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,
+    ArrayAdapter aaProfFor,aaAge,aaGender,aaCaste,aaMTongue,aaMaritalStat,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,aaIncomeFrom,aaIncomeTo,
             aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue,aaStar,aaRassi,aaDosh,aaGotra,aaResident;
 
 
@@ -119,6 +119,8 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     TimePickerEditText etBTime;
     ArrayList<String> list_prof_for=new ArrayList<String>();
     ArrayList<String> list_age=new ArrayList<String>();
+    ArrayList<String> list_income_from=new ArrayList<String>();
+    ArrayList<String> list_income_to=new ArrayList<String>();
     ArrayList<String> list_caste=new ArrayList<String>();
     ArrayList<ChildPojoReligion>list_pojo_religion=new ArrayList<ChildPojoReligion>();
     ArrayList<ChildPojoCaste>list_pojo_caste=new ArrayList<ChildPojoCaste>();
@@ -199,7 +201,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
     String intentReligion="",intentCaste="",intentCountry="",intentState="",intentMaritalStat="",intentBirthCountry="",intentBirthState="",intentBirthCity="",
             intentOccu="",intentEdu="",intentMTongue="",intentPhysicalStat="",intentHeightFrom="",intentHeightTo="",intentEating="",intentDrinking="",
-    intentSmoking="",intentAgeFrom="",intentAgeTo="";
+    intentSmoking="",intentAgeFrom="",intentAgeTo="",intentMinIncome="",intentMaxIncome="";
     SPCustProfile spCustProfile;
     ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
 
@@ -221,7 +223,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         etEmployedIn=(EditText)rootView.findViewById(R.id.edt_employedIn);
         etBDate = (DatePickerEditText) rootView.findViewById(R.id.edt_bdate);
         etSubCaste=(EditText)rootView.findViewById(R.id.edt_subCaste);
-        etIncome=(EditText)rootView.findViewById(R.id.edt_income);
+       // etIncome=(EditText)rootView.findViewById(R.id.edt_income_from);
         etFamOrigin=(EditText)rootView.findViewById(R.id.edt_fam_origin);
         etFamLoc=(EditText)rootView.findViewById(R.id.edt_fam_location);
         etFatherStat=(EditText)rootView.findViewById(R.id.edt_father_stat);
@@ -316,6 +318,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         spPhysStat=(MaterialSpinner)rootView.findViewById(R.id.sp_physical_stat);spEdu=(MaterialSpinner)rootView.findViewById(R.id.sp_edu);
         spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occu);
         //spCurrency=(MaterialSpinner)rootView.findViewById(R.id.sp_currency);
+        spIncomeFrom=(MaterialSpinner)rootView.findViewById(R.id.sp_income_from);spIncomeTo=(MaterialSpinner)rootView.findViewById(R.id.sp_income_to);
         spFood=(MaterialSpinner)rootView.findViewById(R.id.sp_food);spDrink=(MaterialSpinner)rootView.findViewById(R.id.sp_drink);
         spSmoke=(MaterialSpinner)rootView.findViewById(R.id.sp_smoke);spFamStat=(MaterialSpinner)rootView.findViewById(R.id.sp_fam_stat);
         spFamType=(MaterialSpinner)rootView.findViewById(R.id.sp_fam_type);spFamValue=(MaterialSpinner)rootView.findViewById(R.id.sp_fam_value);
@@ -455,6 +458,12 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         for(int i=18;i<=70;i++)
             list_age.add(String.valueOf(i));
 
+        for(int i=50000;i<=1000000;i+=50000) {
+            list_income_from.add(String.valueOf(i));
+            list_income_to.add(String.valueOf(i));
+        }
+
+        list_income_to.add("1000000 & Above");
         // list_marital_Stat.add("Marital Status");
         list_marital_Stat.add("Never Married");
         list_marital_Stat.add("Divorced");
@@ -566,10 +575,15 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         aaResident = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_resident);
         aaResident.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        aaIncomeFrom= new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_income_from);
+        aaIncomeFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        aaIncomeTo= new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_income_to);
+        aaIncomeTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spMaritalStat.setAdapter(aaMaritalStat);spAgeTo.setAdapter(aaAge);spAgeFrom.setAdapter(aaAge);
         spPhysStat.setAdapter(aaPhysStat);
         spFood.setAdapter(aaFood);spDrink.setAdapter(aaDrink);spSmoke.setAdapter(aaSmoke);
+        spIncomeFrom.setAdapter(aaIncomeFrom);spIncomeTo.setAdapter(aaIncomeTo);
 
 
         Log.e("intentAgeFrom",intentAgeFrom);
@@ -622,6 +636,25 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             tvSmoke.setText(list_smoke.get(Integer.parseInt(intentSmoking)-1));
             spSmoke.setSelection(Integer.parseInt(intentSmoking));
         }
+
+        Log.e("intentMinIncome",intentMinIncome);
+        if(!intentMinIncome.equalsIgnoreCase("")){
+
+            if(!tvAnnualIncome.getText().toString().contains(intentMinIncome))
+            tvAnnualIncome.setText(intentMinIncome);
+            spIncomeFrom.setSelection(list_income_from.indexOf(intentMinIncome));
+        }
+
+
+        Log.e("intentMaxIncome",intentMaxIncome);
+        if(!intentMaxIncome.equalsIgnoreCase("")){
+
+            if(!tvAnnualIncome.getText().toString().contains("To"))
+            tvAnnualIncome.append(" To "+intentMaxIncome);
+            Log.e("maxincomeindex initial", String.valueOf(list_income_to.indexOf(intentMaxIncome)));
+            spIncomeTo.setSelection(list_income_to.indexOf(intentMaxIncome));
+        }
+
 
         getPreference();
 
@@ -1700,7 +1733,9 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
             call = getResponse.updateProfessional(spCustProfile.getMatrimonyId(),
                     spEdu.getSelectedItemPosition()<=0?"0":list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
-                    spOccu.getSelectedItemPosition()<=0?"0":list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),etIncome.getText().toString());
+                    spOccu.getSelectedItemPosition()<=0?"0":list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),
+                    spIncomeFrom.getSelectedItemPosition()<=0 ? "0" : spIncomeFrom.getSelectedItem().toString(),
+                    spIncomeTo.getSelectedItemPosition()<=0 ? "0" : spIncomeTo.getSelectedItem().toString());
 
         }
         else if(section.equalsIgnoreCase("about_partner")) {
@@ -1934,6 +1969,38 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 }
             }
         }
+
+      /*  tvAnnualIncome.setText(mListItem.get(0).getAge_from()+" to "+mListItem.get(0).getAge_to());
+
+        if(mListItem.get(0).getAge_from()!=null) {
+            intentAgeFrom = mListItem.get(0).getAge_from();
+            if (intentAgeFrom.equalsIgnoreCase("0") || intentAgeFrom.equalsIgnoreCase("")) {
+                tvAge.setText("");
+            } else {
+                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
+                // Log.e("listPhysicalStatSize", "" + list_physical_stat.size());
+                //  Log.e("textPStat", "" + list_marital_Stat.get(Integer.parseInt(intentPhysicalStat) - 1));
+                //if (list_age.size() > Integer.parseInt(intentAgeFrom) - 1) {
+                tvAge.setText(intentAgeFrom);
+                spAgeFrom.setSelection(list_age.indexOf(intentAgeFrom)+1);
+                //}
+            }
+        }
+
+        if(mListItem.get(0).getAge_to()!=null) {
+            intentAgeTo = mListItem.get(0).getAge_to();
+            if (intentAgeTo.equalsIgnoreCase("0") || intentAgeTo.equalsIgnoreCase("")) {
+                tvAge.append("");
+            } else {
+                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
+                // Log.e("listPhysicalStatSize", "" + list_physical_stat.size());
+                //  Log.e("textPStat", "" + list_marital_Stat.get(Integer.parseInt(intentPhysicalStat) - 1));
+                //    if (list_age.size() > Integer.parseInt(intentAgeTo) - 1) {
+                tvAge.append(" To "+intentAgeTo);
+                spAgeTo.setSelection(list_age.indexOf(intentAgeTo)+1);
+                //  }
+            }
+        }*/
     }
 
     public void setReligion(){
@@ -2081,8 +2148,42 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             }
         }
         Log.e("intentoccu", intentOccu);*/
-        tvAnnualIncome.setText(mListItem.get(0).getMin_income());
-        etIncome.setText(mListItem.get(0).getMin_income());
+     /*   tvAnnualIncome.setText(mListItem.get(0).getMin_income());
+        //etIncome.setText(mListItem.get(0).getMin_income());*/
+
+        tvAnnualIncome.setText(mListItem.get(0).getMin_income()+" to "+mListItem.get(0).getMax_income());
+
+        if(mListItem.get(0).getMin_income()!=null) {
+            intentMinIncome = mListItem.get(0).getMin_income();
+            if (intentMinIncome.equalsIgnoreCase("0") || intentMinIncome.equalsIgnoreCase("")) {
+                tvAnnualIncome.setText("");
+            } else {
+                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
+                // Log.e("listPhysicalStatSize", "" + list_physical_stat.size());
+                //  Log.e("textPStat", "" + list_marital_Stat.get(Integer.parseInt(intentPhysicalStat) - 1));
+                //if (list_age.size() > Integer.parseInt(intentAgeFrom) - 1) {
+                tvAnnualIncome.setText(intentMinIncome);
+                spIncomeFrom.setSelection(list_income_from.indexOf(intentMinIncome)+1);
+                //}
+            }
+        }
+
+        if(mListItem.get(0).getMax_income()!=null) {
+            intentMaxIncome = mListItem.get(0).getMax_income();
+            if (intentMaxIncome.equalsIgnoreCase("0") || intentMaxIncome.equalsIgnoreCase("")) {
+                tvAnnualIncome.append("");
+            } else {
+                //intentPhysicalStat = mListItem.get(0).getPhysical_status();
+                // Log.e("listPhysicalStatSize", "" + list_physical_stat.size());
+                //  Log.e("textPStat", "" + list_marital_Stat.get(Integer.parseInt(intentPhysicalStat) - 1));
+                //    if (list_age.size() > Integer.parseInt(intentAgeTo) - 1) {
+                tvAnnualIncome.append(" To "+intentMaxIncome);
+                Log.e("maxIncomelistsize", String.valueOf(list_income_to.size()));
+                Log.e("maxincomeindex", String.valueOf(list_income_to.indexOf(intentMaxIncome)));
+                spIncomeTo.setSelection(list_income_to.indexOf(intentMaxIncome)+1);
+                //  }
+            }
+        }
     }
 
     public void setPartnerDescription(){
@@ -2171,6 +2272,5 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         }
 
     }
-
 
 }

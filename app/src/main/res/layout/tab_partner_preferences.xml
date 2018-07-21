@@ -209,7 +209,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="2"
-                                    android:text="Age :"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -222,7 +222,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="2"
-                                    android:text="Height :"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -234,7 +234,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Marital Status"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -247,7 +247,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Physical Status"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -260,7 +260,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Eating Habits :"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -272,7 +272,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Drinking Habits"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -284,7 +284,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Smoking Habits :"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -844,7 +844,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Hindu"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -856,7 +856,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text=""
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -868,7 +868,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Brahmin - Deshastha"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -1150,7 +1150,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Hindu"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -1162,7 +1162,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Brahmin - Deshastha"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -1303,7 +1303,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1337,7 +1337,7 @@
                 <LinearLayout
 
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:background="#0c000000"
                     android:orientation="horizontal"
                     android:weightSum="2"
@@ -1348,7 +1348,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:weightSum="3"
+                        android:weightSum="4"
                         android:orientation="vertical"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
@@ -1380,7 +1380,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"
+                            android:layout_weight="2"
                             android:text="Annual Income :"
                             android:fontFamily="Roboto-Regular"
                             android:textSize="16sp"
@@ -1409,7 +1409,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:weightSum="3"
+                                android:weightSum="4"
                                 android:visibility="visible">
 
                                 <TextView
@@ -1417,7 +1417,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Hindu"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -1429,7 +1429,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
                                     android:layout_weight="1"
-                                    android:text="Rassi:"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
@@ -1440,23 +1440,21 @@
                                     android:id="@+id/tv_income"
                                     android:layout_width="match_parent"
                                     android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:text="Dosham :"
+                                    android:layout_weight="2"
+                                    android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
                                     android:gravity="center_vertical"
                                     />
 
-
                             </LinearLayout>
-
                             <LinearLayout
                                 android:id="@+id/ll_professional_edit"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
-                                android:weightSum="3"
+                                android:weightSum="4"
                                 android:layout_marginTop="5dp"
                                 android:visibility="invisible">
                                 <LinearLayout
@@ -1556,8 +1554,8 @@
                                         android:background="@drawable/home_spinner_border">
 
 
-                                        <EditText
-                                            android:id="@+id/edt_income"
+                                  <!--      <EditText
+                                            android:id="@+id/edt_income_from"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:hint="Deshastha"
@@ -1568,9 +1566,87 @@
                                             android:textSize="16sp"
                                             android:textColor="#4A4A4A"
                                             android:singleLine="true"
+                                            />-->
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_income_from"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="State"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
                                             />
                                     </LinearLayout>
 
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                    <!--    <EditText
+                                            android:id="@+id/edt_income_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            android:singleLine="true"
+                                            />-->
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_income_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="State"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
                         </FrameLayout>

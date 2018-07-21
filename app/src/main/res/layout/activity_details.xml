@@ -128,6 +128,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:hint="No. of Children"
+                            android:inputType="number"
                             android:textColorHint="#FFFFFF"
                             android:background="#00000000"
                             android:layout_gravity="center_horizontal"
@@ -191,6 +192,7 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="Roboto-Regular"
                         android:textSize="16dp"
+                        android:inputType="text"
                         android:padding="10dp"
                         android:textColor="#ffffff"
                         android:singleLine="true"
@@ -697,6 +699,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:fontFamily="Roboto-Regular"
                                 android:textSize="16dp"
+                                android:inputType="number"
                                 android:padding="10dp"
                                 android:textColor="#ffffff"
                                 android:singleLine="true"
@@ -1066,8 +1069,6 @@
 
             </LinearLayout>
         </ScrollView>
-
-
 
     </LinearLayout>
 

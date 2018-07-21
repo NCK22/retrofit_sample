@@ -28,7 +28,7 @@ public interface savePreferencesInterface {
     @FormUrlEncoded
     @POST("app/app_save_preference.php")
     Call<CommonParentPojo> updateProfessional(@Field("matrimony_id") String user_id, @Field("education") String education, @Field("occupation") String occupation,
-                                              @Field("min_income") String income);
+                                              @Field("min_income") String min_income,@Field("max_income") String max_income);
 
     @FormUrlEncoded
     @POST("app/app_save_preference.php")

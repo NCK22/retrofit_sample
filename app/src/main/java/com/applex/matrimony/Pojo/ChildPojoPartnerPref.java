@@ -26,6 +26,7 @@ public class ChildPojoPartnerPref {
     @SerializedName("education") String education;
     @SerializedName("occupation") String occupation;
     @SerializedName("min_income") String min_income;
+    @SerializedName("max_income") String max_income;
     @SerializedName("about_partner") String about_partner;
 
 
@@ -86,6 +87,14 @@ public class ChildPojoPartnerPref {
     }
     public String getReligion() {
         return religion;
+    }
+
+    public String getMax_income() {
+        return max_income;
+    }
+
+    public void setMax_income(String max_income) {
+        this.max_income = max_income;
     }
 
     public void setReligion(String religion) {

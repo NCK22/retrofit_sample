@@ -655,9 +655,12 @@ displayData();
 
         Log.e("intentProfileFor", intentProfileFor);
         if (!intentProfileFor.equalsIgnoreCase("")) {
-
+/*
             tvProfFor.setText(list_prof_for.get(Integer.parseInt(intentProfileFor) - 1));
-            spProfFor.setSelection(Integer.parseInt(intentProfileFor));
+            spProfFor.setSelection(Integer.parseInt(intentProfileFor));*/
+
+            tvProfFor.setText(intentProfileFor);
+            spProfFor.setSelection(list_prof_for.indexOf(intentProfileFor)+1);
         }
 
         Log.e("intentBodyType", intentBodyType);
@@ -717,8 +720,10 @@ displayData();
         Log.e("intentResident", intentResident);
         if (!intentResident.equalsIgnoreCase("")) {
 
-            tvResidentStatus.setText(list_resident.get(Integer.parseInt(intentResident) - 1));
-            spResident.setSelection(Integer.parseInt(intentResident));
+         /*   tvResidentStatus.setText(list_resident.get(Integer.parseInt(intentResident) - 1));
+            spResident.setSelection(Integer.parseInt(intentResident));*/
+            tvResidentStatus.setText(intentResident);
+            spResident.setSelection(list_resident.indexOf(intentResident)+1);
         }
 
         Log.e("intentFamilyValue", intentFamilyValue);
@@ -2323,7 +2328,7 @@ if(view!=null) {
             } else {
 
                 tvProfFor.setText(intentProfileFor);
-                spProfFor.setSelection(list_prof_for.indexOf(intentProfileFor));
+                spProfFor.setSelection(list_prof_for.indexOf(intentProfileFor)+1);
                /* Log.e("listPhysicalStatSize", "" + list_prof_for.size());
                 Log.e("textPStat", "" + list_prof_for.get(Integer.parseInt(intentProfileFor) - 1));
                 if (list_prof_for.size() > Integer.parseInt(intentProfileFor) - 1) {
@@ -2905,7 +2910,7 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
                 tvResidentStatus.setText("");
             } else {
                tvResidentStatus.setText(intentResident);
-               spResident.setSelection(list_resident.indexOf(intentResident));
+               spResident.setSelection(list_resident.indexOf(intentResident)+1);
                /* Log.e("listMaritialStatSize", "" + list_resident.size());
                 Log.e("textMStat", "" + list_resident.get(Integer.parseInt(intentResident) - 1));
                 if (list_resident.size() > Integer.parseInt(intentResident) - 1) {
