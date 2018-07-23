@@ -101,7 +101,6 @@ public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapte
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.img_row_logo);
             member_typ = (TextView) itemView.findViewById(R.id.tv_row_member_type);
-
         }
     }
 

@@ -26,6 +26,7 @@ import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Activity.DetailsActivity;
 import com.applex.matrimony.Activity.RegisterActivity;
 import com.applex.matrimony.Adapter.HomeProfilesAdapter;
+import com.applex.matrimony.Adapter.MultiSelectionAdapter;
 import com.applex.matrimony.Interface.APIInterface;
 import com.applex.matrimony.Interface.getCasteInterface;
 import com.applex.matrimony.Interface.getCityInterface;
@@ -78,6 +79,7 @@ import com.applex.matrimony.Pojo.ParentPojoStar;
 import com.applex.matrimony.Pojo.ParentPojoState;
 import com.applex.matrimony.Pojo.ParentPojoWeight;
 import com.applex.matrimony.R;
+import com.applex.matrimony.StateVO;
 import com.applex.matrimony.Storage.SPCustProfile;
 
 
@@ -657,7 +659,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
 
         getPreference();
-
 
 
         progressDialog.dismiss();
@@ -1578,9 +1579,24 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             list_edu.add(resultMap.get(key).getEducation());
                         }
                         Log.e("List Size", "" + list_edu.size());
-                        aaEdu = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list_edu);
-                        aaEdu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spEdu.setAdapter(aaEdu);
+
+                        ArrayList<StateVO> listVOs = new ArrayList<>();
+
+                        for (int i = 0; i < list_edu.size(); i++) {
+                            StateVO stateVO = new StateVO();
+                            stateVO.setTitle(list_edu.get(i));
+                            stateVO.setSelected(false);
+                            listVOs.add(stateVO);
+                        }
+                        MultiSelectionAdapter myAdapter = new MultiSelectionAdapter(getActivity(), 0,
+                                listVOs);
+                        spEdu.setAdapter(myAdapter);
+
+
+                      /*  aaEdu = new ArrayAdapter(getActivity(), android.R.layout.test_list_item, list_edu);
+                        aaEdu.setDropDownViewResource(android.R.layout.select_dialog_item);
+                        spEdu.setAdapter(aaEdu);*/
+
 
                        /* if(!intentEdu.equalsIgnoreCase("")) {
                             Log.e("intentedufunction",intentEdu);
@@ -1599,6 +1615,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             }
                         }
                     }
+
                     progressDialog.dismiss();
                 }
 
@@ -1644,6 +1661,19 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             list_occu.add(resultMap.get(key).getOccupation());
                         }
                         Log.e("List Size",""+list_occu.size());
+
+                      /*  ArrayList<StateVO> listVOs = new ArrayList<>();
+
+                        for (int i = 0; i < list_occu.size(); i++) {
+                            StateVO stateVO = new StateVO();
+                            stateVO.setTitle(list_occu.get(i));
+                            stateVO.setSelected(false);
+                            listVOs.add(stateVO);
+                        }
+                        MultiSelectionAdapter myAdapter = new MultiSelectionAdapter(getActivity(), 0,
+                                listVOs);
+                        spOccu.setAdapter(myAdapter);*/
+
                         aaOccu = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_occu);
                         aaOccu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spOccu.setAdapter(aaOccu);
@@ -2200,7 +2230,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     public void keepButtonOpen(String section)
     {
 
-
         switch(section)
         {
             case "basic": if (llBasic.getVisibility() == View.GONE) {
@@ -2268,7 +2297,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     llProfessional.setVisibility(View.GONE);
 
                 break;
-
         }
 
     }

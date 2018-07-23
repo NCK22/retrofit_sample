@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -463,6 +465,30 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
 
 
         imgProfPic.setOnClickListener(this);
+
+        // Load the animation like this
+        Animation animSlide = AnimationUtils.loadAnimation(getActivity(),
+                R.anim.slide);
+        animSlide.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+// Start the animation like this
+        imgProfPic.startAnimation(animSlide);
 
         imgEditBasic.setOnClickListener(this);
         imgClearBasic.setOnClickListener(this);
@@ -2067,7 +2093,6 @@ if(view!=null) {
         Call<CommonParentPojo> call = null;
         if (section.equalsIgnoreCase("Basic")) {
 
-
             Calendar d = etBDate.getDate();
             String s = d.get(d.YEAR) + "-" + (d.get(d.MONTH) + 1) + "-" + d.get(d.DAY_OF_MONTH);
             String age = String.valueOf(2018 - d.get(d.YEAR));
@@ -2084,7 +2109,6 @@ if(view!=null) {
                     , spFood.getSelectedItemPosition()==0 ? "0" :String.valueOf(spFood.getSelectedItemPosition()),
                     spDrink.getSelectedItemPosition()==0 ? "0" :String.valueOf(spDrink.getSelectedItemPosition()),
                     spSmoke.getSelectedItemPosition()==0 ? "0" :String.valueOf(spSmoke.getSelectedItemPosition()));
-
 
         } else if (section.equalsIgnoreCase("religion")) {
 
