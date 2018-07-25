@@ -74,6 +74,7 @@ public class MultiSelectionAdapter extends ArrayAdapter<StateVO> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 int getPosition = (Integer) buttonView.getTag();
+
             }
         });
         return convertView;

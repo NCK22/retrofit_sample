@@ -2498,6 +2498,11 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
 
     public void setGroomBrideLoc(){
 
+        if(mListItem.get(0).getGender().equalsIgnoreCase("Male"))
+            btnGroomBrideLoc.setText("Groom's Location");
+        else if(mListItem.get(0).getGender().equalsIgnoreCase("Female"))
+            btnGroomBrideLoc.setText("Bride's Location");
+
         if(mListItem.get(0).getCountry()!=null) {
             intentCountry = mListItem.get(0).getCountry();
             if (intentCountry.equalsIgnoreCase("0")||intentCountry.equalsIgnoreCase("")) {

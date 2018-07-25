@@ -153,10 +153,11 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
       //  bottmNavView.setItemBackground(0,R.color.colorTheme);
      //   bottmNavView.setIconSizeAt(bottmNavView.getMenuItemPosition(bottmNavView.getMenu().findItem(bottmNavView.getSelectedItemId())),32,32);
 
+        // if(spCustProfile.getProfilePhotoPath().equalsIgnoreCase(""))
+        getProfile();
     Log.e("SPProfilephoto",spCustProfile.getProfilePhotoPath());
         setHeader();
-       if(spCustProfile.getProfilePhotoPath().equalsIgnoreCase(""))
-           getProfile();
+
 
     }
 
@@ -316,6 +317,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
                         //MyApp.saveIsLogin(false);
                         spCustProfile.setIsLogin("false");
                         spCustProfile.setProfilePhotoPath("");
+                        spCustProfile.setGender("");
                         spCustProfile.clearGalleryPhotoPath();
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -334,6 +336,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
 
     public void getProfile(){
 
+        Log.e("Inside","getProfile");
         progressDialog.show();
 
         getProfileInterface getResponse = APIClient.getClient().create(getProfileInterface.class);
@@ -353,8 +356,10 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
                         if(parentPojoProfile.getObjProfile().get(0).getProfile_photo()!=null) {
                             Log.e("profile_photo res", parentPojoProfile.getObjProfile().get(0).getProfile_photo());
                             spCustProfile.setProfilePhotoPath(parentPojoProfile.getObjProfile().get(0).getProfile_photo());
-                            spCustProfile.setName(parentPojoProfile.getObjProfile().get(0).getProfile_name());
                         }
+                        spCustProfile.setName(parentPojoProfile.getObjProfile().get(0).getProfile_name());
+                        Log.e("In getProfile",parentPojoProfile.getObjProfile().get(0).getProfile_name());
+                        spCustProfile.setGender(parentPojoProfile.getObjProfile().get(0).getGender());
                        setHeader();
 
                     }
@@ -382,6 +387,7 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
             TextView txtHeaderName = (TextView) header.findViewById(R.id.header_name);
             TextView txtHeaderEmail = (TextView) header.findViewById(R.id.header_email);
             final ShapedImageView imageUser = (ShapedImageView) header.findViewById(R.id.header_image);
+            Log.e("In header",spCustProfile.getName());
              txtHeaderName.setText(spCustProfile.getName());
             txtHeaderEmail.setText(spCustProfile.getEmail());
 

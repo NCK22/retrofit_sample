@@ -28,6 +28,7 @@ dependencies {
     compile 'com.android.support:design:27.1.1'
     compile 'com.android.support:cardview-v7:27.+'
     compile 'com.github.ganfra:material-spinner:2.0.0'
+    compile 'com.github.pratikbutani:MultiSelectSpinner:08d324c987'
     compile 'com.github.BlackBoxVision:datetimepicker-edittext:v0.3.3'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     compile 'cn.gavinliu.android.lib:ShapedImageView:0.8.4'

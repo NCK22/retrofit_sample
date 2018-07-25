@@ -190,6 +190,7 @@ SPCustProfile spCustProfile;
                         //MyApp.saveIsLogin(false);
                         spCustProfile.setIsLogin("false");
                         spCustProfile.setProfilePhotoPath("");
+                        spCustProfile.setGender("");
                         spCustProfile.clearGalleryPhotoPath();
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

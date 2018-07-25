@@ -1471,7 +1471,59 @@
                                         android:layout_marginBottom="4dp"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
-                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                        <FrameLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                            <EditText
+                                                android:id="@+id/edt_sp_edu"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="100dp"
+                                                android:inputType="none"
+                                                android:scrollbars="vertical"
+                                                android:scrollbarAlwaysDrawVerticalTrack="true"
+                                                android:fadeScrollbars="false"
+                                                android:scrollbarSize="50dp"
+                                                android:scrollbarStyle="insideInset"
+                                                android:overScrollMode="always"
+                                                android:enabled="false"
+                                                />
+                                            <com.androidbuts.multispinnerfilter.MultiSpinner
+                                                android:id="@+id/sp_edu"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginRight="15dp"
+                                                android:layout_marginEnd="15dp"
+                                                app:ms_alignLabels="false"
+                                                app:ms_arrowColor="#00000000"
+                                                app:ms_arrowSize="10dp"
+                                                app:ms_baseColor="#00000000"
+                                                app:ms_enableErrorLabel="false"
+                                                app:ms_enableFloatingLabel="false"
+                                                app:ms_errorColor="#FFFFFF"
+                                                app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                                app:ms_hintTextSize="16sp"
+                                                app:ms_hint="Education"
+                                                app:ms_hintColor="@color/black"
+                                                app:ms_multiline="true"
+                                                app:ms_thickness="0.5dp"
+                                                android:inputType="textMultiLine"
+                                                android:scrollbars="vertical"
+                                                android:scrollbarAlwaysDrawVerticalTrack="true"
+                                                android:fadeScrollbars="false"
+                                                android:scrollbarSize="50dp"
+                                                android:scrollbarStyle="insideInset"
+                                                android:overScrollMode="always"
+                                                android:popupBackground="#00000000"
+                                                android:background="#00000000"
+                                                android:nestedScrollingEnabled="true"
+                                                android:backgroundTint="@color/black"
+                                                android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                                />
+
+
+                                        </FrameLayout>
+                                       <!-- <fr.ganfra.materialspinner.MaterialSpinner
                                             android:id="@+id/sp_edu"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
@@ -1492,7 +1544,8 @@
                                             app:ms_thickness="0.5dp"
                                             android:popupBackground="#e6e6e6"
                                             android:popupElevation="@dimen/floating_label_bottom_spacing"
-                                            />
+                                            />-->
+
                                     </LinearLayout>
                                 </LinearLayout>
 

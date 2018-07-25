@@ -22,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidbuts.multispinnerfilter.MultiSpinner;
+import com.androidbuts.multispinnerfilter.MultiSpinnerListener;
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Activity.DetailsActivity;
 import com.applex.matrimony.Activity.RegisterActivity;
@@ -87,9 +89,11 @@ import org.json.JSONArray;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 import io.blackbox_vision.datetimepickeredittext.view.DatePickerEditText;
@@ -108,14 +112,16 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
 
     MaterialSpinner spMaritalStat,spCountry,spState,spCity,spBirthCountry,spBirthState,spBirthCity,spHeightFrom,spHeightTo,spWeight,spBodyType,spComplexion,
-            spPhysStat,spEdu,spOccu,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue,spIncomeFrom,spIncomeTo
+            spPhysStat,spEduc,spOccu,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue,spIncomeFrom,spIncomeTo
             , spProfFor,spCaste,spReligion,spMTongue,spStar,spRassi,spDosh,spGotra,spResident,spAgeFrom,spAgeTo;
+
+    MultiSpinner spEdu;
 
     ArrayAdapter aaProfFor,aaAge,aaGender,aaCaste,aaMTongue,aaMaritalStat,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,aaIncomeFrom,aaIncomeTo,
             aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue,aaStar,aaRassi,aaDosh,aaGotra,aaResident;
 
 
-    EditText etAbout,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
+    EditText etAbout,etSpEdu,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
             etFamOrigin,etFamLoc,etFatherStat,etMotherStat,etNoOfBrothers,etNoOfSisters;
     DatePickerEditText etBDate;
     TimePickerEditText etBTime;
@@ -219,6 +225,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
         etName=(EditText)rootView.findViewById(R.id.edt_name);
         etAbout=(EditText)rootView.findViewById(R.id.edt_about_you);
+        etSpEdu=(EditText)rootView.findViewById(R.id.edt_sp_edu);
         etCollege=(EditText)rootView.findViewById(R.id.edt_college);
         etEduDetail=(EditText)rootView.findViewById(R.id.edt_eduInDetail);
         etOccuDetail=(EditText)rootView.findViewById(R.id.edt_occuInDetail);
@@ -317,7 +324,36 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         spHeightFrom=(MaterialSpinner)rootView.findViewById(R.id.sp_height_from);spHeightTo=(MaterialSpinner)rootView.findViewById(R.id.sp_height_to);
         spWeight=(MaterialSpinner)rootView.findViewById(R.id.sp_weight);
         spBodyType=(MaterialSpinner)rootView.findViewById(R.id.sp_body_type);spComplexion=(MaterialSpinner)rootView.findViewById(R.id.sp_complexion);
-        spPhysStat=(MaterialSpinner)rootView.findViewById(R.id.sp_physical_stat);spEdu=(MaterialSpinner)rootView.findViewById(R.id.sp_edu);
+        spPhysStat=(MaterialSpinner)rootView.findViewById(R.id.sp_physical_stat);
+
+        spEdu=(MultiSpinner) rootView.findViewById(R.id.sp_edu);
+        etSpEdu.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                v.getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                    case MotionEvent.ACTION_UP:
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+
+                }
+
+                return false;
+            }
+        });
+
+        etSpEdu.setShowSoftInputOnFocus(false);
+        etSpEdu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSpEdu.setVisibility(View.INVISIBLE);
+                etSpEdu.setEnabled(false);
+                spEdu.setVisibility(View.VISIBLE);
+                spEdu.performClick();
+            }
+        });
+
         spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occu);
         //spCurrency=(MaterialSpinner)rootView.findViewById(R.id.sp_currency);
         spIncomeFrom=(MaterialSpinner)rootView.findViewById(R.id.sp_income_from);spIncomeTo=(MaterialSpinner)rootView.findViewById(R.id.sp_income_to);
@@ -656,6 +692,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             Log.e("maxincomeindex initial", String.valueOf(list_income_to.indexOf(intentMaxIncome)));
             spIncomeTo.setSelection(list_income_to.indexOf(intentMaxIncome));
         }
+
+        if(spCustProfile.getGender().equalsIgnoreCase("Male"))
+            btnGroomBrideLoc.setText("Bride's Location");
+        else if(spCustProfile.getGender().equalsIgnoreCase("Female"))
+            btnGroomBrideLoc.setText("Groom's Location");
 
 
         getPreference();
@@ -1571,8 +1612,49 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         Log.e("objsize", "" + parentPojoEducation.getObjEducation().size());
 
                         LinkedHashMap<String, ChildPojoEducation> resultMap = parentPojoEducation.getObjEducation();
-
+                        final LinkedHashMap<String, Boolean> list =new LinkedHashMap<String,Boolean>();
                         Iterator<String> keys = resultMap.keySet().iterator();
+                        while (keys.hasNext()) {
+                            String key = keys.next();
+                            list.put(resultMap.get(key).getEducation(),false);
+                            list_pojo_edu.add(resultMap.get(key));
+                            list_edu.add(resultMap.get(key).getEducation());
+
+                        }
+
+                        /*
+                         * Getting array of String to Bind in Spinner
+                         */
+                        //final List<String,Boolean> list = Arrays.asList(getResources().getStringArray(R.array.sports_array));
+
+/**
+ * Simple MultiSelection Spinner (Without Search/Filter Functionlity)
+ *
+ *  Using MultiSpinner class
+ */
+   //                     MultiSpinner simpleSpinner = (MultiSpinner) findViewById(R.id.simpleMultiSpinner);
+
+                        spEdu.setItems(list, new MultiSpinnerListener() {
+                            @Override
+                            public void onItemsSelected(boolean[] selected) {
+                                for(int i=0; i<selected.length; i++) {
+                                    if(selected[i]) {
+                                        Log.i("TAG", i + " : "+ list.get(i));
+                                        etSpEdu.setEnabled(true);
+                                        spEdu.setVisibility(View.INVISIBLE);
+                                        etSpEdu.setVisibility(View.VISIBLE);
+                                        etSpEdu.setText(spEdu.getSelectedItem().toString());
+                                    }
+                                }
+                            }
+                        });
+
+
+
+
+
+
+                   /*     Iterator<String> keys = resultMap.keySet().iterator();
                         while (keys.hasNext()) {
                             String key = keys.next();
                             list_pojo_edu.add(resultMap.get(key));
@@ -1590,7 +1672,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         }
                         MultiSelectionAdapter myAdapter = new MultiSelectionAdapter(getActivity(), 0,
                                 listVOs);
-                        spEdu.setAdapter(myAdapter);
+                        spEdu.setAdapter(myAdapter);*/
 
 
                       /*  aaEdu = new ArrayAdapter(getActivity(), android.R.layout.test_list_item, list_edu);
@@ -1609,7 +1691,10 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             for (int i = 0; i < list_pojo_edu.size(); i++) {
                                 if (list_pojo_edu.get(i).getEducation_id().equalsIgnoreCase(intentEdu)) {
                                     tvEdu.setText(list_pojo_edu.get(i).getEducation());
-                                    spEdu.setSelection(list_edu.indexOf(list_pojo_edu.get(i).getEducation()) + 1);
+                                    //spEdu.setSelection(list_edu.indexOf(list_pojo_edu.get(i).getEducation()) + 1);
+                                    etSpEdu.setText(list_pojo_edu.get(i).getEducation());
+                                    etSpEdu.setEnabled(true);
+                                    spEdu.setVisibility(View.INVISIBLE);
                                     break;
                                 }
                             }
@@ -1761,8 +1846,23 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         }
         else if(section.equalsIgnoreCase("professional")) {
 
+            String s=etSpEdu.getText().toString();
+            Log.e("arrayOSAtring",s);
+           // s.replaceAll("\\s","");
+            String[] as=s.split(", ");
+            String strEdu="";
+            Log.e("arraysize",""+as.length);
+            for(int i=0;i<as.length;i++){
+                Log.e("arrayElement",as[i]);
+                Log.e("arrayindex",list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id());
+                if(strEdu.equalsIgnoreCase(""))
+                    strEdu=list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id();
+                else
+                    strEdu=strEdu+","+list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id();
+            }
             call = getResponse.updateProfessional(spCustProfile.getMatrimonyId(),
-                    spEdu.getSelectedItemPosition()<=0?"0":list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
+                    //spEdu.getSelectedItemPosition()<=0?"0":list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
+                    strEdu.equalsIgnoreCase("")?"0":strEdu,
                     spOccu.getSelectedItemPosition()<=0?"0":list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),
                     spIncomeFrom.getSelectedItemPosition()<=0 ? "0" : spIncomeFrom.getSelectedItem().toString(),
                     spIncomeTo.getSelectedItemPosition()<=0 ? "0" : spIncomeTo.getSelectedItem().toString());
@@ -1844,8 +1944,12 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         setPartnerDescription();
                     }
                 }
-                else
-                    Log.e("parentpojotabwhome","null");
+                else {
+                    Log.e("parentPojoPartnerPref", "null");
+
+
+
+                }
                 progressDialog.dismiss();
 
             }
@@ -1854,6 +1958,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             public void onFailure(Call<ParentPojoPartnerPref> call, Throwable t) {
 
                 Log.e("throwable",""+t);
+
                 progressDialog.dismiss();
             }
         });
@@ -2088,6 +2193,12 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     }
 
     public void setGroomBrideLoc(){
+Log.e("Inside","partPrefLoc");
+Log.e("inpartner pref",spCustProfile.getGender());
+        if(spCustProfile.getGender().equalsIgnoreCase("Male"))
+            btnGroomBrideLoc.setText("Bride's Location");
+        else if(spCustProfile.getGender().equalsIgnoreCase("Female"))
+            btnGroomBrideLoc.setText("Groom's Location");
 
         if(mListItem.get(0).getCountry()!=null) {
             intentCountry = mListItem.get(0).getCountry();

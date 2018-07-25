@@ -120,7 +120,6 @@
                         android:padding="10dp"
                         android:textColor="#ffffff"
                         android:inputType="text"
-                        tab
                         />
 
                 </LinearLayout>

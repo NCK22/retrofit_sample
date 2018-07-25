@@ -488,7 +488,7 @@ public class TabMyProfile extends Fragment implements AdapterView.OnItemSelected
         });
 
 // Start the animation like this
-        imgProfPic.startAnimation(animSlide);
+       // imgProfPic.startAnimation(animSlide);
 
         imgEditBasic.setOnClickListener(this);
         imgClearBasic.setOnClickListener(this);
@@ -1367,8 +1367,10 @@ if(view!=null) {
                         aaMTongue.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spMTongue.setAdapter(aaMTongue);
 
-                        if (intentMTongue != null)
+                        if (intentMTongue != null) {
+                            tvMTongue.setText(intentMTongue);
                             spMTongue.setSelection(list_mtongue.indexOf(intentMTongue) + 1);
+                        }
                         progressDialog.dismiss();
                     }
                 }
@@ -2262,6 +2264,7 @@ if(view!=null) {
                         mListItem = parentPojoProfile.getObjProfile();
                         spCustProfile.setProfilePhotoPath(mListItem.get(0).getProfile_photo());
                         spCustProfile.setGalleryPhotoPath(mListItem.get(0).getGallery());
+                        spCustProfile.setGender(mListItem.get(0).getGender());
                         setBasic();
                         setReligion();
                         setGroomBrideLoc();
@@ -2296,22 +2299,22 @@ if(view!=null) {
         spProfFor.setSelection(Integer.parseInt(mListItem.get(0).getProfile_for()));*/
         Log.e("profile_photo_myProfile","http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath());
 
-        Picasso.Builder builder = new Picasso.Builder(getActivity());
-        builder.listener(new Picasso.Listener()
-        {
-            @Override
-            public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception)
-            {
-                exception.printStackTrace();
-                Log.e("Exception",""+exception);
-            }
-        });
-        builder.build()
-                .load("http://applex360.in/Deshpande-family/Matrimony-web/"+spCustProfile.getProfilePhotoPath())
-                .placeholder(R.mipmap.userprofile)
-                .into(imgProfPic);
+        if(!spCustProfile.getProfilePhotoPath().equalsIgnoreCase("")) {
+            Picasso.Builder builder = new Picasso.Builder(getActivity());
+            builder.listener(new Picasso.Listener() {
+                @Override
+                public void onImageLoadFailed(Picasso picasso, Uri uri, Exception exception) {
+                    exception.printStackTrace();
+                    Log.e("Exception", "" + exception);
+                    imgProfPic.setImageResource(R.mipmap.userprofile);
+                }
+            });
+            builder.build()
+                    .load("http://applex360.in/Deshpande-family/Matrimony-web/" + spCustProfile.getProfilePhotoPath())
+                    .placeholder(R.mipmap.userprofile)
+                    .into(imgProfPic);
 
-
+        }
    /*     Picasso.with(getActivity().getApplicationContext())
                 .load("http://applex360.in/Deshpande-family/Matrimony-web/"+spCustProfile.getProfilePhotoPath())
                 .placeholder(R.mipmap.userprofile)
@@ -2559,7 +2562,6 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
                     tvMTongue.setText(intentMTongue);
                     spMTongue.setSelection(list_mtongue.indexOf(intentWeight));
                 }
-
             }
         }
         else if (mListItem.get(0).getMother_language() == null) tvMTongue.setText("");
@@ -2872,6 +2874,11 @@ else if (mListItem.get(0).getDrinking() == null) tvDrink.setText("");
 }
 
     public void setGroomBrideLoc(){
+
+        if(spCustProfile.getGender().equalsIgnoreCase("Male"))
+            btnGroomBrideLoc.setText("Groom's Location");
+        else if(spCustProfile.getGender().equalsIgnoreCase("Female"))
+            btnGroomBrideLoc.setText("Bride's Location");
 
         if(mListItem.get(0).getCountry()!=null) {
             intentCountry = mListItem.get(0).getCountry();

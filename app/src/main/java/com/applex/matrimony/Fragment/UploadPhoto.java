@@ -157,7 +157,10 @@ public class UploadPhoto extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btn_submit_photo:
+                if(bitmap!=null)
                 uploadFile();
+                else
+                    Toast.makeText(getActivity(), "Please select image to upload", Toast.LENGTH_SHORT).show();
                 // startActivity(new Intent(UploadPhoto.this,TabViewParentActivity.class));
                 break;
         }

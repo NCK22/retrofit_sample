@@ -421,7 +421,6 @@ Log.e("searchFlag",searchFlag);
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
 
     public void getCasteList(String religion_id){
