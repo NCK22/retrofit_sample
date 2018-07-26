@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -217,7 +218,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView=inflater.inflate(R.layout.tab_partner_preferences,container,false);
+        View rootView=inflater.inflate(R.layout.tab_partner_preferences2,container,false);
 
         Log.e("TabHome","onCreateView");
         progressDialog=new ProgressDialog(getActivity());
@@ -342,6 +343,22 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 return false;
             }
         });
+      /*  tvEdu.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                v.getParent().getParent().requestDisallowInterceptTouchEvent(true);
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                    case MotionEvent.ACTION_UP:
+                        v.getParent().requestDisallowInterceptTouchEvent(false);
+                        break;
+                }
+
+                return false;
+            }
+        });*/
+
+        //tvEdu.setMovementMethod(new ScrollingMovementMethod());
 
         etSpEdu.setShowSoftInputOnFocus(false);
         etSpEdu.setOnClickListener(new View.OnClickListener() {
@@ -392,7 +409,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         btnBasic.setOnClickListener(this);btnReligion.setOnClickListener(this);btnProfessional.setOnClickListener(this);
         btnGroomBrideLoc.setOnClickListener(this);btnAbt.setOnClickListener(this);// btnFam.setOnClickListener(this);// btnAbtFam.setOnClickListener(this);
 
-
         initializeSpinnerLists();
         initializeSpinnerAdapters();
 
@@ -402,8 +418,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         getOccupationList();
         getReligionList();
         getMTongueList();
-
-
 
 
         llBasic=(LinearLayout)rootView.findViewById(R.id.ll_basic);
@@ -429,7 +443,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         llAbtFam=(LinearLayout)rootView.findViewById(R.id.ll_about_family);
 
         llAbt=(LinearLayout)rootView.findViewById(R.id.ll_about);
-
 
         list_ll.add(llAbt);
         list_ll.add(llBasic);
@@ -1610,17 +1623,51 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     if(parentPojoEducation.getStatus().equalsIgnoreCase("1")) {
                         Log.e("Response", "Success");
                         Log.e("objsize", "" + parentPojoEducation.getObjEducation().size());
-
+                        Log.e("intentEdu", intentEdu);
                         LinkedHashMap<String, ChildPojoEducation> resultMap = parentPojoEducation.getObjEducation();
                         final LinkedHashMap<String, Boolean> list =new LinkedHashMap<String,Boolean>();
                         Iterator<String> keys = resultMap.keySet().iterator();
                         while (keys.hasNext()) {
                             String key = keys.next();
-                            list.put(resultMap.get(key).getEducation(),false);
                             list_pojo_edu.add(resultMap.get(key));
                             list_edu.add(resultMap.get(key).getEducation());
+                           // list.put(resultMap.get(key).getEducation(), false);
+                         /*   if(intentEdu.contains(resultMap.get(key).getEducation_id())) {
+                                if(!list.containsKey(resultMap.get(key).getEducation())) {
+                                    Log.e("intentEduId", resultMap.get(key).getEducation_id());
+                                    // Log.e("intentEduId",resultMap.get(key).getEducation());
+                                    list.put(resultMap.get(key).getEducation(), true);
+                                }
+                            }
+                            else {*/
 
+                                if(!list.containsKey(resultMap.get(key).getEducation())) {
+
+                                    if(intentEdu.contains(resultMap.get(key).getEducation_id()))
+                                    list.put(resultMap.get(key).getEducation(), true);
+                                    else
+                                        list.put(resultMap.get(key).getEducation(), false);
+                                }
+                           // }
+
+
+                            /*Log.e("intentEduElement", String.valueOf(list.get("Aeronautical Engineering")));
+                            Log.e("intentEduElement", String.valueOf(list.get("B.Arch")));*/
                         }
+
+
+                      /*  Iterator<String> keys2 = resultMap.keySet().iterator();
+                        while(keys2.hasNext()){
+                            String key = keys2.next();
+                            Log.e("intentEduKeys",resultMap.get(key).getEducation_id());
+                            if(intentEdu.contains(resultMap.get(key).getEducation_id())) {
+                                Log.e("intentEduId",resultMap.get(key).getEducation_id());
+                                Log.e("intentEduId",resultMap.get(key).getEducation());
+                                list.put(resultMap.get(key).getEducation(), true);
+                            }
+
+
+                        }*/
 
                         /*
                          * Getting array of String to Bind in Spinner
@@ -1639,13 +1686,17 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             public void onItemsSelected(boolean[] selected) {
                                 for(int i=0; i<selected.length; i++) {
                                     if(selected[i]) {
+
                                         Log.i("TAG", i + " : "+ list.get(i));
+
                                         etSpEdu.setEnabled(true);
                                         spEdu.setVisibility(View.INVISIBLE);
                                         etSpEdu.setVisibility(View.VISIBLE);
                                         etSpEdu.setText(spEdu.getSelectedItem().toString());
+                                        tvEdu.setText(spEdu.getSelectedItem().toString());
                                     }
                                 }
+
                             }
                         });
 
@@ -1687,18 +1738,20 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             tvEdu.setText(list_edu.get(Integer.parseInt(intentEdu)-1));
                         }*/
 
-                        if (!intentEdu.equalsIgnoreCase("")) {
+                  /*      if (!intentEdu.equalsIgnoreCase("")) {
+                            etSpEdu.setText("");
                             for (int i = 0; i < list_pojo_edu.size(); i++) {
-                                if (list_pojo_edu.get(i).getEducation_id().equalsIgnoreCase(intentEdu)) {
+                                if (intentEdu.contains(list_pojo_edu.get(i).getEducation_id())) {
                                     tvEdu.setText(list_pojo_edu.get(i).getEducation());
                                     //spEdu.setSelection(list_edu.indexOf(list_pojo_edu.get(i).getEducation()) + 1);
-                                    etSpEdu.setText(list_pojo_edu.get(i).getEducation());
+                                  etSpEdu.append(list_pojo_edu.get(i).getEducation());
+
                                     etSpEdu.setEnabled(true);
                                     spEdu.setVisibility(View.INVISIBLE);
                                     break;
                                 }
                             }
-                        }
+                        }*/
                     }
 
                     progressDialog.dismiss();

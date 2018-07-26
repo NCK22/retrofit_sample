@@ -1,0 +1,1804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginBottom="70dp"
+    android:background="#000000"  >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:fillViewport="true"
+        android:layout_marginBottom="70dp"
+        android:background="#00000000">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="0dp"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btnBasic"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/border_expbtn"
+                android:drawableRight="@mipmap/downarrow"
+                android:drawableTint="#4A4A4A"
+                android:fontFamily="Roboto-Regular"
+                android:onClick="expandableButton4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Basic Details"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#4A4A4A"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_basic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#0c000000"
+                    android:weightSum="1">
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.80"/>
+
+
+                    <ImageView
+                        android:id="@+id/img_clear_basic"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_dissmiss"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/img_editSave_basic"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/editicon2"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0c000000"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="9"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="0dp"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="Age :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="Height :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Marital Status"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Physical Status"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Eating Habits :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Drinking Habits"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Smoking Habits :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="0dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/ll_basic_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="9"
+                                android:visibility="visible">
+
+
+                                <TextView
+                                    android:id="@+id/tv_age"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="2"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+
+                                <TextView
+                                    android:id="@+id/tv_height"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="2"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_marital_stat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+
+                                <TextView
+                                    android:id="@+id/tv_physical_stat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+
+                                <TextView
+                                    android:id="@+id/tv_food"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_drink"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_smoke"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_basic_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="9"
+                                android:layout_marginTop="0dp"
+                                android:visibility="invisible">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_age_from"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="0dp"
+                                            android:layout_marginEnd="0dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="0dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="From"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="0dp"
+                                        android:layout_marginBottom="0dp"
+                                        android:orientation="vertical"
+                                        android:layout_weight="1"
+                                        >
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_gravity="center"
+                                            android:layout_marginBottom="4dp"
+                                            android:layout_marginTop="5dp"
+                                            android:background="@drawable/home_spinner_border">
+
+                                    <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_age_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="To"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_height_from"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Height"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_height_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Height"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+
+                                    android:layout_marginBottom="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_marital_stat"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Marital Status"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_physical_stat"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Physical Status"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_food"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Food"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_drink"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Drinking"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:layout_marginTop="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_smoke"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Smoking"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            android:visibility="visible"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnReligion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/border_expbtn"
+                android:drawableRight="@mipmap/downarrow"
+                android:drawableTint="#4A4A4A"
+                android:fontFamily="Roboto-Regular"
+                android:onClick="expandableButton4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Religion Information"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#4A4A4A"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_religion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#0c000000"
+                    android:weightSum="1">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.80"/>
+
+                    <ImageView
+                        android:id="@+id/img_clear_religion"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_dissmiss"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/img_editSave_religion"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/editicon2"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="#0c000000"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="3"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="0dp"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Religion:"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="MotherTongue :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Caste / Division :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="0dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/ll_religion_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="3"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:id="@+id/tv_religion"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_mtongue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_caste"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_religion_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="3"
+                                android:layout_marginTop="5dp"
+                                android:visibility="invisible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_religion"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Religion"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_mothertongue"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="MotherTongue"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_caste"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Caste"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </FrameLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnGroomBrideLoc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/border_expbtn"
+                android:drawableRight="@mipmap/downarrow"
+                android:drawableTint="#4A4A4A"
+                android:fontFamily="Roboto-Regular"
+                android:onClick="expandableButton4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Groom's Location"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#4A4A4A"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_groomBrideLoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#0c000000"
+                    android:weightSum="1">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.80"/>
+
+                    <ImageView
+                        android:id="@+id/img_clear_groomBrideLoc"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_dissmiss"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/img_editSave_groomBrideLoc"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/editicon2"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="#0c000000"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="2"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="0dp"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Country:"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="State :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="0dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/ll_groomBrideLoc_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="2"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:id="@+id/tv_country"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_state"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_groomBrideLoc_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="2"
+                                android:layout_marginTop="5dp"
+                                android:visibility="invisible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_country"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Country"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_state"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="State"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </FrameLayout>
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnProfessional"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/border_expbtn"
+                android:drawableRight="@mipmap/downarrow"
+                android:drawableTint="#4A4A4A"
+                android:fontFamily="Roboto-Regular"
+                android:onClick="expandableButton4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Professional Information"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#4A4A4A"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:id="@+id/ll_professional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#0c000000"
+                    android:weightSum="1">
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.80"/>
+
+
+                    <ImageView
+                        android:id="@+id/img_clear_professional"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_dissmiss"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/img_editSave_professional"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/editicon2"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0c000000"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:weightSum="4"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="0dp"
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Education:"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:text="Occupation"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:text="Annual Income :"
+                            android:fontFamily="Roboto-Regular"
+                            android:textSize="16sp"
+                            android:textColor="#4A4A4A"
+                            android:gravity="center_vertical"
+                            />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="0dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <LinearLayout
+                                android:id="@+id/ll_professional_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:id="@+id/tv_edu"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    android:scrollbars="vertical"
+                                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                                    android:fadeScrollbars="false"
+                                    android:scrollbarSize="50dp"
+                                    android:scrollbarStyle="insideInset"
+                                    android:overScrollMode="always"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_occu"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_income"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Not Specified"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="center_vertical"
+                                    />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:id="@+id/ll_professional_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="5"
+                                android:layout_marginTop="5dp"
+                                android:visibility="invisible">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="2"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+                                        <FrameLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                            <EditText
+                                                android:id="@+id/edt_sp_edu"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="100dp"
+                                                android:inputType="none"
+                                                android:scrollbars="vertical"
+                                                android:scrollbarAlwaysDrawVerticalTrack="true"
+                                                android:fadeScrollbars="false"
+                                                android:scrollbarSize="50dp"
+                                                android:scrollbarStyle="insideInset"
+                                                android:overScrollMode="always"
+                                                android:enabled="false"
+                                                />
+                                            <com.androidbuts.multispinnerfilter.MultiSpinner
+                                                android:id="@+id/sp_edu"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_marginRight="15dp"
+                                                android:layout_marginEnd="15dp"
+                                                app:ms_alignLabels="false"
+                                                app:ms_arrowColor="#00000000"
+                                                app:ms_arrowSize="10dp"
+                                                app:ms_baseColor="#00000000"
+                                                app:ms_enableErrorLabel="false"
+                                                app:ms_enableFloatingLabel="false"
+                                                app:ms_errorColor="#FFFFFF"
+                                                app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                                app:ms_hintTextSize="16sp"
+                                                app:ms_hint="Education"
+                                                app:ms_hintColor="@color/black"
+                                                app:ms_multiline="true"
+                                                app:ms_thickness="0.5dp"
+                                                android:inputType="textMultiLine"
+                                                android:scrollbars="vertical"
+                                                android:scrollbarAlwaysDrawVerticalTrack="true"
+                                                android:fadeScrollbars="false"
+                                                android:scrollbarSize="50dp"
+                                                android:scrollbarStyle="insideInset"
+                                                android:overScrollMode="always"
+                                                android:popupBackground="#00000000"
+                                                android:background="#00000000"
+                                                android:nestedScrollingEnabled="true"
+                                                android:backgroundTint="@color/black"
+                                                android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                                />
+
+
+                                        </FrameLayout>
+                                       <!-- <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_edu"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Education"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="true"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />-->
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_occu"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hintColor="#000000"
+                                            app:ms_hint="Occupation"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                  <!--      <EditText
+                                            android:id="@+id/edt_income_from"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            android:singleLine="true"
+                                            />-->
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_income_from"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="State"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:orientation="vertical"
+                                    android:layout_weight="1"
+                                    android:layout_marginBottom="0dp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:layout_marginBottom="4dp"
+                                        android:layout_marginTop="5dp"
+                                        android:background="@drawable/home_spinner_border">
+
+
+                                    <!--    <EditText
+                                            android:id="@+id/edt_income_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:hint="Deshastha"
+                                            android:textColorHint="#4A4A4A"
+                                            android:background="#00000000"
+                                            android:layout_gravity="center_horizontal"
+                                            android:fontFamily="Roboto-Regular"
+                                            android:textSize="16sp"
+                                            android:textColor="#4A4A4A"
+                                            android:singleLine="true"
+                                            />-->
+
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_income_to"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="State"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </FrameLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+
+            <Button
+                android:id="@+id/btnAboutGroomBride"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/border_expbtn"
+                android:drawableRight="@mipmap/downarrow"
+                android:drawableTint="#4A4A4A"
+                android:fontFamily="Roboto-Regular"
+                android:onClick="expandableButton4"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="15dp"
+                android:text="Partner Description"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#4A4A4A"
+                android:textSize="16sp" />
+            <LinearLayout
+                android:id="@+id/ll_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:background="#0c000000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    android:weightSum="1">
+
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.80"/>
+
+
+                    <ImageView
+                        android:id="@+id/img_clear_about"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_dissmiss"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/img_editSave_about"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.10"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/editicon2"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/border_about_fam">
+
+                    <EditText
+                        android:id="@+id/edt_about_you"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:inputType="textMultiLine"
+                        android:scrollbars="vertical"
+                        android:scrollbarAlwaysDrawVerticalTrack="true"
+                        android:fadeScrollbars="false"
+                        android:scrollbarSize="50dp"
+                        android:scrollbarStyle="insideInset"
+                        android:overScrollMode="always"
+                        android:enabled="false"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
