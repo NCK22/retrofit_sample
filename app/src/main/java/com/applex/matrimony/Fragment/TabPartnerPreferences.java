@@ -113,16 +113,16 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
 
     MaterialSpinner spMaritalStat,spCountry,spState,spCity,spBirthCountry,spBirthState,spBirthCity,spHeightFrom,spHeightTo,spWeight,spBodyType,spComplexion,
-            spPhysStat,spEduc,spOccu,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue,spIncomeFrom,spIncomeTo
+            spPhysStat,spEduc,spOccuc,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue,spIncomeFrom,spIncomeTo
             , spProfFor,spCaste,spReligion,spMTongue,spStar,spRassi,spDosh,spGotra,spResident,spAgeFrom,spAgeTo;
 
-    MultiSpinner spEdu;
+    MultiSpinner spEdu,spOccu;
 
     ArrayAdapter aaProfFor,aaAge,aaGender,aaCaste,aaMTongue,aaMaritalStat,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,aaIncomeFrom,aaIncomeTo,
             aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue,aaStar,aaRassi,aaDosh,aaGotra,aaResident;
 
 
-    EditText etAbout,etSpEdu,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
+    EditText etAbout,etSpEdu,etSpOccu,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
             etFamOrigin,etFamLoc,etFatherStat,etMotherStat,etNoOfBrothers,etNoOfSisters;
     DatePickerEditText etBDate;
     TimePickerEditText etBTime;
@@ -227,6 +227,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         etName=(EditText)rootView.findViewById(R.id.edt_name);
         etAbout=(EditText)rootView.findViewById(R.id.edt_about_you);
         etSpEdu=(EditText)rootView.findViewById(R.id.edt_sp_edu);
+        etSpOccu=(EditText)rootView.findViewById(R.id.edt_sp_occu);
         etCollege=(EditText)rootView.findViewById(R.id.edt_college);
         etEduDetail=(EditText)rootView.findViewById(R.id.edt_eduInDetail);
         etOccuDetail=(EditText)rootView.findViewById(R.id.edt_occuInDetail);
@@ -328,6 +329,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         spPhysStat=(MaterialSpinner)rootView.findViewById(R.id.sp_physical_stat);
 
         spEdu=(MultiSpinner) rootView.findViewById(R.id.sp_edu);
+        spOccu=(MultiSpinner)rootView.findViewById(R.id.sp_occu);
         etSpEdu.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -370,8 +372,19 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 spEdu.performClick();
             }
         });
+        etSpOccu.setShowSoftInputOnFocus(false);
+        etSpOccu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSpOccu.setVisibility(View.INVISIBLE);
+                etSpOccu.setEnabled(false);
+                spOccu.setVisibility(View.VISIBLE);
+                spOccu.performClick();
+            }
+        });
 
-        spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occu);
+
+       // spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occu);
         //spCurrency=(MaterialSpinner)rootView.findViewById(R.id.sp_currency);
         spIncomeFrom=(MaterialSpinner)rootView.findViewById(R.id.sp_income_from);spIncomeTo=(MaterialSpinner)rootView.findViewById(R.id.sp_income_to);
         spFood=(MaterialSpinner)rootView.findViewById(R.id.sp_food);spDrink=(MaterialSpinner)rootView.findViewById(R.id.sp_drink);
@@ -1696,16 +1709,10 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                                         tvEdu.setText(spEdu.getSelectedItem().toString());
                                     }
                                 }
-
                             }
                         });
 
-
-
-
-
-
-                   /*     Iterator<String> keys = resultMap.keySet().iterator();
+                        /*     Iterator<String> keys = resultMap.keySet().iterator();
                         while (keys.hasNext()) {
                             String key = keys.next();
                             list_pojo_edu.add(resultMap.get(key));
@@ -1791,30 +1798,51 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         Log.e("objsize", ""+parentPojoOccupation.getObjOccupation().size());
 
                         LinkedHashMap<String, ChildPojoOccupation> resultMap =parentPojoOccupation.getObjOccupation();
-
+                        final LinkedHashMap<String, Boolean> list =new LinkedHashMap<String,Boolean>();
                         Iterator<String> keys=resultMap.keySet().iterator();
-                        while (keys.hasNext()){
+                    /*    while (keys.hasNext()){
                             String key=keys.next();
                             list_pojo_occu.add(resultMap.get(key));
                             list_occu.add(resultMap.get(key).getOccupation());
                         }
-                        Log.e("List Size",""+list_occu.size());
+                        Log.e("List Size",""+list_occu.size());*/
 
-                      /*  ArrayList<StateVO> listVOs = new ArrayList<>();
+                        while (keys.hasNext()) {
+                            String key = keys.next();
+                            list_pojo_occu.add(resultMap.get(key));
+                            list_occu.add(resultMap.get(key).getOccupation());
 
-                        for (int i = 0; i < list_occu.size(); i++) {
-                            StateVO stateVO = new StateVO();
-                            stateVO.setTitle(list_occu.get(i));
-                            stateVO.setSelected(false);
-                            listVOs.add(stateVO);
+                            if(!list.containsKey(resultMap.get(key).getOccupation())) {
+
+                                if(intentOccu.contains(resultMap.get(key).getOccupation_id()))
+                                    list.put(resultMap.get(key).getOccupation(), true);
+                                else
+                                    list.put(resultMap.get(key).getOccupation(), false);
+                            }
+
                         }
-                        MultiSelectionAdapter myAdapter = new MultiSelectionAdapter(getActivity(), 0,
-                                listVOs);
-                        spOccu.setAdapter(myAdapter);*/
 
+                        spOccu.setItems(list, new MultiSpinnerListener() {
+                            @Override
+                            public void onItemsSelected(boolean[] selected) {
+                                for(int i=0; i<selected.length; i++) {
+                                    if(selected[i]) {
+
+                                        Log.i("TAG", i + " : "+ list.get(i));
+                                        etSpOccu.setEnabled(true);
+                                        spOccu.setVisibility(View.INVISIBLE);
+                                        etSpOccu.setVisibility(View.VISIBLE);
+                                        etSpOccu.setText(spOccu.getSelectedItem().toString());
+                                        tvOccu.setText(spOccu.getSelectedItem().toString());
+                                    }
+                                }
+                            }
+                        });
+
+/*
                         aaOccu = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_occu);
                         aaOccu.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spOccu.setAdapter(aaOccu);
+                        spOccu.setAdapter(aaOccu);*/
 
                        /* if(!intentOccu.equalsIgnoreCase("")) {
                             Log.e("intentoccufunction",intentOccu);
@@ -1823,7 +1851,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             tvOccu.setText(list_occu.get(Integer.parseInt(intentOccu)-1));
                         }*/
 
-                        if(!intentOccu.equalsIgnoreCase("")) {
+                    /*    if(!intentOccu.equalsIgnoreCase("")) {
 
                             for (int i = 0; i < list_pojo_occu.size(); i++) {
                                 if (list_pojo_occu.get(i).getOccupation_id().equalsIgnoreCase(intentOccu)) {
@@ -1832,7 +1860,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                                     break;
                                 }
                             }
-                        }
+                        }*/
                     }
                     progressDialog.dismiss();
                 }
@@ -1899,6 +1927,8 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         }
         else if(section.equalsIgnoreCase("professional")) {
 
+            Log.e("listEduSize",""+list_edu.size());
+            Log.e("listEduSizePojo",""+list_pojo_edu.size());
             String s=etSpEdu.getText().toString();
             Log.e("arrayOSAtring",s);
            // s.replaceAll("\\s","");
@@ -1906,17 +1936,36 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             String strEdu="";
             Log.e("arraysize",""+as.length);
             for(int i=0;i<as.length;i++){
-                Log.e("arrayElement",as[i]);
-                Log.e("arrayindex",list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id());
+                Log.e("arrayElement",as[i]);Log.e("arrayindex",list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id());
                 if(strEdu.equalsIgnoreCase(""))
                     strEdu=list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id();
                 else
                     strEdu=strEdu+","+list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id();
             }
+
+            String s2=etSpOccu.getText().toString();
+            Log.e("arrayOSAtring",s2);
+            Log.e("listSizeOccu",""+list_occu.size());
+            Log.e("listSizeOccuPojo",""+list_pojo_occu.size());
+            // s.replaceAll("\\s","");
+            String[] as2=s2.split(", ");
+            String strOccu="";
+            Log.e("arraysize",""+as2.length);
+            for(int i=0;i<as2.length;i++){
+                Log.e("arrayElement",as2[i]);
+                Log.e("arrayindex",list_pojo_occu.get(list_occu.indexOf(as2[i])).getOccupation_id());
+                if(strOccu.equalsIgnoreCase(""))
+                    strOccu=list_pojo_occu.get(list_occu.indexOf(as2[i])).getOccupation_id();
+                else
+                    strOccu=strOccu+","+list_pojo_occu.get(list_occu.indexOf(as2[i])).getOccupation_id();
+            }
+
+
             call = getResponse.updateProfessional(spCustProfile.getMatrimonyId(),
                     //spEdu.getSelectedItemPosition()<=0?"0":list_pojo_edu.get(list_edu.indexOf(spEdu.getItemAtPosition(spEdu.getSelectedItemPosition()-1).toString())).getEducation_id(),
                     strEdu.equalsIgnoreCase("")?"0":strEdu,
-                    spOccu.getSelectedItemPosition()<=0?"0":list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),
+                    //spOccu.getSelectedItemPosition()<=0?"0":list_pojo_occu.get(list_occu.indexOf(spOccu.getItemAtPosition(spOccu.getSelectedItemPosition()-1).toString())).getOccupation_id(),
+                    strOccu.equalsIgnoreCase("")?"0":strOccu,
                     spIncomeFrom.getSelectedItemPosition()<=0 ? "0" : spIncomeFrom.getSelectedItem().toString(),
                     spIncomeTo.getSelectedItemPosition()<=0 ? "0" : spIncomeTo.getSelectedItem().toString());
 

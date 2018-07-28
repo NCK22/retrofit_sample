@@ -110,6 +110,8 @@
                         app:ms_thickness="0.5dp"
                         android:popupBackground="#e6e6e6"
                         android:popupElevation="@dimen/floating_label_bottom_spacing"
+                        android:nextFocusDown="@+id/sp_will_intercast"
+                      android:focusable="true"
                         />
                 </LinearLayout>
 

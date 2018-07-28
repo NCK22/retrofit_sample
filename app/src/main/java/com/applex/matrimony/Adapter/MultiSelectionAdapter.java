@@ -29,8 +29,7 @@ public class MultiSelectionAdapter extends ArrayAdapter<StateVO> {
     }
 
     @Override
-    public View getDropDownView(int position, View convertView,
-                                ViewGroup parent) {
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
         return getCustomView(position, convertView, parent);
     }
 
@@ -39,18 +38,15 @@ public class MultiSelectionAdapter extends ArrayAdapter<StateVO> {
         return getCustomView(position, convertView, parent);
     }
 
-    public View getCustomView(final int position, View convertView,
-                              ViewGroup parent) {
+    public View getCustomView(final int position, View convertView,ViewGroup parent) {
 
         final ViewHolder holder;
         if (convertView == null) {
             LayoutInflater layoutInflator = LayoutInflater.from(mContext);
             convertView = layoutInflator.inflate(R.layout.spinner_item, null);
             holder = new ViewHolder();
-            holder.mTextView = (TextView) convertView
-                    .findViewById(R.id.text);
-            holder.mCheckBox = (CheckBox) convertView
-                    .findViewById(R.id.checkbox);
+            holder.mTextView = (TextView) convertView.findViewById(R.id.text);
+            holder.mCheckBox = (CheckBox) convertView.findViewById(R.id.checkbox);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
