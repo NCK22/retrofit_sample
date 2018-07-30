@@ -112,17 +112,17 @@ import retrofit2.Response;
 public class TabPartnerPreferences extends Fragment implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
 
-    MaterialSpinner spMaritalStat,spCountry,spState,spCity,spBirthCountry,spBirthState,spBirthCity,spHeightFrom,spHeightTo,spWeight,spBodyType,spComplexion,
+    MaterialSpinner spMaritalStat,spCity,spBirthCountry,spBirthState,spBirthCity,spHeightFrom,spHeightTo,spWeight,spBodyType,spComplexion,
             spPhysStat,spEduc,spOccuc,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue,spIncomeFrom,spIncomeTo
             , spProfFor,spCaste,spReligion,spMTongue,spStar,spRassi,spDosh,spGotra,spResident,spAgeFrom,spAgeTo;
 
-    MultiSpinner spEdu,spOccu;
+    MultiSpinner spEdu,spOccu,spCountry,spState;
 
     ArrayAdapter aaProfFor,aaAge,aaGender,aaCaste,aaMTongue,aaMaritalStat,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,aaIncomeFrom,aaIncomeTo,
             aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue,aaStar,aaRassi,aaDosh,aaGotra,aaResident;
 
 
-    EditText etAbout,etSpEdu,etSpOccu,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
+    EditText etAbout,etSpEdu,etSpOccu,etSpCountry,etSpState,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
             etFamOrigin,etFamLoc,etFatherStat,etMotherStat,etNoOfBrothers,etNoOfSisters;
     DatePickerEditText etBDate;
     TimePickerEditText etBTime;
@@ -228,6 +228,8 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         etAbout=(EditText)rootView.findViewById(R.id.edt_about_you);
         etSpEdu=(EditText)rootView.findViewById(R.id.edt_sp_edu);
         etSpOccu=(EditText)rootView.findViewById(R.id.edt_sp_occu);
+        etSpCountry=(EditText)rootView.findViewById(R.id.edt_sp_country);
+        etSpState=(EditText)rootView.findViewById(R.id.edt_sp_state);
         etCollege=(EditText)rootView.findViewById(R.id.edt_college);
         etEduDetail=(EditText)rootView.findViewById(R.id.edt_eduInDetail);
         etOccuDetail=(EditText)rootView.findViewById(R.id.edt_occuInDetail);
@@ -319,8 +321,8 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         spAgeTo=(MaterialSpinner)rootView.findViewById(R.id.sp_age_to);
 
         spMaritalStat=(MaterialSpinner)rootView.findViewById(R.id.sp_marital_stat);
-        spCountry=(MaterialSpinner)rootView.findViewById(R.id.sp_country);
-        spState=(MaterialSpinner)rootView.findViewById(R.id.sp_state);spCity=(MaterialSpinner)rootView.findViewById(R.id.sp_city);
+        spCountry=(MultiSpinner) rootView.findViewById(R.id.sp_country);
+        spState=(MultiSpinner) rootView.findViewById(R.id.sp_state);spCity=(MaterialSpinner)rootView.findViewById(R.id.sp_city);
         spBirthCountry=(MaterialSpinner)rootView.findViewById(R.id.sp_CountryOfBirth);
         spBirthState=(MaterialSpinner)rootView.findViewById(R.id.sp_stateOfBirth);spBirthCity=(MaterialSpinner)rootView.findViewById(R.id.sp_cityOfBirth);
         spHeightFrom=(MaterialSpinner)rootView.findViewById(R.id.sp_height_from);spHeightTo=(MaterialSpinner)rootView.findViewById(R.id.sp_height_to);
@@ -382,7 +384,26 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 spOccu.performClick();
             }
         });
-
+        etSpCountry.setShowSoftInputOnFocus(false);
+        etSpCountry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSpCountry.setVisibility(View.INVISIBLE);
+                etSpCountry.setEnabled(false);
+                spCountry.setVisibility(View.VISIBLE);
+                spCountry.performClick();
+            }
+        });
+        etSpState.setShowSoftInputOnFocus(false);
+        etSpState.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSpState.setVisibility(View.INVISIBLE);
+                etSpState.setEnabled(false);
+                spState.setVisibility(View.VISIBLE);
+                spState.performClick();
+            }
+        });
 
        // spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occu);
         //spCurrency=(MaterialSpinner)rootView.findViewById(R.id.sp_currency);
@@ -757,14 +778,32 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
             case R.id.sp_country:
                 Log.e("onIemSelectedListener ","country called");
-                if(spCountry.getSelectedItemPosition()>0 )
+                Log.e("etSpCountry",etSpCountry.getText().toString());
+                Log.e("SpCountry position", String.valueOf(spCountry.getSelectedItemPosition()));
+
+
+
+                if(etSpCountry.getText().toString().equalsIgnoreCase("") && tvCountry.getText().toString().equalsIgnoreCase(""))
                 {
-                   /* Log.e("selected index",""+list_country.indexOf(spCountry.getSelectedItem()));
+                    Log.e("inside","if");
+               /*     if(list_state!=null)
+                        list_state.clear();
+                    if(list_pojo_state!=null)
+                        list_pojo_state.clear();*/
+                }
+                else /*if(spCountry.getSelectedItemPosition()>0 )*/
+                {
+
+                    Log.e("inside","else");
+                    /*Log.e("selected index",""+list_country.indexOf(spCountry.getSelectedItem()));
                     Log.e("pojo element name",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_name());
                     Log.e("pojo element id",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
                     Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
-                   // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());*/
-                    getStateList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
+                   // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());
+*/
+                    Log.e("ItemSelectedCountry","called");
+           //        getStateList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
+
                     //  getCurrencyList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())+1).getCountry_id());
 
                 }
@@ -1266,27 +1305,53 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     if(parentModelCountry.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
                         Log.e("objsize", ""+parentModelCountry.getObjCountry().size());
-
+                        Log.e("intentCountry",intentCountry);
+                        final LinkedHashMap<String, Boolean> list =new LinkedHashMap<String,Boolean>();
                         LinkedHashMap<String, ChildModelCountry> resultMap = parentModelCountry.getObjCountry();
                         Iterator<String> keys=resultMap.keySet().iterator();
                         while (keys.hasNext()){
                             String key=keys.next();
                             list_pojo_country.add(resultMap.get(key));
                             list_country.add(resultMap.get(key).getCountry_name());
+
+                            if(!list.containsKey(resultMap.get(key).getCountry_name())) {
+
+                                if(intentCountry.contains(resultMap.get(key).getCountry_id()))
+                                    list.put(resultMap.get(key).getCountry_name(), true);
+                                else
+                                    list.put(resultMap.get(key).getCountry_name(), false);
+                            }
                         }
 
+                        spCountry.setItems(list, new MultiSpinnerListener() {
+                            @Override
+                            public void onItemsSelected(boolean[] selected) {
+                                for(int i=0; i<selected.length; i++) {
+                                    if(selected[i]) {
+
+                                        Log.i("TAG", i + " : "+ list.get(i));
+                                        etSpCountry.setEnabled(true);
+                                        spCountry.setVisibility(View.INVISIBLE);
+                                        etSpCountry.setVisibility(View.VISIBLE);
+                                        etSpCountry.setText(spCountry.getSelectedItem().toString());
+                                        tvCountry.setText(spCountry.getSelectedItem().toString());
+                                    }
+                                }
+                            }
+                        });
+
                         //Collections.sort(list_country);
-                        Log.e("List Size",""+list_country.size());
+                    /*    Log.e("List Size",""+list_country.size());
                         aaCountry = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_country);
                         aaCountry.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spCountry.setAdapter(aaCountry);
+                        spCountry.setAdapter(aaCountry);*/
 
                         /*if(!intentCountry.equalsIgnoreCase("")) {
                             tvCountry.setText(list_pojo_country.get(Integer.parseInt(intentCountry)-1).getCountry_name());
                             spCountry.setSelection(list_country.indexOf(list_pojo_country.get(Integer.parseInt(intentCountry)-1).getCountry_name()));
                         }*/
 
-                        if(!intentCountry.equalsIgnoreCase(""))
+                       /* if(!intentCountry.equalsIgnoreCase(""))
                         {
                             for(int i=0;i<list_pojo_country.size();i++){
                                 if(list_pojo_country.get(i).getCountry_id().equalsIgnoreCase(intentCountry)){
@@ -1295,7 +1360,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                                     break;
                                 }
                             }
-                        }
+                        }*/
                     }
                 }
             }
@@ -1332,25 +1397,51 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     if(parentPojoState.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
                         Log.e("objsize", ""+parentPojoState.getObjState().size());
-
+                        Log.e("intentState",intentState);
                         LinkedHashMap<String, ChildPojoState> resultMap =parentPojoState.getObjState();
-
+                        final LinkedHashMap<String, Boolean> list =new LinkedHashMap<String,Boolean>();
                         Iterator<String> keys=resultMap.keySet().iterator();
                         while (keys.hasNext()){
                             String key=keys.next();
                             list_pojo_state.add(resultMap.get(key));
                             list_state.add(resultMap.get(key).getState_name());
+
+                            if(!list.containsKey(resultMap.get(key).getState_name())) {
+
+                                if(intentState.contains(resultMap.get(key).getState_id()))
+                                    list.put(resultMap.get(key).getState_name(), true);
+                                else
+                                    list.put(resultMap.get(key).getState_name(), false);
+                            }
                         }
-                        Log.e("List Size",""+list_state.size());
+
+                        spState.setItems(list, new MultiSpinnerListener() {
+                            @Override
+                            public void onItemsSelected(boolean[] selected) {
+                                for(int i=0; i<selected.length; i++) {
+                                    if(selected[i]) {
+                                        Log.e("Inside","stateSetItems");
+                                        Log.i("TAG", i + " : "+ list.get(i));
+
+                                        etSpState.setEnabled(true);
+                                        spState.setVisibility(View.INVISIBLE);
+                                        etSpState.setVisibility(View.VISIBLE);
+                                        etSpState.setText(spState.getSelectedItem().toString());
+                                        tvState.setText(spState.getSelectedItem().toString());
+                                    }
+                                }
+                            }
+                        });
+                    /*    Log.e("List Size",""+list_state.size());
                         aaState = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_state);
                         aaState.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spState.setAdapter(aaState);
-/*
+*//*
                         if(!intentState.equalsIgnoreCase("")) {
                          //   spState.setSelection(list_state.indexOf(intentState) + 1);
                             tvState.setText(list_pojo_state.get(Integer.parseInt(intentState)-1).getState_name());
                             spState.setSelection(list_state.indexOf(list_pojo_state.get(Integer.parseInt(intentState)-1).getState_name()));
-                        }*/
+                        }*//*
 
                         if(!intentState.equalsIgnoreCase("")){
                             for(int i=0;i<list_pojo_state.size();i++){
@@ -1360,7 +1451,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                                     break;
                                 }
                             }
-                        }
+                        }*/
 
                     }
                     else
@@ -1879,7 +1970,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
         progressDialog.show();
 
-
         final savePreferencesInterface getResponse = APIClient.getClient().create(savePreferencesInterface.class);
         Call<CommonParentPojo> call = null;
         if(section.equalsIgnoreCase("Basic")) {
@@ -1913,17 +2003,49 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         }
         else if(section.equalsIgnoreCase("groomBrideLoc")) {
 
-            String s="";
+            String s1=etSpCountry.getText().toString();
+            Log.e("arrayOSAtring",s1);
+            // s.replaceAll("\\s","");
+            String[] as=s1.split(", ");
+            String strCountry="";
+            Log.e("arraysize",""+as.length);
+            for(int i=0;i<as.length;i++){
+         //       Log.e("arrayElement",as[i]);Log.e("arrayindex",list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id());
+                if(strCountry.equalsIgnoreCase(""))
+                    strCountry=list_pojo_country.get(list_country.indexOf(as[i])).getCountry_id();
+                else
+                    strCountry=strCountry+","+list_pojo_country.get(list_country.indexOf(as[i])).getCountry_id();
+            }
+
+            String s2=etSpState.getText().toString();
+            Log.e("arrayOSAtring",s2);
+            String strState="";
+ if(!s2.equalsIgnoreCase("")) {
+     String[] as2 = s2.split(", ");
+
+     Log.e("arraysize", "" + as2.length);
+     for (int i = 0; i < as2.length; i++) {
+         //       Log.e("arrayElement",as[i]);Log.e("arrayindex",list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id());
+         if (strState.equalsIgnoreCase(""))
+             strState = list_pojo_state.get(list_state.indexOf(as2[i])).getState_id();
+         else
+             strState = strState + "," + list_pojo_state.get(list_state.indexOf(as2[i])).getState_id();
+     }
+ }
+
+
+            /* String s="";
             if(list_state.size()==0)
                 s="0";
             else if(spState.getSelectedItemPosition()<=0)
                 s="0";
             else
-                s=list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id();
+                s=list_pojo_state.get(list_state.indexOf(spState.getSelectedItem().toString())).getState_id();*/
 
             call = getResponse.updateGroomBrideLoc(spCustProfile.getMatrimonyId(),
-                    spCountry.getSelectedItemPosition()<=0?"0":list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
-                   s);
+                    //spCountry.getSelectedItemPosition()<=0?"0":list_pojo_country.get(list_country.indexOf(spCountry.getItemAtPosition(spCountry.getSelectedItemPosition()-1).toString())).getCountry_id(),
+                    strCountry.equalsIgnoreCase("")?"0":strCountry,
+                    strState.equalsIgnoreCase("")?"0":strState);
         }
         else if(section.equalsIgnoreCase("professional")) {
 
@@ -2048,8 +2170,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 }
                 else {
                     Log.e("parentPojoPartnerPref", "null");
-
-
 
                 }
                 progressDialog.dismiss();
@@ -2295,6 +2415,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     }
 
     public void setGroomBrideLoc(){
+
 Log.e("Inside","partPrefLoc");
 Log.e("inpartner pref",spCustProfile.getGender());
         if(spCustProfile.getGender().equalsIgnoreCase("Male"))
@@ -2305,13 +2426,13 @@ Log.e("inpartner pref",spCustProfile.getGender());
         if(mListItem.get(0).getCountry()!=null) {
             intentCountry = mListItem.get(0).getCountry();
             if (intentCountry.equalsIgnoreCase("0")||intentCountry.equalsIgnoreCase("")) {
-                tvCountry.setText("");
+         //       tvCountry.setText("");
             } else {
 
                 //intentCountry = mListItem.get(0).getCountry();
                 for (int i = 0; i < list_pojo_country.size(); i++) {
                     if (list_pojo_country.get(i).getCountry_id().equalsIgnoreCase(intentCountry)) {
-                        tvCountry.setText(list_pojo_country.get(i).getCountry_name());
+                    //    tvCountry.setText(list_pojo_country.get(i).getCountry_name());
                         spCountry.setSelection(list_country.indexOf(list_pojo_country.get(i).getCountry_name()) + 1);
                         break;
                     }
@@ -2330,8 +2451,8 @@ Log.e("inpartner pref",spCustProfile.getGender());
 
                 for (int i = 0; i < list_pojo_state.size(); i++) {
                     if (list_pojo_state.get(i).getState_id().equalsIgnoreCase(intentState)) {
-                        tvState.setText(list_pojo_state.get(i).getState_name());
-                        spState.setSelection(list_state.indexOf(list_pojo_state.get(i).getState_name()) + 1);
+                   //     tvState.setText(list_pojo_state.get(i).getState_name());
+                     //   spState.setSelection(list_state.indexOf(list_pojo_state.get(i).getState_name()) + 1);
                         break;
                     }
                 }

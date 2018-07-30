@@ -1076,24 +1076,25 @@
 
                 </LinearLayout>
                 <LinearLayout
-
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:background="#0c000000"
                     android:orientation="horizontal"
                     android:weightSum="2"
+                    android:visibility="visible"
                     >
 
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="0"
                         android:weightSum="2"
                         android:orientation="vertical"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginTop="0dp"
+                        android:visibility="gone"
                         >
 
                         <TextView
@@ -1127,7 +1128,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:orientation="vertical"
                         android:layout_marginRight="5dp"
                         android:layout_marginEnd="5dp"
@@ -1135,7 +1136,7 @@
 
                         <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="wrap_content">
 
                             <LinearLayout
                                 android:id="@+id/ll_groomBrideLoc_view"
@@ -1145,30 +1146,72 @@
                                 android:weightSum="2"
                                 android:visibility="visible">
 
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="Country :"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:layout_gravity="start"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="start"
+                                    />
+
                                 <TextView
                                     android:id="@+id/tv_country"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
                                     android:gravity="center_vertical"
+                                    android:layout_marginBottom="5dp"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="2"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:text="State :"
+                                    android:layout_gravity="start"
+                                    android:fontFamily="Roboto-Regular"
+                                    android:textSize="16sp"
+                                    android:textColor="#4A4A4A"
+                                    android:gravity="start"
                                     />
 
                                 <TextView
                                     android:id="@+id/tv_state"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Not Specified"
                                     android:fontFamily="Roboto-Regular"
                                     android:textSize="16sp"
                                     android:textColor="#4A4A4A"
                                     android:gravity="center_vertical"
+                                    android:layout_marginBottom="5dp"
                                     />
-
+                            </LinearLayout>
 
                             </LinearLayout>
 
@@ -1179,26 +1222,53 @@
                                 android:orientation="vertical"
                                 android:weightSum="2"
                                 android:layout_marginTop="5dp"
-                                android:visibility="invisible">
+                                android:visibility="gone">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="0dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginBottom="0dp"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1"
-                                    >
+                                    android:orientation="horizontal"
+                                    android:weightSum="2">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="Roboto-Regular"
+                                        android:gravity="start"
+                                        android:text="Country :"
+                                        android:textColor="#4A4A4A"
+                                        android:textSize="16sp" />
 
 
                                     <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:layout_marginBottom="4dp"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
 
-                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                        <FrameLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                        <EditText
+                                            android:id="@+id/edt_sp_country"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:enabled="false"
+                                            android:fadeScrollbars="false"
+                                            android:inputType="none"
+                                            android:overScrollMode="always"
+                                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                                            android:scrollbarSize="50dp"
+                                            android:scrollbarStyle="insideInset"
+                                            android:scrollbars="vertical" />
+
+                                        <com.androidbuts.multispinnerfilter.MultiSpinner
                                             android:id="@+id/sp_country"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
@@ -1220,6 +1290,30 @@
                                             android:popupBackground="#e6e6e6"
                                             android:popupElevation="@dimen/floating_label_bottom_spacing"
                                             />
+                                        </FrameLayout>
+
+                                        <!--   <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_country"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="Country"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />-->
 
                                     </LinearLayout>
                                 </LinearLayout>
@@ -1227,21 +1321,50 @@
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="0dp"
+                                    android:layout_height="wrap_content"
                                     android:layout_marginBottom="0dp"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1"
-                                    >
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
+                                    android:weightSum="2"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="0dp"
                                         android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="Roboto-Regular"
+                                        android:gravity="start"
+                                        android:text="State :"
+                                        android:textColor="#4A4A4A"
+                                        android:textSize="16sp" />
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_weight="1"
+                                        android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:layout_marginBottom="4dp"
                                         android:layout_marginTop="5dp"
                                         android:background="@drawable/home_spinner_border">
 
 
-                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                        <FrameLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent">
+
+                                        <EditText
+                                            android:id="@+id/edt_sp_state"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:enabled="false"
+                                            android:fadeScrollbars="false"
+                                            android:inputType="none"
+                                            android:overScrollMode="always"
+                                            android:scrollbarAlwaysDrawVerticalTrack="true"
+                                            android:scrollbarSize="50dp"
+                                            android:scrollbarStyle="insideInset"
+                                            android:scrollbars="vertical" />
+
+                                        <com.androidbuts.multispinnerfilter.MultiSpinner
                                             android:id="@+id/sp_state"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
@@ -1263,6 +1386,31 @@
                                             android:popupBackground="#e6e6e6"
                                             android:popupElevation="@dimen/floating_label_bottom_spacing"
                                             />
+                                        </FrameLayout>
+
+                                        <!--
+                                        <fr.ganfra.materialspinner.MaterialSpinner
+                                            android:id="@+id/sp_state"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginRight="15dp"
+                                            android:layout_marginEnd="15dp"
+                                            app:ms_alignLabels="false"
+                                            app:ms_arrowColor="#00000000"
+                                            app:ms_arrowSize="10dp"
+                                            app:ms_baseColor="#00000000"
+                                            app:ms_enableErrorLabel="false"
+                                            app:ms_enableFloatingLabel="false"
+                                            app:ms_errorColor="#FFFFFF"
+                                            app:ms_typeface="fonts/Roboto-Regular.ttf"
+                                            app:ms_hintTextSize="16sp"
+                                            app:ms_hint="State"
+                                            app:ms_hintColor="@color/black"
+                                            app:ms_multiline="false"
+                                            app:ms_thickness="0.5dp"
+                                            android:popupBackground="#e6e6e6"
+                                            android:popupElevation="@dimen/floating_label_bottom_spacing"
+                                            />-->
 
                                     </LinearLayout>
                                 </LinearLayout>
