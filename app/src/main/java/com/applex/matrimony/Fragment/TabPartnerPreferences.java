@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,15 +115,15 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
     MaterialSpinner spMaritalStat,spCity,spBirthCountry,spBirthState,spBirthCity,spHeightFrom,spHeightTo,spWeight,spBodyType,spComplexion,
             spPhysStat,spEduc,spOccuc,spCurrency,spFood,spDrink,spSmoke,spFamStat,spFamType,spFamValue,spIncomeFrom,spIncomeTo
-            , spProfFor,spCaste,spReligion,spMTongue,spStar,spRassi,spDosh,spGotra,spResident,spAgeFrom,spAgeTo;
+            , spProfFor,spReligion,spMTongue,spStar,spRassi,spDosh,spGotra,spResident,spAgeFrom,spAgeTo;
 
-    MultiSpinner spEdu,spOccu,spCountry,spState;
+    MultiSpinner spEdu,spOccu,spCountry,spState,spCaste;
 
     ArrayAdapter aaProfFor,aaAge,aaGender,aaCaste,aaMTongue,aaMaritalStat,aaCountry,aaState,aaCity,aaHeight,aaWeight,aaBodyType,aaComplexion,aaIncomeFrom,aaIncomeTo,
             aaPhysStat,aaEdu,aaOccu,aaEmployIn,aaCurrency,aaFood,aaDrink,aaSmoke,aaFamStat,aaFamType,aapFamValue,aaStar,aaRassi,aaDosh,aaGotra,aaResident;
 
 
-    EditText etAbout,etSpEdu,etSpOccu,etSpCountry,etSpState,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
+    EditText etAbout,etSpEdu,etSpOccu,etSpCountry,etSpState,etSpCaste,etAboutFam,etName,etSubCaste,etCollege,etEduDetail,etOccuDetail,etEmployedIn,etIncome,
             etFamOrigin,etFamLoc,etFatherStat,etMotherStat,etNoOfBrothers,etNoOfSisters;
     DatePickerEditText etBDate;
     TimePickerEditText etBTime;
@@ -214,6 +215,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     intentSmoking="",intentAgeFrom="",intentAgeTo="",intentMinIncome="",intentMaxIncome="";
     SPCustProfile spCustProfile;
     ArrayList<LinearLayout> list_ll=new ArrayList<LinearLayout>();
+    ScrollView scrollview;
 
     @Nullable
     @Override
@@ -225,12 +227,15 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         progressDialog=new ProgressDialog(getActivity());
         spCustProfile=new SPCustProfile(getActivity());
 
+        scrollview=(ScrollView)rootView.findViewById(R.id.scrollview);
+
         etName=(EditText)rootView.findViewById(R.id.edt_name);
         etAbout=(EditText)rootView.findViewById(R.id.edt_about_you);
         etSpEdu=(EditText)rootView.findViewById(R.id.edt_sp_edu);
         etSpOccu=(EditText)rootView.findViewById(R.id.edt_sp_occu);
         etSpCountry=(EditText)rootView.findViewById(R.id.edt_sp_country);
         etSpState=(EditText)rootView.findViewById(R.id.edt_sp_state);
+        etSpCaste=(EditText)rootView.findViewById(R.id.edt_sp_caste);
         etCollege=(EditText)rootView.findViewById(R.id.edt_college);
         etEduDetail=(EditText)rootView.findViewById(R.id.edt_eduInDetail);
         etOccuDetail=(EditText)rootView.findViewById(R.id.edt_occuInDetail);
@@ -315,7 +320,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         tvNoOfSisters=(TextView)rootView.findViewById(R.id.tv_noOfSister);
 
         spProfFor=(MaterialSpinner)rootView.findViewById(R.id.sp_profile_for);
-        spCaste=(MaterialSpinner)rootView.findViewById(R.id.sp_caste);
+        spCaste=(MultiSpinner)rootView.findViewById(R.id.sp_caste);
         spReligion=(MaterialSpinner)rootView.findViewById(R.id.sp_religion);
         spMTongue=(MaterialSpinner)rootView.findViewById(R.id.sp_mothertongue);
         spAgeFrom=(MaterialSpinner)rootView.findViewById(R.id.sp_age_from);
@@ -369,10 +374,11 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         etSpEdu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etSpEdu.setVisibility(View.INVISIBLE);
-                etSpEdu.setEnabled(false);
                 spEdu.setVisibility(View.VISIBLE);
                 spEdu.performClick();
+                etSpEdu.setVisibility(View.INVISIBLE);
+                etSpEdu.setEnabled(false);
+
             }
         });
         etSpOccu.setShowSoftInputOnFocus(false);
@@ -406,7 +412,20 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             }
         });
 
-       // spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occu);
+        etSpCaste.setShowSoftInputOnFocus(false);
+        etSpCaste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etSpCaste.setVisibility(View.INVISIBLE);
+                etSpCaste.setEnabled(false);
+                spCaste.setVisibility(View.VISIBLE);
+                spCaste.performClick();
+            }
+        });
+
+
+
+        // spOccu=(MaterialSpinner)rootView.findViewById(R.id.sp_occu);
         //spCurrency=(MaterialSpinner)rootView.findViewById(R.id.sp_currency);
         spIncomeFrom=(MaterialSpinner)rootView.findViewById(R.id.sp_income_from);spIncomeTo=(MaterialSpinner)rootView.findViewById(R.id.sp_income_to);
         spFood=(MaterialSpinner)rootView.findViewById(R.id.sp_food);spDrink=(MaterialSpinner)rootView.findViewById(R.id.sp_drink);
@@ -758,8 +777,10 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-        ((TextView)view).setTextColor(Color.BLACK);
-        ((TextView)view).setTextSize(16);
+        if(view!=null) {
+            ((TextView) view).setTextColor(Color.BLACK);
+            ((TextView) view).setTextSize(16);
+        }
         switch(adapterView.getId())
         {
             case R.id.sp_religion:
@@ -772,6 +793,9 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     Log.e("pojo element id",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
                     Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
                    // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());*/
+
+                   spCaste.setVisibility(View.VISIBLE);
+                   etSpCaste.setVisibility(View.INVISIBLE);
                     getCasteList(list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id());
 
                 }
@@ -1139,7 +1163,17 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
                             }
 
+                        String s1="";
+                            if(spReligion.getSelectedItemPosition()>0)
+                       s1=spReligion.getSelectedItem().toString();
+                            else
+                                s1=tvReligion.getText().toString();
+
+                        if(!s1.equalsIgnoreCase("")&& !s1.equalsIgnoreCase("Not Specified")) {
+                            Log.e("arrayOSAtring", s1);
+                            getCasteList(list_pojo_religion.get(list_religion.indexOf(s1)).getReligion_id());
                         }
+                    }
                         progressDialog.dismiss();
                     }
 
@@ -1179,20 +1213,50 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     if(parentPojoCaste.getStatus().equalsIgnoreCase("1")){
                         Log.e("Response","Success");
                         Log.e("objsize", ""+parentPojoCaste.getObjCaste().size());
-
+                        Log.e("intentCaste",intentCaste);
                         LinkedHashMap<String, ChildPojoCaste> resultMap =parentPojoCaste.getObjCaste();
-
+                        final LinkedHashMap<String, Boolean> list =new LinkedHashMap<String,Boolean>();
+                        String[] as=intentCaste.split(",");
+                        ArrayList<String> al=new ArrayList<String>(Arrays.asList(as));
                         Iterator<String> keys=resultMap.keySet().iterator();
                         while (keys.hasNext()){
                             String key=keys.next();
 
                             list_pojo_caste.add(resultMap.get(key));
                             list_caste.add(resultMap.get(key).getCaste_name());
+
+                            if(!list.containsKey(resultMap.get(key).getCaste_name())) {
+
+                                if(al.contains(resultMap.get(key).getCaste_id()))
+                                    list.put(resultMap.get(key).getCaste_name(), true);
+                                else
+                                    list.put(resultMap.get(key).getCaste_name(), false);
+                            }
                         }
-                        Log.e("cast List Size",""+list_caste.size());
+
+                     //   etSpCaste.setText("");
+                        spCaste.setItems(list, new MultiSpinnerListener() {
+                            @Override
+                            public void onItemsSelected(boolean[] selected) {
+                                for(int i=0; i<selected.length; i++) {
+                                    if(selected[i]) {
+
+                                        Log.i("TAG", i + " : "+ list.get(i));
+                                        etSpCaste.setEnabled(true);
+                                        spCaste.setVisibility(View.INVISIBLE);
+                                        etSpCaste.setVisibility(View.VISIBLE);
+                                        etSpCaste.setText(spCaste.getSelectedItem().toString());
+                                        tvCaste.setText(spCaste.getSelectedItem().toString());
+
+                                    }
+                                }
+                            }
+
+                        });
+                       /* Log.e("cast List Size",""+list_caste.size());
                         aaCaste = new ArrayAdapter(getActivity(),android.R.layout.simple_spinner_item,list_caste);
                         aaCaste.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spCaste.setAdapter(aaCaste);
+                        spCaste.setAdapter(aaCaste);*/
                       /*  if(intentCaste!=null) {
                             Log.e("intentCaste",intentCaste);
                             String caste_name="";
@@ -1209,7 +1273,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                             tvCaste.setText(caste_name);
                         }*/
 
-                        Log.e("intentCaste",intentCaste);
+                     /*   Log.e("intentCaste",intentCaste);
                         if(!intentCaste.equalsIgnoreCase("")){
 
 
@@ -1221,7 +1285,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
 
                                 }
                             }
-                        }
+                        }*/
 
                         progressDialog.dismiss();
                     }
@@ -2040,25 +2104,39 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                     spSmoke.getSelectedItemPosition()==0 ? "0" : String.valueOf(spSmoke.getSelectedItemPosition()));
         }
         else if(section.equalsIgnoreCase("religion")) {
+
+   /*
         String c="";
             if(list_caste.size()==0)
                 c="0";
             else if(spCaste.getSelectedItemPosition()==0)
                 c="0";
             else
-                c=list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id();
+                c=list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem().toString())).getCaste_id();*/
+
+            String s1=etSpCaste.getText().toString();
+            Log.e("arrayOSAtring",s1);
+            String[] as=s1.split(", ");
+            String strCaste="";
+            Log.e("arraysize",""+as.length);
+            for(int i=0;i<as.length;i++){
+                //       Log.e("arrayElement",as[i]);Log.e("arrayindex",list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id());
+                if(strCaste.equalsIgnoreCase(""))
+                    strCaste=list_pojo_caste.get(list_caste.indexOf(as[i])).getCaste_id();
+                else
+                    strCaste=strCaste+","+list_pojo_caste.get(list_caste.indexOf(as[i])).getCaste_id();
+            }
 
 
             call = getResponse.updateReligion(spCustProfile.getMatrimonyId(),
                     spReligion.getSelectedItemPosition()==0?"0":list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem().toString())).getReligion_id(),
                     spMTongue.getSelectedItemPosition()==0?"0":list_pojo_mtongue.get(list_mtongue.indexOf(spMTongue.getSelectedItem().toString())).getMother_tongue_id(),
-                    c);
+                    strCaste.equalsIgnoreCase("")?"0":strCaste);
         }
         else if(section.equalsIgnoreCase("groomBrideLoc")) {
 
             String s1=etSpCountry.getText().toString();
             Log.e("arrayOSAtring",s1);
-            // s.replaceAll("\\s","");
             String[] as=s1.split(", ");
             String strCountry="";
             Log.e("arraysize",""+as.length);
@@ -2434,14 +2512,14 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
         if(mListItem.get(0).getCaste()!=null) {
             intentCaste = mListItem.get(0).getCaste();
             if (intentCaste.equalsIgnoreCase("0")||intentCaste.equalsIgnoreCase("")) {
-                tvCaste.setText("");
+              //  tvCaste.setText("");
             } else {
 
 //                intentCaste = mListItem.get(0).getCaste();
                 for (int i = 0; i < list_pojo_caste.size(); i++) {
                     if (list_pojo_caste.get(i).getCaste_id().equalsIgnoreCase(intentCaste)) {
-                        tvCaste.setText(list_pojo_caste.get(i).getCaste_name());
-                        spCaste.setSelection(list_caste.indexOf(list_pojo_caste.get(i).getCaste_name()) + 1);
+                       // tvCaste.setText(list_pojo_caste.get(i).getCaste_name());
+                       // spCaste.setSelection(list_caste.indexOf(list_pojo_caste.get(i).getCaste_name()) + 1);
                         break;
 
                     }
@@ -2619,7 +2697,9 @@ Log.e("inpartner pref",spCustProfile.getGender());
 
         switch(section)
         {
-            case "basic": if (llBasic.getVisibility() == View.GONE) {
+            case "basic":
+                scrollview.scrollTo(0,btnBasic.getTop());
+                if (llBasic.getVisibility() == View.GONE) {
                 for(int i=0;i<list_ll.size();i++)
                 {
                     list_ll.get(i).setVisibility(View.GONE);
@@ -2632,6 +2712,7 @@ Log.e("inpartner pref",spCustProfile.getGender());
                 break;
 
             case "about":
+                scrollview.scrollTo(0,btnAbt.getTop());
                 if (llAbt.getVisibility() == View.GONE) {
 
                     for(int i=0;i<list_ll.size();i++)
@@ -2646,6 +2727,7 @@ Log.e("inpartner pref",spCustProfile.getGender());
                 break;
 
             case "religion":
+                scrollview.scrollTo(0,btnReligion.getTop());
                 if (llReligion.getVisibility() == View.GONE) {
                     for(int i=0;i<list_ll.size();i++)
                     {
@@ -2659,7 +2741,9 @@ Log.e("inpartner pref",spCustProfile.getGender());
 
                 break;
 
-            case "location": if (llGroomBrideLoc.getVisibility() == View.GONE) {
+            case "location":
+                scrollview.scrollTo(0,btnGroomBrideLoc.getTop());
+                if (llGroomBrideLoc.getVisibility() == View.GONE) {
                 for(int i=0;i<list_ll.size();i++)
                 {
                     list_ll.get(i).setVisibility(View.GONE);
@@ -2672,6 +2756,7 @@ Log.e("inpartner pref",spCustProfile.getGender());
                 break;
 
             case "professional":
+                btnProfessional.scrollTo(0,scrollview.getTop());
                 if (llProfessional.getVisibility() == View.GONE) {
 
                     for(int i=0;i<list_ll.size();i++)
