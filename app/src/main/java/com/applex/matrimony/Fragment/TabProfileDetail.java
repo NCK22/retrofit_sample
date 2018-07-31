@@ -227,7 +227,6 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
 
         imgProfPic=(ImageView)rootView.findViewById(R.id.img_profile_pic);
 
-
         etName = (EditText) rootView.findViewById(R.id.edt_name);
         etAbout = (EditText) rootView.findViewById(R.id.edt_about_you);
         etCollege = (EditText) rootView.findViewById(R.id.edt_college);
@@ -345,7 +344,6 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
         btnFam.setOnClickListener(this);
         btnAbtFam.setOnClickListener(this);
 
-
         initializeSpinnerLists();
         initializeSpinnerAdapters();
 
@@ -360,7 +358,6 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
         getStarList();
         getRaasiList();
         getGotraList();
-
 
         llBasic = (LinearLayout) rootView.findViewById(R.id.ll_basic);
         llBasicEdit = (LinearLayout) rootView.findViewById(R.id.ll_basic_edit);
@@ -446,8 +443,6 @@ displayData();
     }
 
     private void displayData() {
-
-
 
         Log.e("displayData","called");
         Log.e("List_highlight size",""+list_gallery.size());

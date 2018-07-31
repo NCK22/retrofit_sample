@@ -111,8 +111,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         list_prof_for.add("Relative");
 
        // list_gender.add("Gender");
-        list_gender.add("Male");
-        list_gender.add("Female");
+        list_gender.add("male");
+        list_gender.add("female");
 
         ArrayAdapter aaProfFor = new ArrayAdapter(this,android.R.layout.simple_spinner_item,list_prof_for);
         aaProfFor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

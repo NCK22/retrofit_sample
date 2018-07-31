@@ -126,6 +126,7 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
             etFamOrigin,etFamLoc,etFatherStat,etMotherStat,etNoOfBrothers,etNoOfSisters;
     DatePickerEditText etBDate;
     TimePickerEditText etBTime;
+    final LinkedHashMap<String, Boolean> list_multi_state =new LinkedHashMap<String,Boolean>();
     ArrayList<String> list_prof_for=new ArrayList<String>();
     ArrayList<String> list_age=new ArrayList<String>();
     ArrayList<String> list_income_from=new ArrayList<String>();
@@ -795,16 +796,40 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                 {
 
                     Log.e("inside","else");
-                    /*Log.e("selected index",""+list_country.indexOf(spCountry.getSelectedItem()));
-                    Log.e("pojo element name",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_name());
-                    Log.e("pojo element id",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
-                    Log.e("pojo element sortname",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_currency());
-                   // Log.e("pojo element phone",list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_extension());
-*/
-                    Log.e("ItemSelectedCountry","called");
-           //        getStateList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())).getCountry_id());
 
-                    //  getCurrencyList(list_pojo_country.get(list_country.indexOf(spCountry.getSelectedItem())+1).getCountry_id());
+                    Log.e("ItemSelectedCountry","called");
+/*
+
+                    if(list_state!=null)
+                        list_state.clear();
+                    if(list_pojo_state!=null)
+                        list_pojo_state.clear();
+                    if(list_multi_state!=null)
+                        list_multi_state.clear();
+
+                    String s1=etSpCountry.getText().toString();
+                    Log.e("arrayOSAtring",s1);
+                    // s.replaceAll("\\s","");
+                    String[] as=s1.split(", ");
+                    String strCountry="";
+                    Log.e("arraysize",""+as.length);
+                    for(int j=0;j<as.length;j++){
+                        //       Log.e("arrayElement",as[i]);Log.e("arrayindex",list_pojo_edu.get(list_edu.indexOf(as[i])).getEducation_id());
+
+                        getStateList(list_pojo_country.get(list_country.indexOf(as[j])).getCountry_id());
+                        */
+/*if(strCountry.equalsIgnoreCase(""))
+                            strCountry=list_pojo_country.get(list_country.indexOf(as[i])).getCountry_id();
+                        else
+                            strCountry=strCountry+","+list_pojo_country.get(list_country.indexOf(as[i])).getCountry_id();*//*
+
+                    }
+
+*/
+
+
+
+
 
                 }
                 break;
@@ -1335,9 +1360,34 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                                         etSpCountry.setVisibility(View.VISIBLE);
                                         etSpCountry.setText(spCountry.getSelectedItem().toString());
                                         tvCountry.setText(spCountry.getSelectedItem().toString());
+
                                     }
                                 }
+
+                                if(list_state!=null)
+                                    list_state.clear();
+                                if(list_pojo_state!=null)
+                                    list_pojo_state.clear();
+                                if(list_multi_state!=null)
+                                    list_multi_state.clear();
+
+                                String s1=etSpCountry.getText().toString();
+
+                                if(!s1.equalsIgnoreCase("")) {
+                                    Log.e("arrayOSAtring", s1);
+                                    // s.replaceAll("\\s","");
+                                    String[] as = s1.split(", ");
+                                    String strCountry = "";
+                                    Log.e("arraysize", "" + as.length);
+                                    for (int j = 0; j < as.length; j++) {
+                                        getStateList(list_pojo_country.get(list_country.indexOf(as[j])).getCountry_id());
+                                    }
+                                }
+                                Log.e("list_multi_state",""+list_multi_state.size());
+                                Log.e("list_pojo_state",""+list_pojo_state.size());
+                                Log.e("list_state",""+list_state.size());
                             }
+
                         });
 
                         //Collections.sort(list_country);
@@ -1378,10 +1428,10 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
     public void getStateList(String country_id){
 
         progressDialog.show();
-        if(list_state!=null)
+      /*  if(list_state!=null)
             list_state.clear();
         if(list_pojo_state!=null)
-            list_pojo_state.clear();
+            list_pojo_state.clear();*/
         Log.e("Country",country_id);
         getStateInterface getResponse = APIClient.getClient().create(getStateInterface.class);
         Call<ParentPojoState> call = getResponse.doGetListResources(country_id);
@@ -1399,29 +1449,32 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         Log.e("objsize", ""+parentPojoState.getObjState().size());
                         Log.e("intentState",intentState);
                         LinkedHashMap<String, ChildPojoState> resultMap =parentPojoState.getObjState();
-                        final LinkedHashMap<String, Boolean> list =new LinkedHashMap<String,Boolean>();
+                        String[] as=intentState.split(",");
+                        ArrayList<String> al=new ArrayList<String>(Arrays.asList(as));
                         Iterator<String> keys=resultMap.keySet().iterator();
                         while (keys.hasNext()){
                             String key=keys.next();
                             list_pojo_state.add(resultMap.get(key));
                             list_state.add(resultMap.get(key).getState_name());
 
-                            if(!list.containsKey(resultMap.get(key).getState_name())) {
 
-                                if(intentState.contains(resultMap.get(key).getState_id()))
-                                    list.put(resultMap.get(key).getState_name(), true);
+
+                            if(!list_multi_state.containsKey(resultMap.get(key).getState_name())) {
+
+                                if(al.contains(resultMap.get(key).getState_id()))
+                                    list_multi_state.put(resultMap.get(key).getState_name(), true);
                                 else
-                                    list.put(resultMap.get(key).getState_name(), false);
+                                    list_multi_state.put(resultMap.get(key).getState_name(), false);
                             }
                         }
 
-                        spState.setItems(list, new MultiSpinnerListener() {
+                        spState.setItems(list_multi_state, new MultiSpinnerListener() {
                             @Override
                             public void onItemsSelected(boolean[] selected) {
                                 for(int i=0; i<selected.length; i++) {
                                     if(selected[i]) {
                                         Log.e("Inside","stateSetItems");
-                                        Log.i("TAG", i + " : "+ list.get(i));
+                                        Log.i("TAG", i + " : "+ list_multi_state.get(i));
 
                                         etSpState.setEnabled(true);
                                         spState.setVisibility(View.INVISIBLE);
@@ -2433,7 +2486,7 @@ Log.e("inpartner pref",spCustProfile.getGender());
                 for (int i = 0; i < list_pojo_country.size(); i++) {
                     if (list_pojo_country.get(i).getCountry_id().equalsIgnoreCase(intentCountry)) {
                     //    tvCountry.setText(list_pojo_country.get(i).getCountry_name());
-                        spCountry.setSelection(list_country.indexOf(list_pojo_country.get(i).getCountry_name()) + 1);
+                       // spCountry.setSelection(list_country.indexOf(list_pojo_country.get(i).getCountry_name()) + 1);
                         break;
                     }
                 }
@@ -2443,7 +2496,7 @@ Log.e("inpartner pref",spCustProfile.getGender());
         if(mListItem.get(0).getState()!=null) {
             intentState = mListItem.get(0).getState();
             if (intentState.equalsIgnoreCase("0")||intentState.equalsIgnoreCase("")) {
-                tvState.setText("");
+             //   tvState.setText("");
             } else {
                 Log.e("state", mListItem.get(0).getState());
                 //  tvState.setText(mListItem.get(0).getState());
