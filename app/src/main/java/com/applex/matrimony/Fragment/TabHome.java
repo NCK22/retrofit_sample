@@ -332,7 +332,8 @@ public class TabHome extends Fragment implements AdapterView.OnItemSelectedListe
         progressDialog.show();
         if(list_search!=null)
             list_search.clear();
-Log.e("searchFlag",searchFlag);
+        Log.e("searchFlag",searchFlag);
+
         searchBasicInterface getResponse = APIClient.getClient().create(searchBasicInterface.class);
         Call<ParentPojoProfile> call = null;
         if(searchFlag.equalsIgnoreCase("byid"))
@@ -340,7 +341,8 @@ Log.e("searchFlag",searchFlag);
         else if(searchFlag.equalsIgnoreCase("basic")) 
             call = getResponse.searchBasic(spCustProfile.getMatrimonyId(),etAgeFrom.getText().toString(),etAgeTo.getText().toString(),
                 spReligion.getSelectedItemPosition()<=0?"":list_pojo_religion.get(list_religion.indexOf(spReligion.getSelectedItem())).getReligion_id(),
-                spCaste.getSelectedItemPosition()<=0?"":list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem())).getCaste_id(),strGender);
+                spCaste.getSelectedItemPosition()<=0?"":list_pojo_caste.get(list_caste.indexOf(spCaste.getSelectedItem())).getCaste_id(),
+                    spCustProfile.getGender().equalsIgnoreCase("Male") ? "female":"male");
         
         call.enqueue(new Callback<ParentPojoProfile>() {
             @Override
@@ -377,6 +379,10 @@ Log.e("searchFlag",searchFlag);
                         transaction.replace(R.id.Container, someFragment ); // give your fragment container id in first parameter
                         transaction.addToBackStack(null);  // if written, this transaction will be added to backstack
                         transaction.commit();*/
+                    }
+                    else
+                    {
+                        showToast(parentPojoProfile.getMsg());
                     }
                 }
                 else
@@ -509,10 +515,10 @@ Log.e("searchFlag",searchFlag);
     public void checkValidity(){
         Log.e("etSearchlength",""+etSearchId.getText().toString().length());
         if(etSearchId.getText().toString().length()==0) {
-            if (!rbGroom.isChecked() && !rbBride.isChecked())
+           /* if (!rbGroom.isChecked() && !rbBride.isChecked())
                 showToast("Please check Groom / Bride");
             else
-                flagAllValid=true;
+                flagAllValid=true;*/
         }
         flagAllValid=true;
 

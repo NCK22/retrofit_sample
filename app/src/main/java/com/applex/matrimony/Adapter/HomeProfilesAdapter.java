@@ -55,11 +55,13 @@ public class HomeProfilesAdapter extends RecyclerView.Adapter<HomeProfilesAdapte
 
         final ChildPojoProfile singleItem = dataList.get(position);
 
-        if ((singleItem.getGender().equalsIgnoreCase("male"))) {
+        /*if ((singleItem.getGender().equalsIgnoreCase("male"))) {
             holder.member_typ.setText("Groom");
         } else {
             holder.member_typ.setText("Bride");
-        }
+        }*/
+
+        holder.member_typ.setText(singleItem.getProfile_name());
         if(singleItem.getProfile_photo()!=null)
 
         Picasso.with(mContext).load("http://applex360.in/Deshpande-family/Matrimony-web/"+singleItem.getProfile_photo()).placeholder(R.mipmap.iconprofile).fit().into(holder.image);

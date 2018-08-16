@@ -92,7 +92,7 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
         holder.occu.setText(singleItem.getOccupation());
         else
             holder.occu.setText(singleItem.getOccupation_detail());
-        if (singleItem.getGender() != null) {
+       /* if (singleItem.getGender() != null) {
 
 
             if ((singleItem.getGender().equalsIgnoreCase("male"))) {
@@ -100,7 +100,8 @@ public class WhoViewedAdapter extends RecyclerView.Adapter<WhoViewedAdapter.Item
             } else {
                 holder.member_typ.setText("Bride");
             }
-        }
+        }*/
+        holder.member_typ.setText(singleItem.getProfile_name());
         holder.matrimony_id.setText(singleItem.getMatrimony_id());
         if(list_profile.contains(singleItem.getMatrimony_id()))
         {

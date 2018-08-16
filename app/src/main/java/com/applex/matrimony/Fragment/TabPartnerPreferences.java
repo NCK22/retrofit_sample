@@ -1177,7 +1177,6 @@ public class TabPartnerPreferences extends Fragment implements AdapterView.OnIte
                         progressDialog.dismiss();
                     }
 
-
             }
 
 
@@ -2756,7 +2755,7 @@ Log.e("inpartner pref",spCustProfile.getGender());
                 break;
 
             case "professional":
-                btnProfessional.scrollTo(0,scrollview.getTop());
+                btnProfessional.scrollTo(0,500);
                 if (llProfessional.getVisibility() == View.GONE) {
 
                     for(int i=0;i<list_ll.size();i++)
@@ -2770,7 +2769,6 @@ Log.e("inpartner pref",spCustProfile.getGender());
 
                 break;
         }
-
     }
 
 }
