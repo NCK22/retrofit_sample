@@ -7,6 +7,17 @@
     android:layout_marginBottom="0dp"
 android:background="#ffffff"
 >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/toolbar_main"
+            layout="@layout/row_back_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:visibility="visible"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +28,9 @@ android:background="#ffffff"
         android:layout_marginEnd="15dp"
         android:fillViewport="true"
         android:layout_marginBottom="0dp"
-        android:background="#00000000">
+        android:background="#00000000"
+        android:layout_below="@+id/toolbar_main"
+    >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -1830,4 +1843,5 @@ android:background="#ffffff"
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    </RelativeLayout>
 </LinearLayout>

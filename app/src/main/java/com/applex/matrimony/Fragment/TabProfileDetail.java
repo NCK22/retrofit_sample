@@ -6,8 +6,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
 
 import com.applex.matrimony.APIClient;
 import com.applex.matrimony.Activity.DetailsActivity;
@@ -215,6 +217,21 @@ public class TabProfileDetail extends Fragment implements View.OnClickListener {
 
         Log.e("TabHome", "onCreateView");
         progressDialog = new ProgressDialog(getActivity());
+
+        toolbar = (Toolbar) rootView.findViewById(R.id.back_toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        if (((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //to destroy current object of fragment
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
 
         getActivity().setTitle("Profile Details");
 
