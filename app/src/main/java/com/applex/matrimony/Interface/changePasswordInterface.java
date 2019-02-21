@@ -16,5 +16,4 @@ public interface changePasswordInterface {
                                               @Field("conf_password") String conf_password,
                                               @Field("user_id") String user_id);
 
-
 }

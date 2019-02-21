@@ -7,11 +7,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
 
-    public static Retrofit retrofit=null;
-    private static String BASE_URL="http://applex360.in/Deshpande-family/Matrimony-web/";
+    public static Retrofit retrofit = null;
+    private static String BASE_URL = "http://applex360.in/Deshpande-family/Matrimony-web/";
 
-    public static Retrofit getClient()
-    {
+    public static Retrofit getClient() {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 // set your desired log level

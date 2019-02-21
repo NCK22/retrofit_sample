@@ -17,6 +17,4 @@ public interface checkOtpInterface {
             @Field("otp") String otp,
             @Field("phone")String phone
     );
-
-
 }

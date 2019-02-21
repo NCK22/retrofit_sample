@@ -223,9 +223,6 @@ public class TabViewParentActivity extends AppCompatActivity implements TabLayou
     }
 
 
-
-
-
     public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {

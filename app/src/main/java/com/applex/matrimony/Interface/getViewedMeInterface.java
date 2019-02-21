@@ -12,5 +12,4 @@ public interface getViewedMeInterface {
     @GET("app/app_get_viewed_me.php")
     Call<ParentPojoProfile> doGetListResources(@Query("matrimony_id") String matrimony_id);
 
-
 }
